@@ -1,6 +1,7 @@
 package team.msg.hiv2.domain.reservation.persistence.mapper
 
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.exception.HomeBaseTableNotFoundException
 import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
@@ -9,6 +10,7 @@ import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.domain.user.persistence.repository.UserRepository
 import team.msg.hiv2.global.mapper.GenericMapper
 
+@Component
 class ReservationMapper(
     private val userRepository: UserRepository,
     private val homeBaseTableRepository: HomeBaseTableRepository

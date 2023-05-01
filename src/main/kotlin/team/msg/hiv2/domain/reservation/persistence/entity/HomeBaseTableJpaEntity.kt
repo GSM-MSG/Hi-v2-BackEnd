@@ -1,6 +1,7 @@
 package team.msg.hiv2.domain.reservation.persistence.entity
 
 import org.hibernate.annotations.Where
+import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
 import team.msg.hiv2.domain.reservation.domain.constant.CheckStatus
 import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 import team.msg.hiv2.global.entity.BaseUuidEntity
@@ -26,7 +27,12 @@ class HomeBaseTableJpaEntity(
     @Column(name = "check_status", nullable = false)
     val checkStatus: CheckStatus,
 
+    @ManyToOne
+    @JoinColumn(name = "home_base_id")
+    val homeBase: HomeBaseJpaEntity,
+
     @Column(columnDefinition = "DATETIME")
     val deletedAt: LocalDateTime?
+
 
 ) : BaseUuidEntity(id)

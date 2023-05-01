@@ -11,5 +11,6 @@ class HomeBaseTable(
     val representativeId: UUID,
     val reason: String,
     val checkStatus: CheckStatus,
+    val homeBaseId: UUID,
     val deletedAt: LocalDateTime? = null
 )
