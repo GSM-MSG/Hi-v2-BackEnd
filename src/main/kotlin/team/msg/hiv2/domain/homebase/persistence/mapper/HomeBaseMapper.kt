@@ -1,10 +1,8 @@
 package team.msg.hiv2.domain.homebase.persistence.mapper
 
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
-import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.domain.user.persistence.repository.UserRepository
 import team.msg.hiv2.global.mapper.GenericMapper
 
