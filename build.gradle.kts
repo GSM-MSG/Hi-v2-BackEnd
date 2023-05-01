@@ -23,7 +23,7 @@ dependencies {
 	implementation(Dependencies.SPRING_SECURITY)
 	implementation(Dependencies.SPRING_VALIDATION)
 	implementation(Dependencies.SPRING_WEB)
-
+	implementation(Dependencies.SPRING_REDIS)
 	testImplementation(Dependencies.SPRING_STARTER_TEST)
 	testImplementation(Dependencies.SPRING_SECURITY_TEST)
 
@@ -36,6 +36,11 @@ dependencies {
 
 	// database
 	runtimeOnly(Dependencies.MYSQL_DATABASE)
+
+	// jwt
+	implementation(Dependencies.JWT_API)
+	runtimeOnly(Dependencies.JWT_IMPL)
+	runtimeOnly(Dependencies.JWT_JACKSON)
 
 }
 
