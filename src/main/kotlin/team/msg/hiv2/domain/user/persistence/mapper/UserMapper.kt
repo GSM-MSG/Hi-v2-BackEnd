@@ -1,6 +1,6 @@
-package team.msg.hiv2.domain.user.adapter.persistence.mapper
+package team.msg.hiv2.domain.user.persistence.mapper
 
-import team.msg.hiv2.domain.user.adapter.persistence.entity.UserJpaEntity
+import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.global.mapper.GenericMapper
 

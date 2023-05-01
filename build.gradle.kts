@@ -37,6 +37,11 @@ dependencies {
 	// database
 	runtimeOnly(Dependencies.MYSQL_DATABASE)
 
+	// jwt
+	implementation(Dependencies.JWT_API)
+	runtimeOnly(Dependencies.JWT_IMPL)
+	runtimeOnly(Dependencies.JWT_JACKSON)
+
 }
 
 tasks.withType<KotlinCompile> {

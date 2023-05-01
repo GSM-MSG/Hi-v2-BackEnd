@@ -1,7 +1,7 @@
-package team.msg.hiv2.domain.user.adapter.persistence.repository
+package team.msg.hiv2.domain.user.persistence.repository
 
 import org.springframework.data.repository.CrudRepository
-import team.msg.hiv2.domain.user.adapter.persistence.entity.UserJpaEntity
+import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 import java.util.*
 
 interface UserRepository : CrudRepository<UserJpaEntity, UUID> {

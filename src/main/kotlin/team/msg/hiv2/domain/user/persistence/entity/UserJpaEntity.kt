@@ -1,4 +1,4 @@
-package team.msg.hiv2.domain.user.adapter.persistence.entity
+package team.msg.hiv2.domain.user.persistence.entity
 
 import org.hibernate.annotations.Where
 import team.msg.hiv2.domain.user.domain.constant.UserRole
