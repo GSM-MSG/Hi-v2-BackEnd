@@ -1,5 +1,6 @@
 package team.msg.hiv2.domain.user.domain
 
+import team.msg.hiv2.domain.user.domain.constant.UserRole
 import java.util.UUID
 
 data class User(
@@ -9,5 +10,6 @@ data class User(
     val grade: Int,
     val classNum: Int,
     val number: Int,
-    val profileUrl: String,
+    val profileImageUrl: String,
+    val roles: MutableList<UserRole>
 )
