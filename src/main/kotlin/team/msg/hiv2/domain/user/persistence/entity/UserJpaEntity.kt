@@ -3,6 +3,7 @@ package team.msg.hiv2.domain.user.persistence.entity
 import org.hibernate.annotations.Where
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.global.entity.BaseUuidEntity
+import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
@@ -34,8 +35,10 @@ class UserJpaEntity(
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles", joinColumns = [JoinColumn(name = "user_id")])
-    var roles: MutableList<UserRole> = mutableListOf()
+    var roles: MutableList<UserRole> = mutableListOf(),
 
+    @Column(columnDefinition = "DATETIME")
+    val deletedAt: LocalDateTime?
 
     ) : BaseUuidEntity(id) {
 }

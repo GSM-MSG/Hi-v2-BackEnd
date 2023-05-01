@@ -4,6 +4,7 @@ import org.hibernate.annotations.Where
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 import team.msg.hiv2.global.entity.BaseUuidEntity
+import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -26,7 +27,10 @@ class NoticeJpaEntity(
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    val user: UserJpaEntity
+    val user: UserJpaEntity,
+
+    @Column(columnDefinition = "DATETIME")
+    val deletedAt: LocalDateTime?
 
 ) : BaseUuidEntity(id) {
 }

@@ -10,6 +10,9 @@ enum class ErrorCode(
     EXPIRED_ACCESS_TOKEN("만료된 accessToken 입니다.", 403),
 
     USER_NOT_FOUND("유저를 찾을 수 없습니다.", 404),
+    RESERVATION_NOT_FOUND("예약을 찾을 수 없습니다.", 404),
+    HOME_BASE_TABLE_NOT_FOUND("예약 테이블을 찾을 수 없습니다.", 404),
+
 
     INTERVAL_SERVER_ERROR("서버 오류 입니다.", 500);
 }
