@@ -1,6 +1,7 @@
 package team.msg.hiv2.domain.user.domain
 
 import team.msg.hiv2.domain.user.domain.constant.UserRole
+import java.time.LocalDateTime
 import java.util.UUID
 
 data class User(
@@ -11,5 +12,7 @@ data class User(
     val classNum: Int,
     val number: Int,
     val profileImageUrl: String,
-    val roles: MutableList<UserRole>
+    val roles: MutableList<UserRole>,
+    val deleteAt: LocalDateTime? = null
+
 )
