@@ -3,13 +3,10 @@ package team.msg.hiv2.domain.homebase.persistence.mapper
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
-import team.msg.hiv2.domain.user.persistence.repository.UserRepository
 import team.msg.hiv2.global.mapper.GenericMapper
 
 @Component
-class HomeBaseMapper(
-    private val userRepository: UserRepository
-) : GenericMapper<HomeBase, HomeBaseJpaEntity>{
+class HomeBaseMapper : GenericMapper<HomeBase, HomeBaseJpaEntity>{
 
     override fun toDomain(entity: HomeBaseJpaEntity?): HomeBase? =
         entity?.let{
