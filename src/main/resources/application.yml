@@ -19,3 +19,10 @@ spring:
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
+
+jwt:
+  accessSecret: ${ACCESS_SECRET:qwertyuiopasdfghjklzxcvbnm12345678901234567890}
+  refreshSecret: ${REFRESH_SECRET:poiuytrewqlkjhgfdsamnbvcxz12345678901234567890}
+  accessExp: ${ACCESS_EXP:1800}
+  refreshExp: ${REFRESH_EXP:7200}
+
