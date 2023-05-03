@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse
 
 class JwtRequestFilter(
     private val jwtParserPort: JwtParserPort
-) : OncePerRequestFilter(){
+) : OncePerRequestFilter() {
 
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
-        filterChain: FilterChain,
+        filterChain: FilterChain
     ) {
         val accessToken = jwtParserPort.parseAccessToken(request)
         if (!accessToken.isNullOrBlank()) {

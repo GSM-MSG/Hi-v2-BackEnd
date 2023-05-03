@@ -16,7 +16,7 @@ class ExceptionFilter: OncePerRequestFilter() {
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
-        filterChain: FilterChain,
+        filterChain: FilterChain
     ) {
         runCatching {
             filterChain.doFilter(request, response)
