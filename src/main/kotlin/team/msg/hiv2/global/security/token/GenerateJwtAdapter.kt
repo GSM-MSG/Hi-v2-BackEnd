@@ -41,7 +41,7 @@ class GenerateJwtAdapter(
             .setSubject(email)
             .claim("type", JwtProperties.refreshType)
             .setIssuedAt(Date())
-            .setExpiration(Date(System.currentTimeMillis() + jwtProperties.accessExp * 1000))
+            .setExpiration(Date(System.currentTimeMillis() + jwtProperties.refreshExp * 1000))
             .compact()
 
     private fun getAccessTokenExpiredAt(): LocalDateTime =
