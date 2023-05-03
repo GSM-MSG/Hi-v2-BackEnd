@@ -10,6 +10,8 @@ enum class ErrorCode(
     INVALID_TOKEN("유효하지 않은 토큰 입니다.", 403),
     EXPIRED_REFRESH_TOKEN("만료된 refreshToken 입니다.", 403),
     EXPIRED_ACCESS_TOKEN("만료된 accessToken 입니다.", 403),
+    UNEXPECTED_TOKEN("Unexpected Token", 401),
+    INVALID_ROLE( "권한이 잘못되었습니다.,", 401),
 
     // user
     USER_NOT_FOUND("유저를 찾을 수 없습니다.", 404),
@@ -21,5 +23,8 @@ enum class ErrorCode(
     // homeBase
     HOME_BASE_NOT_FOUND("홈베이스를 찾을 수 없습니다.", 404),
 
+
+    // internal
+    FORBIDDEN("FORBIDDEN", 403),
     INTERVAL_SERVER_ERROR("서버 오류 입니다.", 500);
 }
