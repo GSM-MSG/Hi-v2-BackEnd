@@ -3,6 +3,8 @@ package team.msg.hiv2.global.security.token
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.stereotype.Component
+import team.msg.hiv2.domain.auth.application.spi.CommandRefreshTokenPort
+import team.msg.hiv2.domain.auth.domain.RefreshToken
 import team.msg.hiv2.domain.auth.persistence.entity.RefreshTokenEntity
 import team.msg.hiv2.domain.auth.persistence.repository.RefreshTokenRepository
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
@@ -14,7 +16,7 @@ import java.util.*
 @Component
 class GenerateJwtAdapter(
     private val jwtProperties: JwtProperties,
-    private val refreshTokenRepository: RefreshTokenRepository
+    private val commandRefreshTokenPort: CommandRefreshTokenPort
 ) : GenerateJwtPort{
 
     override fun generate(email: String): TokenResponse {
@@ -22,7 +24,7 @@ class GenerateJwtAdapter(
         val refreshToken = generateRefreshToken(email, jwtProperties.refreshSecret)
         val accessExpiredAt = getAccessTokenExpiredAt()
         val refreshExpiredAt = getRefreshTokenExpiredAt()
-        refreshTokenRepository.save(RefreshTokenEntity(refreshToken, email, jwtProperties.refreshExp))
+        commandRefreshTokenPort.saveRefreshToken(RefreshToken(refreshToken, email, jwtProperties.refreshExp))
         return TokenResponse(accessToken, refreshToken, accessExpiredAt, refreshExpiredAt)
     }
 

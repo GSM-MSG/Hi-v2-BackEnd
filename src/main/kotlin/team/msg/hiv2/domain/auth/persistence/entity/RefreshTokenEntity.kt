@@ -19,4 +19,3 @@ data class RefreshTokenEntity(
 
 )
 
-fun RefreshTokenEntity.toDomain() = RefreshToken(refreshToken = refreshToken, email = email, expiredAt = expiredAt)
