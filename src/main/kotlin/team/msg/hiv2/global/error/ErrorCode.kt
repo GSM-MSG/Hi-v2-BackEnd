@@ -11,7 +11,7 @@ enum class ErrorCode(
     EXPIRED_REFRESH_TOKEN("만료된 refreshToken 입니다.", 403),
     EXPIRED_ACCESS_TOKEN("만료된 accessToken 입니다.", 403),
     UNEXPECTED_TOKEN("Unexpected Token", 401),
-    INVALID_ROLE("검증되지 않은 권한입니다.", 401),
+    INVALID_ROLE("검증 되지 않은 권한 입니다.", 401),
 
     // user
     USER_NOT_FOUND("유저를 찾을 수 없습니다.", 404),
