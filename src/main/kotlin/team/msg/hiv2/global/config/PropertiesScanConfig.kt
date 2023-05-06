@@ -12,5 +12,4 @@ import team.msg.hiv2.thirdparty.gauth.GAuthProperties
         GAuthProperties::class
     ]
 )
-class PropertiesScanConfig {
-}
+class PropertiesScanConfig
