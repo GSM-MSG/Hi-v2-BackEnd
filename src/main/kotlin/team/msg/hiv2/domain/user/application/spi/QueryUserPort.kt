@@ -9,4 +9,6 @@ interface QueryUserPort {
     fun queryUserByEmail(email: String): User?
     fun queryUserRoleByEmail(email: String, role: String): UserRole
     fun existsUserByEmail(email: String): Boolean
+
+    fun queryCurrentUser(): User
 }

@@ -9,12 +9,14 @@ import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.domain.user.persistence.mapper.UserMapper
 import team.msg.hiv2.domain.user.persistence.repository.UserRepository
 import team.msg.hiv2.global.error.exception.InvalidRoleException
+import team.msg.hiv2.global.security.spi.SecurityPort
 import java.util.*
 
 @Component
 class UserPersistenceAdapter(
     private val userRepository: UserRepository,
-    private val userMapper: UserMapper
+    private val userMapper: UserMapper,
+    private val securityPort: SecurityPort
 ) : UserPort {
 
     override fun save(user: User): User? =
@@ -42,5 +44,9 @@ class UserPersistenceAdapter(
 
     override fun existsUserByEmail(email: String): Boolean =
         userRepository.existsByEmail(email)
+
+    override fun queryCurrentUser(): User =
+        userMapper.toDomain(userRepository.findByIdOrNull(securityPort.queryCurrentUserId()))
+            .let { it ?: throw UserNotFoundException() }
 
 }
