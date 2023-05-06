@@ -4,9 +4,11 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.user.application.spi.UserPort
 import team.msg.hiv2.domain.user.domain.User
+import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.domain.user.persistence.mapper.UserMapper
 import team.msg.hiv2.domain.user.persistence.repository.UserRepository
+import team.msg.hiv2.global.error.exception.InvalidRoleException
 import java.util.*
 
 @Component
@@ -15,17 +17,30 @@ class UserPersistenceAdapter(
     private val userMapper: UserMapper
 ) : UserPort {
 
-    override fun save(user: User) {
-        userRepository.save(userMapper.toEntity(user))
-    }
+    override fun save(user: User): User? =
+        userMapper.toDomain(userRepository.save(userMapper.toEntity(user)))
 
-    override fun queryUserById(id: UUID): User {
+
+    override fun queryUserById(id: UUID): User? {
         val user = userRepository.findByIdOrNull(id) ?: throw UserNotFoundException()
-        return userMapper.toDomain(user)!!
+        return userMapper.toDomain(user)
     }
 
-    override fun queryUserByEmail(email: String): User {
+    override fun queryUserByEmail(email: String): User? {
         val user = userRepository.findByEmail(email) ?: throw UserNotFoundException()
-        return userMapper.toDomain(user)!!
+        return userMapper.toDomain(user)
     }
+
+    override fun queryUserRoleByEmail(email: String, role: String): UserRole {
+        val user = queryUserByEmail(email) ?: return when(role){
+            "ROLE_STUDENT" -> UserRole.ROLE_STUDENT
+            "ROLE_TEACHER" -> UserRole.ROLE_TEACHER
+            else -> throw InvalidRoleException()
+        }
+        return user.roles.firstOrNull() ?: throw UserNotFoundException()
+    }
+
+    override fun existsUserByEmail(email: String): Boolean =
+        userRepository.existsByEmail(email)
+
 }

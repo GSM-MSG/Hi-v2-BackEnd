@@ -6,4 +6,5 @@ import java.util.*
 
 interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun findByEmail(email: String): UserJpaEntity?
+    fun existsByEmail(email: String): Boolean
 }
