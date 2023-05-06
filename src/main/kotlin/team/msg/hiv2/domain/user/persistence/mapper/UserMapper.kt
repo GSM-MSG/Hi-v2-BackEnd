@@ -22,7 +22,7 @@ class UserMapper : GenericMapper<User, UserJpaEntity> {
             )
         }
 
-    override fun toEntity(domain: User): UserJpaEntity =
+    fun toEntity(domain: org.springframework.security.core.userdetails.User): UserJpaEntity =
         domain.let {
             UserJpaEntity(
                 id = it.id,
