@@ -12,7 +12,7 @@ class RefreshTokenMapper() : GenericMapper<RefreshToken, RefreshTokenEntity> {
         entity?.let {
             RefreshToken(
                 refreshToken = it.refreshToken,
-                email = it.email,
+                userId = it.userId,
                 expiredAt = it.expiredAt
             )
         }
@@ -21,7 +21,7 @@ class RefreshTokenMapper() : GenericMapper<RefreshToken, RefreshTokenEntity> {
         domain.let {
             RefreshTokenEntity(
                 refreshToken = it.refreshToken,
-                email = it.email,
+                userId = it.userId,
                 expiredAt = it.expiredAt
             )
         }

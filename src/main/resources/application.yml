@@ -28,5 +28,12 @@ jwt:
 
 gauth:
   clientId: ${GAUTH_CLIENT_ID}
-  clientSecret: ${CLIENT_SECRET}
-  redirectUri: ${REDIRECT_URI}
+  clientSecret: ${GAUTH_CLIENT_SECRET}
+  redirectUri: ${GAUTH_REDIRECT_URI}
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error

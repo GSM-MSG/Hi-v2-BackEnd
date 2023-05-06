@@ -4,6 +4,7 @@ import gauth.GAuth
 import gauth.GAuthToken
 import gauth.GAuthUserInfo
 import org.springframework.stereotype.Component
+import org.springframework.web.bind.annotation.PostMapping
 import team.msg.hiv2.thirdparty.gauth.spi.GAuthPort
 
 @Component

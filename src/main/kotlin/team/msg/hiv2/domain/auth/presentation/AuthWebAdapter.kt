@@ -1,12 +1,11 @@
 package team.msg.hiv2.domain.auth.presentation
 
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import team.msg.hiv2.domain.auth.application.usecase.GAuthSignInUseCase
+import team.msg.hiv2.domain.auth.presentation.data.request.GAuthSignInRequest
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/auth")
@@ -15,7 +14,7 @@ class AuthWebAdapter(
 ) {
 
     @PostMapping
-    fun signIn(@RequestParam code: String): ResponseEntity<TokenResponse> =
-        gAuthSignInUseCase.execute(code)
+    fun signIn(@RequestBody @Valid request: GAuthSignInRequest): ResponseEntity<TokenResponse> =
+        gAuthSignInUseCase.execute(request)
             .let { ResponseEntity.ok(it) }
 }

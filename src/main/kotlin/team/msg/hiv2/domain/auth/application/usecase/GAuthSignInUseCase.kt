@@ -1,12 +1,14 @@
 package team.msg.hiv2.domain.auth.application.usecase
 
 import team.msg.hiv2.domain.auth.application.spi.CommandRefreshTokenPort
+import team.msg.hiv2.domain.auth.presentation.data.request.GAuthSignInRequest
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
 import team.msg.hiv2.domain.user.application.spi.UserPort
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.global.annotation.usecase.UseCase
 import team.msg.hiv2.global.security.spi.GenerateJwtPort
+import team.msg.hiv2.thirdparty.gauth.GAuthProperties
 import team.msg.hiv2.thirdparty.gauth.spi.GAuthPort
 import java.util.*
 
@@ -17,13 +19,13 @@ class GAuthSignInUseCase(
     private val generateJwtPort: GenerateJwtPort
 ) {
 
-    fun execute(code: String): TokenResponse{
-        val gAuthToken = gAuthPort.queryGAuthToken(code)
+    fun execute(request: GAuthSignInRequest): TokenResponse{
+        val gAuthToken = gAuthPort.queryGAuthToken(request.code)
         val gAuthUserInfo = gAuthPort.queryGAuthUserInfo(gAuthToken.accessToken)
         val role = userPort.queryUserRoleByEmail(gAuthUserInfo.email, gAuthUserInfo.role)
 
-        val user = createUser(userPort.existsUserByEmail(
-            gAuthUserInfo.email),
+        val user = createUser(
+            userPort.existsUserByEmail(gAuthUserInfo.email),
             User(
                 id = UUID.randomUUID(),
                 email = gAuthUserInfo.email,
@@ -36,7 +38,7 @@ class GAuthSignInUseCase(
             )
         )
 
-        return generateJwtPort.generate(user.email)
+        return generateJwtPort.generate(user.id)
     }
 
     private fun createUser(isExistUser: Boolean, user: User): User {
