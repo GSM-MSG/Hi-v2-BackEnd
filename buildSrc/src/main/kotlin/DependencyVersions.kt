@@ -16,4 +16,7 @@ object DependencyVersions {
     // querydsl
     const val QUERY_DSL_VERSION = "5.0.0"
     const val QUERY_DSL_APT_VERSION = "5.0.0"
+
+    // gauth
+    const val GAUTH_VERSION = "v2.0.0"
 }
