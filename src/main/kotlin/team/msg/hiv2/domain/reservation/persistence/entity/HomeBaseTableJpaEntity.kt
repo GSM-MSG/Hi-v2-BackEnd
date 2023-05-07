@@ -31,8 +31,5 @@ class HomeBaseTableJpaEntity(
     @JoinColumn(name = "home_base_id")
     val homeBase: HomeBaseJpaEntity,
 
-    @Column(columnDefinition = "DATETIME")
-    val deletedAt: LocalDateTime?
-
 
 ) : BaseUuidEntity(id)

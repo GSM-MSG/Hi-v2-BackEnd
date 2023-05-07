@@ -36,8 +36,7 @@ class HomeBaseTableMapper(
                 representative = user,
                 reason = it.reason,
                 checkStatus = it.checkStatus,
-                homeBase = homeBase,
-                deletedAt = it.deletedAt
+                homeBase = homeBase
             )
         }
     }

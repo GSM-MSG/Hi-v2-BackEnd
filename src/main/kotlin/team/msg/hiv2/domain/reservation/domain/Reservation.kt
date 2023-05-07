@@ -9,5 +9,4 @@ data class Reservation(
     val id: UUID,
     val userId: UUID,
     val homeBaseTableId: UUID,
-    val deletedAt: LocalDateTime? = null
 )

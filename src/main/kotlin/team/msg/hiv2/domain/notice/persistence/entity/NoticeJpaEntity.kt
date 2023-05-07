@@ -29,8 +29,6 @@ class NoticeJpaEntity(
     @JoinColumn(name = "user_id")
     val user: UserJpaEntity,
 
-    @Column(columnDefinition = "DATETIME")
-    val deletedAt: LocalDateTime?
 
 ) : BaseUuidEntity(id) {
 }

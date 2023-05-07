@@ -22,7 +22,6 @@ class ReservationMapper(
                 id = it.id,
                 userId = it.user.id,
                 homeBaseTableId = it.homeBaseTable.id,
-                deletedAt = it.deletedAt
             )
         }
 
@@ -37,7 +36,6 @@ class ReservationMapper(
                 id = it.id,
                 user = user,
                 homeBaseTable = homeBaseTable,
-                deletedAt = it.deletedAt
             )
         }
     }

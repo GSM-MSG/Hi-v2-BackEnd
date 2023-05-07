@@ -13,6 +13,4 @@ data class User(
     val number: Int,
     val profileImageUrl: String,
     val roles: MutableList<UserRole>,
-    val deleteAt: LocalDateTime? = null
-
 )

@@ -9,5 +9,4 @@ data class HomeBase(
     val id: UUID,
     val floor: Int,
     val period: Int,
-    val deleteAt: LocalDateTime? = null
 )

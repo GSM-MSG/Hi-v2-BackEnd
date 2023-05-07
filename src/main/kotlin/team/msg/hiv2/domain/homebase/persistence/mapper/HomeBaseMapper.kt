@@ -13,8 +13,7 @@ class HomeBaseMapper : GenericMapper<HomeBase, HomeBaseJpaEntity>{
             HomeBase(
                 id = it.id,
                 floor = it.floor,
-                period = it.period,
-                deleteAt = it.deletedAt
+                period = it.period
             )
         }
 
@@ -23,8 +22,7 @@ class HomeBaseMapper : GenericMapper<HomeBase, HomeBaseJpaEntity>{
             HomeBaseJpaEntity(
                 id = it.id,
                 floor = it.floor,
-                period = it.period,
-                deletedAt = it.deleteAt
+                period = it.period
             )
         }
 }
