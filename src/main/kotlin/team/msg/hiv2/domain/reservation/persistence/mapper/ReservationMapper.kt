@@ -21,7 +21,7 @@ class ReservationMapper(
             Reservation(
                 id = it.id,
                 userId = it.user.id,
-                homeBaseTableId = it.homeBaseTable.id,
+                homeBaseTableId = it.homeBaseTable.id
             )
         }
 
@@ -35,7 +35,7 @@ class ReservationMapper(
             ReservationJpaEntity(
                 id = it.id,
                 user = user,
-                homeBaseTable = homeBaseTable,
+                homeBaseTable = homeBaseTable
             )
         }
     }
