@@ -32,8 +32,7 @@ class UserMapper : GenericMapper<User, UserJpaEntity> {
                 classNum = it.classNum,
                 number = it.number,
                 profileImageUrl = it.profileImageUrl,
-                roles = it.roles,
-                deletedAt = it.deleteAt
+                roles = it.roles
             )
         }
 }

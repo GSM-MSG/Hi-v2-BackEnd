@@ -9,7 +9,6 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "user")
-@Where(clause = "deleted_at is null")
 class UserJpaEntity(
 
     override val id: UUID,
@@ -36,9 +35,6 @@ class UserJpaEntity(
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles", joinColumns = [JoinColumn(name = "user_id")])
     var roles: MutableList<UserRole> = mutableListOf(),
-
-    @Column(columnDefinition = "DATETIME")
-    val deletedAt: LocalDateTime?
 
     ) : BaseUuidEntity(id) {
 }

@@ -10,5 +10,4 @@ data class Notice(
     val title: String,
     val content: String,
     val userId: UUID,
-    val deletedAt: LocalDateTime? = null
 )

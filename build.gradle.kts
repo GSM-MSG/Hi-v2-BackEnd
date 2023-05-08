@@ -15,6 +15,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
+	maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
@@ -41,6 +42,9 @@ dependencies {
 	implementation(Dependencies.JWT_API)
 	runtimeOnly(Dependencies.JWT_IMPL)
 	runtimeOnly(Dependencies.JWT_JACKSON)
+
+	// gauth
+	implementation(Dependencies.GAUTH)
 
 }
 

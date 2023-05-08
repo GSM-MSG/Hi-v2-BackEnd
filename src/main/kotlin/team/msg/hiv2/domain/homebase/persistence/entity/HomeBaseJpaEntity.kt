@@ -17,9 +17,6 @@ class HomeBaseJpaEntity(
 
     val floor: Int,
 
-    val period: Int,
-
-    @Column(columnDefinition = "DATETIME")
-    val deletedAt: LocalDateTime?
+    val period: Int
 
 ) : BaseUuidEntity(id)

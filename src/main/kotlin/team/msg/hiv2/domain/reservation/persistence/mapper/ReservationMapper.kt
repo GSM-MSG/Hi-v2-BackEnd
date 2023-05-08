@@ -21,8 +21,7 @@ class ReservationMapper(
             Reservation(
                 id = it.id,
                 userId = it.user.id,
-                homeBaseTableId = it.homeBaseTable.id,
-                deletedAt = it.deletedAt
+                homeBaseTableId = it.homeBaseTable.id
             )
         }
 
@@ -36,8 +35,7 @@ class ReservationMapper(
             ReservationJpaEntity(
                 id = it.id,
                 user = user,
-                homeBaseTable = homeBaseTable,
-                deletedAt = it.deletedAt
+                homeBaseTable = homeBaseTable
             )
         }
     }

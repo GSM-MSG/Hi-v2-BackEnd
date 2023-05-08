@@ -19,28 +19,28 @@ class GenerateJwtAdapter(
     private val commandRefreshTokenPort: CommandRefreshTokenPort
 ) : GenerateJwtPort{
 
-    override fun generate(email: String): TokenResponse {
-        val accessToken = generateAccessToken(email, jwtProperties.accessSecret)
-        val refreshToken = generateRefreshToken(email, jwtProperties.refreshSecret)
+    override fun generate(userId: UUID): TokenResponse {
+        val accessToken = generateAccessToken(userId, jwtProperties.accessSecret)
+        val refreshToken = generateRefreshToken(userId, jwtProperties.refreshSecret)
         val accessExpiredAt = getAccessTokenExpiredAt()
         val refreshExpiredAt = getRefreshTokenExpiredAt()
-        commandRefreshTokenPort.saveRefreshToken(RefreshToken(refreshToken, email, jwtProperties.refreshExp))
+        commandRefreshTokenPort.saveRefreshToken(RefreshToken(refreshToken, userId, jwtProperties.refreshExp))
         return TokenResponse(accessToken, refreshToken, accessExpiredAt, refreshExpiredAt)
     }
 
-    private fun generateAccessToken(email: String, secret: Key): String =
+    private fun generateAccessToken(userId: UUID, secret: Key): String =
         Jwts.builder()
             .signWith(secret, SignatureAlgorithm.HS256)
-            .setSubject(email)
+            .setSubject(userId.toString())
             .claim("type", JwtProperties.accessType)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtProperties.accessExp * 1000))
             .compact()
 
-    private fun generateRefreshToken(email: String, secret: Key): String =
+    private fun generateRefreshToken(userId: UUID, secret: Key): String =
         Jwts.builder()
             .signWith(secret, SignatureAlgorithm.HS256)
-            .setSubject(email)
+            .setSubject(userId.toString())
             .claim("type", JwtProperties.refreshType)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtProperties.refreshExp * 1000))

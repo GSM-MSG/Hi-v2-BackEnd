@@ -20,7 +20,4 @@ class ReservationJpaEntity(
     @JoinColumn(name = "home_base_table_id")
     val homeBaseTable: HomeBaseTableJpaEntity,
 
-    @Column(columnDefinition = "DATETIME")
-    val deletedAt: LocalDateTime?
-
 ) : BaseUuidEntity(id)

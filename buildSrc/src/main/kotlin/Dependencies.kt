@@ -39,4 +39,6 @@ object Dependencies {
     const val COMMONS_IO = "commons-io:commons-io:${DependencyVersions.COMMONS_IO_VERSION}"
     const val APACHE_TIKA = "org.apache.tika:tika-core:${DependencyVersions.APACHE_TIKA_VERSION}"
 
+    //gauth
+    const val GAUTH = "com.github.GSM-MSG:GAuth-SDK-Java:${DependencyVersions.GAUTH_VERSION}"
 }

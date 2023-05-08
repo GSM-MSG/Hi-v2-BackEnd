@@ -31,8 +31,7 @@ class NoticeMapper(
                 id = it.id,
                 title = it.title,
                 content = it.content,
-                user = user,
-                deletedAt = it.deletedAt
+                user = user
             )
         }
     }
