@@ -21,7 +21,6 @@ class GAuthAdapter(
             gAuthProperties.redirectUri
         )
 
-
     override fun queryGAuthUserInfo(accessToken: String): GAuthUserInfo =
         gAuth.getUserInfo(accessToken)
 
