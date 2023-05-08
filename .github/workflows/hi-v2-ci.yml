@@ -1,4 +1,4 @@
-name: hi-v2-ci
+name: HI_V2_CI
 
 on:
   push:
