@@ -33,8 +33,6 @@ jobs:
 
       - name: Create application.yml
         run: |
-          mkdir ./src/main/resources
-          touch ./src/main/resources/application.yml
           echo "${{ secrets.HI_BACKEND_ENV }}" > ./src/main/resources/application.yml
         shell: bash
 
