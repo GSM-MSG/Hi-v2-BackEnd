@@ -1,5 +1,6 @@
 package team.msg.hiv2.domain.auth.persistence
 
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.auth.application.spi.RefreshTokenPort
 import team.msg.hiv2.domain.auth.domain.RefreshToken
@@ -15,4 +16,7 @@ class RefreshTokenPersistenceAdapter(
     override fun saveRefreshToken(refreshToken: RefreshToken) {
         refreshTokenRepository.save(refreshTokenMapper.toEntity(refreshToken))
     }
+
+    override fun queryByRefreshToken(refreshToken: String): RefreshToken? =
+        refreshTokenMapper.toDomain(refreshTokenRepository.findByIdOrNull(refreshToken))
 }
