@@ -37,10 +37,12 @@ class SecurityConfig(
                 CorsUtils.isPreFlightRequest(request)
             }).permitAll()
 
+             // health check
             .antMatchers(HttpMethod.GET, "/").permitAll()
 
              // auth
             .antMatchers(HttpMethod.POST, "/auth").permitAll()
+            .antMatchers(HttpMethod.PATCH, "/auth").permitAll()
 
             .anyRequest().authenticated()
             .and()
