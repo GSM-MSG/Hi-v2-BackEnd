@@ -1,3 +1,3 @@
 package team.msg.hiv2.domain.auth.application.spi
 
-interface RefreshTokenPort : CommandRefreshTokenPort
+interface RefreshTokenPort : CommandRefreshTokenPort, QueryRefreshTokenPort

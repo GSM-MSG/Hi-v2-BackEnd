@@ -36,7 +36,7 @@ class GAuthSignInUseCase(
             )
         )
 
-        return generateJwtPort.generate(user.id)
+        return generateJwtPort.generate(user.id, user.roles)
     }
 
     private fun createUser(isExistUser: Boolean, user: User): User {
