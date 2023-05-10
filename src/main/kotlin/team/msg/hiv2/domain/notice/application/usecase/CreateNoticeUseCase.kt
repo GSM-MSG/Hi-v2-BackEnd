@@ -23,6 +23,6 @@ class CreateNoticeUseCase(
             userId = user.id
         )
 
-        val saveNotice = commandNoticePort.saveNotice(notice)
+        commandNoticePort.saveNotice(notice)
     }
 }
