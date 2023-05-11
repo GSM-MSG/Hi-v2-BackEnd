@@ -40,7 +40,7 @@ class GAuthSignInUseCase(
     }
 
     private fun createUser(isExistUser: Boolean, user: User): User {
-        return if (isExistUser) {
+        return if(isExistUser){
             userPort.queryUserByEmail(user.email) ?: throw UserNotFoundException()
         } else {
             userPort.save(user)!!
