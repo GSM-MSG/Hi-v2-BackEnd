@@ -5,5 +5,6 @@ import team.msg.hiv2.domain.user.domain.constant.UserRole
 import java.util.UUID
 
 interface GenerateJwtPort {
+
     fun generate(userId: UUID, roles: MutableList<UserRole>): TokenResponse
 }

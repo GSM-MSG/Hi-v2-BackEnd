@@ -4,7 +4,6 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.notice.application.spi.NoticePort
 import team.msg.hiv2.domain.notice.domain.Notice
-import team.msg.hiv2.domain.notice.exception.NoticeNotFoundException
 import team.msg.hiv2.domain.notice.persistence.mapper.NoticeMapper
 import team.msg.hiv2.domain.notice.persistence.repository.NoticeRepository
 import java.util.*

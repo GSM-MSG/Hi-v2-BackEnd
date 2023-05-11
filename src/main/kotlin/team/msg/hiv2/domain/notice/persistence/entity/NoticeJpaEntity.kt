@@ -14,7 +14,6 @@ import javax.persistence.Table
 @Table(name = "notice")
 @Where(clause = "deleted_at is null")
 class NoticeJpaEntity(
-
     override val id: UUID,
 
     @Column(nullable = false)
@@ -25,7 +24,5 @@ class NoticeJpaEntity(
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    val user: UserJpaEntity,
-
-
+    val user: UserJpaEntity
 ) : BaseUuidEntity(id)
