@@ -17,8 +17,7 @@ class NoticeWebAdapter(
 ) {
 
     @PostMapping
-    fun createNotice(@RequestBody @Valid request: CreateNoticeRequest): ResponseEntity<Void> {
+    fun createNotice(@RequestBody @Valid request: CreateNoticeRequest): ResponseEntity<Void> =
         createNoticeUseCase.execute(request)
-        return ResponseEntity.status(HttpStatus.CREATED).build()
-    }
+            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 }
