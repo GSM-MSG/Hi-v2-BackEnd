@@ -25,7 +25,7 @@ enum class ErrorCode(
     HOME_BASE_NOT_FOUND("홈베이스를 찾을 수 없습니다.", 404),
 
     // notice
-    NOTICE_NOT_FOUND("공지글을 찾을 수 없습니다.", 404),
+    NOTICE_NOT_FOUND("공지사항을 찾을 수 없습니다.", 404),
 
 
     // internal
