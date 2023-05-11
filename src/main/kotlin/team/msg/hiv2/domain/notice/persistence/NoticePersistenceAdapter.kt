@@ -29,5 +29,5 @@ class NoticePersistenceAdapter(
     }
 
     override fun queryNoticeById(noticeId: UUID) =
-        noticeMapper.toDomain(noticeRepository.findByIdOrNull(noticeId) ?: throw NoticeNotFoundException())
+        noticeMapper.toDomain(noticeRepository.findByIdOrNull(noticeId))
 }
