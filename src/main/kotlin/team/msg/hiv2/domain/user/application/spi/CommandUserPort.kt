@@ -6,4 +6,5 @@ import team.msg.hiv2.domain.user.domain.User
 interface CommandUserPort {
 
     fun save(user: User) : User?
+    fun saveAll(users: List<User>)
 }

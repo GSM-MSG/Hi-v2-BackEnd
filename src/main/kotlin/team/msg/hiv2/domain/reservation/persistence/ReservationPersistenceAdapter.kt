@@ -14,9 +14,9 @@ class ReservationPersistenceAdapter(
     private val reservationMapper: ReservationMapper
 ) : ReservationPort {
 
-    override fun saveReservation(reservation: Reservation) {
-        reservationRepository.save(reservationMapper.toEntity(reservation))
-    }
+    override fun saveReservation(reservation: Reservation): UUID =
+        reservationMapper.toDomain(reservationRepository.save(reservationMapper.toEntity(reservation)))!!.id
+
 
     override fun queryReservationById(id: UUID): Reservation? =
         reservationMapper.toDomain(reservationRepository.findByIdOrNull(id))
