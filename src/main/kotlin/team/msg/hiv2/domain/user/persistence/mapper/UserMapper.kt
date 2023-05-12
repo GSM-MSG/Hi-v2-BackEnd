@@ -3,6 +3,7 @@ package team.msg.hiv2.domain.user.persistence.mapper
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.reservation.exception.ReservationNotFoundException
+import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
 import team.msg.hiv2.domain.reservation.persistence.repository.ReservationRepository
 import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 import team.msg.hiv2.domain.user.domain.User
@@ -24,12 +25,13 @@ class UserMapper(
                 number = it.number,
                 profileImageUrl = it.profileImageUrl,
                 roles = it.roles,
-                reservationId = it.reservation.id
+                reservationId = it.reservation!!.id
             )
         }
 
     override fun toEntity(domain: User): UserJpaEntity {
-        val reservation = reservationRepository.findByIdOrNull(domain.reservationId!!)
+        val reservationId = domain.reservationId
+        val reservation = reservationId?.let { reservationRepository.findByIdOrNull(it) }
             ?: throw ReservationNotFoundException()
         return domain.let {
             UserJpaEntity(

@@ -32,7 +32,7 @@ class UserJpaEntity(
 
     @ManyToOne
     @JoinColumn(name = "reservation_id")
-    val reservation: ReservationJpaEntity,
+    val reservation: ReservationJpaEntity? = null,
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)

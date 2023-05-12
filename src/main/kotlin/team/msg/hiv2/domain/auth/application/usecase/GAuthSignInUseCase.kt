@@ -32,7 +32,8 @@ class GAuthSignInUseCase(
                 classNum = gAuthUserInfo.classNum,
                 number = gAuthUserInfo.num,
                 profileImageUrl = gAuthUserInfo.profileUrl,
-                roles = mutableListOf(role)
+                roles = mutableListOf(role),
+                reservationId = null
             )
         )
 
