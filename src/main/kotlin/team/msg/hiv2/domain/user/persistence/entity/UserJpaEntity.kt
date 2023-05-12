@@ -1,6 +1,7 @@
 package team.msg.hiv2.domain.user.persistence.entity
 
 import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
+import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.global.entity.BaseUuidEntity
 import java.util.*
@@ -37,6 +38,10 @@ class UserJpaEntity(
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles", joinColumns = [JoinColumn(name = "user_id")])
-    var roles: MutableList<UserRole> = mutableListOf()
+    var roles: MutableList<UserRole> = mutableListOf(),
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "use_status")
+    val useStatus: UseStatus
 
 ) : BaseUuidEntity(id)
