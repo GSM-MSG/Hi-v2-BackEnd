@@ -33,7 +33,6 @@ class UserMapper(
     override fun toEntity(domain: User): UserJpaEntity {
         val reservationId = domain.reservationId
         val reservation = reservationId?.let { reservationRepository.findByIdOrNull(it) }
-            ?: throw ReservationNotFoundException()
         return domain.let {
             UserJpaEntity(
                 id = it.id,

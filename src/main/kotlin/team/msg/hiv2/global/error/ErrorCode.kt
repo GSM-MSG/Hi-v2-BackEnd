@@ -23,6 +23,7 @@ enum class ErrorCode(
 
     // homeBase
     HOME_BASE_NOT_FOUND("홈베이스를 찾을 수 없습니다.", 404),
+    HOME_BASE_FORBIDDEN("예약 가능한 상태가 아닙니다.", 403),
 
     // notice
     NOTICE_NOT_FOUND("공지사항을 찾을 수 없습니다.", 404),

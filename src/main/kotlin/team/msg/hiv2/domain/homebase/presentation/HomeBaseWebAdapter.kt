@@ -24,5 +24,4 @@ class HomeBaseWebAdapter(
         reserveHomeBaseUseCase.execute(floor, period, request)
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
-
 }
