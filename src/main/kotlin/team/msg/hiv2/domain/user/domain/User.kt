@@ -13,5 +13,5 @@ data class User(
     val number: Int,
     val profileImageUrl: String,
     val roles: MutableList<UserRole>,
-    val reservationId: UUID
+    val reservationId: UUID? = null
 )
