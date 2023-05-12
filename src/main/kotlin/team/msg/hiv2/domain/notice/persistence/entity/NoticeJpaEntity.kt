@@ -12,7 +12,6 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "notice")
-@Where(clause = "deleted_at is null")
 class NoticeJpaEntity(
     override val id: UUID,
 
