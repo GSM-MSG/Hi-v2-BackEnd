@@ -5,6 +5,6 @@ import java.util.UUID
 
 interface CommandNoticePort {
 
-    fun saveNotice(notice: Notice)
+    fun saveNotice(notice: Notice): Notice
     fun deleteNotice(noticeId: UUID)
 }
