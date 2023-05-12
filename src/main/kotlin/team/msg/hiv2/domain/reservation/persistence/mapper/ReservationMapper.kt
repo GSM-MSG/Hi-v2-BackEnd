@@ -2,10 +2,10 @@ package team.msg.hiv2.domain.reservation.persistence.mapper
 
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import team.msg.hiv2.domain.homebase.exception.HomeBaseNotFoundException
+import team.msg.hiv2.domain.homebase.persistence.repository.HomeBaseRepository
 import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.reservation.exception.HomeBaseTableNotFoundException
 import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
-import team.msg.hiv2.domain.reservation.persistence.repository.HomeBaseTableRepository
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.domain.user.persistence.repository.UserRepository
 import team.msg.hiv2.global.mapper.GenericMapper
@@ -13,29 +13,32 @@ import team.msg.hiv2.global.mapper.GenericMapper
 @Component
 class ReservationMapper(
     private val userRepository: UserRepository,
-    private val homeBaseTableRepository: HomeBaseTableRepository
+    private val homeBaseRepository: HomeBaseRepository
 ) : GenericMapper<Reservation, ReservationJpaEntity> {
 
     override fun toDomain(entity: ReservationJpaEntity?): Reservation? =
         entity?.let {
             Reservation(
                 id = it.id,
-                userId = it.user.id,
-                homeBaseTableId = it.homeBaseTable.id
+                representativeId = it.user.id,
+                homeBaseId = it.homeBase.id,
+                reason = it.reason,
+                checkStatus = it.checkStatus
             )
         }
 
     override fun toEntity(domain: Reservation): ReservationJpaEntity {
-        val user = userRepository.findByIdOrNull(domain.userId)
+        val user = userRepository.findByIdOrNull(domain.representativeId)
             ?: throw UserNotFoundException()
-        val homeBaseTable = homeBaseTableRepository.findByIdOrNull(domain.homeBaseTableId)
-            ?: throw HomeBaseTableNotFoundException()
-
+        val homeBase = homeBaseRepository.findByIdOrNull(domain.homeBaseId)
+            ?: throw HomeBaseNotFoundException()
         return domain.let {
             ReservationJpaEntity(
                 id = it.id,
                 user = user,
-                homeBaseTable = homeBaseTable
+                homeBase = homeBase,
+                reason = it.reason,
+                checkStatus = it.checkStatus
             )
         }
     }

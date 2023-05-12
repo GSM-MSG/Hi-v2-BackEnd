@@ -4,4 +4,4 @@ import org.springframework.data.repository.CrudRepository
 import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
 import java.util.UUID
 
-interface HomeBaseRepository : CrudRepository<HomeBaseJpaEntity, UUID>
+interface HomeBaseRepository : CrudRepository<HomeBaseJpaEntity, Long>
