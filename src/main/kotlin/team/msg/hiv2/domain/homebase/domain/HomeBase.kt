@@ -6,7 +6,7 @@ import java.util.*
 
 @Aggregate
 data class HomeBase(
-    val id: UUID,
+    val id: Long,
     val floor: Int,
     val period: Int,
 )

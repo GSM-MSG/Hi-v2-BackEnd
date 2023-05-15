@@ -44,6 +44,12 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST, "/auth").permitAll()
             .antMatchers(HttpMethod.PATCH, "/auth").permitAll()
 
+             // homeBase
+            .antMatchers(HttpMethod.POST, "/homebase").hasRole("STUDENT")
+
+             // notice
+            .antMatchers(HttpMethod.POST, "/notice").hasAnyRole("ADMIN", "TEACHER")
+
             .anyRequest().authenticated()
             .and()
 

@@ -7,4 +7,4 @@ import org.springframework.transaction.annotation.Transactional
 @Target(AnnotationTarget.CLASS)
 @Component
 @Transactional
-annotation class UseCase()
+annotation class UseCase

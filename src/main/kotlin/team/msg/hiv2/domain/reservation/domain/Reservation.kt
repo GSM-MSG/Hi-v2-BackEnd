@@ -7,6 +7,8 @@ import java.util.*
 @Aggregate
 data class Reservation(
     val id: UUID,
-    val userId: UUID,
-    val homeBaseTableId: UUID,
+    val representativeId: UUID,
+    val homeBaseId: Long,
+    val reason: String,
+    val checkStatus: Boolean
 )
