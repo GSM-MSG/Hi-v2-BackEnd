@@ -40,8 +40,6 @@ class UserPersistenceAdapter(
         userRepository.findAllById(ids).map { userMapper.toDomain(it) ?: throw UserNotFoundException() }
 
     override fun queryUserRoleByEmail(email: String, role: String): UserRole {
-        println(email)
-        println(role)
         val user = queryUserByEmail(email) ?: return when(role){
             "ROLE_STUDENT" -> UserRole.ROLE_STUDENT
             "ROLE_TEACHER" -> UserRole.ROLE_TEACHER
