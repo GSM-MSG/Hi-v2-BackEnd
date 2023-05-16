@@ -46,6 +46,7 @@ class SecurityConfig(
 
              // homeBase
             .antMatchers(HttpMethod.POST, "/homebase").hasRole("STUDENT")
+            .antMatchers(HttpMethod.GET, "/homebase").authenticated()
 
              // notice
             .antMatchers(HttpMethod.POST, "/notice").hasAnyRole("ADMIN", "TEACHER")
