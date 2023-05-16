@@ -17,7 +17,7 @@ class QueryReservationByHomeBaseUseCase(
 
     fun execute(floor: Int, period: Int): List<ReservationResponse>{
         val homeBase = queryHomeBasePort.queryHomeBaseByFloorAndPeriod(floor, period)
-            .let { it ?: throw HomeBaseNotFoundException() }
+            ?: throw HomeBaseNotFoundException()
         val reservations = queryReservationPort.queryAllReservationByHomeBase(homeBase)
 
         return reservations.map {
