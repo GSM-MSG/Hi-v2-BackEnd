@@ -6,5 +6,6 @@ import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
 import java.util.UUID
 
 interface ReservationRepository : CrudRepository<ReservationJpaEntity, UUID> {
-    fun findByHomeBase(homeBase: HomeBaseJpaEntity): ReservationJpaEntity?
+    fun findAllByHomeBase(homeBase: HomeBaseJpaEntity): List<ReservationJpaEntity>
+
 }

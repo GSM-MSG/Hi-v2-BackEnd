@@ -2,6 +2,8 @@ package team.msg.hiv2.domain.user.persistence
 
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import team.msg.hiv2.domain.reservation.domain.Reservation
+import team.msg.hiv2.domain.reservation.persistence.mapper.ReservationMapper
 import team.msg.hiv2.domain.user.application.spi.UserPort
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UserRole
@@ -16,7 +18,8 @@ import java.util.*
 class UserPersistenceAdapter(
     private val userRepository: UserRepository,
     private val userMapper: UserMapper,
-    private val securityPort: SecurityPort
+    private val securityPort: SecurityPort,
+    private val reservationMapper: ReservationMapper
 ) : UserPort {
 
     override fun save(user: User): User =
@@ -37,7 +40,7 @@ class UserPersistenceAdapter(
     }
 
     override fun queryAllUserById(ids: List<UUID>): List<User> =
-        userRepository.findAllById(ids).map { userMapper.toDomain(it) ?: throw UserNotFoundException() }
+        userRepository.findAllById(ids).map { userMapper.toDomain(it)!! }
 
     override fun queryUserRoleByEmail(email: String, role: String): UserRole {
         val user = queryUserByEmail(email) ?: return when(role){
@@ -47,6 +50,11 @@ class UserPersistenceAdapter(
         }
         return user.roles.firstOrNull() ?: throw UserNotFoundException()
     }
+
+    override fun queryAllUserByReservation(reservation: Reservation): List<User> =
+        userRepository.findAllByReservation(reservationMapper.toEntity(reservation))
+            .map { userMapper.toDomain(it)!! }
+
 
     override fun existsUserByEmail(email: String): Boolean =
         userRepository.existsByEmail(email)
