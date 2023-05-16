@@ -28,6 +28,4 @@ class ReservationPersistenceAdapter(
         reservationRepository.findAllByHomeBase(homeBaseMapper.toEntity(homeBase))
             .map { reservationMapper.toDomain(it)!! }
 
-
-
 }
