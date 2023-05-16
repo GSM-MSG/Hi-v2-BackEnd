@@ -9,7 +9,7 @@ import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
 
 @ReadOnlyUseCase
-class QueryReservationUseCase(
+class QueryReservationByHomeBaseUseCase(
     private val queryReservationPort: QueryReservationPort,
     private val queryHomeBasePort: QueryHomeBasePort,
     private val queryUserPort: QueryUserPort
