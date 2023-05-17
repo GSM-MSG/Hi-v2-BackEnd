@@ -1,6 +1,6 @@
 package team.msg.hiv2.domain.homebase.application.usecase
 
-import team.msg.hiv2.domain.homebase.presentation.data.response.ReservationDetailResponse
+import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationDetailResponse
 import team.msg.hiv2.domain.reservation.application.spi.QueryReservationPort
 import team.msg.hiv2.domain.reservation.exception.ReservationNotFoundException
 import team.msg.hiv2.domain.user.application.spi.QueryUserPort
@@ -14,7 +14,7 @@ class QueryReservationDetailUseCase(
     private val queryUserPort: QueryUserPort
 ) {
 
-    fun execute(id: UUID): ReservationDetailResponse{
+    fun execute(id: UUID): ReservationDetailResponse {
         val reservation = queryReservationPort.queryReservationById(id)
             ?: throw ReservationNotFoundException()
         val users = queryUserPort.queryAllUserByReservation(reservation)

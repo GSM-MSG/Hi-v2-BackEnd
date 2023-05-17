@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import team.msg.hiv2.domain.homebase.application.usecase.QueryReservationDetailUseCase
-import team.msg.hiv2.domain.homebase.presentation.data.response.ReservationDetailResponse
+import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationDetailResponse
 import java.util.UUID
 
 @RestController
