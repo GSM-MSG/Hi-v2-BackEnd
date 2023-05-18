@@ -1,4 +1,4 @@
-package team.msg.hiv2.domain.homebase.application.usecase
+package team.msg.hiv2.domain.reservation.application.usecase
 
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationDetailResponse
 import team.msg.hiv2.domain.reservation.application.spi.QueryReservationPort
