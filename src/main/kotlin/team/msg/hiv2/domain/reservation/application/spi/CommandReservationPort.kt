@@ -4,4 +4,5 @@ import team.msg.hiv2.domain.reservation.domain.Reservation
 
 interface CommandReservationPort {
     fun saveReservation(reservation: Reservation): Reservation
+    fun deleteReservation(reservation: Reservation)
 }
