@@ -51,6 +51,7 @@ class SecurityConfig(
              // reservation
             .antMatchers(HttpMethod.GET, "/reservation/{reservation_id}").authenticated()
             .antMatchers(HttpMethod.DELETE, "/reservation/{reservation_id}").hasRole("STUDENT")
+            .antMatchers(HttpMethod.PATCH, "/reservation/{reservation_id}").hasRole("STUDENT")
 
              // notice
             .antMatchers(HttpMethod.POST, "/notice").hasAnyRole("ADMIN", "TEACHER")
