@@ -4,6 +4,7 @@ import team.msg.hiv2.domain.reservation.application.spi.ReservationPort
 import team.msg.hiv2.domain.reservation.exception.ForbiddenCommandReservationException
 import team.msg.hiv2.domain.reservation.exception.ReservationNotFoundException
 import team.msg.hiv2.domain.user.application.spi.UserPort
+import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.global.annotation.usecase.UseCase
 import java.util.UUID
@@ -11,7 +12,8 @@ import java.util.UUID
 @UseCase
 class DeleteReservationUseCase(
     private val reservationPort: ReservationPort,
-    private val userPort: UserPort
+    private val userPort: UserPort,
+    private val userValidator: UserValidator
 ) {
 
     fun execute(reservationId: UUID){
@@ -20,8 +22,7 @@ class DeleteReservationUseCase(
         val users = userPort.queryAllUserByReservation(reservation)
         val currentUser = userPort.queryCurrentUser()
 
-        if(currentUser.id != reservation.representativeId)
-            throw ForbiddenCommandReservationException()
+        userValidator.checkRepresentative(currentUser, reservation)
 
         userPort.saveAll(users.map { it.copy(useStatus = UseStatus.AVAILABLE) })
         reservationPort.deleteReservation(reservation)
