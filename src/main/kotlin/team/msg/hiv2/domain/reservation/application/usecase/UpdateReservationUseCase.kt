@@ -17,7 +17,8 @@ class UpdateReservationUseCase(
 ) {
 
     fun execute(reservationId: UUID, request: UpdateReservationRequest){
-        val reservation = reservationPort.queryReservationById(reservationId) ?: throw ReservationNotFoundException()
+        val reservation = reservationPort.queryReservationById(reservationId)
+            ?: throw ReservationNotFoundException()
         val currentUser = userPort.queryCurrentUser()
         userValidator.checkRepresentative(currentUser, reservation)
 
