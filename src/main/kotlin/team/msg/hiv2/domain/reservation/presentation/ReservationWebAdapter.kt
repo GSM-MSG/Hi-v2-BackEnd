@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import team.msg.hiv2.domain.reservation.application.usecase.DelegateRepresentativeUseCase
 import team.msg.hiv2.domain.reservation.application.usecase.DeleteReservationUseCase
 import team.msg.hiv2.domain.reservation.application.usecase.QueryReservationDetailUseCase
 import team.msg.hiv2.domain.reservation.application.usecase.UpdateReservationUseCase
@@ -19,7 +20,8 @@ import java.util.UUID
 class ReservationWebAdapter(
     private val queryReservationDetailUseCase: QueryReservationDetailUseCase,
     private val deleteReservationUseCase: DeleteReservationUseCase,
-    private val updateReservationUseCase: UpdateReservationUseCase
+    private val updateReservationUseCase: UpdateReservationUseCase,
+    private val delegateRepresentativeUseCase: DelegateRepresentativeUseCase
 ) {
 
     @GetMapping("/{id}")
@@ -36,4 +38,10 @@ class ReservationWebAdapter(
     fun updateReservation(@PathVariable id: UUID, request: UpdateReservationRequest): ResponseEntity<Void> =
         updateReservationUseCase.execute(id, request)
             .let { ResponseEntity.noContent().build() }
+
+    @PatchMapping("/{id}/{user_id}")
+    fun delegateRepresentative(@PathVariable id: UUID, @PathVariable("user_id") userId: UUID): ResponseEntity<Void> =
+        delegateRepresentativeUseCase.execute(id, userId)
+            .let { ResponseEntity.noContent().build() }
+
 }
