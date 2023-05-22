@@ -55,6 +55,7 @@ class SecurityConfig(
 
              // notice
             .antMatchers(HttpMethod.POST, "/notice").hasAnyRole("ADMIN", "TEACHER")
+            .antMatchers(HttpMethod.GET, "/notice").authenticated()
 
             .anyRequest().authenticated()
             .and()
