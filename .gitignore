@@ -32,6 +32,7 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+schema.sql
 
 ### VS Code ###
 .vscode/

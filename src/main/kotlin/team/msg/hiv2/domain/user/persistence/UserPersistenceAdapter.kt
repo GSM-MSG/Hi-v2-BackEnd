@@ -53,6 +53,8 @@ class UserPersistenceAdapter(
         userRepository.findAllByReservation(reservationMapper.toEntity(reservation))
             .map { userMapper.toDomain(it)!! }
 
+    override fun queryUserByIdAndReservation(id: UUID, reservation: Reservation): User? =
+        userMapper.toDomain(userRepository.findByIdAndReservation(id, reservationMapper.toEntity(reservation)))
 
     override fun existsUserByEmail(email: String): Boolean =
         userRepository.existsByEmail(email)

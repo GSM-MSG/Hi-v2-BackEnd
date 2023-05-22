@@ -12,6 +12,7 @@ interface QueryUserPort {
     fun queryAllUserById(ids: List<UUID>): List<User>
     fun queryUserRoleByEmail(email: String, role: String): UserRole
     fun queryAllUserByReservation(reservation: Reservation): List<User>
+    fun queryUserByIdAndReservation(id: UUID, reservation: Reservation): User?
     fun existsUserByEmail(email: String): Boolean
     fun queryCurrentUser(): User
 }
