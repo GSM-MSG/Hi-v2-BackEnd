@@ -25,6 +25,6 @@ class DelegateRepresentativeUseCase(
         val delegatedUser = userPort.queryUserByIdAndReservation(userId, reservation)
             ?: throw UserNotFoundException()
 
-        reservationPort.saveReservation(reservation.copy(representativeId = delegatedUser.id))
+        reservationPort.save(reservation.copy(representativeId = delegatedUser.id))
     }
 }

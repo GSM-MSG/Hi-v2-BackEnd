@@ -35,7 +35,7 @@ class ReserveHomeBaseUseCase(
 
         userValidator.checkUsersUseStatus(users)
 
-        val reservationId = commandReservationPort.saveReservation(reservation).id
+        val reservationId = commandReservationPort.save(reservation).id
         userPort.saveAll(users.map { it.copy(reservationId = reservationId, useStatus = UseStatus.UNAVAILABLE) })
     }
 }

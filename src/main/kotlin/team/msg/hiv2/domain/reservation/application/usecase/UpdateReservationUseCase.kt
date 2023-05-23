@@ -28,7 +28,7 @@ class UpdateReservationUseCase(
         val users = userPort.queryAllUserById(request.users)
         userValidator.checkUsersUseStatus(users)
 
-        reservationPort.saveReservation(reservation.copy(reason = request.reason))
+        reservationPort.save(reservation.copy(reason = request.reason))
         userPort.saveAll(users.map { it.copy(reservationId = reservationId) })
     }
 }
