@@ -19,7 +19,8 @@ class UserPersistenceAdapter(
     private val userRepository: UserRepository,
     private val userMapper: UserMapper,
     private val securityPort: SecurityPort,
-    private val reservationMapper: ReservationMapper
+    private val reservationMapper: ReservationMapper,
+    private val noticeRepository: UserRepository
 ) : UserPort {
 
     override fun save(user: User): User =
@@ -62,4 +63,9 @@ class UserPersistenceAdapter(
     override fun queryCurrentUser(): User =
         userMapper.toDomain(userRepository.findByIdOrNull(securityPort.queryCurrentUserId()))
             .let { it ?: throw UserNotFoundException() }
+
+    override fun queryUserByNotice(id: UUID): User {
+        val user = noticeRepository.findByIdOrNull(id) ?: throw UserNotFoundException()
+        return userMapper.toDomain(user)!!
+    }
 }
