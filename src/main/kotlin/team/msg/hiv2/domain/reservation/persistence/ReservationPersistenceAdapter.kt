@@ -18,7 +18,7 @@ class ReservationPersistenceAdapter(
     private val homeBaseMapper: HomeBaseMapper
 ) : ReservationPort {
 
-    override fun saveReservation(reservation: Reservation): Reservation =
+    override fun save(reservation: Reservation): Reservation =
         reservationMapper.toDomain(reservationRepository.save(reservationMapper.toEntity(reservation)))!!
 
     override fun deleteReservation(reservation: Reservation){

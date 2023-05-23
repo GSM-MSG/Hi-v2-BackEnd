@@ -21,6 +21,12 @@ class SecurityConfig(
     private val jwtParserPort: JwtParserPort
 ) {
 
+    companion object {
+        const val STUDENT = "STUDENT"
+        const val TEACHER = "TEACHER"
+        const val ADMIN = "ADMIN"
+    }
+
     @Bean
     protected fun filterChain(http: HttpSecurity): SecurityFilterChain =
         http
@@ -45,18 +51,20 @@ class SecurityConfig(
             .antMatchers(HttpMethod.PATCH, "/auth").permitAll()
 
              // homeBase
-            .antMatchers(HttpMethod.POST, "/homebase").hasRole("STUDENT")
+            .antMatchers(HttpMethod.POST, "/homebase").hasRole(STUDENT)
             .antMatchers(HttpMethod.GET, "/homebase").authenticated()
 
              // reservation
             .antMatchers(HttpMethod.GET, "/reservation/{reservation_id}").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/reservation/{reservation_id}").hasRole("STUDENT")
-            .antMatchers(HttpMethod.PATCH, "/reservation/{reservation_id}").hasRole("STUDENT")
-            .antMatchers(HttpMethod.PATCH, "/reservation/{reservation_id}/{user_id}").hasRole("STUDENT")
+            .antMatchers(HttpMethod.DELETE, "/reservation/{reservation_id}").hasRole(STUDENT)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{reservation_id}").hasRole(STUDENT)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{reservation_id}/{user_id}").hasRole(STUDENT)
+            .antMatchers(HttpMethod.DELETE, "/reservation/{reservation_id}/exit").hasRole(STUDENT)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{reservation_id}/check-status").hasRole(TEACHER)
 
              // notice
-            .antMatchers(HttpMethod.POST, "/notice").hasAnyRole("ADMIN", "TEACHER")
             .antMatchers(HttpMethod.GET, "/notice").authenticated()
+            .antMatchers(HttpMethod.POST, "/notice").hasAnyRole(ADMIN, TEACHER)
 
             .anyRequest().authenticated()
             .and()

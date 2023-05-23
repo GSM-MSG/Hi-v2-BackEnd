@@ -7,5 +7,4 @@ import java.util.UUID
 
 interface ReservationRepository : CrudRepository<ReservationJpaEntity, UUID> {
     fun findAllByHomeBase(homeBase: HomeBaseJpaEntity): List<ReservationJpaEntity>
-
 }

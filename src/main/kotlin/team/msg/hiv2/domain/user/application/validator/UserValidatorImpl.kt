@@ -3,6 +3,7 @@ package team.msg.hiv2.domain.user.application.validator
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.homebase.exception.ForbiddenReserveException
 import team.msg.hiv2.domain.reservation.domain.Reservation
+import team.msg.hiv2.domain.reservation.exception.ForbiddenCommandReservationException
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 
@@ -20,5 +21,10 @@ class UserValidatorImpl : UserValidator {
     override fun checkRepresentative(user: User, reservation: Reservation) {
         if(user.id != reservation.representativeId)
             throw ForbiddenReserveException()
+    }
+
+    override fun checkUserAndReservation(user: User, reservation: Reservation) {
+        if(user.reservationId != reservation.id)
+            throw ForbiddenCommandReservationException()
     }
 }
