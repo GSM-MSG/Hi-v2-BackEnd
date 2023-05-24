@@ -22,8 +22,6 @@ class DeleteReservationUseCase(
         val users = userPort.queryAllUserByReservation(reservation)
         val currentUser = userPort.queryCurrentUser()
 
-        if(currentUser.id != reservation.representativeId)
-            throw ForbiddenCommandReservationException()
         userValidator.checkRepresentative(currentUser, reservation)
 
         userPort.saveAll(users.map { it.copy(useStatus = UseStatus.AVAILABLE) })
