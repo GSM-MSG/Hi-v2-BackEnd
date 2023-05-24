@@ -1,6 +1,5 @@
 package team.msg.hiv2.domain.user.application.spi
 
-import team.msg.hiv2.domain.notice.domain.Notice
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UserRole
@@ -16,5 +15,4 @@ interface QueryUserPort {
     fun queryUserByIdAndReservation(id: UUID, reservation: Reservation): User?
     fun existsUserByEmail(email: String): Boolean
     fun queryCurrentUser(): User
-    fun queryUserByNotice(id: UUID): User
 }

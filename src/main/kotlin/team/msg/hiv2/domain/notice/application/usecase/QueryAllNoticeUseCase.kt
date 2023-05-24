@@ -3,6 +3,7 @@ package team.msg.hiv2.domain.notice.application.usecase
 import team.msg.hiv2.domain.notice.application.spi.QueryNoticePort
 import team.msg.hiv2.domain.notice.presentation.data.response.NoticeResponse
 import team.msg.hiv2.domain.user.application.spi.QueryUserPort
+import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.usecase.UseCase
 
@@ -15,7 +16,8 @@ class QueryAllNoticeUseCase(
         val notices = queryNoticePort.queryAllNotice()
 
         return notices.map {
-            val user = queryUserPort.queryUserByNotice(it.id)
+            val user = queryUserPort.queryUserById(it.userId)
+                ?: throw UserNotFoundException()
             NoticeResponse(
                 noticeId = it.id,
                 title = it.title,
