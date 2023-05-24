@@ -19,7 +19,7 @@ class UserPersistenceAdapter(
     private val userRepository: UserRepository,
     private val userMapper: UserMapper,
     private val securityPort: SecurityPort,
-    private val reservationMapper: ReservationMapper
+    private val reservationMapper: ReservationMapper,
 ) : UserPort {
 
     override fun save(user: User): User =

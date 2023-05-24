@@ -36,3 +36,4 @@ schema.sql
 
 ### VS Code ###
 .vscode/
+.DS_Store

@@ -18,7 +18,6 @@ class UserValidatorImpl : UserValidator {
     override fun checkUsersUseStatus(users: List<User>){
         users.forEach { checkUserUseStatus(it) }
     }
-
     override fun checkRepresentative(user: User, reservation: Reservation) {
         if(user.id != reservation.representativeId)
             throw ForbiddenReserveException()

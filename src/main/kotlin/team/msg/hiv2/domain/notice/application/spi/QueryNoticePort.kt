@@ -5,6 +5,6 @@ import java.util.UUID
 
 interface QueryNoticePort {
 
-    fun queryNotice(): List<Notice?>
+    fun queryAllNotice(): List<Notice>
     fun queryNoticeById(noticeId: UUID): Notice?
 }

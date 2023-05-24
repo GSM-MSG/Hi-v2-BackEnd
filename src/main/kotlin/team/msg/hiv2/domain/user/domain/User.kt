@@ -2,7 +2,6 @@ package team.msg.hiv2.domain.user.domain
 
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
-import java.time.LocalDateTime
 import java.util.UUID
 
 data class User(

@@ -29,7 +29,6 @@ class ReservationWebAdapter(
     fun deleteReservation(@PathVariable id: UUID): ResponseEntity<Void> =
         deleteReservationUseCase.execute(id)
             .let { ResponseEntity.noContent().build() }
-
     @PatchMapping("/{id}")
     fun updateReservation(@PathVariable id: UUID, request: UpdateReservationRequest): ResponseEntity<Void> =
         updateReservationUseCase.execute(id, request)
