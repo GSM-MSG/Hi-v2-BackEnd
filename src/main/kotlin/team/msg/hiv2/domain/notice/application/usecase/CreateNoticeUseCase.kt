@@ -21,8 +21,7 @@ class CreateNoticeUseCase(
             id = UUID.randomUUID(),
             title = request.title,
             content = request.content,
-            userId = user.id,
-            createdAt = LocalDateTime.now()
+            userId = user.id
         )
 
         commandNoticePort.saveNotice(notice)

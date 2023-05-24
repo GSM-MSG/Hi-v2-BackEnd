@@ -24,7 +24,4 @@ class NoticeJpaEntity(
     @ManyToOne
     @JoinColumn(name = "user_id")
     val user: UserJpaEntity,
-
-    override val createdAt: LocalDateTime
-
 ) : BaseUuidEntity(id)

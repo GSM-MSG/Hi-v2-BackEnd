@@ -10,5 +10,5 @@ data class Notice(
     val title: String,
     val content: String,
     val userId: UUID,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime = LocalDateTime.now()
 )

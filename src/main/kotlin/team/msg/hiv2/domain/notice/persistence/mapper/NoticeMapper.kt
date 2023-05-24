@@ -19,8 +19,7 @@ class NoticeMapper(
                 id = it.id,
                 title = it.title,
                 content = it.content,
-                userId = it.user.id,
-                createdAt = it.createdAt
+                userId = it.user.id
             )
         }
 
@@ -32,8 +31,7 @@ class NoticeMapper(
                 id = it.id,
                 title = it.title,
                 content = it.content,
-                user = user,
-                createdAt = it.createdAt
+                user = user
             )
         }
     }
