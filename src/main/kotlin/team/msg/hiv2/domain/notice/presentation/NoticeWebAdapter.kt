@@ -12,6 +12,7 @@ import team.msg.hiv2.domain.notice.application.usecase.CreateNoticeUseCase
 import team.msg.hiv2.domain.notice.application.usecase.QueryAllNoticeUseCase
 import team.msg.hiv2.domain.notice.application.usecase.QueryNoticeDetailsUseCase
 import team.msg.hiv2.domain.notice.presentation.data.request.CreateNoticeRequest
+import team.msg.hiv2.domain.notice.presentation.data.response.NoticeDetailsResponse
 import team.msg.hiv2.domain.notice.presentation.data.response.NoticeResponse
 import java.util.UUID
 import javax.validation.Valid
@@ -35,7 +36,7 @@ class NoticeWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/{notice_id}")
-    fun queryNoticeDetails(@PathVariable("notice_id") noticeId: UUID): ResponseEntity<NoticeResponse> =
+    fun queryNoticeDetails(@PathVariable("notice_id") noticeId: UUID): ResponseEntity<NoticeDetailsResponse> =
         queryNoticeDetailsUseCase.execute(noticeId)
             .let { ResponseEntity.ok(it) }
 }
