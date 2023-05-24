@@ -2,6 +2,7 @@ package team.msg.hiv2.domain.notice.presentation
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import team.msg.hiv2.domain.notice.application.usecase.CreateNoticeUseCase
+import team.msg.hiv2.domain.notice.application.usecase.DeleteNoticeUseCase
 import team.msg.hiv2.domain.notice.application.usecase.QueryAllNoticeUseCase
 import team.msg.hiv2.domain.notice.application.usecase.QueryNoticeDetailsUseCase
 import team.msg.hiv2.domain.notice.presentation.data.request.CreateNoticeRequest
@@ -22,7 +24,8 @@ import javax.validation.Valid
 class NoticeWebAdapter(
     private val createNoticeUseCase: CreateNoticeUseCase,
     private val queryAllNoticeUseCase: QueryAllNoticeUseCase,
-    private val queryNoticeDetailsUseCase: QueryNoticeDetailsUseCase
+    private val queryNoticeDetailsUseCase: QueryNoticeDetailsUseCase,
+    private val deleteNoticeUseCase: DeleteNoticeUseCase
 ) {
 
     @PostMapping
@@ -39,4 +42,9 @@ class NoticeWebAdapter(
     fun queryNoticeDetails(@PathVariable("notice_id") noticeId: UUID): ResponseEntity<NoticeDetailsResponse> =
         queryNoticeDetailsUseCase.execute(noticeId)
             .let { ResponseEntity.ok(it) }
+
+    @DeleteMapping("/{notice_id}")
+    fun deleteNotice(@PathVariable("notice_id") noticeId: UUID): ResponseEntity<Void> =
+        deleteNoticeUseCase.execute(noticeId)
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
