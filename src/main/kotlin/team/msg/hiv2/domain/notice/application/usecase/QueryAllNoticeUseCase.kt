@@ -5,9 +5,9 @@ import team.msg.hiv2.domain.notice.presentation.data.response.NoticeResponse
 import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
-import team.msg.hiv2.global.annotation.usecase.UseCase
+import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
 
-@UseCase
+@ReadOnlyUseCase
 class QueryAllNoticeUseCase(
     private val queryNoticePort: QueryNoticePort,
     private val queryUserPort: QueryUserPort
@@ -21,7 +21,6 @@ class QueryAllNoticeUseCase(
             NoticeResponse(
                 noticeId = it.id,
                 title = it.title,
-                content = it.content,
                 user = UserResponse(
                     userId = user.id,
                     name = user.name
