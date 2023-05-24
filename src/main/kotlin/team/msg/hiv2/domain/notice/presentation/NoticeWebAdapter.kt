@@ -35,8 +35,7 @@ class NoticeWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/{notice_id}")
-    fun queryNoticeDetails(@PathVariable("notice_id") noticeId: UUID) {
+    fun queryNoticeDetails(@PathVariable("notice_id") noticeId: UUID): ResponseEntity<NoticeResponse> =
         queryNoticeDetailsUseCase.execute(noticeId)
             .let { ResponseEntity.ok(it) }
-    }
 }
