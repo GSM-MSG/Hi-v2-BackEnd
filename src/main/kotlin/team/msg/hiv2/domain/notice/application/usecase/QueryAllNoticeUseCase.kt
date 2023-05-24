@@ -21,7 +21,6 @@ class QueryAllNoticeUseCase(
             NoticeResponse(
                 noticeId = it.id,
                 title = it.title,
-                content = it.content,
                 user = UserResponse(
                     userId = user.id,
                     name = user.name

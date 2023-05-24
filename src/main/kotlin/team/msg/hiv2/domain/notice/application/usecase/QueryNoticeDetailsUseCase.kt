@@ -2,6 +2,7 @@ package team.msg.hiv2.domain.notice.application.usecase
 
 import team.msg.hiv2.domain.notice.application.spi.QueryNoticePort
 import team.msg.hiv2.domain.notice.exception.NoticeNotFoundException
+import team.msg.hiv2.domain.notice.presentation.data.response.NoticeDetailsResponse
 import team.msg.hiv2.domain.notice.presentation.data.response.NoticeResponse
 import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
@@ -14,13 +15,13 @@ class QueryNoticeDetailsUseCase(
     private val queryNoticePort: QueryNoticePort,
     private val queryUserPort: QueryUserPort
 ) {
-    fun execute(id: UUID): NoticeResponse {
+    fun execute(id: UUID): NoticeDetailsResponse {
         val notice = queryNoticePort.queryNoticeById(id)
             ?: throw NoticeNotFoundException()
         val user = queryUserPort.queryUserById(notice.userId)
             ?: throw UserNotFoundException()
 
-        return NoticeResponse(
+        return NoticeDetailsResponse(
             noticeId = notice.id,
             title = notice.title,
             content = notice.content,
