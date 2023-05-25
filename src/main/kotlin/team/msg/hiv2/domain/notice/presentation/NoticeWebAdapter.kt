@@ -38,13 +38,13 @@ class NoticeWebAdapter(
         queryAllNoticeUseCase.execute()
             .let { ResponseEntity.ok(it) }
 
-    @GetMapping("/{notice_id}")
-    fun queryNoticeDetails(@PathVariable("notice_id") noticeId: UUID): ResponseEntity<NoticeDetailsResponse> =
-        queryNoticeDetailsUseCase.execute(noticeId)
+    @GetMapping("/{id}")
+    fun queryNoticeDetails(@PathVariable id: UUID): ResponseEntity<NoticeDetailsResponse> =
+        queryNoticeDetailsUseCase.execute(id)
             .let { ResponseEntity.ok(it) }
 
-    @DeleteMapping("/{notice_id}")
-    fun deleteNotice(@PathVariable("notice_id") noticeId: UUID): ResponseEntity<Void> =
-        deleteNoticeUseCase.execute(noticeId)
+    @DeleteMapping("/{id}")
+    fun deleteNotice(@PathVariable id: UUID): ResponseEntity<Void> =
+        deleteNoticeUseCase.execute(id)
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
