@@ -11,6 +11,12 @@ class SearchUserByNameKeywordUseCase(
 
     fun execute(keyword: String): List<UserResponse> =
         queryUserPort.queryUserByNameContaining(keyword).map {
-            UserResponse(it.id, it.name)
+            UserResponse(
+                userId = it.id,
+                name = it.name,
+                grade = it.grade,
+                classNum = it.classNum,
+                number = it.number
+            )
         }
 }

@@ -4,5 +4,8 @@ import java.util.UUID
 
 data class UserResponse(
     val userId: UUID,
-    val name: String
+    val name: String,
+    val grade: Int,
+    val classNum: Int,
+    val number: Int
 )
