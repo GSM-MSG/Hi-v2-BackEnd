@@ -17,8 +17,8 @@ class NoticePersistenceAdapter(
     override fun saveNotice(notice: Notice): Notice =
         noticeMapper.toDomain(noticeRepository.save(noticeMapper.toEntity(notice)))!!
 
-    override fun deleteNotice(noticeId: UUID) {
-        noticeRepository.deleteById(noticeId)
+    override fun deleteNotice(notice: Notice) {
+        noticeRepository.delete(noticeMapper.toEntity(notice))
     }
 
     override fun queryAllNotice(): List<Notice>  =
