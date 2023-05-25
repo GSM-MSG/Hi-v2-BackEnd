@@ -16,7 +16,7 @@ class UserWebAdapter(
     private val searchUserByNameKeywordUseCase: SearchUserByNameKeywordUseCase
 ) {
 
-    @GetMapping("path")
+    @GetMapping("/search")
     fun execute(@RequestBody @Valid request: SearchUserKeywordRequest): ResponseEntity<List<UserResponse>> =
         searchUserByNameKeywordUseCase.execute(request.keyword)
             .let { ResponseEntity.ok(it) }

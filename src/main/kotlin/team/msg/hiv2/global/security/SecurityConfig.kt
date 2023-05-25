@@ -19,7 +19,7 @@ import team.msg.hiv2.global.security.spi.JwtParserPort
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val jwtParserPort: JwtParserPort, private val userRepository: UserRepository
+    private val jwtParserPort: JwtParserPort
 ) {
 
     companion object {
