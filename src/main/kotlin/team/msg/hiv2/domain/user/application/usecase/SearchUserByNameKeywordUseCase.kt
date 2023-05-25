@@ -5,7 +5,7 @@ import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
 
 @ReadOnlyUseCase
-class SearchUserByNameUseCase(
+class SearchUserByNameKeywordUseCase(
     private val queryUserPort: QueryUserPort
 ) {
 
