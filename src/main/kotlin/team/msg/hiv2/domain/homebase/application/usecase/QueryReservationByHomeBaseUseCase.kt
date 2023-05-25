@@ -25,8 +25,11 @@ class QueryReservationByHomeBaseUseCase(
             ReservationResponse(
                 reservationId = it.id,
                 users = users.map { user -> UserResponse(
-                    userId = user.id,
-                    name = user.name
+                        userId = user.id,
+                        name = user.name,
+                        grade = user.grade,
+                        classNum = user.classNum,
+                        number = user.number
                     )
                 }
             )
