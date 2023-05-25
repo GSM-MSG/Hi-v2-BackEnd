@@ -23,7 +23,10 @@ class QueryAllNoticeUseCase(
                 title = it.title,
                 user = UserResponse(
                     userId = user.id,
-                    name = user.name
+                    name = user.name,
+                    grade = user.grade,
+                    classNum = user.classNum,
+                    number = user.number
                 ),
                 createdAt = it.createdAt
             )

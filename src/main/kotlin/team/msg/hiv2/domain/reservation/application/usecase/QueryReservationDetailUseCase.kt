@@ -24,7 +24,10 @@ class QueryReservationDetailUseCase(
             users = users.map {
                 UserResponse(
                     userId = it.id,
-                    name = it.name
+                    name = it.name,
+                    grade = it.grade,
+                    classNum = it.classNum,
+                    number = it.number
                 )
             },
             reason = reservation.reason,

@@ -10,4 +10,5 @@ interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun existsByEmail(email: String): Boolean
     fun findAllByReservation(reservation: ReservationJpaEntity): List<UserJpaEntity>
     fun findByIdAndReservation(id: UUID, reservation: ReservationJpaEntity): UserJpaEntity
+    fun findAllByNameContaining(keyword: String): List<UserJpaEntity>
 }
