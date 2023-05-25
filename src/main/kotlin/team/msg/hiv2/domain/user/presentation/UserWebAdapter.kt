@@ -1,6 +1,7 @@
 package team.msg.hiv2.domain.user.presentation
 
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -15,6 +16,7 @@ class UserWebAdapter(
     private val searchUserByNameKeywordUseCase: SearchUserByNameKeywordUseCase
 ) {
 
+    @GetMapping
     fun execute(@RequestBody @Valid request: SearchUserKeywordRequest): ResponseEntity<List<UserResponse>> =
         searchUserByNameKeywordUseCase.execute(request.keyword)
             .let { ResponseEntity.ok(it) }

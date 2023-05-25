@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.util.matcher.RequestMatcher
 import org.springframework.web.cors.CorsUtils
+import team.msg.hiv2.domain.user.persistence.repository.UserRepository
 import team.msg.hiv2.global.config.FilterConfig
 import team.msg.hiv2.global.security.handler.CustomAccessDenied
 import team.msg.hiv2.global.security.handler.CustomAuthenticationEntryPoint
@@ -18,7 +19,7 @@ import team.msg.hiv2.global.security.spi.JwtParserPort
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val jwtParserPort: JwtParserPort
+    private val jwtParserPort: JwtParserPort, private val userRepository: UserRepository
 ) {
 
     companion object {
@@ -65,6 +66,9 @@ class SecurityConfig(
              // notice
             .antMatchers(HttpMethod.GET, "/notice").authenticated()
             .antMatchers(HttpMethod.POST, "/notice").hasAnyRole(ADMIN, TEACHER)
+
+             // user
+            .antMatchers(HttpMethod.GET, "/user").authenticated()
 
             .anyRequest().authenticated()
             .and()
