@@ -46,10 +46,10 @@ class NoticeWebAdapter(
     @DeleteMapping("/{id}")
     fun deleteNotice(@PathVariable id: UUID): ResponseEntity<Void> =
         deleteNoticeUseCase.execute(id)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .let { ResponseEntity.noContent().build() }
 
     @PatchMapping("/{id}")
     fun updateNotice(@PathVariable id: UUID, request: UpdateNoticeRequest): ResponseEntity<Void> =
         updateNoticeUseCase.execute(id, request)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .let { ResponseEntity.noContent().build() }
 }
