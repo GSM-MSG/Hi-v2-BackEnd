@@ -49,7 +49,7 @@ class NoticeWebAdapter(
             .let { ResponseEntity.noContent().build() }
 
     @PatchMapping("/{id}")
-    fun updateNotice(@PathVariable id: UUID, request: UpdateNoticeRequest): ResponseEntity<Void> =
+    fun updateNotice(@PathVariable id: UUID, @RequestBody @Valid request: UpdateNoticeRequest): ResponseEntity<Void> =
         updateNoticeUseCase.execute(id, request)
             .let { ResponseEntity.noContent().build() }
 }
