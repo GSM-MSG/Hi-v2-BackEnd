@@ -12,11 +12,11 @@ class ModifyNoticeUseCase(
     private val noticePort: NoticePort,
     private val userValidator: UserValidator
 ) {
-    fun execute(noticeId: UUID, modifyNoticeRequest: ModifyNoticeRequest) {
-        val notice = noticePort.queryNoticeById(noticeId)
+    fun execute(id: UUID, modifyNoticeRequest: ModifyNoticeRequest) {
+        val notice = noticePort.queryNoticeById(id)
             ?: throw NoticeNotFoundException()
 
-        userValidator.checkUserAndWriter(noticeId, notice.userId)
+        userValidator.checkUserAndWriter(id, notice.userId)
 
         noticePort.saveNotice(notice.copy(title = modifyNoticeRequest.title, content = modifyNoticeRequest.content))
     }

@@ -4,16 +4,15 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import team.msg.hiv2.domain.notice.application.usecase.CreateNoticeUseCase
-import team.msg.hiv2.domain.notice.application.usecase.DeleteNoticeUseCase
-import team.msg.hiv2.domain.notice.application.usecase.QueryAllNoticeUseCase
-import team.msg.hiv2.domain.notice.application.usecase.QueryNoticeDetailsUseCase
+import team.msg.hiv2.domain.notice.application.usecase.*
 import team.msg.hiv2.domain.notice.presentation.data.request.CreateNoticeRequest
+import team.msg.hiv2.domain.notice.presentation.data.request.ModifyNoticeRequest
 import team.msg.hiv2.domain.notice.presentation.data.response.NoticeDetailsResponse
 import team.msg.hiv2.domain.notice.presentation.data.response.NoticeResponse
 import java.util.UUID
@@ -25,7 +24,8 @@ class NoticeWebAdapter(
     private val createNoticeUseCase: CreateNoticeUseCase,
     private val queryAllNoticeUseCase: QueryAllNoticeUseCase,
     private val queryNoticeDetailsUseCase: QueryNoticeDetailsUseCase,
-    private val deleteNoticeUseCase: DeleteNoticeUseCase
+    private val deleteNoticeUseCase: DeleteNoticeUseCase,
+    private val modifyNoticeUseCase: ModifyNoticeUseCase
 ) {
 
     @PostMapping
@@ -46,5 +46,10 @@ class NoticeWebAdapter(
     @DeleteMapping("/{id}")
     fun deleteNotice(@PathVariable id: UUID): ResponseEntity<Void> =
         deleteNoticeUseCase.execute(id)
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+
+    @PatchMapping("/{id}")
+    fun modifyNotice(@PathVariable id: UUID, request: ModifyNoticeRequest): ResponseEntity<Void> =
+        modifyNoticeUseCase.execute(id, request)
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
