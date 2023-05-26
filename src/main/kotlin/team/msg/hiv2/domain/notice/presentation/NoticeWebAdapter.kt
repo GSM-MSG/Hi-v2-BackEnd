@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import team.msg.hiv2.domain.notice.application.usecase.*
 import team.msg.hiv2.domain.notice.presentation.data.request.CreateNoticeRequest
-import team.msg.hiv2.domain.notice.presentation.data.request.ModifyNoticeRequest
+import team.msg.hiv2.domain.notice.presentation.data.request.UpdateNoticeRequest
 import team.msg.hiv2.domain.notice.presentation.data.response.NoticeDetailsResponse
 import team.msg.hiv2.domain.notice.presentation.data.response.NoticeResponse
 import java.util.UUID
@@ -25,7 +25,7 @@ class NoticeWebAdapter(
     private val queryAllNoticeUseCase: QueryAllNoticeUseCase,
     private val queryNoticeDetailsUseCase: QueryNoticeDetailsUseCase,
     private val deleteNoticeUseCase: DeleteNoticeUseCase,
-    private val modifyNoticeUseCase: ModifyNoticeUseCase
+    private val updateNoticeUseCase: UpdateNoticeUseCase
 ) {
 
     @PostMapping
@@ -49,7 +49,7 @@ class NoticeWebAdapter(
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @PatchMapping("/{id}")
-    fun modifyNotice(@PathVariable id: UUID, request: ModifyNoticeRequest): ResponseEntity<Void> =
-        modifyNoticeUseCase.execute(id, request)
+    fun updateNotice(@PathVariable id: UUID, request: UpdateNoticeRequest): ResponseEntity<Void> =
+        updateNoticeUseCase.execute(id, request)
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
