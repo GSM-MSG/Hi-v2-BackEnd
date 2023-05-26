@@ -18,6 +18,6 @@ class UpdateNoticeUseCase(
 
         userValidator.checkUserAndWriter(id, notice.userId)
 
-        noticePort.saveNotice(notice.copy(title = updateNoticeRequest.title, content = updateNoticeRequest.content))
+        noticePort.save(notice.copy(title = updateNoticeRequest.title, content = updateNoticeRequest.content))
     }
 }

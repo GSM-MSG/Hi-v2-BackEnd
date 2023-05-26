@@ -14,10 +14,10 @@ class NoticePersistenceAdapter(
     private val noticeRepository: NoticeRepository
 ) : NoticePort {
 
-    override fun saveNotice(notice: Notice): Notice =
+    override fun save(notice: Notice): Notice =
         noticeMapper.toDomain(noticeRepository.save(noticeMapper.toEntity(notice)))!!
 
-    override fun deleteNotice(notice: Notice) {
+    override fun delete(notice: Notice) {
         noticeRepository.delete(noticeMapper.toEntity(notice))
     }
 

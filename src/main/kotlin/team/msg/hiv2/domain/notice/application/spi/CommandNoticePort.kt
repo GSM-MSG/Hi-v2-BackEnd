@@ -4,6 +4,6 @@ import team.msg.hiv2.domain.notice.domain.Notice
 
 interface CommandNoticePort {
 
-    fun saveNotice(notice: Notice): Notice
-    fun deleteNotice(notice: Notice)
+    fun save(notice: Notice): Notice
+    fun delete(notice: Notice)
 }

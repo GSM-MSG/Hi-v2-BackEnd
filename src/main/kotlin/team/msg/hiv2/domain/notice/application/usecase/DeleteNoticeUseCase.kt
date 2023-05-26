@@ -20,6 +20,6 @@ class DeleteNoticeUseCase(
 
         userValidator.checkUserAndWriter(user.id, notice.userId)
 
-        noticePort.deleteNotice(notice)
+        noticePort.delete(notice)
     }
 }
