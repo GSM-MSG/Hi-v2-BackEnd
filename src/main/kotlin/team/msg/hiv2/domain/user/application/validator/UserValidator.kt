@@ -11,4 +11,5 @@ interface UserValidator {
     fun checkRepresentative(user: User, reservation: Reservation)
     fun checkUserAndReservation(user: User, reservation: Reservation)
     fun checkUserAndWriter(userId: UUID, noticeWriterId: UUID)
+    fun checkUserAdminRole(user: User)
 }
