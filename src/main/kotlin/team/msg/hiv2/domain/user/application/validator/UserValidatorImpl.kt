@@ -13,14 +13,15 @@ import java.util.*
 @Component
 class UserValidatorImpl : UserValidator {
 
-    override fun checkUserUseStatus(user: User){
-        if(user.useStatus == UseStatus.UNAVAILABLE)
+    override fun checkUserUseStatus(user: User) {
+        if (user.useStatus == UseStatus.UNAVAILABLE)
             throw ForbiddenReserveException()
     }
 
-    override fun checkUsersUseStatus(users: List<User>){
+    override fun checkUsersUseStatus(users: List<User>) {
         users.forEach { checkUserUseStatus(it) }
     }
+
     override fun checkRepresentative(user: User, reservation: Reservation) {
         if(user.id != reservation.representativeId)
             throw ForbiddenReserveException()
