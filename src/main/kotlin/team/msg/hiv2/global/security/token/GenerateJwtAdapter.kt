@@ -36,7 +36,8 @@ class GenerateJwtAdapter(
             .claim("type", JwtProperties.accessType)
             .claim(JwtProperties.roleType, roles)
             .setIssuedAt(Date())
-            .setExpiration(Date(System.currentTimeMillis() + jwtProperties.accessExp * 1000))
+            .setExpiration(Date(System.currentTimeMillis() + jwtProperties.accessExp * 1000 +
+                    + TimeZone.getTimeZone("Asia/Seoul").rawOffset))
             .compact()
 
     private fun generateRefreshToken(userId: UUID, secret: Key, roles: MutableList<UserRole>): String =
@@ -46,7 +47,8 @@ class GenerateJwtAdapter(
             .claim("type", JwtProperties.refreshType)
             .claim(JwtProperties.roleType, roles)
             .setIssuedAt(Date())
-            .setExpiration(Date(System.currentTimeMillis() + jwtProperties.refreshExp * 1000))
+            .setExpiration(Date(System.currentTimeMillis() + jwtProperties.refreshExp * 1000
+                    + TimeZone.getTimeZone("Asia/Seoul").rawOffset))
             .compact()
 
     private fun getAccessTokenExpiredAt(): LocalDateTime =
