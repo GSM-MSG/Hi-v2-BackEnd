@@ -3,6 +3,7 @@ package team.msg.hiv2.domain.auth.presentation
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import team.msg.hiv2.domain.auth.application.usecase.GAuthSignInUseCase
+import team.msg.hiv2.domain.auth.application.usecase.LogoutUseCase
 import team.msg.hiv2.domain.auth.application.usecase.ReissueTokenUseCase
 import team.msg.hiv2.domain.auth.presentation.data.request.GAuthSignInRequest
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
@@ -12,7 +13,8 @@ import javax.validation.Valid
 @RequestMapping("/auth")
 class AuthWebAdapter(
     private val gAuthSignInUseCase: GAuthSignInUseCase,
-    private val reissueTokenUseCase: ReissueTokenUseCase
+    private val reissueTokenUseCase: ReissueTokenUseCase,
+    private val logoutUseCase: LogoutUseCase
 ) {
 
     @PostMapping
@@ -24,4 +26,10 @@ class AuthWebAdapter(
     fun reissue(@RequestHeader("RefreshToken") @Valid refreshToken: String): ResponseEntity<TokenResponse> =
         reissueTokenUseCase.execute(refreshToken)
             .let { ResponseEntity.ok(it) }
+
+    @DeleteMapping
+    fun logout(@RequestHeader("RefreshToken") @Valid refreshToken: String): ResponseEntity<Void> =
+        logoutUseCase.execute(refreshToken)
+            .let { ResponseEntity.noContent().build() }
+
 }
