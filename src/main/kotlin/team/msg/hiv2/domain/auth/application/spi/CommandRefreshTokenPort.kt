@@ -4,5 +4,6 @@ import team.msg.hiv2.domain.auth.domain.RefreshToken
 
 interface CommandRefreshTokenPort {
 
-    fun saveRefreshToken(refreshToken: RefreshToken): String
+    fun save(refreshToken: RefreshToken): String
+    fun delete(refreshToken: RefreshToken)
 }

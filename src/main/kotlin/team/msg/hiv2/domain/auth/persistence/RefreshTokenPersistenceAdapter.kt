@@ -13,8 +13,12 @@ class RefreshTokenPersistenceAdapter(
     private val refreshTokenMapper: RefreshTokenMapper
 ) : RefreshTokenPort {
 
-    override fun saveRefreshToken(refreshToken: RefreshToken): String =
+    override fun save(refreshToken: RefreshToken): String =
         refreshTokenRepository.save(refreshTokenMapper.toEntity(refreshToken)).refreshToken
+
+    override fun delete(refreshToken: RefreshToken) {
+        refreshTokenRepository.delete(refreshTokenMapper.toEntity(refreshToken))
+    }
 
     override fun queryByRefreshToken(refreshToken: String): RefreshToken? =
         refreshTokenMapper.toDomain(refreshTokenRepository.findByIdOrNull(refreshToken))

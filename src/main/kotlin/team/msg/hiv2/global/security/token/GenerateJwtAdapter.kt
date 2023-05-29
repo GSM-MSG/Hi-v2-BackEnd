@@ -25,7 +25,7 @@ class GenerateJwtAdapter(
         val refreshToken = generateRefreshToken(userId, jwtProperties.refreshSecret, roles)
         val accessExpiredAt = getAccessTokenExpiredAt()
         val refreshExpiredAt = getRefreshTokenExpiredAt()
-        commandRefreshTokenPort.saveRefreshToken(RefreshToken(refreshToken, userId, jwtProperties.refreshExp))
+        commandRefreshTokenPort.save(RefreshToken(refreshToken, userId, jwtProperties.refreshExp))
         return TokenResponse(accessToken, refreshToken, accessExpiredAt, refreshExpiredAt)
     }
 
