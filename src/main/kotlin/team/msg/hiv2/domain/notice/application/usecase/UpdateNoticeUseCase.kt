@@ -20,10 +20,8 @@ class UpdateNoticeUseCase(
             ?: throw NoticeNotFoundException()
         val user = queryUserPort.queryCurrentUser()
 
-        if(user.roles.equals(UserRole.ROLE_TEACHER)) {
+        if(user.roles.firstOrNull() == UserRole.ROLE_TEACHER) {
             userValidator.checkUserAndWriter(user.id, notice.userId)
-        } else {
-            userValidator.checkUserAdminRole(user)
         }
 
         noticePort.save(notice.copy(title = updateNoticeRequest.title, content = updateNoticeRequest.content))
