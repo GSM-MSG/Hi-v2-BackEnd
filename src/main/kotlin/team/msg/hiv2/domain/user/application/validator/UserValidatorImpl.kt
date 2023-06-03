@@ -7,7 +7,6 @@ import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.exception.ForbiddenCommandReservationException
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
-import team.msg.hiv2.domain.user.domain.constant.UserRole
 import java.util.*
 
 @Component
@@ -34,12 +33,6 @@ class UserValidatorImpl : UserValidator {
 
     override fun checkUserAndWriter(userId: UUID, noticeWriterId: UUID) {
         if(userId != noticeWriterId) {
-            throw ForbiddenCommandNotice()
-        }
-    }
-
-    override fun checkUserAdminRole(user: User) {
-        if(!user.roles.equals(UserRole.ROLE_ADMIN)) {
             throw ForbiddenCommandNotice()
         }
     }
