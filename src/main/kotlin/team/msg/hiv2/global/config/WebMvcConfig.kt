@@ -16,6 +16,5 @@ class WebMvcConfig : WebMvcConfigurer{
                 "http://localhost:3000",
                 "https://dev-hi.msg-team.com"
             )
-            .exposedHeaders("*")
     }
 }
