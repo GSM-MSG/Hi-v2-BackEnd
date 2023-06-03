@@ -4,8 +4,10 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import team.msg.hiv2.domain.auth.application.usecase.GAuthSignInUseCase
 import team.msg.hiv2.domain.auth.application.usecase.LogoutUseCase
+import team.msg.hiv2.domain.auth.application.usecase.QueryGAuthLoginLinkUseCase
 import team.msg.hiv2.domain.auth.application.usecase.ReissueTokenUseCase
 import team.msg.hiv2.domain.auth.presentation.data.request.GAuthSignInRequest
+import team.msg.hiv2.domain.auth.presentation.data.response.GAuthLinkResponse
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
 import javax.validation.Valid
 
@@ -14,8 +16,14 @@ import javax.validation.Valid
 class AuthWebAdapter(
     private val gAuthSignInUseCase: GAuthSignInUseCase,
     private val reissueTokenUseCase: ReissueTokenUseCase,
-    private val logoutUseCase: LogoutUseCase
+    private val logoutUseCase: LogoutUseCase,
+    private val queryGAuthLoginLinkUseCase: QueryGAuthLoginLinkUseCase
 ) {
+
+    @GetMapping
+    fun queryGAuthLoginLink(): ResponseEntity<GAuthLinkResponse> =
+        queryGAuthLoginLinkUseCase.execute()
+            .let { ResponseEntity.ok(it) }
 
     @PostMapping
     fun signIn(@RequestBody @Valid request: GAuthSignInRequest): ResponseEntity<TokenResponse> =
