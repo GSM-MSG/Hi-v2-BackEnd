@@ -10,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.util.matcher.RequestMatcher
 import org.springframework.web.cors.CorsUtils
-import team.msg.hiv2.domain.user.persistence.repository.UserRepository
 import team.msg.hiv2.global.config.FilterConfig
 import team.msg.hiv2.global.security.handler.CustomAccessDenied
 import team.msg.hiv2.global.security.handler.CustomAuthenticationEntryPoint
@@ -69,6 +68,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/notice/{notice_id}").authenticated()
             .antMatchers(HttpMethod.POST, "/notice").hasAnyRole(ADMIN, TEACHER)
             .antMatchers(HttpMethod.DELETE, "/notice/{notice_id}").hasAnyRole(ADMIN, TEACHER)
+            .antMatchers(HttpMethod.PATCH, "/notice/{notice_id}").hasAnyRole(ADMIN, TEACHER)
 
              // user
             .antMatchers(HttpMethod.GET, "/user").authenticated()

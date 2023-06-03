@@ -5,7 +5,6 @@ import team.msg.hiv2.domain.notice.domain.Notice
 import team.msg.hiv2.domain.notice.presentation.data.request.CreateNoticeRequest
 import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.global.annotation.usecase.UseCase
-import java.time.LocalDateTime
 import java.util.*
 
 @UseCase
@@ -24,6 +23,6 @@ class CreateNoticeUseCase(
             userId = user.id
         )
 
-        commandNoticePort.saveNotice(notice)
+        commandNoticePort.save(notice)
     }
 }
