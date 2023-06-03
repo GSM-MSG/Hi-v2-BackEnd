@@ -13,8 +13,9 @@ class WebMvcConfig : WebMvcConfigurer{
             .allowedMethods("GET", "POST", "PUT", "PATCH", "HEAD", "DELETE", "OPTIONS")
             .allowedOrigins(
                 "http://localhost:8080",
+                "http://localhost:3000",
                 "https://dev-hi.msg-team.com"
             )
-            .exposedHeaders(HttpHeaders.CONTENT_DISPOSITION)
+            .exposedHeaders("*")
     }
 }
