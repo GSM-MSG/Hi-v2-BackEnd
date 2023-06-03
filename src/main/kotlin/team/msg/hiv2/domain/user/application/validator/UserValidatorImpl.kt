@@ -32,8 +32,7 @@ class UserValidatorImpl : UserValidator {
     }
 
     override fun checkUserAndWriter(userId: UUID, noticeWriterId: UUID) {
-        if(userId != noticeWriterId) {
+        if(userId != noticeWriterId)
             throw ForbiddenCommandNotice()
-        }
     }
 }
