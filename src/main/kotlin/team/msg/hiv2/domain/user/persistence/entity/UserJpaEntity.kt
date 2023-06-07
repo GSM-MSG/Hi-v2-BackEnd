@@ -29,7 +29,7 @@ class UserJpaEntity(
     val number: Int,
 
     @Column(columnDefinition = "TEXT", nullable = false)
-    var profileImageUrl: String,
+    var profileImageUrl: String = "",
 
     @ManyToOne
     @JoinColumn(name = "reservation_id")
