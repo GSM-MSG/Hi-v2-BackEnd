@@ -73,6 +73,7 @@ class SecurityConfig(
 
              // user
             .antMatchers(HttpMethod.GET, "/user").authenticated()
+            .antMatchers(HttpMethod.GET, "/user/my-page").authenticated()
 
             .anyRequest().authenticated()
             .and()
