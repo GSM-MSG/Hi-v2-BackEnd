@@ -15,7 +15,7 @@ class QueryUserInfoUseCase(
 ) {
     fun execute(): UserInfoResponse {
         val user = queryUserPort.queryCurrentUser()
-        val reservation = queryReservationPort.queryReservationByUser(user)
+        val reservation = user.reservationId?.let { queryReservationPort.queryReservationById(it) }
         val users = reservation?.let { queryUserPort.queryAllUserByReservation(it) }
 
         return UserInfoResponse(
@@ -27,7 +27,7 @@ class QueryUserInfoUseCase(
             useStatus = user.useStatus,
             profileImageUrl = user.profileImageUrl,
             reservation = ReservationResponse(
-                reservationId = reservation?.id,
+                reservationId = user.reservationId,
                 users = users?.map {
                     UserResponse(
                         userId = it.id,
