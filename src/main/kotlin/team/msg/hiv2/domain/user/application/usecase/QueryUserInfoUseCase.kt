@@ -6,6 +6,7 @@ import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
+import java.util.*
 
 @ReadOnlyUseCase
 class QueryUserInfoUseCase(
@@ -18,13 +19,13 @@ class QueryUserInfoUseCase(
         val users = reservation?.let { queryUserPort.queryAllUserByReservation(it) }
 
         return UserInfoResponse(
-            user = UserResponse(
-                userId = user.id,
-                name = user.name,
-                grade = user.grade,
-                classNum = user.classNum,
-                number = user.number
-            ),
+            id = UUID.randomUUID(),
+            name = user.name,
+            grade = user.grade,
+            classNum = user.classNum,
+            number = user.number,
+            useStatus = user.useStatus,
+            profileImageUrl = user.profileImageUrl,
             reservation = ReservationResponse(
                 reservationId = reservation?.id,
                 users = users?.map {
