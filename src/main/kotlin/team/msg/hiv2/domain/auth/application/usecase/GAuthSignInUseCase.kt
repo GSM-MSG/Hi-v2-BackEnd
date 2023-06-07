@@ -22,7 +22,6 @@ class GAuthSignInUseCase(
         val gAuthToken = gAuthPort.queryGAuthToken(request.code)
         val gAuthUserInfo = gAuthPort.queryGAuthUserInfo(gAuthToken.accessToken)
         val role = userPort.queryUserRoleByEmail(gAuthUserInfo.email, gAuthUserInfo.role)
-
         val user = createUser(
             userPort.existsUserByEmail(gAuthUserInfo.email),
             User(
@@ -32,7 +31,7 @@ class GAuthSignInUseCase(
                 grade = gAuthUserInfo.grade,
                 classNum = gAuthUserInfo.classNum,
                 number = gAuthUserInfo.num,
-                profileImageUrl = gAuthUserInfo.profileUrl,
+                profileImageUrl = gAuthUserInfo.profileUrl ?: "",
                 roles = mutableListOf(role),
                 reservationId = null,
                 useStatus = UseStatus.AVAILABLE

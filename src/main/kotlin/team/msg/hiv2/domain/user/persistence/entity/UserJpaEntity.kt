@@ -28,8 +28,8 @@ class UserJpaEntity(
     @Column(nullable = true)
     val number: Int,
 
-    @Column(columnDefinition = "TEXT", nullable = true)
-    var profileImageUrl: String?,
+    @Column(columnDefinition = "TEXT", nullable = false)
+    var profileImageUrl: String,
 
     @ManyToOne
     @JoinColumn(name = "reservation_id")

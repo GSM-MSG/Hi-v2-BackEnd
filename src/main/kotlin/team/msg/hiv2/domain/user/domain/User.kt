@@ -11,7 +11,7 @@ data class User(
     val grade: Int,
     val classNum: Int,
     val number: Int,
-    val profileImageUrl: String?,
+    val profileImageUrl: String,
     val roles: MutableList<UserRole>,
     val reservationId: UUID?,
     val useStatus: UseStatus
