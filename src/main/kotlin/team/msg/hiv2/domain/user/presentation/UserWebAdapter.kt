@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 import team.msg.hiv2.domain.user.application.usecase.QueryUserInfoUseCase
 import team.msg.hiv2.domain.user.application.usecase.SearchUserByNameKeywordUseCase
 import team.msg.hiv2.domain.user.presentation.data.request.SearchUserKeywordRequest
+import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import javax.validation.Valid
 
@@ -25,7 +26,7 @@ class UserWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/my-page")
-    fun execute(): ResponseEntity<Void> =
+    fun execute(): ResponseEntity<UserInfoResponse> =
         queryUserInfoUseCase.execute()
-            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+            .let { ResponseEntity.ok(it) }
 }
