@@ -42,6 +42,6 @@ class UserJpaEntity(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "use_status")
-    val useStatus: UseStatus?
+    val useStatus: UseStatus
 
 ) : BaseUuidEntity(id)

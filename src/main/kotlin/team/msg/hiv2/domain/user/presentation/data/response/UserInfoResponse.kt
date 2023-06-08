@@ -12,5 +12,5 @@ class UserInfoResponse(
     val number: Int?,
     val profileImageUrl: String,
     val reservation: ReservationResponse?,
-    val useStatus: UseStatus?
+    val useStatus: UseStatus
 )
