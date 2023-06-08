@@ -26,18 +26,20 @@ class QueryUserInfoUseCase(
             number = user.number,
             useStatus = user.useStatus,
             profileImageUrl = user.profileImageUrl,
-            reservation = ReservationResponse(
-                reservationId = user.reservationId,
-                users = users?.map {
-                    UserResponse(
-                        userId = it.id,
-                        name = it.name,
-                        grade = it.grade,
-                        classNum = it.classNum,
-                        number = it.number
-                    )
-                }
-            )
+            reservation = users?.let { users ->
+                ReservationResponse(
+                    reservationId = user.reservationId,
+                    users = users.map {
+                        UserResponse(
+                            userId = it.id,
+                            name = it.name,
+                            grade = it.grade,
+                            classNum = it.classNum,
+                            number = it.number
+                        )
+                    }
+                )
+            }
         )
     }
 }
