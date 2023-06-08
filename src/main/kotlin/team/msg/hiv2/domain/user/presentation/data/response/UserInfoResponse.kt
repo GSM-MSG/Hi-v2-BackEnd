@@ -7,10 +7,10 @@ import java.util.UUID
 class UserInfoResponse(
     val id: UUID,
     val name: String,
-    val grade: Int,
-    val classNum: Int,
-    val number: Int,
-    val useStatus: UseStatus,
+    val grade: Int?,
+    val classNum: Int?,
+    val number: Int?,
     val profileImageUrl: String,
-    val reservation: ReservationResponse?
+    val reservation: ReservationResponse?,
+    val useStatus: UseStatus?
 )

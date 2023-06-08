@@ -20,13 +20,13 @@ class UserJpaEntity(
     val name: String,
 
     @Column(nullable = true)
-    val grade: Int,
+    val grade: Int?,
 
     @Column(nullable = true)
-    val classNum: Int,
+    val classNum: Int?,
 
     @Column(nullable = true)
-    val number: Int,
+    val number: Int?,
 
     @Column(columnDefinition = "TEXT", nullable = false)
     var profileImageUrl: String = "",
@@ -42,6 +42,6 @@ class UserJpaEntity(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "use_status")
-    val useStatus: UseStatus
+    val useStatus: UseStatus?
 
 ) : BaseUuidEntity(id)
