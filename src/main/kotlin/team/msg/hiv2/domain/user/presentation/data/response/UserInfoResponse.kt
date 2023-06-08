@@ -1,18 +1,16 @@
-package team.msg.hiv2.domain.user.domain
+package team.msg.hiv2.domain.user.presentation.data.response
 
+import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
-import team.msg.hiv2.domain.user.domain.constant.UserRole
 import java.util.UUID
 
-data class User(
+class UserInfoResponse(
     val id: UUID,
-    val email: String,
     val name: String,
     val grade: Int?,
     val classNum: Int?,
     val number: Int?,
     val profileImageUrl: String,
-    val roles: MutableList<UserRole>,
-    val reservationId: UUID?,
+    val reservation: ReservationResponse?,
     val useStatus: UseStatus
 )

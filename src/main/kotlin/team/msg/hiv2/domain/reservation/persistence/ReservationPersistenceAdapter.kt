@@ -6,7 +6,6 @@ import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.homebase.persistence.mapper.HomeBaseMapper
 import team.msg.hiv2.domain.reservation.application.spi.ReservationPort
 import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.reservation.exception.ReservationNotFoundException
 import team.msg.hiv2.domain.reservation.persistence.mapper.ReservationMapper
 import team.msg.hiv2.domain.reservation.persistence.repository.ReservationRepository
 import java.util.*
@@ -31,5 +30,4 @@ class ReservationPersistenceAdapter(
     override fun queryAllReservationByHomeBase(homeBase: HomeBase): List<Reservation> =
         reservationRepository.findAllByHomeBase(homeBaseMapper.toEntity(homeBase))
             .map { reservationMapper.toDomain(it)!! }
-
 }
