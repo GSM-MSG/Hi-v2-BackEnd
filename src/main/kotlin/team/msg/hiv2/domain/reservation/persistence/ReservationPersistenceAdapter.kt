@@ -14,7 +14,7 @@ import java.util.*
 class ReservationPersistenceAdapter(
     private val reservationRepository: ReservationRepository,
     private val reservationMapper: ReservationMapper,
-    private val homeBaseMapper: HomeBaseMapper,
+    private val homeBaseMapper: HomeBaseMapper
 ) : ReservationPort {
 
     override fun save(reservation: Reservation): Reservation =
