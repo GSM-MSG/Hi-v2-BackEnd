@@ -15,7 +15,6 @@ import team.msg.hiv2.global.security.handler.CustomAccessDenied
 import team.msg.hiv2.global.security.handler.CustomAuthenticationEntryPoint
 import team.msg.hiv2.global.security.spi.JwtParserPort
 
-@Configuration
 @EnableWebSecurity
 class SecurityConfig(
     private val jwtParserPort: JwtParserPort
