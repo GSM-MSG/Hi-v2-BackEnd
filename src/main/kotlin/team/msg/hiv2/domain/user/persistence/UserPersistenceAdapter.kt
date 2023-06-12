@@ -41,7 +41,7 @@ class UserPersistenceAdapter(
         userRepository.findAllById(ids).map { userMapper.toDomain(it)!! }
 
     override fun queryUserRoleByEmail(email: String, role: String): UserRole {
-        val user = queryUserByEmail(email) ?: return when(role){
+        val user = queryUserByEmail(email) ?: return when (role) {
             "ROLE_STUDENT" -> UserRole.ROLE_STUDENT
             "ROLE_TEACHER" -> UserRole.ROLE_TEACHER
             else -> throw InvalidRoleException()
@@ -66,4 +66,6 @@ class UserPersistenceAdapter(
     override fun queryUserByNameContaining(keyword: String): List<User> =
         userRepository.findAllByNameContaining(keyword).map { userMapper.toDomain(it)!! }
 
+    override fun queryAllUser(): List<User> =
+        userRepository.findAll().map { userMapper.toDomain(it)!! }
 }
