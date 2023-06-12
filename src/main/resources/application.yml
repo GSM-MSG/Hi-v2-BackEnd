@@ -27,6 +27,9 @@ spring:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
 
+  main:
+    allow-circular-references: true
+
 jwt:
   accessSecret: ${ACCESS_SECRET:qwertyuiopasdfghjklzxcvbnm12345678901234567890}
   refreshSecret: ${REFRESH_SECRET:poiuytrewqlkjhgfdsamnbvcxz12345678901234567890}

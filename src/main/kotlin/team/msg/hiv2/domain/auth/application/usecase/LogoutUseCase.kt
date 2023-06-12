@@ -1,7 +1,5 @@
 package team.msg.hiv2.domain.auth.application.usecase
 
-import team.msg.hiv2.domain.auth.application.service.CommandRefreshTokenService
-import team.msg.hiv2.domain.auth.application.service.QueryRefreshTokenService
 import team.msg.hiv2.domain.auth.application.service.RefreshTokenService
 import team.msg.hiv2.domain.user.application.service.QueryUserService
 import team.msg.hiv2.domain.user.exception.UserNotFoundException

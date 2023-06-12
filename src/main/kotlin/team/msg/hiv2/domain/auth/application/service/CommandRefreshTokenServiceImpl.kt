@@ -7,11 +7,11 @@ import team.msg.hiv2.global.annotation.service.DomainService
 @DomainService
 class CommandRefreshTokenServiceImpl(
     private val commandRefreshTokenPort: CommandRefreshTokenPort
-) : CommandRefreshTokenService{
-    override fun save(refreshToken: RefreshToken): String =
+) {
+    fun save(refreshToken: RefreshToken): String =
         commandRefreshTokenPort.save(refreshToken)
 
-    override fun delete(refreshToken: RefreshToken) =
+    fun delete(refreshToken: RefreshToken) =
         commandRefreshTokenPort.delete(refreshToken)
 
 }
