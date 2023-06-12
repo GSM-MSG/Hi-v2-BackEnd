@@ -1,3 +1,10 @@
 package team.msg.hiv2.domain.user.application.service
 
-interface UserService : CommandUserService, QueryUserService
+import team.msg.hiv2.global.annotation.service.DomainService
+
+
+@DomainService
+class UserService(
+    commandUserService: CommandUserService,
+    queryUserService: QueryUserService
+) : CommandUserService by commandUserService, QueryUserService by queryUserService

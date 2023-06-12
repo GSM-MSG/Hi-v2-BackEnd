@@ -5,8 +5,10 @@ import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
+import team.msg.hiv2.global.annotation.service.DomainService
 import java.util.*
 
+@DomainService
 class QueryUserServiceImpl(
     private val queryUserPort: QueryUserPort
 ) : QueryUserService {
