@@ -1,10 +1,11 @@
 package team.msg.hiv2.domain.notice.application.usecase
 
-import team.msg.hiv2.domain.notice.application.service.CommandNoticeService
 import team.msg.hiv2.domain.notice.application.service.NoticeService
-import team.msg.hiv2.domain.notice.application.service.QueryNoticeService
+import team.msg.hiv2.domain.notice.application.spi.NoticePort
+import team.msg.hiv2.domain.notice.exception.NoticeNotFoundException
 import team.msg.hiv2.domain.notice.presentation.data.request.UpdateNoticeRequest
 import team.msg.hiv2.domain.user.application.service.QueryUserService
+import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.global.annotation.usecase.UseCase
@@ -13,19 +14,18 @@ import java.util.UUID
 
 @UseCase
 class UpdateNoticeUseCase(
-    private val queryNoticeService: QueryNoticeService,
-    private val commandNoticeService: CommandNoticeService,
+    private val noticeService: NoticeService,
     private val userValidator: UserValidator,
     private val queryUserService: QueryUserService
 ) {
     fun execute(id: UUID, updateNoticeRequest: UpdateNoticeRequest) {
-        val notice = queryNoticeService.queryNoticeById(id)
+        val notice = noticeService.queryNoticeById(id)
         val user = queryUserService.queryCurrentUser()
         val role = user.roles.firstOrNull() ?: throw InvalidRoleException()
 
         if(role == UserRole.ROLE_TEACHER)
             userValidator.checkUserAndWriter(user.id, notice.userId)
 
-        commandNoticeService.save(notice.copy(title = updateNoticeRequest.title, content = updateNoticeRequest.content))
+         noticeService.save(notice.copy(title = updateNoticeRequest.title, content = updateNoticeRequest.content))
     }
 }
