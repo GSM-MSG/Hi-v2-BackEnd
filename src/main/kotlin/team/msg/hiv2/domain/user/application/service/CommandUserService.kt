@@ -6,4 +6,5 @@ interface CommandUserService {
 
     fun save(user: User) : User
     fun saveAll(users: List<User>)
+    fun createUser(user: User, isExist: Boolean): User
 }
