@@ -25,6 +25,6 @@ class DeleteReservationUseCase(
         userValidator.checkRepresentative(currentUser, reservation)
 
         userPort.saveAll(users.map { it.copy(useStatus = UseStatus.AVAILABLE) })
-        reservationPort.deleteReservation(reservation)
+        reservationPort.delete(reservation)
     }
 }

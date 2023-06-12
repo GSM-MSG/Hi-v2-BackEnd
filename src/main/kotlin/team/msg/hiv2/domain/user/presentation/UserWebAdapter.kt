@@ -20,12 +20,12 @@ class UserWebAdapter(
 ) {
 
     @GetMapping("/search")
-    fun execute(@RequestBody @Valid request: SearchUserKeywordRequest): ResponseEntity<List<UserResponse>> =
+    fun searchUser(@RequestBody @Valid request: SearchUserKeywordRequest): ResponseEntity<List<UserResponse>> =
         searchUserByNameKeywordUseCase.execute(request.keyword)
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/my-page")
-    fun execute(): ResponseEntity<UserInfoResponse> =
+    fun queryMyPage(): ResponseEntity<UserInfoResponse> =
         queryUserInfoUseCase.execute()
             .let { ResponseEntity.ok(it) }
 }
