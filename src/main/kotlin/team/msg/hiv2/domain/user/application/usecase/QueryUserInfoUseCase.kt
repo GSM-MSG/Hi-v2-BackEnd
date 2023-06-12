@@ -1,8 +1,10 @@
 package team.msg.hiv2.domain.user.application.usecase
 
+import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.application.spi.QueryReservationPort
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 import team.msg.hiv2.domain.user.application.service.QueryUserService
+import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
@@ -11,13 +13,13 @@ import java.util.*
 
 @ReadOnlyUseCase
 class QueryUserInfoUseCase(
-    private val queryUserService: QueryUserService,
-    private val queryReservationPort: QueryReservationPort
+    private val userService: UserService,
+    private val reservationService: ReservationService
 ) {
     fun execute(): UserInfoResponse {
-        val user = queryUserService.queryCurrentUser()
-        val reservation = user.reservationId?.let { queryReservationPort.queryReservationById(it) }
-        val users = reservation?.let { queryUserService.queryAllUserByReservation(it) }
+        val user = userService.queryCurrentUser()
+        val reservation = user.reservationId?.let { reservationService.queryReservationById(it) }
+        val users = reservation?.let { userService.queryAllUserByReservation(it) }
 
         return UserInfoResponse(
             id = UUID.randomUUID(),

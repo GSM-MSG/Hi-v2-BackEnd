@@ -1,17 +1,18 @@
 package team.msg.hiv2.domain.user.application.usecase
 
 import team.msg.hiv2.domain.user.application.service.QueryUserService
+import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
 
 @ReadOnlyUseCase
 class SearchUserByNameKeywordUseCase(
-    private val queryUserService: QueryUserService
+    private val userService: UserService
 ) {
 
     fun execute(keyword: String): List<UserResponse> =
-        queryUserService.queryUserByNameContaining(keyword).map {
+        userService.queryUserByNameContaining(keyword).map {
             UserResponse(
                 userId = it.id,
                 name = it.name,

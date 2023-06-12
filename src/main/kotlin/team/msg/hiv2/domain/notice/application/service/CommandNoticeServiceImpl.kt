@@ -7,7 +7,7 @@ import team.msg.hiv2.global.annotation.service.DomainService
 @DomainService
 class CommandNoticeServiceImpl(
     private val commandNoticePort: CommandNoticePort
-) : CommandNoticeService{
+) : CommandNoticeService {
 
     override fun save(notice: Notice): Notice =
         commandNoticePort.save(notice)

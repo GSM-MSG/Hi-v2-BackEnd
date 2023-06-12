@@ -9,7 +9,7 @@ import java.util.*
 @DomainService
 class QueryNoticeServiceImpl(
     private val queryNoticePort: QueryNoticePort
-) : QueryNoticePort {
+) : QueryNoticeService {
 
     override fun queryAllNotice(): List<Notice> =
         queryNoticePort.queryAllNotice()

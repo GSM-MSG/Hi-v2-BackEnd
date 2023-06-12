@@ -7,7 +7,7 @@ import team.msg.hiv2.global.annotation.service.DomainService
 @DomainService
 class CommandReservationServiceImpl(
     private val commandReservationPort: CommandReservationPort
-) : CommandReservationPort {
+) : CommandReservationService {
 
     override fun save(reservation: Reservation): Reservation =
         commandReservationPort.save(reservation)
