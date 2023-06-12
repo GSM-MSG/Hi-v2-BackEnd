@@ -2,6 +2,7 @@ package team.msg.hiv2.domain.reservation.application.usecase
 
 import team.msg.hiv2.domain.reservation.application.service.CommandReservationService
 import team.msg.hiv2.domain.reservation.application.service.QueryReservationService
+import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.application.validator.UserValidator
@@ -11,14 +12,13 @@ import java.util.UUID
 
 @UseCase
 class UpdateReservationUseCase(
-    private val commandReservationService: CommandReservationService,
-    private val queryReservationService: QueryReservationService,
+    private val reservationService: ReservationService,
     private val userService: UserService,
     private val userValidator: UserValidator
 ) {
 
     fun execute(reservationId: UUID, request: UpdateReservationRequest){
-        val reservation = queryReservationService.queryReservationById(reservationId)
+        val reservation = reservationService.queryReservationById(reservationId)
         val currentUser = userService.queryCurrentUser()
         userValidator.checkRepresentative(currentUser, reservation)
 
@@ -28,7 +28,7 @@ class UpdateReservationUseCase(
         val users = userService.queryAllUserById(request.users)
         userValidator.checkUsersUseStatus(users)
 
-        commandReservationService.save(reservation.copy(reason = request.reason))
+        reservationService.save(reservation.copy(reason = request.reason))
         userService.saveAll(users.map { it.copy(reservationId = reservationId) })
     }
 }

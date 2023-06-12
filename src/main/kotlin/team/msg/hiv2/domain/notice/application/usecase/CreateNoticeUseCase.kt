@@ -1,11 +1,9 @@
 package team.msg.hiv2.domain.notice.application.usecase
 
 import team.msg.hiv2.domain.notice.application.service.CommandNoticeService
-import team.msg.hiv2.domain.notice.application.spi.CommandNoticePort
 import team.msg.hiv2.domain.notice.domain.Notice
 import team.msg.hiv2.domain.notice.presentation.data.request.CreateNoticeRequest
 import team.msg.hiv2.domain.user.application.service.QueryUserService
-import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.global.annotation.usecase.UseCase
 import java.util.*
 

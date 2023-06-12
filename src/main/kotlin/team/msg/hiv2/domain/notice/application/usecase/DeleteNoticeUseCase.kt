@@ -1,11 +1,7 @@
 package team.msg.hiv2.domain.notice.application.usecase
 
-import team.msg.hiv2.domain.notice.application.service.CommandNoticeService
 import team.msg.hiv2.domain.notice.application.service.NoticeService
-import team.msg.hiv2.domain.notice.application.spi.NoticePort
-import team.msg.hiv2.domain.notice.exception.NoticeNotFoundException
 import team.msg.hiv2.domain.user.application.service.QueryUserService
-import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.global.annotation.usecase.UseCase
