@@ -2,10 +2,11 @@ package team.msg.hiv2.domain.auth.application.usecase
 
 import team.msg.hiv2.domain.auth.presentation.data.request.GAuthSignInRequest
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
-import team.msg.hiv2.domain.user.application.spi.UserPort
+import team.msg.hiv2.domain.user.application.service.CommandUserService
+import team.msg.hiv2.domain.user.application.service.QueryUserService
+import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
-import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.global.annotation.usecase.UseCase
 import team.msg.hiv2.global.security.spi.GenerateJwtPort
 import team.msg.hiv2.thirdparty.gauth.spi.GAuthPort
@@ -13,17 +14,17 @@ import java.util.*
 
 @UseCase
 class GAuthSignInUseCase(
-    private val userPort: UserPort,
     private val gAuthPort: GAuthPort,
+    private val userService: UserService,
     private val generateJwtPort: GenerateJwtPort
 ) {
 
     fun execute(request: GAuthSignInRequest): TokenResponse{
         val gAuthToken = gAuthPort.queryGAuthToken(request.code)
         val gAuthUserInfo = gAuthPort.queryGAuthUserInfo(gAuthToken.accessToken)
-        val role = userPort.queryUserRoleByEmail(gAuthUserInfo.email, gAuthUserInfo.role)
-        val user = createUser(
-            userPort.existsUserByEmail(gAuthUserInfo.email),
+        val role = userService.queryUserRoleByEmail(gAuthUserInfo.email, gAuthUserInfo.role)
+
+        val user = userService.createUser(
             User(
                 id = UUID.randomUUID(),
                 email = gAuthUserInfo.email,
@@ -35,17 +36,11 @@ class GAuthSignInUseCase(
                 roles = mutableListOf(role),
                 reservationId = null,
                 useStatus = UseStatus.AVAILABLE
-            )
+            ),
+            userService.existsUserByEmail(gAuthUserInfo.email),
         )
 
         return generateJwtPort.generate(user.id, user.roles)
     }
 
-    private fun createUser(isExistUser: Boolean, user: User): User {
-        return if(isExistUser){
-            userPort.queryUserByEmail(user.email) ?: throw UserNotFoundException()
-        } else {
-            userPort.save(user)
-        }
-    }
 }
