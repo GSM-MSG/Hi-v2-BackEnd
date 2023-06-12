@@ -17,7 +17,7 @@ import team.msg.hiv2.global.annotation.usecase.UseCase
             classes = [
                 DomainService::class,
                 UseCase::class,
-                ReadOnlyUseCase::class,
+                ReadOnlyUseCase::class
             ]
         )
     ]

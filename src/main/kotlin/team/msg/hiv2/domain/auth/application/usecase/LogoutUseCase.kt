@@ -1,6 +1,7 @@
 package team.msg.hiv2.domain.auth.application.usecase
 
-import team.msg.hiv2.domain.auth.application.service.RefreshTokenService
+import team.msg.hiv2.domain.auth.application.service.CommandRefreshTokenService
+import team.msg.hiv2.domain.auth.application.service.QueryRefreshTokenService
 import team.msg.hiv2.domain.user.application.service.QueryUserService
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.global.annotation.usecase.UseCase
@@ -8,16 +9,17 @@ import team.msg.hiv2.global.annotation.usecase.UseCase
 @UseCase
 class LogoutUseCase(
     private val queryUserService: QueryUserService,
-    private val refreshTokenService: RefreshTokenService
+    private val queryRefreshTokenService: QueryRefreshTokenService,
+    private val commandRefreshTokenService: CommandRefreshTokenService
 ) {
 
     fun execute(refreshToken: String){
         val user = queryUserService.queryCurrentUser()
-        val token = refreshTokenService.queryByRefreshToken(refreshToken)
+        val token = queryRefreshTokenService.queryByRefreshToken(refreshToken)
 
         if(user.id != token.userId)
             throw UserNotFoundException()
 
-        refreshTokenService.delete(token)
+        commandRefreshTokenService.delete(token)
     }
 }
