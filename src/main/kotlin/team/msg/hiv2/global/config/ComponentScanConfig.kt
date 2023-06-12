@@ -15,9 +15,9 @@ import team.msg.hiv2.global.annotation.usecase.UseCase
         Filter(
             type = FilterType.ANNOTATION,
             classes = [
+                DomainService::class,
                 UseCase::class,
                 ReadOnlyUseCase::class,
-                DomainService::class
             ]
         )
     ]
