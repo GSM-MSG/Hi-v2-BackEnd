@@ -24,6 +24,6 @@ class NoticePersistenceAdapter(
     override fun queryAllNotice(): List<Notice>  =
         noticeRepository.findAll().map { noticeMapper.toDomain(it)!! }
 
-    override fun queryNoticeById(noticeId: UUID) =
-        noticeMapper.toDomain(noticeRepository.findByIdOrNull(noticeId))
+    override fun queryNoticeById(id: UUID) =
+        noticeMapper.toDomain(noticeRepository.findByIdOrNull(id))
 }
