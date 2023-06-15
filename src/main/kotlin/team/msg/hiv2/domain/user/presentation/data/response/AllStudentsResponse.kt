@@ -4,7 +4,7 @@ import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import java.util.*
 
 data class AllStudentsResponse(
-    val id: UUID,
+    val userId: UUID,
     val name: String,
     val grade: Int?,
     val classNum: Int?,
