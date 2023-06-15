@@ -1,10 +1,6 @@
 package team.msg.hiv2.domain.reservation.application.usecase
 
-import team.msg.hiv2.domain.reservation.application.service.QueryReservationService
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
-import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.user.application.service.CommandUserService
-import team.msg.hiv2.domain.user.application.service.QueryUserService
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.global.annotation.usecase.UseCase

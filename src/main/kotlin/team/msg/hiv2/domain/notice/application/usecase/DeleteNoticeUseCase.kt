@@ -1,7 +1,6 @@
 package team.msg.hiv2.domain.notice.application.usecase
 
 import team.msg.hiv2.domain.notice.application.service.NoticeService
-import team.msg.hiv2.domain.user.application.service.QueryUserService
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.domain.user.domain.constant.UserRole

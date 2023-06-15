@@ -9,6 +9,7 @@ import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
 class QueryAllStudentsUseCase(
     private val userService: UserService
 ) {
+
     fun execute(): List<AllStudentsResponse> {
         return userService.queryAllUserByUserRole(UserRole.ROLE_STUDENT)
             .map { AllStudentsResponse(

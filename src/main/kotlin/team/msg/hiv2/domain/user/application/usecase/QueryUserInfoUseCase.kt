@@ -13,6 +13,7 @@ class QueryUserInfoUseCase(
     private val userService: UserService,
     private val reservationService: ReservationService
 ) {
+
     fun execute(): UserInfoResponse {
         val user = userService.queryCurrentUser()
         val reservation = user.reservationId?.let { reservationService.queryReservationById(it) }
