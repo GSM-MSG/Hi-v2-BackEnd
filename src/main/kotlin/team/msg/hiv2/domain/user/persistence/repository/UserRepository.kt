@@ -1,14 +1,16 @@
 package team.msg.hiv2.domain.user.persistence.repository
 
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
+import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 import java.util.*
 
-interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
+interface UserRepository : JpaRepository<UserJpaEntity, UUID> {
     fun findByEmail(email: String): UserJpaEntity?
     fun existsByEmail(email: String): Boolean
     fun findAllByReservation(reservation: ReservationJpaEntity): List<UserJpaEntity>
     fun findByIdAndReservation(id: UUID, reservation: ReservationJpaEntity): UserJpaEntity
     fun findAllByNameContaining(keyword: String): List<UserJpaEntity>
+    fun findAllByRoles(role: UserRole): List<UserJpaEntity>
 }
