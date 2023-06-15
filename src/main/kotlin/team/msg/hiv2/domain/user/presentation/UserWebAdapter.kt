@@ -33,7 +33,7 @@ class UserWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/students")
-    fun queryAllUser(): ResponseEntity<List<AllStudentsResponse>> =
+    fun queryAllUser(): ResponseEntity<AllStudentsResponse> =
         queryAllStudentsUseCase.execute()
             .let { ResponseEntity.ok(it) }
 }
