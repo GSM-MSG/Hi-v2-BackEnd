@@ -32,8 +32,12 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
-schema.sql
 
 ### VS Code ###
 .vscode/
 .DS_Store
+
+
+### DEV ###
+schema.sql
+.env
