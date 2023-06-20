@@ -46,6 +46,9 @@ dependencies {
 	// gauth
 	implementation(Dependencies.GAUTH)
 
+	// mockito
+	testImplementation(Dependencies.MOCKITO)
+
 }
 
 tasks.withType<KotlinCompile> {
