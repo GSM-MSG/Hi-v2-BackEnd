@@ -56,19 +56,20 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/homebase").authenticated()
 
              // reservation
-            .antMatchers(HttpMethod.GET, "/reservation/{reservation_id}").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/reservation/{reservation_id}").hasRole(STUDENT)
-            .antMatchers(HttpMethod.PATCH, "/reservation/{reservation_id}").hasRole(STUDENT)
-            .antMatchers(HttpMethod.PATCH, "/reservation/{reservation_id}/{user_id}").hasRole(STUDENT)
-            .antMatchers(HttpMethod.DELETE, "/reservation/{reservation_id}/exit").hasRole(STUDENT)
-            .antMatchers(HttpMethod.PATCH, "/reservation/{reservation_id}/check-status").hasRole(TEACHER)
+            .antMatchers(HttpMethod.GET, "/reservation/{id}").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/reservation/{id}").hasRole(STUDENT)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{id}").hasRole(STUDENT)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/{user_id}").hasRole(STUDENT)
+            .antMatchers(HttpMethod.DELETE, "/reservation/{id}/exit").hasRole(STUDENT)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/check-status").hasRole(TEACHER)
+            .antMatchers(HttpMethod.DELETE, "/reservation/kill-all").hasRole(ADMIN)
 
              // notice
             .antMatchers(HttpMethod.GET, "/notice").authenticated()
-            .antMatchers(HttpMethod.GET, "/notice/{notice_id}").authenticated()
+            .antMatchers(HttpMethod.GET, "/notice/{id}").authenticated()
             .antMatchers(HttpMethod.POST, "/notice").hasAnyRole(ADMIN, TEACHER)
-            .antMatchers(HttpMethod.DELETE, "/notice/{notice_id}").hasAnyRole(ADMIN, TEACHER)
-            .antMatchers(HttpMethod.PATCH, "/notice/{notice_id}").hasAnyRole(ADMIN, TEACHER)
+            .antMatchers(HttpMethod.DELETE, "/notice/{id}").hasAnyRole(ADMIN, TEACHER)
+            .antMatchers(HttpMethod.PATCH, "/notice/{id}").hasAnyRole(ADMIN, TEACHER)
 
              // user
             .antMatchers(HttpMethod.GET, "/user").authenticated()

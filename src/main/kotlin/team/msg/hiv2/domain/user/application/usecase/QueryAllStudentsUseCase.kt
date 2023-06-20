@@ -12,7 +12,7 @@ class QueryAllStudentsUseCase(
 ) {
 
     fun execute(): AllStudentsResponse {
-        val students = userService.queryAllUserByUserRole(UserRole.ROLE_STUDENT)
+        val students = userService.queryAllUserByRolesContaining(UserRole.ROLE_STUDENT)
         return AllStudentsResponse(
             students.map {
                 StudentResponse(

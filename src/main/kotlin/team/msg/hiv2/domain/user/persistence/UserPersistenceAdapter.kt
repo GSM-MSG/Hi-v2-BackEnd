@@ -66,6 +66,10 @@ class UserPersistenceAdapter(
     override fun queryUserByNameContaining(keyword: String): List<User> =
         userRepository.findAllByNameContaining(keyword).map { userMapper.toDomain(it)!! }
 
-    override fun queryAllUserByUserRole(role: UserRole): List<User> =
-        userRepository.findAllByRoles(role).map { userMapper.toDomain(it)!! }
+    override fun queryAllUserByReservationIsNotNull(): List<User> =
+        userRepository.findAllByReservationIsNotNull().map { userMapper.toDomain(it)!! }
+
+    override fun queryAllUserByRolesContaining(role: UserRole): List<User> =
+        userRepository.findAllByRolesContaining(role).map { userMapper.toDomain(it)!! }
+
 }

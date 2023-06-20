@@ -17,7 +17,8 @@ class ReservationWebAdapter(
     private val updateReservationUseCase: UpdateReservationUseCase,
     private val delegateRepresentativeUseCase: DelegateRepresentativeUseCase,
     private val exitReservationUseCase: ExitReservationUseCase,
-    private val updateReservationCheckStatusUseCase: UpdateReservationCheckStatusUseCase
+    private val updateReservationCheckStatusUseCase: UpdateReservationCheckStatusUseCase,
+    private val deleteAllReservationUseCase: DeleteAllReservationUseCase
 ) {
 
     @GetMapping("/{id}")
@@ -48,6 +49,11 @@ class ReservationWebAdapter(
     fun updateReservationCheckStatus(@PathVariable id: UUID,
                                      @RequestBody @Valid request: UpdateReservationCheckStatusRequest): ResponseEntity<Void> =
         updateReservationCheckStatusUseCase.execute(id, request)
+            .let { ResponseEntity.noContent().build() }
+
+    @DeleteMapping("/kill-all")
+    fun deleteAllReservation(): ResponseEntity<Void> =
+        deleteAllReservationUseCase.execute()
             .let { ResponseEntity.noContent().build() }
 
 
