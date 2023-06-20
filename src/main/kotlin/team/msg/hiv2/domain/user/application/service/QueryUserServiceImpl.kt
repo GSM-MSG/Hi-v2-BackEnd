@@ -40,4 +40,8 @@ class QueryUserServiceImpl(
     override fun queryUserByNameContaining(keyword: String): List<User> =
         queryUserPort.queryUserByNameContaining(keyword)
 
+    override fun queryAllUserByReservationIsNotNull(): List<User> =
+        queryUserPort.queryAllUserByReservationIsNotNull()
+
+
 }
