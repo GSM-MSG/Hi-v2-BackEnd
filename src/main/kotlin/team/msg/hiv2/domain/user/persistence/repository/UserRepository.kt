@@ -2,6 +2,7 @@ package team.msg.hiv2.domain.user.persistence.repository
 
 import org.springframework.data.repository.CrudRepository
 import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
+import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 import java.util.*
 
@@ -12,4 +13,5 @@ interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun findByIdAndReservation(id: UUID, reservation: ReservationJpaEntity): UserJpaEntity
     fun findAllByNameContaining(keyword: String): List<UserJpaEntity>
     fun findAllByReservationIsNotNull(): List<UserJpaEntity>
+    fun findAllByRoles(roles: MutableList<UserRole>): List<UserJpaEntity>
 }

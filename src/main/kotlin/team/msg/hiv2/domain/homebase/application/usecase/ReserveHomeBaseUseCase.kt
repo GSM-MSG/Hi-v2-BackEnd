@@ -1,17 +1,10 @@
 package team.msg.hiv2.domain.homebase.application.usecase
 
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
-import team.msg.hiv2.domain.homebase.application.service.QueryHomeBaseService
-import team.msg.hiv2.domain.homebase.application.spi.QueryHomeBasePort
-import team.msg.hiv2.domain.homebase.exception.HomeBaseNotFoundException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
-import team.msg.hiv2.domain.reservation.application.service.CommandReservationService
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
-import team.msg.hiv2.domain.reservation.application.spi.CommandReservationPort
 import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.user.application.service.QueryUserService
 import team.msg.hiv2.domain.user.application.service.UserService
-import team.msg.hiv2.domain.user.application.spi.UserPort
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.global.annotation.usecase.UseCase

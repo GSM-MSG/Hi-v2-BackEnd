@@ -16,5 +16,9 @@ interface QueryUserService {
     fun existsUserByEmail(email: String): Boolean
     fun queryCurrentUser(): User
     fun queryUserByNameContaining(keyword: String): List<User>
+<<<<<<< HEAD
     fun queryAllUserByReservationIsNotNull(): List<User>
+=======
+    fun queryAllUserByUserRole(role: UserRole): List<User>
+>>>>>>> 892398914c820d3fa7cc97d53d42c9c6ff23fbdf
 }

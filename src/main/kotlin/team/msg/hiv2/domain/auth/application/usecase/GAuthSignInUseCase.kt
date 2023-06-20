@@ -2,8 +2,6 @@ package team.msg.hiv2.domain.auth.application.usecase
 
 import team.msg.hiv2.domain.auth.presentation.data.request.GAuthSignInRequest
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
-import team.msg.hiv2.domain.user.application.service.CommandUserService
-import team.msg.hiv2.domain.user.application.service.QueryUserService
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
