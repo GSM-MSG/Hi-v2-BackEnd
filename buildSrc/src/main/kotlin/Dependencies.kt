@@ -17,6 +17,9 @@ object Dependencies {
     const val SPRING_SECURITY_TEST = "org.springframework.security:spring-security-test"
     const val SPRING_AOP = "org.springframework.boot:spring-boot-starter-aop"
 
+    // mockito
+    const val MOCKITO = "org.mockito.kotlin:mockito-kotlin:${DependencyVersions.MOCKITO_VERSION}"
+
     // jackson
     const val JACKSON_MODULE_KOTLIN = "com.fasterxml.jackson.module:jackson-module-kotlin"
 
