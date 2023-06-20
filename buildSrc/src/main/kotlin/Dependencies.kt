@@ -19,7 +19,6 @@ object Dependencies {
 
     // mockito
     const val MOCKITO = "org.mockito.kotlin:mockito-kotlin:${DependencyVersions.MOCKITO_VERSION}"
-
     // jackson
     const val JACKSON_MODULE_KOTLIN = "com.fasterxml.jackson.module:jackson-module-kotlin"
 

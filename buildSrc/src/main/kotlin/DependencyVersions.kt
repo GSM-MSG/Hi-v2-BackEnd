@@ -21,5 +21,5 @@ object DependencyVersions {
     const val GAUTH_VERSION = "v2.0.0"
 
     // test
-    const val MOCKITO_VERSION = "4.4.0"
+    const val MOCKITO_VERSION = "4.0.0"
 }
