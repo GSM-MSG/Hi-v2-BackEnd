@@ -1,8 +1,6 @@
 package team.msg.hiv2.domain.user.application.usecase
 
-import team.msg.hiv2.domain.user.application.service.QueryUserService
 import team.msg.hiv2.domain.user.application.service.UserService
-import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
 

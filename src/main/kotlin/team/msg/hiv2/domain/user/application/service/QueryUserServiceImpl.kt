@@ -40,4 +40,6 @@ class QueryUserServiceImpl(
     override fun queryUserByNameContaining(keyword: String): List<User> =
         queryUserPort.queryUserByNameContaining(keyword)
 
+    override fun queryAllUserByUserRole(role: UserRole): List<User> =
+        queryUserPort.queryAllUserByUserRole(role)
 }
