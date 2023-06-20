@@ -16,4 +16,5 @@ interface QueryUserPort {
     fun existsUserByEmail(email: String): Boolean
     fun queryCurrentUser(): User
     fun queryUserByNameContaining(keyword: String): List<User>
+    fun queryUserByReservationIsNotNull(): List<User>
 }
