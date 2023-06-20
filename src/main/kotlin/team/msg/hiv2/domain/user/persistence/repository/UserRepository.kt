@@ -13,5 +13,5 @@ interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun findByIdAndReservation(id: UUID, reservation: ReservationJpaEntity): UserJpaEntity
     fun findAllByNameContaining(keyword: String): List<UserJpaEntity>
     fun findAllByReservationIsNotNull(): List<UserJpaEntity>
-    fun findAllByRoles(roles: MutableList<UserRole>): List<UserJpaEntity>
+    fun findAllByRolesContaining(role: UserRole): List<UserJpaEntity>
 }
