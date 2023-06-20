@@ -66,10 +66,10 @@ class SecurityConfig(
 
              // notice
             .antMatchers(HttpMethod.GET, "/notice").authenticated()
-            .antMatchers(HttpMethod.GET, "/notice/{notice_id}").authenticated()
+            .antMatchers(HttpMethod.GET, "/notice/{id}").authenticated()
             .antMatchers(HttpMethod.POST, "/notice").hasAnyRole(ADMIN, TEACHER)
-            .antMatchers(HttpMethod.DELETE, "/notice/{notice_id}").hasAnyRole(ADMIN, TEACHER)
-            .antMatchers(HttpMethod.PATCH, "/notice/{notice_id}").hasAnyRole(ADMIN, TEACHER)
+            .antMatchers(HttpMethod.DELETE, "/notice/{id}").hasAnyRole(ADMIN, TEACHER)
+            .antMatchers(HttpMethod.PATCH, "/notice/{id}").hasAnyRole(ADMIN, TEACHER)
 
              // user
             .antMatchers(HttpMethod.GET, "/user").authenticated()
