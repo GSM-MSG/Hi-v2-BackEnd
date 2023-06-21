@@ -1,14 +1,15 @@
 package team.msg.hiv2.domain.homebase.application.usecase
 
-import com.sun.security.auth.UserPrincipal
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.mockito.Mock
 import org.mockito.kotlin.any
 import org.mockito.kotlin.given
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
+import team.msg.hiv2.domain.homebase.exception.ForbiddenReserveException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
@@ -119,6 +120,47 @@ internal class ReserveHomeBaseUseCaseTest {
             reserveHomeBaseUseCase.execute(floor, period, requestStub)
         }
 
+    }
+
+    @Test
+    fun `예약 명단에 예약 가능 상태가 아닌 멤버가 있음`() {
+        val userStub = User(
+            id = userId,
+            email = "test@email",
+            name = "hope",
+            grade = 2,
+            classNum = 4,
+            number = 6,
+            profileImageUrl = "profileImageUrl",
+            roles = mutableListOf(UserRole.ROLE_STUDENT),
+            reservationId = null,
+            useStatus = UseStatus.UNAVAILABLE
+        )
+
+        val userStub2 = User(
+            id = userId2,
+            email = "test2@email",
+            name = "hope2",
+            grade = 2,
+            classNum = 4,
+            number = 7,
+            profileImageUrl = "profileImageUrl2",
+            roles = mutableListOf(UserRole.ROLE_STUDENT),
+            reservationId = null,
+            useStatus = UseStatus.AVAILABLE
+        )
+
+        given(userService.queryCurrentUser()).willReturn(userStub)
+
+        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)).willReturn(homeBaseStub)
+
+        given(userService.queryAllUserById(requestStub.users)).willReturn(listOf(userStub, userStub2))
+
+        given(userValidator.checkUsersUseStatus(listOf(userStub, userStub2))).willThrow(ForbiddenReserveException())
+
+        assertThrows<ForbiddenReserveException> {
+            reserveHomeBaseUseCase.execute(floor, period, requestStub)
+        }
     }
 
 
