@@ -7,5 +7,5 @@ interface CommandReservationService{
     fun save(reservation: Reservation): Reservation
     fun delete(reservation: Reservation)
     fun deleteAll()
-    fun deleteAll(reservations: List<Reservation>)
+    fun deleteAllReservationInBatch(reservations: List<Reservation>)
 }

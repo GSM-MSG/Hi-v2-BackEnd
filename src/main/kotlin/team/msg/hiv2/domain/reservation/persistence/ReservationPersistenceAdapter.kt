@@ -28,8 +28,8 @@ class ReservationPersistenceAdapter(
         reservationRepository.deleteAll()
     }
 
-    override fun deleteAll(reservations: List<Reservation>) {
-        reservationRepository.deleteAll(reservations.map { reservationMapper.toEntity(it) })
+    override fun deleteAllReservationInBatch(reservations: List<Reservation>) {
+        reservationRepository.deleteAllInBatch(reservations.map { reservationMapper.toEntity(it) })
     }
 
     override fun queryReservationById(id: UUID) =

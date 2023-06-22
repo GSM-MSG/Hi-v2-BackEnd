@@ -19,8 +19,8 @@ class CommandReservationServiceImpl(
         commandReservationPort.deleteAll()
     }
 
-    override fun deleteAll(reservations: List<Reservation>) {
-        commandReservationPort.deleteAll(reservations)
+    override fun deleteAllReservationInBatch(reservations: List<Reservation>) {
+        commandReservationPort.deleteAllReservationInBatch(reservations)
     }
 
 }
