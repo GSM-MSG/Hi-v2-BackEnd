@@ -43,8 +43,8 @@ class UserWebAdapter(
         queryAllStudentsUseCase.execute()
             .let { ResponseEntity.ok(it) }
 
-    @PatchMapping("/{user_id}")
-    fun updateUserUseStatus(@PathVariable("user_id") userId: UUID, updateUserUseStatusRequest: UpdateUserUseStatusRequest): ResponseEntity<Void> =
-        updateUserUseStatusUseCase.execute(userId, updateUserUseStatusRequest.status)
+    @PatchMapping("/{id}")
+    fun updateUserUseStatus(@PathVariable id: UUID, updateUserUseStatusRequest: UpdateUserUseStatusRequest): ResponseEntity<Void> =
+        updateUserUseStatusUseCase.execute(id, updateUserUseStatusRequest.status)
             .let { ResponseEntity.noContent().build() }
 }
