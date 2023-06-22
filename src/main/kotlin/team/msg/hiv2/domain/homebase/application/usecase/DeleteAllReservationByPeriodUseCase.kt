@@ -14,6 +14,6 @@ class DeleteAllReservationByPeriodUseCase(
 
     fun execute(period: Int){
         val homeBases = homeBaseService.queryAllHomeBaseByPeriod(period)
-
+        val reservations = reservationService.queryAllReservationByHomeBaseIn(homeBases)
     }
 }
