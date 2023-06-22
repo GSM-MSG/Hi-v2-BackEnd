@@ -7,4 +7,5 @@ import java.util.UUID
 interface QueryReservationPort {
     fun queryReservationById(id: UUID): Reservation?
     fun queryAllReservationByHomeBase(homeBase: HomeBase): List<Reservation>
+    fun queryAllReservationByHomeBaseContaining(homeBases: List<HomeBase>): List<Reservation>
 }
