@@ -19,7 +19,7 @@ import javax.validation.Valid
 class UserWebAdapter(
     private val searchUserByNameKeywordUseCase: SearchUserByNameKeywordUseCase,
     private val queryUserInfoUseCase: QueryUserInfoUseCase,
-    private val queryAllStudentsUseCase: QueryAllStudentsUseCase
+    private val queryAllStudentsUseCase: QueryAllStudentsUseCase,
 ) {
 
     @GetMapping("/search")
