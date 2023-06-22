@@ -54,6 +54,7 @@ class SecurityConfig(
              // homeBase
             .antMatchers(HttpMethod.POST, "/homebase").hasRole(STUDENT)
             .antMatchers(HttpMethod.GET, "/homebase").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/homebase").hasRole(ADMIN)
 
              // reservation
             .antMatchers(HttpMethod.GET, "/reservation/{id}").authenticated()
