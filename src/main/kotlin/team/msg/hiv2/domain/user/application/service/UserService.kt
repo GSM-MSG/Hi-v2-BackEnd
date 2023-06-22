@@ -7,4 +7,5 @@ import team.msg.hiv2.global.annotation.service.DomainService
 class UserService(
     commandUserService: CommandUserService,
     queryUserService: QueryUserService
-) : CommandUserService by commandUserService, QueryUserService by queryUserService
+) : CommandUserService by commandUserService,
+    QueryUserService by queryUserService

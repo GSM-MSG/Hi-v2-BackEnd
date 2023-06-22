@@ -6,4 +6,5 @@ interface CommandReservationPort {
     fun save(reservation: Reservation): Reservation
     fun delete(reservation: Reservation)
     fun deleteAll()
+    fun deleteAllReservationInBatch(reservations: List<Reservation>)
 }

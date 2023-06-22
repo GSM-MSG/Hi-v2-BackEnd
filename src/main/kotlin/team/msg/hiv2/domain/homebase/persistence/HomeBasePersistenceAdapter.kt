@@ -15,4 +15,7 @@ class HomeBasePersistenceAdapter(
     override fun queryHomeBaseByFloorAndPeriod(floor: Int, period: Int): HomeBase? =
         homeBaseMapper.toDomain(homeBaseRepository.findByFloorAndPeriod(floor, period))
 
+    override fun queryAllHomeBaseByPeriod(period: Int): List<HomeBase> =
+        homeBaseRepository.findAllByPeriod(period).map { homeBaseMapper.toDomain(it)!! }
+
 }

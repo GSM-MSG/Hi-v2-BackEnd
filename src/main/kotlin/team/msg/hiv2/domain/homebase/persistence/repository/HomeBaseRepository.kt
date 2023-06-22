@@ -6,4 +6,5 @@ import java.util.UUID
 
 interface HomeBaseRepository : CrudRepository<HomeBaseJpaEntity, Long>{
     fun findByFloorAndPeriod(floor: Int, period: Int): HomeBaseJpaEntity?
+    fun findAllByPeriod(period: Int): List<HomeBaseJpaEntity>
 }

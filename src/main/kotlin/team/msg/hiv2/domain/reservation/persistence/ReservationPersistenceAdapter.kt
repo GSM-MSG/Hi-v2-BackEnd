@@ -28,10 +28,19 @@ class ReservationPersistenceAdapter(
         reservationRepository.deleteAll()
     }
 
+    override fun deleteAllReservationInBatch(reservations: List<Reservation>) {
+        reservationRepository.deleteAllInBatch(reservations.map { reservationMapper.toEntity(it) })
+    }
+
     override fun queryReservationById(id: UUID) =
         reservationMapper.toDomain(reservationRepository.findByIdOrNull(id))
 
     override fun queryAllReservationByHomeBase(homeBase: HomeBase): List<Reservation> =
         reservationRepository.findAllByHomeBase(homeBaseMapper.toEntity(homeBase))
             .map { reservationMapper.toDomain(it)!! }
+
+    override fun queryAllReservationByHomeBaseIn(homeBases: List<HomeBase>): List<Reservation> =
+        reservationRepository.findAllByHomeBaseIn(homeBases.map { homeBaseMapper.toEntity(it) })
+            .map { reservationMapper.toDomain(it)!! }
+
 }
