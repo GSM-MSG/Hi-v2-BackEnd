@@ -17,4 +17,8 @@ class QueryReservationServiceImpl(
 
     override fun queryAllReservationByHomeBase(homeBase: HomeBase): List<Reservation> =
         queryReservationPort.queryAllReservationByHomeBase(homeBase)
+
+    override fun queryAllReservationByHomeBaseContaining(homeBases: List<HomeBase>): List<Reservation> =
+        queryReservationPort.queryAllReservationByHomeBaseContaining(homeBases)
+
 }

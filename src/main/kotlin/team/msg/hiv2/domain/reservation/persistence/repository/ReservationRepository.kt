@@ -10,4 +10,5 @@ import java.util.UUID
 interface ReservationRepository : CrudRepository<ReservationJpaEntity, UUID> {
     fun findAllByHomeBase(homeBase: HomeBaseJpaEntity): List<ReservationJpaEntity>
     fun findAllByHomeBaseContaining(homeBases: List<HomeBaseJpaEntity>): List<ReservationJpaEntity>
+    fun deleteAll(reservations: List<ReservationJpaEntity>)
 }
