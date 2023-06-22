@@ -76,6 +76,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/user").authenticated()
             .antMatchers(HttpMethod.GET, "/user/my-page").authenticated()
             .antMatchers(HttpMethod.GET, "/user/students").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/user/{id}").hasAnyRole(ADMIN, TEACHER)
 
             .anyRequest().authenticated()
             .and()
