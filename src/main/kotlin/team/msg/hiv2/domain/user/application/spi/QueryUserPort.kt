@@ -18,4 +18,5 @@ interface QueryUserPort {
     fun queryUserByNameContaining(keyword: String): List<User>
     fun queryAllUserByReservationIsNotNull(): List<User>
     fun queryAllUserByRolesContaining(role: UserRole): List<User>
+    fun queryAllUserByReservationIn(reservations: List<Reservation>): List<User>
 }
