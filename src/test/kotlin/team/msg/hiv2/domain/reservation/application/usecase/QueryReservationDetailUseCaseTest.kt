@@ -32,8 +32,8 @@ class QueryReservationDetailUseCaseTest {
     private val floor = 3
     private val period = 10
 
-    private val representativeId1 = UUID.randomUUID()
-    private val userId1 = UUID.randomUUID()
+    private val representativeId = UUID.randomUUID()
+    private val userId = UUID.randomUUID()
 
     private val reason = "회의"
     private val homeBaseStub by lazy {
@@ -47,7 +47,7 @@ class QueryReservationDetailUseCaseTest {
     private val reservationStub by lazy {
         Reservation(
             id = UUID.randomUUID(),
-            representativeId = representativeId1,
+            representativeId = representativeId,
             reason = reason,
             homeBaseId = homeBaseStub.id,
             checkStatus = false
@@ -56,7 +56,7 @@ class QueryReservationDetailUseCaseTest {
 
     private val userStub1 by lazy {
         User(
-            id = representativeId1,
+            id = representativeId,
             email = "test@email",
             name = "hope",
             grade = 2,
@@ -71,7 +71,7 @@ class QueryReservationDetailUseCaseTest {
 
     private val userStub2 by lazy {
         User(
-            id = userId1,
+            id = userId,
             email = "test@email",
             name = "esperer",
             grade = 2,
@@ -86,7 +86,7 @@ class QueryReservationDetailUseCaseTest {
 
     private val userResponseStub1 by lazy {
         UserResponse(
-            userId = representativeId1,
+            userId = representativeId,
             name = userStub1.name,
             grade = userStub1.grade,
             classNum = userStub1.classNum,
@@ -97,7 +97,7 @@ class QueryReservationDetailUseCaseTest {
 
     private val userResponseStub2 by lazy {
         UserResponse(
-            userId = userId1,
+            userId = userId,
             name = userStub2.name,
             grade = userStub2.grade,
             classNum = userStub2.classNum,
