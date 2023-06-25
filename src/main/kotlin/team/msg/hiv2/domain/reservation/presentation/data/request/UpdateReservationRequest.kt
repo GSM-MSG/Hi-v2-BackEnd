@@ -6,7 +6,7 @@ import javax.validation.constraints.Size
 
 data class UpdateReservationRequest(
     @field:Size(min = 2, max = 6)
-    val users: MutableList<UUID>,
+    val users: List<UUID>,
     @field:NotBlank
     val reason: String
 )
