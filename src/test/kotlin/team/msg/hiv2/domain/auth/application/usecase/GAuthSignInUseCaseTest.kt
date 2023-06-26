@@ -129,10 +129,10 @@ class GAuthSignInUseCaseTest{
         given(generateJwtPort.generate(saveUserStub.id, saveUserStub.roles))
             .willReturn(responseStub)
 
-        // then
+        // when
         val result = gAuthSignInUseCase.execute(requestStub)
 
-        // when
+        // then
         assertThat(result).isEqualTo(responseStub)
     }
 }
