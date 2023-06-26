@@ -33,7 +33,7 @@ class QueryAllNoticeUseCaseTest {
     private val title = "title_test"
     private val content = "content_test"
 
-    private val noticeListStub = listOf(
+    private val noticeStub: Notice by lazy {
         Notice(
             id = noticeId,
             title = title,
@@ -41,7 +41,7 @@ class QueryAllNoticeUseCaseTest {
             userId = userId,
             createdAt = LocalDateTime.MAX
         )
-    )
+    }
 
     private val userStub: User by lazy {
         User(
@@ -85,7 +85,7 @@ class QueryAllNoticeUseCaseTest {
 
         // given
         given(noticeService.queryAllNotice())
-            .willReturn(noticeListStub)
+            .willReturn(listOf(noticeStub))
 
         given(userService.queryUserById(userId))
             .willReturn(userStub)
