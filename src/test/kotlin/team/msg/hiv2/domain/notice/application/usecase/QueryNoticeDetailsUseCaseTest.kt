@@ -35,6 +35,16 @@ class QueryNoticeDetailsUseCaseTest {
     private val title = "title_test"
     private val content = "content_test"
 
+    private val noticeStub: Notice by lazy {
+        Notice(
+            id = noticeId,
+            title = title,
+            content = content,
+            userId = userId,
+            createdAt = LocalDateTime.MAX
+        )
+    }
+
     private val userStub: User by lazy {
         User(
             id = userId,
@@ -78,16 +88,11 @@ class QueryNoticeDetailsUseCaseTest {
     fun `공지사항 상세 조회 성공`() {
 
         // given
-        val noticeStub = Notice(
-            id = noticeId,
-            title = title,
-            content = content,
-            userId = userId,
-            createdAt = LocalDateTime.MAX
-        )
+        given(noticeService.queryNoticeById(noticeId))
+            .willReturn(noticeStub)
 
-        given(noticeService.queryNoticeById(noticeId)).willReturn(noticeStub)
-        given(userService.queryUserById(userId)).willReturn(userStub)
+        given(userService.queryUserById(userId))
+            .willReturn(userStub)
 
         // then
         val result = queryNoticeDetailsUseCase.execute(noticeId)
