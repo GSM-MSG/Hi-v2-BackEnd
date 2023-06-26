@@ -150,13 +150,17 @@ internal class ReserveHomeBaseUseCaseTest {
             useStatus = UseStatus.AVAILABLE
         )
 
-        given(userService.queryCurrentUser()).willReturn(userStub)
+        given(userService.queryCurrentUser())
+            .willReturn(userStub)
 
-        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)).willReturn(homeBaseStub)
+        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period))
+            .willReturn(homeBaseStub)
 
-        given(userService.queryAllUserById(requestStub.users)).willReturn(listOf(userStub, userStub2))
+        given(userService.queryAllUserById(requestStub.users))
+            .willReturn(listOf(userStub, userStub2))
 
-        given(userValidator.checkUsersUseStatus(listOf(userStub, userStub2))).willThrow(ForbiddenReserveException())
+        given(userValidator.checkUsersUseStatus(listOf(userStub, userStub2)))
+            .willThrow(ForbiddenReserveException())
 
         assertThrows<ForbiddenReserveException> {
             reserveHomeBaseUseCase.execute(floor, period, requestStub)

@@ -111,17 +111,23 @@ class GAuthSignInUseCaseTest{
     fun `회원가입 성공`() {
 
         // given
-        given(gAuthPort.queryGAuthToken(requestStub.code)).willReturn(gAuthTokenStub)
+        given(gAuthPort.queryGAuthToken(requestStub.code))
+            .willReturn(gAuthTokenStub)
 
-        given(gAuthPort.queryGAuthUserInfo(gAuthTokenStub.accessToken)).willReturn(gAuthUserInfoStub)
+        given(gAuthPort.queryGAuthUserInfo(gAuthTokenStub.accessToken))
+            .willReturn(gAuthUserInfoStub)
 
-        given(userService.queryUserRoleByEmail(gAuthUserInfoStub.email, gAuthUserInfoStub.role)).willReturn(role)
+        given(userService.queryUserRoleByEmail(gAuthUserInfoStub.email, gAuthUserInfoStub.role))
+            .willReturn(role)
 
-        given(userService.existsUserByEmail(gAuthUserInfoStub.email)).willReturn(false)
+        given(userService.existsUserByEmail(gAuthUserInfoStub.email))
+            .willReturn(false)
 
-        given(userService.createUser(any(), any())).willReturn(saveUserStub)
+        given(userService.createUser(any(), any()))
+            .willReturn(saveUserStub)
 
-        given(generateJwtPort.generate(saveUserStub.id, saveUserStub.roles)).willReturn(responseStub)
+        given(generateJwtPort.generate(saveUserStub.id, saveUserStub.roles))
+            .willReturn(responseStub)
 
         // when
         val result = gAuthSignInUseCase.execute(requestStub)

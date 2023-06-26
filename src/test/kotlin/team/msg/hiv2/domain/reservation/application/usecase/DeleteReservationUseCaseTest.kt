@@ -1,14 +1,13 @@
 package team.msg.hiv2.domain.reservation.application.usecase
 
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.mockito.Mock
 import org.mockito.kotlin.given
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.domain.user.domain.User
@@ -18,7 +17,10 @@ import team.msg.hiv2.global.annotation.HiTest
 import java.util.*
 
 @HiTest
-class UpdateReservationUseCaseTest {
+class DeleteReservationUseCaseTest {
+
+    @Mock
+    private lateinit var reservationService: ReservationService
 
     @Mock
     private lateinit var userService: UserService
@@ -26,10 +28,7 @@ class UpdateReservationUseCaseTest {
     @Mock
     private lateinit var userValidator: UserValidator
 
-    @Mock
-    private lateinit var reservationService: ReservationService
-
-    private lateinit var updateReservationUseCase: UpdateReservationUseCase
+    private lateinit var deleteReservationUseCase: DeleteReservationUseCase
 
     private val floor = 3
     private val period = 10
@@ -88,34 +87,29 @@ class UpdateReservationUseCaseTest {
 
     private val requestReservationId = reservationStub.id
 
-    private val requestStub by lazy{
-        UpdateReservationRequest(
-            users = listOf(representativeId, userId),
-            reason = "수정됨"
-        )
-    }
-
     @BeforeEach
-    fun setUp(){
-        updateReservationUseCase = UpdateReservationUseCase(
+    fun setUp() {
+        deleteReservationUseCase = DeleteReservationUseCase(
             reservationService, userService, userValidator
         )
     }
 
     @Test
-    fun `수정 성공`() {
+    fun `삭제 성공`() {
 
         // given
         given(reservationService.queryReservationById(requestReservationId))
             .willReturn(reservationStub)
+
+        given(userService.queryAllUserByReservation(reservationStub))
+            .willReturn(listOf(userStub1, userStub2))
 
         given(userService.queryCurrentUser())
             .willReturn(userStub1)
 
         // when & then
         assertDoesNotThrow {
-            updateReservationUseCase.execute(requestReservationId, requestStub)
+            deleteReservationUseCase.execute(requestReservationId)
         }
     }
-
 }

@@ -74,8 +74,11 @@ internal class CreatNoticeUseCaseTest {
             createdAt = LocalDateTime.now()
         )
 
-        given(userService.queryCurrentUser()).willReturn(userStub)
-        given(noticeService.save(any())).willReturn(noticeStub)
+        given(userService.queryCurrentUser())
+            .willReturn(userStub)
+
+        given(noticeService.save(any()))
+            .willReturn(noticeStub)
 
         // when & then
         assertDoesNotThrow {
