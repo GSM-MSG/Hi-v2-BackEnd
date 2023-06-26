@@ -133,9 +133,14 @@ class QueryReservationByHomeBaseUseCaseTest {
     fun `예약 현황 조회 성공`(){
 
         // given
-        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)).willReturn(homeBaseStub)
-        given(reservationService.queryAllReservationByHomeBase(homeBaseStub)).willReturn(listOf(reservationStub))
-        given(userService.queryAllUserByReservation(reservationStub)).willReturn(listOf(userStub1, userStub2))
+        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period))
+            .willReturn(homeBaseStub)
+
+        given(reservationService.queryAllReservationByHomeBase(homeBaseStub))
+            .willReturn(listOf(reservationStub))
+
+        given(userService.queryAllUserByReservation(reservationStub))
+            .willReturn(listOf(userStub1, userStub2))
 
         // when
         val response = queryReservationByHomeBaseUseCase.execute(floor, period)

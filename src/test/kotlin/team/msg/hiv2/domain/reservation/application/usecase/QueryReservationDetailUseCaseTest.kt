@@ -125,8 +125,11 @@ class QueryReservationDetailUseCaseTest {
     fun `예약 테이블 조회 성공`(){
 
         // given
-        given(reservationService.queryReservationById(requestId)).willReturn(reservationStub)
-        given(userService.queryAllUserByReservation(reservationStub)).willReturn(listOf(userStub1, userStub2))
+        given(reservationService.queryReservationById(requestId))
+            .willReturn(reservationStub)
+
+        given(userService.queryAllUserByReservation(reservationStub))
+            .willReturn(listOf(userStub1, userStub2))
 
         // when
         val result = queryReservationDetailUseCase.execute(requestId)

@@ -106,8 +106,11 @@ class UpdateReservationUseCaseTest {
     fun `수정 성공`() {
 
         // given
-        given(reservationService.queryReservationById(requestReservationId)).willReturn(reservationStub)
-        given(userService.queryCurrentUser()).willReturn(userStub1)
+        given(reservationService.queryReservationById(requestReservationId))
+            .willReturn(reservationStub)
+
+        given(userService.queryCurrentUser())
+            .willReturn(userStub1)
 
         // when & then
         assertDoesNotThrow {
