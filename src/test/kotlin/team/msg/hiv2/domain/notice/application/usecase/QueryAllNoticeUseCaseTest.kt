@@ -7,7 +7,7 @@ import org.mockito.Mock
 import org.mockito.kotlin.given
 import team.msg.hiv2.domain.notice.application.service.NoticeService
 import team.msg.hiv2.domain.notice.domain.Notice
-import team.msg.hiv2.domain.notice.presentation.data.response.NoticeDetailsResponse
+import team.msg.hiv2.domain.notice.presentation.data.response.NoticeResponse
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
@@ -18,7 +18,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 @HiTest
-class QueryNoticeDetailsUseCaseTest {
+class QueryAllNoticeUseCaseTest {
 
     @Mock
     private lateinit var noticeService: NoticeService
@@ -26,7 +26,7 @@ class QueryNoticeDetailsUseCaseTest {
     @Mock
     private lateinit var userService: UserService
 
-    private lateinit var queryNoticeDetailsUseCase: QueryNoticeDetailsUseCase
+    private lateinit var queryAllNoticeUseCase: QueryAllNoticeUseCase
 
     private val noticeId = UUID.randomUUID()
     private val userId = UUID.randomUUID()
@@ -58,12 +58,10 @@ class QueryNoticeDetailsUseCaseTest {
         )
     }
 
-
-    private val responseStub: NoticeDetailsResponse by lazy {
-        NoticeDetailsResponse(
+    private val responseStub = listOf(
+        NoticeResponse(
             noticeId = noticeId,
             title = title,
-            content = content,
             user = UserResponse(
                 userId = userId,
                 name = "test",
@@ -73,29 +71,29 @@ class QueryNoticeDetailsUseCaseTest {
             ),
             createdAt = LocalDateTime.MAX
         )
-    }
+    )
 
     @BeforeEach
     fun setUp() {
-        queryNoticeDetailsUseCase = QueryNoticeDetailsUseCase(
+        queryAllNoticeUseCase = QueryAllNoticeUseCase(
             noticeService, userService
         )
     }
 
     @Test
-    fun `공지사항 상세 조회 성공`() {
+    fun `공지사항 전체 조회 성공`() {
 
         // given
-        given(noticeService.queryNoticeById(noticeId))
-            .willReturn(noticeStub)
+        given(noticeService.queryAllNotice())
+            .willReturn(listOf(noticeStub))
 
         given(userService.queryUserById(userId))
             .willReturn(userStub)
 
-        // then
-        val result = queryNoticeDetailsUseCase.execute(noticeId)
-
         // when
+        val result = queryAllNoticeUseCase.execute()
+
+        // then
         assertEquals(result, responseStub)
     }
 }
