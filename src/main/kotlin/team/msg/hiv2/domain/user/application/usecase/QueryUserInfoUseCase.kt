@@ -16,7 +16,9 @@ class QueryUserInfoUseCase(
 
     fun execute(): UserInfoResponse {
         val user = userService.queryCurrentUser()
+
         val reservation = user.reservationId?.let { reservationService.queryReservationById(it) }
+
         val users = reservation?.let { userService.queryAllUserByReservation(it) }
 
         return UserInfoResponse(

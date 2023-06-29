@@ -15,6 +15,7 @@ class DelegateRepresentativeUseCase(
 
     fun execute(reservationId: UUID, userId: UUID){
         val currentUser = userService.queryCurrentUser()
+
         val reservation = reservationService.queryReservationById(reservationId)
 
         userValidator.checkRepresentative(currentUser, reservation)
