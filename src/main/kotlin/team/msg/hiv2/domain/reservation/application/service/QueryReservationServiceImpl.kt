@@ -8,7 +8,7 @@ import team.msg.hiv2.global.annotation.service.DomainService
 import java.util.*
 
 @DomainService
-class QueryReservationServiceImpl(
+private class QueryReservationServiceImpl(
     private val queryReservationPort: QueryReservationPort
 ) : QueryReservationService {
 
@@ -21,4 +21,6 @@ class QueryReservationServiceImpl(
     override fun queryAllReservationByHomeBaseIn(homeBases: List<HomeBase>): List<Reservation> =
         queryReservationPort.queryAllReservationByHomeBaseIn(homeBases)
 
+    override fun countReservationByHomeBase(homeBase: HomeBase): Int =
+        queryReservationPort.countReservationByHomeBase(homeBase)
 }

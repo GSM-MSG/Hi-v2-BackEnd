@@ -16,7 +16,9 @@ class DeleteReservationUseCase(
 
     fun execute(reservationId: UUID){
         val reservation = reservationService.queryReservationById(reservationId)
+
         val users = userService.queryAllUserByReservation(reservation)
+
         val currentUser = userService.queryCurrentUser()
 
         userValidator.checkRepresentative(currentUser, reservation)

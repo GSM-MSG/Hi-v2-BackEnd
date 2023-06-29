@@ -17,13 +17,17 @@ class UpdateReservationUseCase(
 
     fun execute(reservationId: UUID, request: UpdateReservationRequest){
         val reservation = reservationService.queryReservationById(reservationId)
+
         val currentUser = userService.queryCurrentUser()
+
         userValidator.checkRepresentative(currentUser, reservation)
 
         val prevUsers = userService.queryAllUserByReservation(reservation)
+
         userService.saveAll(prevUsers.map { it.copy(reservationId = null , useStatus = UseStatus.AVAILABLE) })
 
         val users = userService.queryAllUserById(request.users)
+
         userValidator.checkUsersUseStatus(users)
 
         reservationService.save(reservation.copy(reason = request.reason))

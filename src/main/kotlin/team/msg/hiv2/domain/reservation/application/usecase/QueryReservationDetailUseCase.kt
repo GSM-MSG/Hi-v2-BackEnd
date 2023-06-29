@@ -15,6 +15,7 @@ class QueryReservationDetailUseCase(
 
     fun execute(id: UUID): ReservationDetailResponse {
         val reservation = reservationService.queryReservationById(id)
+
         val users = userService.queryAllUserByReservation(reservation)
 
         return ReservationDetailResponse(
