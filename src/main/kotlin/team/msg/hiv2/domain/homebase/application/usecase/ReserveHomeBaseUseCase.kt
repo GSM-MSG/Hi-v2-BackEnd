@@ -19,9 +19,14 @@ class ReserveHomeBaseUseCase(
 ) {
 
     fun execute(floor: Int, period: Int, request: ReservationHomeBaseRequest){
+
         val currentUser = userService.queryCurrentUser()
+
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
+
         val users = userService.queryAllUserById(request.users)
+
+
 
         userValidator.checkUsersUseStatus(users)
 

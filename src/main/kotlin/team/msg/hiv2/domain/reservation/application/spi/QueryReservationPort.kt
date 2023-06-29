@@ -8,4 +8,5 @@ interface QueryReservationPort {
     fun queryReservationById(id: UUID): Reservation?
     fun queryAllReservationByHomeBase(homeBase: HomeBase): List<Reservation>
     fun queryAllReservationByHomeBaseIn(homeBases: List<HomeBase>): List<Reservation>
+    fun countReservationByHomeBase(homeBase: HomeBase): Int
 }
