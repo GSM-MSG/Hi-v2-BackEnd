@@ -13,6 +13,7 @@ class LogoutUseCase(
 
     fun execute(refreshToken: String){
         val user = userService.queryCurrentUser()
+
         val token = refreshTokenService.queryByRefreshToken(refreshToken)
 
         if(user.id != token.userId)

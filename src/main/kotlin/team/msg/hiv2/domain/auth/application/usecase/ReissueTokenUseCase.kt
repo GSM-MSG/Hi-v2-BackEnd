@@ -19,7 +19,9 @@ class ReissueTokenUseCase(
     fun execute(requestToken: String): TokenResponse {
         val refreshToken = jwtParserPort.parseRefreshToken(requestToken)
             ?: throw InvalidRefreshTokenException()
+
         val token = refreshTokenService.queryByRefreshToken(refreshToken)
+
         val user = userService.queryUserById(token.userId)
 
         return generateJwtPort.generate(user.id, user.roles)

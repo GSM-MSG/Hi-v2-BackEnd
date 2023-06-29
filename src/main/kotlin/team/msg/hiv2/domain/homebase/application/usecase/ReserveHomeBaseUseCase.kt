@@ -1,6 +1,7 @@
 package team.msg.hiv2.domain.homebase.application.usecase
 
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
+import team.msg.hiv2.domain.homebase.exception.ForbiddenReserveException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
@@ -19,9 +20,15 @@ class ReserveHomeBaseUseCase(
 ) {
 
     fun execute(floor: Int, period: Int, request: ReservationHomeBaseRequest){
+
         val currentUser = userService.queryCurrentUser()
+
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
+
         val users = userService.queryAllUserById(request.users)
+
+        if(reservationService.countReservationByHomeBase(homeBase) >= 5)
+            throw ForbiddenReserveException()
 
         userValidator.checkUsersUseStatus(users)
 

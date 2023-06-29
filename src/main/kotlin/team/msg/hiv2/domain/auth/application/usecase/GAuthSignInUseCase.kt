@@ -19,7 +19,9 @@ class GAuthSignInUseCase(
 
     fun execute(request: GAuthSignInRequest): TokenResponse{
         val gAuthToken = gAuthPort.queryGAuthToken(request.code)
+
         val gAuthUserInfo = gAuthPort.queryGAuthUserInfo(gAuthToken.accessToken)
+
         val role = userService.queryUserRoleByEmail(gAuthUserInfo.email, gAuthUserInfo.role)
 
         val user = userService.createUser(
