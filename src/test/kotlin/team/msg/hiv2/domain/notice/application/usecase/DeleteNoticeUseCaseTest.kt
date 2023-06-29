@@ -35,7 +35,7 @@ class DeleteNoticeUseCaseTest {
     private val title = "title_test"
     private val content = "content_test"
 
-    private val noticeStub: Notice by lazy {
+    private val requestStub: Notice by lazy {
         Notice(
             id = noticeId,
             title = title,
@@ -75,7 +75,7 @@ class DeleteNoticeUseCaseTest {
             .willReturn(userStub)
 
         given(noticeService.queryNoticeById(noticeId))
-            .willReturn(noticeStub)
+            .willReturn(requestStub)
 
         // when & then
         assertDoesNotThrow {
