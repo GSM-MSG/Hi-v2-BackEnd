@@ -20,6 +20,7 @@ import java.util.*
 
 @HiTest
 class UpdateNoticeUseCaseTest {
+
     @Mock
     private lateinit var noticeService: NoticeService
 
@@ -61,7 +62,7 @@ class UpdateNoticeUseCaseTest {
         )
     }
 
-    private val updateNoticeStub: UpdateNoticeRequest by lazy {
+    private val requestStub: UpdateNoticeRequest by lazy {
         UpdateNoticeRequest(
             title = title,
             content = content
@@ -90,7 +91,7 @@ class UpdateNoticeUseCaseTest {
 
         // when & then
         assertDoesNotThrow {
-            updateNoticeUseCase.execute(noticeId, updateNoticeStub)
+            updateNoticeUseCase.execute(noticeId, requestStub)
         }
     }
 }
