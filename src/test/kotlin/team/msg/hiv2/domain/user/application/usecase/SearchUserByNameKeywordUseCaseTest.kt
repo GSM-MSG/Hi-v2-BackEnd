@@ -58,7 +58,6 @@ class SearchUserByNameKeywordUseCaseTest {
 
     @Test
     fun `유저 검색 성공`() {
-
         // given
         given(userService.queryUserByNameContaining(requestKeyword))
             .willReturn(listOf(userStub))
