@@ -67,7 +67,7 @@ internal class QueryUserInfoUseCaseTest {
         given(userService.queryCurrentUser())
             .willReturn(userStub)
 
-        given(reservationService.queryReservationById(userStub.reservationId!!))
+        given(reservationService.queryReservationById(reservationId))
             .willReturn(reservationStub)
 
         given(userService.queryAllUserByReservation(reservationStub))
