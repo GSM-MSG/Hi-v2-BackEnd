@@ -5,8 +5,6 @@ import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.auth.application.spi.CommandRefreshTokenPort
 import team.msg.hiv2.domain.auth.domain.RefreshToken
-import team.msg.hiv2.domain.auth.persistence.entity.RefreshTokenEntity
-import team.msg.hiv2.domain.auth.persistence.repository.RefreshTokenRepository
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.global.security.spi.GenerateJwtPort
