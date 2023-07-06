@@ -1,5 +1,6 @@
 package team.msg.hiv2.domain.auth.application.usecase
 
+import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -81,6 +82,9 @@ class ReissueTokenUseCaseTest {
         // given
         given(jwtParserPort.parseRefreshToken(requestToken))
             .willReturn(refreshTokenStub.refreshToken)
+
+        given(refreshTokenService.queryByRefreshToken(requestToken))
+            .willReturn(refreshTokenStub)
 
         given(userService.queryUserById(refreshTokenStub.userId))
             .willReturn(userStub)
