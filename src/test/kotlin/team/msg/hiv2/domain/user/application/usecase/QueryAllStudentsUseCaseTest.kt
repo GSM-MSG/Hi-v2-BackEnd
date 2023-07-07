@@ -3,7 +3,6 @@ package team.msg.hiv2.domain.user.application.usecase
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertDoesNotThrow
 import org.mockito.Mock
 import org.mockito.kotlin.given
 import team.msg.hiv2.domain.user.application.service.UserService
@@ -25,7 +24,7 @@ internal class QueryAllStudentsUseCaseTest {
 
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
-    private val userRole = UserRole.ROLE_STUDENT
+    private val studentRole = UserRole.ROLE_STUDENT
 
     private val userStub1: User by lazy {
         User(
@@ -36,7 +35,7 @@ internal class QueryAllStudentsUseCaseTest {
             classNum = 3,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(userRole),
+            roles = mutableListOf(studentRole),
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
@@ -51,7 +50,7 @@ internal class QueryAllStudentsUseCaseTest {
             classNum = 3,
             number = 7,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(userRole),
+            roles = mutableListOf(studentRole),
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
@@ -93,7 +92,7 @@ internal class QueryAllStudentsUseCaseTest {
     fun `전체 학생 조회 성공`() {
 
         // given
-        given(userService.queryAllUserByRolesContaining(userRole))
+        given(userService.queryAllUserByRolesContaining(studentRole))
             .willReturn(listOf(userStub1, userStub2))
 
         // when
