@@ -37,9 +37,7 @@ internal class UpdateUserUseStatusUseCaseTest {
         )
     }
 
-    private val requestStub: UseStatus by lazy {
-        UseStatus.AVAILABLE
-    }
+    private val requestStub = UseStatus.UNAVAILABLE
 
     @BeforeEach
     fun setUp() {
