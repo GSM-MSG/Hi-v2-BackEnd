@@ -2,6 +2,7 @@ package team.msg.hiv2.domain.auth.presentation
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import team.msg.hiv2.domain.auth.application.facade.AuthFacade
 import team.msg.hiv2.domain.auth.application.usecase.GAuthSignInUseCase
 import team.msg.hiv2.domain.auth.application.usecase.LogoutUseCase
 import team.msg.hiv2.domain.auth.application.usecase.QueryGAuthLoginLinkUseCase
@@ -15,32 +16,29 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/auth")
 class AuthWebAdapter(
-    private val gAuthSignInUseCase: GAuthSignInUseCase,
-    private val reissueTokenUseCase: ReissueTokenUseCase,
-    private val logoutUseCase: LogoutUseCase,
-    private val queryGAuthLoginLinkUseCase: QueryGAuthLoginLinkUseCase
+    private val authFacade: AuthFacade
 ) {
 
     @GetMapping
     fun queryGAuthLoginLink(): ResponseEntity<GAuthLinkResponse> =
-        queryGAuthLoginLinkUseCase.execute()
+        authFacade.queryGAuthLoginLink()
             .let { ResponseEntity.ok(it) }
 
     @PostMapping
     fun signIn(@RequestBody @Valid request: GAuthSignInWebRequest): ResponseEntity<TokenResponse> =
-        gAuthSignInUseCase.execute(
+        authFacade.gAuthSignIn(
             GAuthSignInRequest(request.code)
         )
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping
     fun reissue(@RequestHeader("RefreshToken") @Valid refreshToken: String): ResponseEntity<TokenResponse> =
-        reissueTokenUseCase.execute(refreshToken)
+        authFacade.reissue(refreshToken)
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping
     fun logout(@RequestHeader("RefreshToken") @Valid refreshToken: String): ResponseEntity<Void> =
-        logoutUseCase.execute(refreshToken)
+        authFacade.logout(refreshToken)
             .let { ResponseEntity.noContent().build() }
 
 }
