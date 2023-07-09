@@ -13,6 +13,7 @@ import team.msg.hiv2.domain.homebase.application.usecase.DeleteAllReservationByP
 import team.msg.hiv2.domain.homebase.application.usecase.QueryReservationByHomeBaseUseCase
 import team.msg.hiv2.domain.homebase.application.usecase.ReserveHomeBaseUseCase
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
+import team.msg.hiv2.domain.homebase.presentation.data.web.ReservationHomeBaseWebRequest
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 import javax.validation.Valid
 
@@ -27,8 +28,8 @@ class HomeBaseWebAdapter(
     @PostMapping
     fun reserveHomeBase(@RequestParam floor: Int,
                         @RequestParam period: Int,
-                        @Valid @RequestBody request: ReservationHomeBaseRequest): ResponseEntity<Void> =
-        reserveHomeBaseUseCase.execute(floor, period, request)
+                        @Valid @RequestBody request: ReservationHomeBaseWebRequest): ResponseEntity<Void> =
+        reserveHomeBaseUseCase.execute(floor, period, ReservationHomeBaseRequest(request.users, request.reason))
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @GetMapping
