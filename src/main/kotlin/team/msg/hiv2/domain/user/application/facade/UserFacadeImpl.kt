@@ -1,5 +1,6 @@
 package team.msg.hiv2.domain.user.application.facade
 
+import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.user.application.usecase.QueryAllStudentsUseCase
 import team.msg.hiv2.domain.user.application.usecase.QueryUserInfoUseCase
 import team.msg.hiv2.domain.user.application.usecase.SearchUserByNameKeywordUseCase
@@ -11,6 +12,7 @@ import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import java.util.*
 
+@Component
 class UserFacadeImpl(
     private val queryAllStudentsUseCase: QueryAllStudentsUseCase,
     private val queryUserInfoUseCase: QueryUserInfoUseCase,
