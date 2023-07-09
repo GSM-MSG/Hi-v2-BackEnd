@@ -15,6 +15,8 @@ import team.msg.hiv2.domain.notice.presentation.data.request.CreateNoticeRequest
 import team.msg.hiv2.domain.notice.presentation.data.request.UpdateNoticeRequest
 import team.msg.hiv2.domain.notice.presentation.data.response.NoticeDetailsResponse
 import team.msg.hiv2.domain.notice.presentation.data.response.NoticeResponse
+import team.msg.hiv2.domain.notice.presentation.data.web.CreateNoticeWebRequest
+import team.msg.hiv2.domain.notice.presentation.data.web.UpdateNoticeWebRequest
 import java.util.UUID
 import javax.validation.Valid
 
@@ -29,8 +31,13 @@ class NoticeWebAdapter(
 ) {
 
     @PostMapping
-    fun createNotice(@RequestBody @Valid request: CreateNoticeRequest): ResponseEntity<Void> =
-        createNoticeUseCase.execute(request)
+    fun createNotice(@RequestBody @Valid request: CreateNoticeWebRequest): ResponseEntity<Void> =
+        createNoticeUseCase.execute(
+            CreateNoticeRequest(
+                title = request.title,
+                content = request.content
+            )
+        )
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @GetMapping
@@ -49,7 +56,12 @@ class NoticeWebAdapter(
             .let { ResponseEntity.noContent().build() }
 
     @PatchMapping("/{id}")
-    fun updateNotice(@PathVariable id: UUID, @RequestBody @Valid request: UpdateNoticeRequest): ResponseEntity<Void> =
-        updateNoticeUseCase.execute(id, request)
+    fun updateNotice(@PathVariable id: UUID, @RequestBody @Valid request: UpdateNoticeWebRequest): ResponseEntity<Void> =
+        updateNoticeUseCase.execute(id,
+            UpdateNoticeRequest(
+                title = request.title,
+                content = request.content
+            )
+        )
             .let { ResponseEntity.noContent().build() }
 }
