@@ -5,8 +5,6 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
 data class ReservationHomeBaseRequest(
-    @field:Size(min = 2, max = 6)
     val users: MutableList<UUID>,
-    @field:NotBlank
     val reason: String
 )
