@@ -11,6 +11,7 @@ import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
+import team.msg.hiv2.domain.user.presentation.data.request.SearchUserKeywordRequest
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.HiTest
 import java.util.*
@@ -22,8 +23,6 @@ class SearchUserByNameKeywordUseCaseTest {
     private lateinit var userService: UserService
 
     private lateinit var searchUserByNameKeywordUseCase: SearchUserByNameKeywordUseCase
-
-    private val requestKeyword = "김"
 
     private val userStub by lazy {
         User(
@@ -50,6 +49,12 @@ class SearchUserByNameKeywordUseCaseTest {
         )
     }
 
+    private val requestStub by lazy {
+        SearchUserKeywordRequest(
+            keyword = "김"
+        )
+    }
+
     @BeforeEach
     fun setUp() {
         searchUserByNameKeywordUseCase =
@@ -59,11 +64,11 @@ class SearchUserByNameKeywordUseCaseTest {
     @Test
     fun `유저 검색 성공`() {
         // given
-        given(userService.queryUserByNameContaining(requestKeyword))
+        given(userService.queryUserByNameContaining(requestStub.keyword))
             .willReturn(listOf(userStub))
 
         // when
-        val result = searchUserByNameKeywordUseCase.execute(requestKeyword)
+        val result = searchUserByNameKeywordUseCase.execute(requestStub)
 
         // then
         assertThat(result).isEqualTo(listOf(responseStub))

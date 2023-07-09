@@ -16,6 +16,8 @@ import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRe
 import team.msg.hiv2.domain.user.presentation.data.response.AllStudentsResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
+import team.msg.hiv2.domain.user.presentation.data.web.SearchUserKeywordWebRequest
+import team.msg.hiv2.domain.user.presentation.data.web.UpdateUserUseStatusWebRequest
 import java.util.UUID
 import javax.validation.Valid
 
@@ -29,8 +31,12 @@ class UserWebAdapter(
 ) {
 
     @GetMapping("/search")
-    fun searchUser(@RequestBody @Valid request: SearchUserKeywordRequest): ResponseEntity<List<UserResponse>> =
-        searchUserByNameKeywordUseCase.execute(request.keyword)
+    fun searchUser(@RequestBody @Valid request: SearchUserKeywordWebRequest): ResponseEntity<List<UserResponse>> =
+        searchUserByNameKeywordUseCase.execute(
+            SearchUserKeywordRequest(
+                keyword = request.keyword
+            )
+        )
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/my-page")
@@ -44,7 +50,11 @@ class UserWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("/{id}")
-    fun updateUserUseStatus(@PathVariable id: UUID, updateUserUseStatusRequest: UpdateUserUseStatusRequest): ResponseEntity<Void> =
-        updateUserUseStatusUseCase.execute(id, updateUserUseStatusRequest.status)
+    fun updateUserUseStatus(@PathVariable id: UUID, request: UpdateUserUseStatusWebRequest): ResponseEntity<Void> =
+        updateUserUseStatusUseCase.execute(id,
+            UpdateUserUseStatusRequest(
+                status = request.status
+            )
+        )
             .let { ResponseEntity.noContent().build() }
 }
