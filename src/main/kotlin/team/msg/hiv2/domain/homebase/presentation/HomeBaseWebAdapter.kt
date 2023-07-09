@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import team.msg.hiv2.domain.homebase.application.facade.HomeBaseFacade
 import team.msg.hiv2.domain.homebase.application.usecase.DeleteAllReservationByPeriodUseCase
 import team.msg.hiv2.domain.homebase.application.usecase.QueryReservationByHomeBaseUseCase
 import team.msg.hiv2.domain.homebase.application.usecase.ReserveHomeBaseUseCase
@@ -20,25 +21,23 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/homebase")
 class HomeBaseWebAdapter(
-    private val reserveHomeBaseUseCase: ReserveHomeBaseUseCase,
-    private val queryReservationByHomeBaseUseCase: QueryReservationByHomeBaseUseCase,
-    private val deleteAllReservationByPeriodUseCase: DeleteAllReservationByPeriodUseCase
+    private val homeBaseFacade: HomeBaseFacade
 ) {
 
     @PostMapping
     fun reserveHomeBase(@RequestParam floor: Int,
                         @RequestParam period: Int,
                         @Valid @RequestBody request: ReservationHomeBaseWebRequest): ResponseEntity<Void> =
-        reserveHomeBaseUseCase.execute(floor, period, ReservationHomeBaseRequest(request.users, request.reason))
+        homeBaseFacade.reserveHomeBase(floor, period, ReservationHomeBaseRequest(request.users, request.reason))
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @GetMapping
     fun queryHomeBaseReservation(@RequestParam floor: Int, @RequestParam period: Int): ResponseEntity<List<ReservationResponse>> =
-        queryReservationByHomeBaseUseCase.execute(floor, period)
+        homeBaseFacade.queryReservationByHomeBase(floor, period)
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping
     fun deleteAllReservationByPeriod(@RequestParam period: Int): ResponseEntity<Void> =
-        deleteAllReservationByPeriodUseCase.execute(period)
+        homeBaseFacade.deleteAllReservationByPeriod(period)
             .let { ResponseEntity.noContent().build() }
 }
