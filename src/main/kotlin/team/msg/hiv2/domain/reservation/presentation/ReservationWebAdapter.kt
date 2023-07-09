@@ -6,6 +6,8 @@ import team.msg.hiv2.domain.reservation.application.usecase.*
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationCheckStatusRequest
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationDetailResponse
+import team.msg.hiv2.domain.reservation.presentation.data.web.UpdateReservationCheckStatusWebRequest
+import team.msg.hiv2.domain.reservation.presentation.data.web.UpdateReservationWebRequest
 import java.util.UUID
 import javax.validation.Valid
 
@@ -31,8 +33,13 @@ class ReservationWebAdapter(
         deleteReservationUseCase.execute(id)
             .let { ResponseEntity.noContent().build() }
     @PatchMapping("/{id}")
-    fun updateReservation(@PathVariable id: UUID, request: UpdateReservationRequest): ResponseEntity<Void> =
-        updateReservationUseCase.execute(id, request)
+    fun updateReservation(@PathVariable id: UUID, request: UpdateReservationWebRequest): ResponseEntity<Void> =
+        updateReservationUseCase.execute(id,
+            UpdateReservationRequest(
+                users = request.users,
+                reason = request.reason
+            )
+        )
             .let { ResponseEntity.noContent().build() }
 
     @PatchMapping("/{id}/{user_id}")
@@ -47,8 +54,12 @@ class ReservationWebAdapter(
 
     @PatchMapping("/{id}/check-status")
     fun updateReservationCheckStatus(@PathVariable id: UUID,
-                                     @RequestBody @Valid request: UpdateReservationCheckStatusRequest): ResponseEntity<Void> =
-        updateReservationCheckStatusUseCase.execute(id, request)
+                                     @RequestBody @Valid request: UpdateReservationCheckStatusWebRequest): ResponseEntity<Void> =
+        updateReservationCheckStatusUseCase.execute(id,
+            UpdateReservationCheckStatusRequest(
+                request.checkStatus
+            )
+        )
             .let { ResponseEntity.noContent().build() }
 
     @DeleteMapping("/kill-all")

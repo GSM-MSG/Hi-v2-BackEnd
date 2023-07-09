@@ -9,6 +9,7 @@ import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
+import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRequest
 import team.msg.hiv2.global.annotation.HiTest
 import java.util.*
 
@@ -37,7 +38,11 @@ internal class UpdateUserUseStatusUseCaseTest {
         )
     }
 
-    private val requestStub = UseStatus.UNAVAILABLE
+    private val requestStub by lazy {
+        UpdateUserUseStatusRequest(
+            status = UseStatus.UNAVAILABLE
+        )
+    }
 
     @BeforeEach
     fun setUp() {
@@ -55,7 +60,7 @@ internal class UpdateUserUseStatusUseCaseTest {
 
         // when & then
         assertDoesNotThrow {
-            updateUserUseStatusUserService.execute(userId ,requestStub)
+            updateUserUseStatusUserService.execute(userId, requestStub)
         }
     }
 

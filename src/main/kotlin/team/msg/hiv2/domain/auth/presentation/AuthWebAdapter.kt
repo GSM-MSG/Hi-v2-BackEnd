@@ -9,6 +9,7 @@ import team.msg.hiv2.domain.auth.application.usecase.ReissueTokenUseCase
 import team.msg.hiv2.domain.auth.presentation.data.request.GAuthSignInRequest
 import team.msg.hiv2.domain.auth.presentation.data.response.GAuthLinkResponse
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
+import team.msg.hiv2.domain.auth.presentation.data.web.GAuthSignInWebRequest
 import javax.validation.Valid
 
 @RestController
@@ -26,8 +27,10 @@ class AuthWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @PostMapping
-    fun signIn(@RequestBody @Valid request: GAuthSignInRequest): ResponseEntity<TokenResponse> =
-        gAuthSignInUseCase.execute(request)
+    fun signIn(@RequestBody @Valid request: GAuthSignInWebRequest): ResponseEntity<TokenResponse> =
+        gAuthSignInUseCase.execute(
+            GAuthSignInRequest(request.code)
+        )
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping
