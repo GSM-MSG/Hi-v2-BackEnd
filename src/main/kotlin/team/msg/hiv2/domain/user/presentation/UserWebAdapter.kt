@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import team.msg.hiv2.domain.user.application.facade.UserFacade
 import team.msg.hiv2.domain.user.application.usecase.QueryAllStudentsUseCase
 import team.msg.hiv2.domain.user.application.usecase.QueryUserInfoUseCase
 import team.msg.hiv2.domain.user.application.usecase.SearchUserByNameKeywordUseCase
@@ -24,15 +25,12 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/user")
 class UserWebAdapter(
-    private val searchUserByNameKeywordUseCase: SearchUserByNameKeywordUseCase,
-    private val queryUserInfoUseCase: QueryUserInfoUseCase,
-    private val queryAllStudentsUseCase: QueryAllStudentsUseCase,
-    private val updateUserUseStatusUseCase: UpdateUserUseStatusUseCase
+    private val userFacade: UserFacade
 ) {
 
     @GetMapping("/search")
     fun searchUser(@RequestBody @Valid request: SearchUserKeywordWebRequest): ResponseEntity<List<UserResponse>> =
-        searchUserByNameKeywordUseCase.execute(
+        userFacade.searchUserByNameKeyword(
             SearchUserKeywordRequest(
                 keyword = request.keyword
             )
@@ -40,18 +38,18 @@ class UserWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/my-page")
-    fun queryMyPage(): ResponseEntity<UserInfoResponse> =
-        queryUserInfoUseCase.execute()
+    fun queryUserInfo(): ResponseEntity<UserInfoResponse> =
+        userFacade.queryUserInfo()
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/students")
-    fun queryAllUser(): ResponseEntity<AllStudentsResponse> =
-        queryAllStudentsUseCase.execute()
+    fun queryAllStudents(): ResponseEntity<AllStudentsResponse> =
+        userFacade.queryAllStudents()
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("/{id}")
     fun updateUserUseStatus(@PathVariable id: UUID, request: UpdateUserUseStatusWebRequest): ResponseEntity<Void> =
-        updateUserUseStatusUseCase.execute(id,
+        userFacade.updateUserUseStatus(id,
             UpdateUserUseStatusRequest(
                 status = request.status
             )

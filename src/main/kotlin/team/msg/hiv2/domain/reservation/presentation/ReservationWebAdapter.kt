@@ -2,6 +2,7 @@ package team.msg.hiv2.domain.reservation.presentation
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import team.msg.hiv2.domain.reservation.application.facade.ReservationFacade
 import team.msg.hiv2.domain.reservation.application.usecase.*
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationCheckStatusRequest
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
@@ -14,27 +15,21 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/reservation")
 class ReservationWebAdapter(
-    private val queryReservationDetailUseCase: QueryReservationDetailUseCase,
-    private val deleteReservationUseCase: DeleteReservationUseCase,
-    private val updateReservationUseCase: UpdateReservationUseCase,
-    private val delegateRepresentativeUseCase: DelegateRepresentativeUseCase,
-    private val exitReservationUseCase: ExitReservationUseCase,
-    private val updateReservationCheckStatusUseCase: UpdateReservationCheckStatusUseCase,
-    private val deleteAllReservationUseCase: DeleteAllReservationUseCase
+    private val reservationFacade: ReservationFacade
 ) {
 
     @GetMapping("/{id}")
     fun queryReservationDetail(@PathVariable id: UUID): ResponseEntity<ReservationDetailResponse> =
-        queryReservationDetailUseCase.execute(id)
+        reservationFacade.queryReservationDetail(id)
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping("/{id}")
     fun deleteReservation(@PathVariable id: UUID): ResponseEntity<Void> =
-        deleteReservationUseCase.execute(id)
+        reservationFacade.deleteReservation(id)
             .let { ResponseEntity.noContent().build() }
     @PatchMapping("/{id}")
     fun updateReservation(@PathVariable id: UUID, request: UpdateReservationWebRequest): ResponseEntity<Void> =
-        updateReservationUseCase.execute(id,
+        reservationFacade.updateReservation(id,
             UpdateReservationRequest(
                 users = request.users,
                 reason = request.reason
@@ -44,18 +39,18 @@ class ReservationWebAdapter(
 
     @PatchMapping("/{id}/{user_id}")
     fun delegateRepresentative(@PathVariable id: UUID, @PathVariable("user_id") userId: UUID): ResponseEntity<Void> =
-        delegateRepresentativeUseCase.execute(id, userId)
+        reservationFacade.delegateRepresentative(id, userId)
             .let { ResponseEntity.noContent().build() }
 
     @DeleteMapping("/{id}/exit")
     fun exitReservation(@PathVariable id: UUID): ResponseEntity<Void> =
-        exitReservationUseCase.execute(id)
+        reservationFacade.exitReservation(id)
             .let { ResponseEntity.noContent().build() }
 
     @PatchMapping("/{id}/check-status")
     fun updateReservationCheckStatus(@PathVariable id: UUID,
                                      @RequestBody @Valid request: UpdateReservationCheckStatusWebRequest): ResponseEntity<Void> =
-        updateReservationCheckStatusUseCase.execute(id,
+        reservationFacade.updateReservationCheckStatus(id,
             UpdateReservationCheckStatusRequest(
                 request.checkStatus
             )
@@ -64,7 +59,7 @@ class ReservationWebAdapter(
 
     @DeleteMapping("/kill-all")
     fun deleteAllReservation(): ResponseEntity<Void> =
-        deleteAllReservationUseCase.execute()
+        reservationFacade.deleteAllReservation()
             .let { ResponseEntity.noContent().build() }
 
 

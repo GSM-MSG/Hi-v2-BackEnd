@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import team.msg.hiv2.domain.notice.application.facade.NoticeFacade
 import team.msg.hiv2.domain.notice.application.usecase.*
 import team.msg.hiv2.domain.notice.presentation.data.request.CreateNoticeRequest
 import team.msg.hiv2.domain.notice.presentation.data.request.UpdateNoticeRequest
@@ -23,16 +24,12 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/notice")
 class NoticeWebAdapter(
-    private val createNoticeUseCase: CreateNoticeUseCase,
-    private val queryAllNoticeUseCase: QueryAllNoticeUseCase,
-    private val queryNoticeDetailsUseCase: QueryNoticeDetailsUseCase,
-    private val deleteNoticeUseCase: DeleteNoticeUseCase,
-    private val updateNoticeUseCase: UpdateNoticeUseCase
+    private val noticeFacade: NoticeFacade
 ) {
 
     @PostMapping
     fun createNotice(@RequestBody @Valid request: CreateNoticeWebRequest): ResponseEntity<Void> =
-        createNoticeUseCase.execute(
+        noticeFacade.createNotice(
             CreateNoticeRequest(
                 title = request.title,
                 content = request.content
@@ -42,22 +39,22 @@ class NoticeWebAdapter(
 
     @GetMapping
     fun queryAllNotice(): ResponseEntity<List<NoticeResponse>> =
-        queryAllNoticeUseCase.execute()
+        noticeFacade.queryAllNotice()
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/{id}")
     fun queryNoticeDetails(@PathVariable id: UUID): ResponseEntity<NoticeDetailsResponse> =
-        queryNoticeDetailsUseCase.execute(id)
+        noticeFacade.queryNoticeDetails(id)
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping("/{id}")
     fun deleteNotice(@PathVariable id: UUID): ResponseEntity<Void> =
-        deleteNoticeUseCase.execute(id)
+        noticeFacade.deleteNotice(id)
             .let { ResponseEntity.noContent().build() }
 
     @PatchMapping("/{id}")
     fun updateNotice(@PathVariable id: UUID, @RequestBody @Valid request: UpdateNoticeWebRequest): ResponseEntity<Void> =
-        updateNoticeUseCase.execute(id,
+        noticeFacade.updateNotice(id,
             UpdateNoticeRequest(
                 title = request.title,
                 content = request.content
