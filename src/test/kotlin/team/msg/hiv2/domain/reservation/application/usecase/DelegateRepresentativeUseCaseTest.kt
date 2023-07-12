@@ -92,11 +92,14 @@ class DelegateRepresentativeUseCaseTest {
     @Test
     fun `대표자 위임 성공`() {
         // given
-        given(userService.queryCurrentUser()).willReturn(userStub1)
+        given(userService.queryCurrentUser())
+            .willReturn(userStub1)
 
-        given(reservationService.queryReservationById(reservationId)).willReturn(reservationStub)
+        given(reservationService.queryReservationById(reservationId))
+            .willReturn(reservationStub)
 
-        given(userService.queryUserByIdAndReservation(userId, reservationStub)).willReturn(userStub2)
+        given(userService.queryUserByIdAndReservation(userId, reservationStub))
+            .willReturn(userStub2)
 
         // when & then
 
