@@ -1,6 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.gradle.api.tasks.testing.Test
-import org.gradle.testing.jacoco.tasks.JacocoReport
 
 plugins {
 	id("org.springframework.boot") version PluginVersion.SPRING_BOOT_VERSION
