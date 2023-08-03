@@ -64,3 +64,9 @@ jobs:
           title: ❗️ HI-Backend-CI 실패! ❗️
           webhook: ${{ secrets.HI_DISCORD_WEBHOOK }}
           color: FF0000
+
+      - name: Report to CodeCov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./build/reports/jacoco/test/jacocoTestReport.xml
