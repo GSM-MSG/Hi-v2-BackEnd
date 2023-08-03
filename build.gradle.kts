@@ -1,8 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.gradle.api.tasks.testing.Test
+import org.gradle.testing.jacoco.tasks.JacocoReport
 
 plugins {
 	id("org.springframework.boot") version PluginVersion.SPRING_BOOT_VERSION
 	id("io.spring.dependency-management") version PluginVersion.DEPENDENCY_MANAGER_VERSION
+	id("jacoco")
 	kotlin("jvm") version PluginVersion.JVM_VERSION
 	kotlin("plugin.spring") version PluginVersion.SPRING_PLUGIN_VERSION
 	kotlin("plugin.jpa") version PluginVersion.JPA_PLUGIN_VERSION
@@ -60,4 +63,24 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.register<JacocoReport>("jacocoRootReport") {
+	subprojects {
+		this@subprojects.plugins.withType<JacocoPlugin>().configureEach {
+			this@subprojects.tasks.matching {
+				it.extensions.findByType<JacocoTaskExtension>() != null
+			}
+				.configureEach {
+					sourceSets(this@subprojects.the<SourceSetContainer>().named("main").get())
+					executionData(this)
+				}
+		}
+	}
+
+	reports {
+		xml.outputLocation.set(File("${buildDir}/reports/jacoco/test/jacocoTestReport.xml"))
+		xml.required.set(true)
+		html.required.set(false)
+	}
 }
