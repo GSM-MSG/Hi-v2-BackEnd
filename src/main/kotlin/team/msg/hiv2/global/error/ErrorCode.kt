@@ -6,10 +6,10 @@ enum class ErrorCode(
 ) {
 
     // global
-    INVALID_TOKEN_TYPE("유효하지 않은 토큰 타입 입니다.", 403),
-    INVALID_TOKEN("유효하지 않은 토큰 입니다.", 403),
-    EXPIRED_REFRESH_TOKEN("만료된 refreshToken 입니다.", 403),
-    EXPIRED_ACCESS_TOKEN("만료된 accessToken 입니다.", 403),
+    INVALID_TOKEN_TYPE("유효하지 않은 토큰 타입 입니다.", 401),
+    INVALID_TOKEN("유효하지 않은 토큰 입니다.", 401),
+    EXPIRED_REFRESH_TOKEN("만료된 refreshToken 입니다.", 401),
+    EXPIRED_ACCESS_TOKEN("만료된 accessToken 입니다.", 401),
     UNEXPECTED_TOKEN("Unexpected Token", 401),
     INVALID_ROLE("검증 되지 않은 권한 입니다.", 401),
 
