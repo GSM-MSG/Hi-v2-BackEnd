@@ -1,4 +1,4 @@
-package team.msg.hiv2.domain
+package team.msg.hiv2.domain.health
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
