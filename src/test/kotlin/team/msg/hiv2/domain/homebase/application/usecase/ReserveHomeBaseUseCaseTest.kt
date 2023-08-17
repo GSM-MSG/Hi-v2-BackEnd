@@ -25,9 +25,6 @@ import java.util.*
 internal class ReserveHomeBaseUseCaseTest {
 
     @Mock
-    private lateinit var userValidator: UserValidator
-
-    @Mock
     private lateinit var userService: UserService
 
     @Mock
@@ -73,7 +70,6 @@ internal class ReserveHomeBaseUseCaseTest {
     @BeforeEach
     fun setUp(){
         reserveHomeBaseUseCase = ReserveHomeBaseUseCase(
-            userValidator,
             userService,
             reservationService,
             homeBaseService
@@ -120,51 +116,6 @@ internal class ReserveHomeBaseUseCaseTest {
             reserveHomeBaseUseCase.execute(floor, period, requestStub)
         }
 
-    }
-
-    @Test
-    fun `예약 명단에 예약 가능 상태가 아닌 멤버가 있음`() {
-        val userStub = User(
-            id = userId,
-            email = "test@email",
-            name = "hope",
-            grade = 2,
-            classNum = 4,
-            number = 6,
-            profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(UserRole.ROLE_STUDENT),
-            reservationId = null,
-            useStatus = UseStatus.UNAVAILABLE
-        )
-
-        val userStub2 = User(
-            id = userId2,
-            email = "test2@email",
-            name = "hope2",
-            grade = 2,
-            classNum = 4,
-            number = 7,
-            profileImageUrl = "profileImageUrl2",
-            roles = mutableListOf(UserRole.ROLE_STUDENT),
-            reservationId = null,
-            useStatus = UseStatus.AVAILABLE
-        )
-
-        given(userService.queryCurrentUser())
-            .willReturn(userStub)
-
-        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period))
-            .willReturn(homeBaseStub)
-
-        given(userService.queryAllUserById(requestStub.users))
-            .willReturn(listOf(userStub, userStub2))
-
-        given(userValidator.checkUsersUseStatus(listOf(userStub, userStub2)))
-            .willThrow(ForbiddenReserveException())
-
-        assertThrows<ForbiddenReserveException> {
-            reserveHomeBaseUseCase.execute(floor, period, requestStub)
-        }
     }
 
 }
