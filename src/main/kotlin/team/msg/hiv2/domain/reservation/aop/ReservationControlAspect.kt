@@ -1,0 +1,36 @@
+package team.msg.hiv2.domain.reservation.aop
+
+import org.aspectj.lang.annotation.Aspect
+import org.aspectj.lang.annotation.Before
+import org.aspectj.lang.annotation.Pointcut
+import org.springframework.stereotype.Component
+import team.msg.hiv2.domain.user.application.service.UserService
+import org.aspectj.lang.JoinPoint
+import org.slf4j.LoggerFactory
+import team.msg.hiv2.domain.reservation.application.service.ReservationService
+import team.msg.hiv2.domain.reservation.exception.ForbiddenCommandReservationException
+import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
+import java.util.*
+
+@Aspect
+@Component
+class ReservationControlAspect(
+    private val userService: UserService,
+    private val reservationService: ReservationService) {
+
+    private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
+
+    @Pointcut("execution(* team.msg.hiv2.domain.reservation.application.usecase.UpdateReservationUseCase.execute(..)) && args(reservationId, request) && within(team.msg.hiv2.domain.reservation.application.usecase.UpdateReservationUseCase)")
+    fun updateReservationUseCasePointcut(reservationId: UUID, request: UpdateReservationRequest) {}
+
+    @Before("updateReservationUseCasePointcut(reservationId, request)")
+    fun checkAuthorization(joinPoint: JoinPoint, reservationId: UUID, request: UpdateReservationRequest) {
+        val currentUser = userService.queryCurrentUser()
+        val reservation = reservationService.queryReservationById(reservationId)
+
+        if (currentUser.id != reservation.representativeId) {
+            log.warn("User {} is not authorized to update Reservation {}", currentUser.id, reservationId)
+            throw ForbiddenCommandReservationException()
+        }
+    }
+}
