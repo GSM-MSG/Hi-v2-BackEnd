@@ -26,6 +26,7 @@ dependencies {
 	implementation(Dependencies.SPRING_VALIDATION)
 	implementation(Dependencies.SPRING_WEB)
 	implementation(Dependencies.SPRING_REDIS)
+	implementation(Dependencies.SPRING_AOP)
 	testImplementation(Dependencies.SPRING_STARTER_TEST)
 	testImplementation(Dependencies.SPRING_SECURITY_TEST)
 
