@@ -1,4 +1,4 @@
-package team.msg.hiv2.domain.reservation.aop
+package team.msg.hiv2.aspect
 
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
@@ -8,7 +8,6 @@ import team.msg.hiv2.domain.user.application.service.UserService
 import org.aspectj.lang.JoinPoint
 import org.slf4j.LoggerFactory
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
-import team.msg.hiv2.domain.reservation.exception.ForbiddenCommandReservationException
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import java.util.*
@@ -20,8 +19,6 @@ class ReservationControlAspect(
     private val reservationService: ReservationService,
     private val userValidator: UserValidator
 ) {
-
-    private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
 
     @Pointcut("execution(* team.msg.hiv2.domain.reservation.application.usecase.UpdateReservationUseCase.execute(..)) && args(reservationId, request) && within(team.msg.hiv2.domain.reservation.application.usecase.UpdateReservationUseCase)")
     fun updateReservationUseCasePointcut(reservationId: UUID, request: UpdateReservationRequest) {}

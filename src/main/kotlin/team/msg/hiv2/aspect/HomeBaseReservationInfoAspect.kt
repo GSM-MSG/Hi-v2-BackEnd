@@ -1,4 +1,4 @@
-package team.msg.hiv2.domain.homebase.aop
+package team.msg.hiv2.aspect
 
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
