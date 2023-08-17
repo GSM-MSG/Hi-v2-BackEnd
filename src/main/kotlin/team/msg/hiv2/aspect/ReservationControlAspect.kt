@@ -30,7 +30,7 @@ class ReservationControlAspect(
     fun delegateRepresentativeUseCasePointcut(reservationId: UUID, userId: UUID){}
 
     @Before("reserveHomeBaseUseCasePointcut(floor, period, request)")
-    fun checkAuthorizationReserveHomeBase(joinPoint: JoinPoint, floor: Int, period: Int, request: ReservationHomeBaseRequest) {
+    fun checkAuthorizationReserveHomeBase(floor: Int, period: Int, request: ReservationHomeBaseRequest) {
         val currentUser = userService.queryCurrentUser()
 
         userValidator.checkUserUseStatus(currentUser)
@@ -38,7 +38,7 @@ class ReservationControlAspect(
     }
 
     @Before("updateReservationUseCasePointcut(reservationId, request)")
-    fun checkAuthorizationUpdateReservation(joinPoint: JoinPoint, reservationId: UUID, request: UpdateReservationRequest) {
+    fun checkAuthorizationUpdateReservation(reservationId: UUID, request: UpdateReservationRequest) {
         val currentUser = userService.queryCurrentUser()
         val reservation = reservationService.queryReservationById(reservationId)
 

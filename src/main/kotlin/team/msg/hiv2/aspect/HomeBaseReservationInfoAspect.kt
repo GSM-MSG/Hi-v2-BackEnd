@@ -23,7 +23,7 @@ class HomeBaseReservationInfoAspect(
     @Around(
         "reserveHomeBaseUseCase_executePointCut(floor, period, request)"
     )
-    private fun loggingReservationInfo(joinPoint: JoinPoint, floor: Int, period: Int, request: ReservationHomeBaseRequest) {
+    private fun loggingReservationInfo(floor: Int, period: Int, request: ReservationHomeBaseRequest) {
         val currentUser = userService.queryCurrentUser()
         log.info("reserve homebase by = {}, floor = {}, period = {}, users = {}",
             currentUser.id, floor, period, request.users)
