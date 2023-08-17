@@ -76,11 +76,6 @@ class ReservationControlAspect(
         val currentUser = userService.queryCurrentUser()
         val reservation = reservationService.queryReservationById(reservationId)
 
-        if(currentUser.id == reservation.representativeId) {
-            log.warn("Forbidden exit reservation, representative user = {}", currentUser.id)
-            throw ForbiddenExitReservationException()
-        }
-        
         userValidator.checkUserAndReservation(currentUser, reservation)
     }
 
