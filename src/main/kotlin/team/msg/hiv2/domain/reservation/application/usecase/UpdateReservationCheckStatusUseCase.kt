@@ -1,5 +1,6 @@
 package team.msg.hiv2.domain.reservation.application.usecase
 
+import org.springframework.stereotype.Service
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationCheckStatusRequest
 import team.msg.hiv2.global.annotation.usecase.UseCase
