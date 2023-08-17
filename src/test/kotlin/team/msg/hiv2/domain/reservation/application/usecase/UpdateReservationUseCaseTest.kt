@@ -24,9 +24,6 @@ class UpdateReservationUseCaseTest {
     private lateinit var userService: UserService
 
     @Mock
-    private lateinit var userValidator: UserValidator
-
-    @Mock
     private lateinit var reservationService: ReservationService
 
     private lateinit var updateReservationUseCase: UpdateReservationUseCase
@@ -98,7 +95,7 @@ class UpdateReservationUseCaseTest {
     @BeforeEach
     fun setUp(){
         updateReservationUseCase = UpdateReservationUseCase(
-            reservationService, userService, userValidator
+            reservationService, userService
         )
     }
 
