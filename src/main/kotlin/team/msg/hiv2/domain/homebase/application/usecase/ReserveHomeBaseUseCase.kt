@@ -13,7 +13,6 @@ import java.util.*
 
 @UseCase
 class ReserveHomeBaseUseCase(
-    private val userValidator: UserValidator,
     private val userService: UserService,
     private val reservationService: ReservationService,
     private val homeBaseService: HomeBaseService
@@ -29,8 +28,6 @@ class ReserveHomeBaseUseCase(
 
         if(reservationService.countReservationByHomeBase(homeBase) >= 5)
             throw ForbiddenReserveException()
-
-        userValidator.checkUsersUseStatus(users)
 
         val reservationId = reservationService.save(
             Reservation(
