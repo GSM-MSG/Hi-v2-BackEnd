@@ -10,13 +10,16 @@ import org.slf4j.LoggerFactory
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.exception.ForbiddenCommandReservationException
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
+import team.msg.hiv2.domain.user.application.validator.UserValidator
 import java.util.*
 
 @Aspect
 @Component
 class ReservationControlAspect(
     private val userService: UserService,
-    private val reservationService: ReservationService) {
+    private val reservationService: ReservationService,
+    private val userValidator: UserValidator
+) {
 
     private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
 
@@ -28,9 +31,7 @@ class ReservationControlAspect(
         val currentUser = userService.queryCurrentUser()
         val reservation = reservationService.queryReservationById(reservationId)
 
-        if (currentUser.id != reservation.representativeId) {
-            log.warn("User {} is not authorized to update Reservation {}", currentUser.id, reservationId)
-            throw ForbiddenCommandReservationException()
-        }
+        userValidator.checkRepresentative(currentUser, reservation)
+        userValidator.checkUsersUseStatus(request.users.map { userService.queryUserById(it) })
     }
 }
