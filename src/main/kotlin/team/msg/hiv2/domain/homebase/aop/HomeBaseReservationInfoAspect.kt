@@ -16,15 +16,12 @@ class HomeBaseReservationInfoAspect {
     @Pointcut("execution(* team.msg.hiv2.domain.homebase.application.usecase.ReserveHomeBaseUseCase+.execute(..))")
     private fun reserveHomeBaseUseCase_executePointCut(){}
 
-    @Pointcut("execution(* team.msg.hiv2.domain.reservation.application.usecase.UpdateReservationUseCase+.execute(..))")
-    private fun updateReservationUseCase_executePointCut(){}
-
     @Around(
-        "reserveHomeBaseUseCase_executePointCut() || updateReservationUseCase_executePointCut()",
+        "reserveHomeBaseUseCase_executePointCut()"
     )
     private fun loggingReservationInfo(joinPoint: ProceedingJoinPoint) {
-        val args = joinPoint.args
-        log.info("homebase reserve execute() called with floor={}, period={}, request={}", args[0], args[1], args[2])
+        val ( floor, period, request ) = joinPoint.args
+        log.info("homebase reserve execute() called with floor={}, period={}, request={}", floor,period, request)
     }
 
 }
