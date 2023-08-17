@@ -25,9 +25,6 @@ class DelegateRepresentativeUseCaseTest {
     @Mock
     private lateinit var reservationService: ReservationService
 
-    @Mock
-    private lateinit var userValidator: UserValidator
-
     private lateinit var delegateRepresentativeUseCase: DelegateRepresentativeUseCase
 
     private val reservationId = UUID.randomUUID()
@@ -85,15 +82,13 @@ class DelegateRepresentativeUseCaseTest {
     @BeforeEach
     fun setUp() {
         delegateRepresentativeUseCase = DelegateRepresentativeUseCase(
-            userService, reservationService, userValidator
+            userService, reservationService
         )
     }
 
     @Test
     fun `대표자 위임 성공`() {
         // given
-        given(userService.queryCurrentUser())
-            .willReturn(userStub1)
 
         given(reservationService.queryReservationById(reservationId))
             .willReturn(reservationStub)

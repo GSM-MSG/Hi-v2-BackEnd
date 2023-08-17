@@ -10,18 +10,13 @@ import java.util.UUID
 @UseCase
 class DeleteReservationUseCase(
     private val reservationService: ReservationService,
-    private val userService: UserService,
-    private val userValidator: UserValidator
+    private val userService: UserService
 ) {
 
     fun execute(reservationId: UUID){
         val reservation = reservationService.queryReservationById(reservationId)
 
         val users = userService.queryAllUserByReservation(reservation)
-
-        val currentUser = userService.queryCurrentUser()
-
-        userValidator.checkRepresentative(currentUser, reservation)
 
         userService.saveAll(users.map { it.copy(useStatus = UseStatus.AVAILABLE) })
         reservationService.delete(reservation)

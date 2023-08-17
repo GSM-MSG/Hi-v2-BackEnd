@@ -9,16 +9,12 @@ import java.util.UUID
 @UseCase
 class DelegateRepresentativeUseCase(
     private val userService: UserService,
-    private val reservationService: ReservationService,
-    private val userValidator: UserValidator
+    private val reservationService: ReservationService
 ) {
 
     fun execute(reservationId: UUID, userId: UUID){
-        val currentUser = userService.queryCurrentUser()
 
         val reservation = reservationService.queryReservationById(reservationId)
-
-        userValidator.checkRepresentative(currentUser, reservation)
 
         val delegatedUser = userService.queryUserByIdAndReservation(userId, reservation)
 

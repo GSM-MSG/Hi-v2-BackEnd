@@ -20,6 +20,7 @@ enum class ErrorCode(
     // reservation
     RESERVATION_NOT_FOUND("예약을 찾을 수 없습니다.", 404),
     FORBIDDEN_COMMAND_RESERVATION("예약 테이블을 제어할 권한이 없습니다.", 403),
+    FORBIDDEN_EXIT_RESERVATION("대표자는 예약을 나갈 수 없습니다.", 403),
 
     // homeBase
     HOME_BASE_NOT_FOUND("홈베이스를 찾을 수 없습니다.", 404),

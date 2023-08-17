@@ -1,6 +1,7 @@
 package team.msg.hiv2.domain.reservation.application.usecase
 
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
+import team.msg.hiv2.domain.reservation.exception.ForbiddenExitReservationException
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.global.annotation.usecase.UseCase
@@ -10,7 +11,6 @@ import java.util.UUID
 class ExitReservationUseCase(
     private val userService: UserService,
     private val reservationService: ReservationService,
-    private val userValidator: UserValidator
 ) {
 
     fun execute(reservationId: UUID){
@@ -18,7 +18,8 @@ class ExitReservationUseCase(
 
         val currentUser = userService.queryCurrentUser()
 
-        userValidator.checkUserAndReservation(currentUser, reservation)
+        if(reservation.representativeId == currentUser.id)
+            throw ForbiddenExitReservationException()
 
         userService.save(currentUser.copy(reservationId = null))
     }
