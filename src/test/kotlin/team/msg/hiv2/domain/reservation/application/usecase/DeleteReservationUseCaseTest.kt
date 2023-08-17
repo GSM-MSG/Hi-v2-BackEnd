@@ -101,9 +101,6 @@ class DeleteReservationUseCaseTest {
         given(userService.queryAllUserByReservation(reservationStub))
             .willReturn(listOf(userStub1, userStub2))
 
-        given(userService.queryCurrentUser())
-            .willReturn(userStub1)
-
         // when & then
         assertDoesNotThrow {
             deleteReservationUseCase.execute(requestReservationId)

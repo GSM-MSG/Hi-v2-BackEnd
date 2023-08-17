@@ -106,9 +106,6 @@ class UpdateReservationUseCaseTest {
         given(reservationService.queryReservationById(requestReservationId))
             .willReturn(reservationStub)
 
-        given(userService.queryCurrentUser())
-            .willReturn(userStub1)
-
         // when & then
         assertDoesNotThrow {
             updateReservationUseCase.execute(requestReservationId, requestStub)
