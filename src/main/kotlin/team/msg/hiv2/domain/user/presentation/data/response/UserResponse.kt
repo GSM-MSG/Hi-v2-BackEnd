@@ -11,7 +11,7 @@ data class UserResponse(
     val number: Int?
 ) {
     companion object {
-        fun of(user: User): UserResponse = UserResponse(
+        fun of(user: User) = UserResponse(
             userId = user.id,
             name = user.name,
             grade = user.grade,

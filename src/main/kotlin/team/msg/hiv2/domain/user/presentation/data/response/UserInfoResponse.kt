@@ -16,7 +16,7 @@ class UserInfoResponse(
     val useStatus: UseStatus
 ) {
     companion object {
-        fun of(user: User, reservation: ReservationResponse): UserInfoResponse = UserInfoResponse(
+        fun of(user: User, reservation: ReservationResponse) = UserInfoResponse(
             userId = user.id,
             name = user.name,
             grade = user.grade,
