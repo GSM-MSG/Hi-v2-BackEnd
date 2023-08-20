@@ -19,30 +19,9 @@ class QueryUserInfoUseCase(
 
         val reservation = user.reservationId?.let { reservationService.queryReservationById(it) }
 
-        val users = reservation?.let { userService.queryAllUserByReservation(it) }
-
-        return UserInfoResponse(
-            userId = UUID.randomUUID(),
-            name = user.name,
-            grade = user.grade,
-            classNum = user.classNum,
-            number = user.number,
-            useStatus = user.useStatus,
-            profileImageUrl = user.profileImageUrl,
-            reservation = users?.let { users ->
-                ReservationResponse(
-                    reservationId = user.reservationId,
-                    users = users.map {
-                        UserResponse(
-                            userId = it.id,
-                            name = it.name,
-                            grade = it.grade,
-                            classNum = it.classNum,
-                            number = it.number
-                        )
-                    }
-                )
-            }
-        )
+        return UserInfoResponse.of(user, reservation?.let {
+            val users = userService.queryAllUserByReservation(it)
+            ReservationResponse.of(it, users.map { user -> UserResponse.of(user) })
+        })
     }
 }
