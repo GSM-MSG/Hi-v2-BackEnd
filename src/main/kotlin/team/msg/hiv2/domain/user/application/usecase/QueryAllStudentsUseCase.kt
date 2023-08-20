@@ -16,15 +16,7 @@ class QueryAllStudentsUseCase(
 
         return AllStudentsResponse(
             students.map {
-                StudentResponse(
-                    userId = it.id,
-                    name = it.name,
-                    grade = it.grade,
-                    classNum = it.classNum,
-                    number = it.number,
-                    profileImageUrl = it.profileImageUrl,
-                    useStatus = it.useStatus
-                )
+                StudentResponse.of(it)
             }
         )
     }
