@@ -18,19 +18,6 @@ class QueryReservationDetailUseCase(
 
         val users = userService.queryAllUserByReservation(reservation)
 
-        return ReservationDetailResponse(
-            reservationId = reservation.id,
-            users = users.map {
-                UserResponse(
-                    userId = it.id,
-                    name = it.name,
-                    grade = it.grade,
-                    classNum = it.classNum,
-                    number = it.number
-                )
-            },
-            reason = reservation.reason,
-            checkStatus = reservation.checkStatus
-        )
+        return ReservationDetailResponse.of(reservation, users.map { UserResponse.of(it) })
     }
 }
