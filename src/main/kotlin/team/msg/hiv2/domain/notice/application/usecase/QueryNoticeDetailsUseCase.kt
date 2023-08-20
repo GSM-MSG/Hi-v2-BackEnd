@@ -16,18 +16,6 @@ class QueryNoticeDetailsUseCase(
         val notice = noticeService.queryNoticeById(id)
         val user = userService.queryUserById(notice.userId)
 
-        return NoticeDetailsResponse(
-            noticeId = notice.id,
-            title = notice.title,
-            content = notice.content,
-            user = UserResponse(
-                userId = user.id,
-                name = user.name,
-                grade = user.grade,
-                classNum = user.classNum,
-                number = user.number
-            ),
-            createdAt = notice.createdAt
-        )
+        return NoticeDetailsResponse.of(notice, UserResponse.of(user))
     }
 }

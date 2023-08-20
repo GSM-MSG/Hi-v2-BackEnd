@@ -16,18 +16,7 @@ class QueryAllNoticeUseCase(
 
         return notices.map {
             val user = userService.queryUserById(it.userId)
-            NoticeResponse(
-                noticeId = it.id,
-                title = it.title,
-                user = UserResponse(
-                    userId = user.id,
-                    name = user.name,
-                    grade = user.grade,
-                    classNum = user.classNum,
-                    number = user.number
-                ),
-                createdAt = it.createdAt
-            )
+            NoticeResponse.of(it, UserResponse.of(user))
         }
     }
 }
