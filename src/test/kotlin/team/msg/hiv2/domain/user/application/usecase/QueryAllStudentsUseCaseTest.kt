@@ -62,18 +62,18 @@ internal class QueryAllStudentsUseCaseTest {
                 StudentResponse(
                     userId = userId1,
                     name = userStub1.name,
-                    grade = userStub1.grade,
-                    classNum = userStub1.classNum,
-                    number = userStub1.number,
+                    grade = userStub1.grade!!,
+                    classNum = userStub1.classNum!!,
+                    number = userStub1.number!!,
                     profileImageUrl = userStub1.profileImageUrl,
                     useStatus = userStub1.useStatus
                 ),
                 StudentResponse(
                     userId = userId2,
                     name = userStub2.name,
-                    grade = userStub2.grade,
-                    classNum = userStub2.classNum,
-                    number = userStub2.number,
+                    grade = userStub2.grade!!,
+                    classNum = userStub2.classNum!!,
+                    number = userStub2.number!!,
                     profileImageUrl = userStub2.profileImageUrl,
                     useStatus = userStub2.useStatus
                 )
