@@ -1,5 +1,6 @@
 package team.msg.hiv2.domain.user.application.facade
 
+import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.presentation.data.request.SearchUserKeywordRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRequest
 import team.msg.hiv2.domain.user.presentation.data.response.AllStudentsResponse
@@ -12,4 +13,5 @@ interface UserFacade {
     fun queryUserInfo(): UserInfoResponse
     fun searchUserByNameKeyword(request: SearchUserKeywordRequest): List<UserResponse>
     fun updateUserUseStatus(userId: UUID, request: UpdateUserUseStatusRequest)
+    fun updateUserRole(userId: UUID, request: UserRole)
 }

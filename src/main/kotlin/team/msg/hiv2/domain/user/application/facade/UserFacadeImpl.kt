@@ -4,7 +4,9 @@ import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.user.application.usecase.QueryAllStudentsUseCase
 import team.msg.hiv2.domain.user.application.usecase.QueryUserInfoUseCase
 import team.msg.hiv2.domain.user.application.usecase.SearchUserByNameKeywordUseCase
+import team.msg.hiv2.domain.user.application.usecase.UpdateUserRoleUseCase
 import team.msg.hiv2.domain.user.application.usecase.UpdateUserUseStatusUseCase
+import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.presentation.data.request.SearchUserKeywordRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRequest
 import team.msg.hiv2.domain.user.presentation.data.response.AllStudentsResponse
@@ -17,7 +19,8 @@ class UserFacadeImpl(
     private val queryAllStudentsUseCase: QueryAllStudentsUseCase,
     private val queryUserInfoUseCase: QueryUserInfoUseCase,
     private val searchUserByNameKeywordUseCase: SearchUserByNameKeywordUseCase,
-    private val updateUserUseStatusUseCase: UpdateUserUseStatusUseCase
+    private val updateUserUseStatusUseCase: UpdateUserUseStatusUseCase,
+    private val updateUserRoleUseCase: UpdateUserRoleUseCase
 ) : UserFacade {
 
     override fun queryAllStudents(): AllStudentsResponse =
@@ -31,5 +34,8 @@ class UserFacadeImpl(
 
     override fun updateUserUseStatus(userId: UUID, request: UpdateUserUseStatusRequest) =
         updateUserUseStatusUseCase.execute(userId, request)
+
+    override fun updateUserRole(userId: UUID,request: UserRole) =
+        updateUserRoleUseCase.execute(userId, request)
 
 }
