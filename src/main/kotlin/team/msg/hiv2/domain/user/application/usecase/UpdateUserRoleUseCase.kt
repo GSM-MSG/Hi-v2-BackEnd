@@ -1,7 +1,7 @@
 package team.msg.hiv2.domain.user.application.usecase
 
 import team.msg.hiv2.domain.user.application.service.UserService
-import team.msg.hiv2.domain.user.domain.constant.UserRole
+import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserRoleWebRequest
 import team.msg.hiv2.global.annotation.usecase.UseCase
 import java.util.UUID
 
@@ -9,9 +9,9 @@ import java.util.UUID
 class UpdateUserRoleUseCase(
     private val userService: UserService
 ) {
-    fun execute(id: UUID,role: UserRole) {
+    fun execute(id: UUID,request: UpdateUserRoleWebRequest) {
         val user = userService.queryUserById(id)
 
-        userService.save(user.copy(roles = mutableListOf(role)))
+        userService.save(user.copy(roles = mutableListOf(request.role)))
     }
 }

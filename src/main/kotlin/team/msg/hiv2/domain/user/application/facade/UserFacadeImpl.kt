@@ -8,6 +8,7 @@ import team.msg.hiv2.domain.user.application.usecase.UpdateUserRoleUseCase
 import team.msg.hiv2.domain.user.application.usecase.UpdateUserUseStatusUseCase
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.presentation.data.request.SearchUserKeywordRequest
+import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserRoleWebRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRequest
 import team.msg.hiv2.domain.user.presentation.data.response.AllStudentsResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
@@ -35,7 +36,7 @@ class UserFacadeImpl(
     override fun updateUserUseStatus(userId: UUID, request: UpdateUserUseStatusRequest) =
         updateUserUseStatusUseCase.execute(userId, request)
 
-    override fun updateUserRole(userId: UUID,request: UserRole) =
+    override fun updateUserRole(userId: UUID, request: UpdateUserRoleWebRequest) =
         updateUserRoleUseCase.execute(userId, request)
 
 }

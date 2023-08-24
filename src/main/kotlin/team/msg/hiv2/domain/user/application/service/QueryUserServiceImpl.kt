@@ -49,5 +49,4 @@ class QueryUserServiceImpl(
     override fun queryAllUserByReservationIn(reservations: List<Reservation>): List<User> =
         queryUserPort.queryAllUserByReservationIn(reservations)
 
-
 }
