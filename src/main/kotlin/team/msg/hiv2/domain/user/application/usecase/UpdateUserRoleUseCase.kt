@@ -9,7 +9,7 @@ import java.util.UUID
 class UpdateUserRoleUseCase(
     private val userService: UserService
 ) {
-    fun execute(userId: UUID,request: UpdateUserRoleWebRequest) {
+    fun execute(userId: UUID, request: UpdateUserRoleWebRequest) {
         val user = userService.queryUserById(userId)
 
         userService.save(user.copy(roles = mutableListOf(request.role)))
