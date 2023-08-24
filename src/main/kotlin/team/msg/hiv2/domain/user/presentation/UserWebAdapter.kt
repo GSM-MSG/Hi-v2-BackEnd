@@ -46,7 +46,7 @@ class UserWebAdapter(
         )
             .let { ResponseEntity.noContent().build() }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/role")
     fun updateUserRole(@PathVariable id: UUID, request: UpdateUserRoleWebRequest): ResponseEntity<Void> =
         userFacade.updateUserRole(id,
             UpdateUserRoleWebRequest(
