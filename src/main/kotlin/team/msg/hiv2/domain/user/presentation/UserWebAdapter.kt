@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import team.msg.hiv2.domain.user.application.facade.UserFacade
 import team.msg.hiv2.domain.user.presentation.data.request.SearchUserKeywordRequest
+import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserRoleWebRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRequest
 import team.msg.hiv2.domain.user.presentation.data.response.AllStudentsResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
@@ -41,6 +42,15 @@ class UserWebAdapter(
         userFacade.updateUserUseStatus(id,
             UpdateUserUseStatusRequest(
                 status = request.status
+            )
+        )
+            .let { ResponseEntity.noContent().build() }
+
+    @PatchMapping("/{id}/role")
+    fun updateUserRole(@PathVariable id: UUID, request: UpdateUserRoleWebRequest): ResponseEntity<Void> =
+        userFacade.updateUserRole(id,
+            UpdateUserRoleWebRequest(
+                role = request.role
             )
         )
             .let { ResponseEntity.noContent().build() }

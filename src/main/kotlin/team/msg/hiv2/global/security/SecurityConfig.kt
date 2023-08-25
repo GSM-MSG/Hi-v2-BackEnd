@@ -42,42 +42,43 @@ class SecurityConfig(
                 CorsUtils.isPreFlightRequest(request)
             }).permitAll()
 
-             // health check
+            // health check
             .antMatchers(HttpMethod.GET, "/").permitAll()
 
-             // auth
+            // auth
             .antMatchers(HttpMethod.GET, "/auth").permitAll()
             .antMatchers(HttpMethod.POST, "/auth").permitAll()
             .antMatchers(HttpMethod.PATCH, "/auth").permitAll()
             .antMatchers(HttpMethod.DELETE, "/auth").authenticated()
 
-             // homeBase
-            .antMatchers(HttpMethod.POST, "/homebase").hasRole(STUDENT)
+            // homeBase
+            .antMatchers(HttpMethod.POST, "/homebase").hasAnyRole(STUDENT, ADMIN)
             .antMatchers(HttpMethod.GET, "/homebase").authenticated()
             .antMatchers(HttpMethod.DELETE, "/homebase").hasRole(ADMIN)
 
-             // reservation
+            // reservation
             .antMatchers(HttpMethod.GET, "/reservation/{id}").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/reservation/{id}").hasRole(STUDENT)
-            .antMatchers(HttpMethod.PATCH, "/reservation/{id}").hasRole(STUDENT)
-            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/{user_id}").hasRole(STUDENT)
-            .antMatchers(HttpMethod.DELETE, "/reservation/{id}/exit").hasRole(STUDENT)
-            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/check-status").hasRole(TEACHER)
+            .antMatchers(HttpMethod.DELETE, "/reservation/{id}").hasAnyRole(STUDENT, ADMIN)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{id}").hasAnyRole(STUDENT, ADMIN)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/{user_id}").hasAnyRole(STUDENT, ADMIN)
+            .antMatchers(HttpMethod.DELETE, "/reservation/{id}/exit").hasAnyRole(STUDENT, ADMIN)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/check-status").hasAnyRole(TEACHER, ADMIN)
             .antMatchers(HttpMethod.DELETE, "/reservation/kill-all").hasRole(ADMIN)
 
-             // notice
+            // notice
             .antMatchers(HttpMethod.GET, "/notice").authenticated()
             .antMatchers(HttpMethod.GET, "/notice/{id}").authenticated()
             .antMatchers(HttpMethod.POST, "/notice").hasAnyRole(ADMIN, TEACHER)
             .antMatchers(HttpMethod.DELETE, "/notice/{id}").hasAnyRole(ADMIN, TEACHER)
             .antMatchers(HttpMethod.PATCH, "/notice/{id}").hasAnyRole(ADMIN, TEACHER)
 
-             // user
+            // user
             .antMatchers(HttpMethod.GET, "/user").authenticated()
             .antMatchers(HttpMethod.GET, "/user/my-page").authenticated()
             .antMatchers(HttpMethod.GET, "/user/students").authenticated()
             .antMatchers(HttpMethod.GET, "/user/search").authenticated()
             .antMatchers(HttpMethod.PATCH, "/user/{id}").hasAnyRole(ADMIN, TEACHER)
+            .antMatchers(HttpMethod.PATCH, "/user/{id}/role").hasRole(ADMIN)
 
             .anyRequest().authenticated()
             .and()
