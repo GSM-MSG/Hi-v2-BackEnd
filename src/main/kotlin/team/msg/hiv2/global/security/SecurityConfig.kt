@@ -52,17 +52,17 @@ class SecurityConfig(
             .antMatchers(HttpMethod.DELETE, "/auth").authenticated()
 
             // homeBase
-            .antMatchers(HttpMethod.POST, "/homebase").hasRole(STUDENT)
+            .antMatchers(HttpMethod.POST, "/homebase").hasAnyRole(STUDENT, ADMIN)
             .antMatchers(HttpMethod.GET, "/homebase").authenticated()
             .antMatchers(HttpMethod.DELETE, "/homebase").hasRole(ADMIN)
 
             // reservation
             .antMatchers(HttpMethod.GET, "/reservation/{id}").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/reservation/{id}").hasRole(STUDENT)
-            .antMatchers(HttpMethod.PATCH, "/reservation/{id}").hasRole(STUDENT)
-            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/{user_id}").hasRole(STUDENT)
-            .antMatchers(HttpMethod.DELETE, "/reservation/{id}/exit").hasRole(STUDENT)
-            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/check-status").hasRole(TEACHER)
+            .antMatchers(HttpMethod.DELETE, "/reservation/{id}").hasAnyRole(STUDENT, ADMIN)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{id}").hasAnyRole(STUDENT, ADMIN)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/{user_id}").hasAnyRole(STUDENT, ADMIN)
+            .antMatchers(HttpMethod.DELETE, "/reservation/{id}/exit").hasAnyRole(STUDENT, ADMIN)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/check-status").hasAnyRole(TEACHER, ADMIN)
             .antMatchers(HttpMethod.DELETE, "/reservation/kill-all").hasRole(ADMIN)
 
             // notice
