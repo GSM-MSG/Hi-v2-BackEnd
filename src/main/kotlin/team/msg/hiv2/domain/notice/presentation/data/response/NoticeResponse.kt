@@ -9,13 +9,15 @@ data class NoticeResponse(
     val noticeId: UUID,
     val title: String,
     val user: UserResponse,
+    val index: Long,
     val createdAt: LocalDateTime
 ) {
     companion object {
-        fun of(notice: Notice, user: UserResponse) = NoticeResponse(
+        fun of(notice: Notice, user: UserResponse, index: Long) = NoticeResponse(
             noticeId = notice.id,
             title = notice.title,
             user = user,
+            index = index,
             createdAt = notice.createdAt
         )
     }

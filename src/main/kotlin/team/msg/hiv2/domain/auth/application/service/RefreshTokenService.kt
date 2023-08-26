@@ -7,5 +7,4 @@ class RefreshTokenService(
     queryRefreshTokenService: QueryRefreshTokenService,
     commandRefreshTokenService: CommandRefreshTokenService
 ) : CommandRefreshTokenService by commandRefreshTokenService
-    , QueryRefreshTokenService by queryRefreshTokenService{
-}
+    , QueryRefreshTokenService by queryRefreshTokenService

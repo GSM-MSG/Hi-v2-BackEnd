@@ -14,9 +14,9 @@ class QueryAllNoticeUseCase(
     fun execute(): List<NoticeResponse> {
         val notices = noticeService.queryAllNotice()
 
-        return notices.map {
-            val user = userService.queryUserById(it.userId)
-            NoticeResponse.of(it, UserResponse.of(user))
+        return notices.mapIndexed { index, notice ->
+            val user = userService.queryUserById(notice.userId)
+            NoticeResponse.of(notice, UserResponse.of(user), index + 1L)
         }
     }
 }

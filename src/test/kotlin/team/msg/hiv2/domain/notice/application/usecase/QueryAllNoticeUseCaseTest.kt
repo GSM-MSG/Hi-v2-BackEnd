@@ -69,6 +69,7 @@ class QueryAllNoticeUseCaseTest {
                 classNum = 3,
                 number = 6
             ),
+            index = 1,
             createdAt = LocalDateTime.MAX
         )
     )
