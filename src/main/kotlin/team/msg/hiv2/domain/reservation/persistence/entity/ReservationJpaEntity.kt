@@ -8,7 +8,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "reservation")
+@Table(name = "reservation", uniqueConstraints = [UniqueConstraint(columnNames = ["home_base_id", "reservation_number"])])
 class ReservationJpaEntity(
 
     override val id: UUID,
@@ -25,7 +25,9 @@ class ReservationJpaEntity(
     val reason: String,
 
     @Column(name = "check_status", nullable = false)
-    var checkStatus: Boolean = false
+    var checkStatus: Boolean = false,
 
+    @Column(name = "reservation_number", nullable = false)
+    val reservationNumber: Int
 
 ) : BaseUuidEntity(id)
