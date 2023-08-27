@@ -30,6 +30,7 @@ class UpdateReservationUseCaseTest {
 
     private val floor = 3
     private val period = 10
+    private val reservationNumber = 1
 
     private val representativeId = UUID.randomUUID()
     private val userId = UUID.randomUUID()
@@ -49,7 +50,8 @@ class UpdateReservationUseCaseTest {
             representativeId = representativeId,
             reason = reason,
             homeBaseId = homeBaseStub.id,
-            checkStatus = false
+            checkStatus = false,
+            reservationNumber = reservationNumber
         )
     }
 

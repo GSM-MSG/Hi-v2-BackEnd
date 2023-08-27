@@ -1,6 +1,7 @@
 package team.msg.hiv2.domain.homebase.application.usecase
 
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
+import team.msg.hiv2.domain.homebase.exception.AlreadyExistReservationException
 import team.msg.hiv2.domain.homebase.exception.ForbiddenReserveException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
@@ -29,13 +30,17 @@ class ReserveHomeBaseUseCase(
         if(reservationService.countReservationByHomeBase(homeBase) >= 5)
             throw ForbiddenReserveException()
 
+        if(reservationService.existsByHomeBaseAndReservationNumber(homeBase, request.reservationNumber))
+            throw AlreadyExistReservationException()
+
         val reservationId = reservationService.save(
             Reservation(
                 id = UUID.randomUUID(),
                 reason = request.reason,
                 representativeId = currentUser.id,
                 homeBaseId = homeBase.id,
-                checkStatus = false
+                checkStatus = false,
+                reservationNumber = request.reservationNumber
             )
         ).id
 
