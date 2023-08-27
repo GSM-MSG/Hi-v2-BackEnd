@@ -30,6 +30,7 @@ class DelegateRepresentativeUseCaseTest {
     private val reservationId = UUID.randomUUID()
     private val representativeId = UUID.randomUUID()
     private val userId = UUID.randomUUID()
+    private val reservationNumber = 1
 
     private val homeBaseStub by lazy {
         HomeBase(
@@ -45,7 +46,8 @@ class DelegateRepresentativeUseCaseTest {
             representativeId = representativeId,
             reason = "reason",
             homeBaseId = homeBaseStub.id,
-            checkStatus = false
+            checkStatus = false,
+            reservationNumber = reservationNumber
         )
     }
 
