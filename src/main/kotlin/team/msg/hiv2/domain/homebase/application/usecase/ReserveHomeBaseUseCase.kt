@@ -35,7 +35,8 @@ class ReserveHomeBaseUseCase(
                 reason = request.reason,
                 representativeId = currentUser.id,
                 homeBaseId = homeBase.id,
-                checkStatus = false
+                checkStatus = false,
+                reservationNumber = request.reservationNumber
             )
         ).id
 

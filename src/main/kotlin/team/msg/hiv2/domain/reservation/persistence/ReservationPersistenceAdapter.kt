@@ -46,5 +46,8 @@ class ReservationPersistenceAdapter(
     override fun countReservationByHomeBase(homeBase: HomeBase): Int =
         reservationRepository.countByHomeBase(homeBaseMapper.toEntity(homeBase))
 
+    override fun existsByHomeBaseAndReservationNumber(homeBase: HomeBase,reservationNumber: Int): Boolean =
+        reservationRepository.existsByHomeBaseAndReservationNumber(homeBaseMapper.toEntity(homeBase), reservationNumber)
+
 
 }

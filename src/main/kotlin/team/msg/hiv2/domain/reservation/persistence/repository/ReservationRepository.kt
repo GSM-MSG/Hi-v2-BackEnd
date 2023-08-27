@@ -15,4 +15,5 @@ interface ReservationRepository : CrudRepository<ReservationJpaEntity, UUID> {
     @Query("DELETE FROM ReservationJpaEntity r WHERE r IN :reservations")
     fun deleteAllInBatch(reservations: List<ReservationJpaEntity>)
     fun countByHomeBase(homeBase: HomeBaseJpaEntity): Int
+    fun existsByHomeBaseAndReservationNumber(homeBase: HomeBaseJpaEntity, reservationNumber: Int): Boolean
 }
