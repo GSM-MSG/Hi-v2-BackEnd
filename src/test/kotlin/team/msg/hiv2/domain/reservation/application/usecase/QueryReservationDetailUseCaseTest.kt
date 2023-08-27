@@ -30,6 +30,7 @@ class QueryReservationDetailUseCaseTest {
 
     private val floor = 3
     private val period = 10
+    private val reservationNumber = 1
 
     private val representativeId = UUID.randomUUID()
     private val userId = UUID.randomUUID()
@@ -49,7 +50,8 @@ class QueryReservationDetailUseCaseTest {
             representativeId = representativeId,
             reason = reason,
             homeBaseId = homeBaseStub.id,
-            checkStatus = false
+            checkStatus = false,
+            reservationNumber = reservationNumber
         )
     }
 
@@ -109,7 +111,8 @@ class QueryReservationDetailUseCaseTest {
             reservationId = reservationStub.id,
             reason = reason,
             checkStatus = false,
-            users = listOf(userResponseStub1, userResponseStub2)
+            users = listOf(userResponseStub1, userResponseStub2),
+            reservationNumber = reservationNumber
         )
     }
 

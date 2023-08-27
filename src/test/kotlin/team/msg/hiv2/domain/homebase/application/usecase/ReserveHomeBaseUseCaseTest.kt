@@ -38,6 +38,7 @@ internal class ReserveHomeBaseUseCaseTest {
     private val floor = 3
     private val period = 10
     private val reason = "회의"
+    private val reservationNumber = 1
 
     private val userId = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
@@ -45,7 +46,8 @@ internal class ReserveHomeBaseUseCaseTest {
     private val requestStub by lazy {
         ReservationHomeBaseRequest(
             mutableListOf(userId, userId2),
-            reason
+            reason,
+            reservationNumber
         )
     }
 
@@ -63,7 +65,8 @@ internal class ReserveHomeBaseUseCaseTest {
             homeBaseId = homeBaseStub.id,
             representativeId = userId,
             reason = reason,
-            checkStatus = false
+            checkStatus = false,
+            reservationNumber = reservationNumber
         )
     }
 

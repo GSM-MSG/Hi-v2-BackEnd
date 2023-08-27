@@ -27,6 +27,8 @@ internal class QueryUserInfoUseCaseTest {
 
     private val userId = UUID.randomUUID()
     private val reservationId = UUID.randomUUID()
+    private val reservationNumber = 1
+
 
     private val userStub: User by lazy {
         User(
@@ -49,7 +51,8 @@ internal class QueryUserInfoUseCaseTest {
             representativeId = userId,
             homeBaseId = 1,
             reason = "test",
-            checkStatus = false
+            checkStatus = false,
+            reservationNumber = reservationNumber
         )
     }
 
