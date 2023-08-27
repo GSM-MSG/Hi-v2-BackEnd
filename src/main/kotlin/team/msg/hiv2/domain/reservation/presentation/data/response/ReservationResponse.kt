@@ -6,12 +6,14 @@ import java.util.*
 
 data class ReservationResponse(
     val reservationId: UUID,
-    val users: List<UserResponse>
+    val users: List<UserResponse>,
+    val reservationNumber: Int
 ) {
     companion object {
         fun of(reservation: Reservation, users: List<UserResponse>) = ReservationResponse(
             reservationId = reservation.id,
-            users = users
+            users = users,
+            reservationNumber = reservation.reservationNumber
         )
     }
 }
