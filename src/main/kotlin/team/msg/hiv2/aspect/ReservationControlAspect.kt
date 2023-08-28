@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
-import team.msg.hiv2.domain.reservation.exception.ForbiddenExitReservationException
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import java.util.*
