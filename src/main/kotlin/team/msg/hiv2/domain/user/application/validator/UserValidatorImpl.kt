@@ -16,7 +16,7 @@ class UserValidatorImpl : UserValidator {
     private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
 
     override fun checkUserUseStatus(user: User) {
-        if (user.useStatus == UseStatus.UNAVAILABLE) {
+        if(user.useStatus == UseStatus.UNAVAILABLE) {
             log.warn("User {} is not available reservation status", user.id)
             throw ForbiddenReserveException()
         }
@@ -27,7 +27,7 @@ class UserValidatorImpl : UserValidator {
     }
 
     override fun checkRepresentative(user: User, reservation: Reservation) {
-        if (user.id != reservation.representativeId) {
+        if(user.id != reservation.representativeId) {
             log.warn("User {} is not authorized to update Reservation {}", user.id, reservation.id)
             throw ForbiddenCommandReservationException()
         }

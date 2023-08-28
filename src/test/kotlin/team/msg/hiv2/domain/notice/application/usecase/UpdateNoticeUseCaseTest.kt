@@ -24,12 +24,6 @@ class UpdateNoticeUseCaseTest {
     @Mock
     private lateinit var noticeService: NoticeService
 
-    @Mock
-    private lateinit var userService: UserService
-
-    @Mock
-    private lateinit var userValidator: UserValidator
-
     private lateinit var updateNoticeUseCase: UpdateNoticeUseCase
 
     private val noticeId = UUID.randomUUID()
@@ -72,7 +66,7 @@ class UpdateNoticeUseCaseTest {
     @BeforeEach
     fun setUp() {
         updateNoticeUseCase = UpdateNoticeUseCase(
-            noticeService, userValidator, userService
+            noticeService
         )
     }
 
@@ -82,9 +76,6 @@ class UpdateNoticeUseCaseTest {
         // given
         given(noticeService.queryNoticeById(noticeId))
             .willReturn(noticeStub)
-
-        given(userService.queryCurrentUser())
-            .willReturn(userStub)
 
         given(noticeService.save(any()))
             .willReturn(noticeStub)
