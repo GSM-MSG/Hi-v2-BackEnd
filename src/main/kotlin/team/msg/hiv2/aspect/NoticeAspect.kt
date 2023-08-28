@@ -23,10 +23,10 @@ class NoticeAspect(
     private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
 
     @Pointcut("execution(* team.msg.hiv2.domain.notice.application.usecase.UpdateNoticeUseCase.execute(..))" +
-            "&& args(id, updateNoticeUseCase) && within(team.msg.hiv2.domain.notice.application.usecase.UpdateNoticeUseCase)")
-    private fun updateNoticeUseCasePointcut(id: UUID,updateNoticeRequest: UpdateNoticeRequest) {}
+            "&& args(id, updateNoticeRequest) && within(team.msg.hiv2.domain.notice.application.usecase.UpdateNoticeUseCase)")
+    private fun updateNoticeUseCasePointcut(id: UUID, updateNoticeRequest: UpdateNoticeRequest) {}
 
-    @Before("updateNoticeUseCasePointcut(id, updateNoticeUseCase(id, updateNoticeUseCase))")
+    @Before("updateNoticeUseCasePointcut(id, updateNoticeRequest)")
     private fun checkWriter(id: UUID, updateNoticeRequest: UpdateNoticeRequest) {
         val user = userService.queryCurrentUser()
         val notice = noticeService.queryNoticeById(id)
