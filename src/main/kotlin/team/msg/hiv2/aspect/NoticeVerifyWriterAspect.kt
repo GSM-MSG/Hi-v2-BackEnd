@@ -3,7 +3,6 @@ package team.msg.hiv2.aspect
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.annotation.Pointcut
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.notice.application.service.NoticeService
 import team.msg.hiv2.domain.notice.presentation.data.request.UpdateNoticeRequest
@@ -14,14 +13,11 @@ import java.util.*
 
 @Component
 @Aspect
-class NoticeAspect(
+class NoticeVerifyWriterAspect(
     private val userService: UserService,
     private val noticeService: NoticeService,
     private val userValidator: UserValidator
 ) {
-
-    private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
-
     @Pointcut("execution(* team.msg.hiv2.domain.notice.application.usecase.UpdateNoticeUseCase.execute(..))" +
             "&& args(id, updateNoticeRequest) && within(team.msg.hiv2.domain.notice.application.usecase.UpdateNoticeUseCase)")
     private fun updateNoticeUseCasePointcut(id: UUID, updateNoticeRequest: UpdateNoticeRequest) {}
