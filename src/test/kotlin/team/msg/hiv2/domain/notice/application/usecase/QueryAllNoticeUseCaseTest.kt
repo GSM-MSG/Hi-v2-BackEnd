@@ -85,7 +85,7 @@ class QueryAllNoticeUseCaseTest {
     fun `공지사항 전체 조회 성공`() {
 
         // given
-        given(noticeService.queryAllNotice())
+        given(noticeService.queryAllNoticeByOrderByCreatedAtDesc())
             .willReturn(listOf(noticeStub))
 
         given(userService.queryUserById(userId))

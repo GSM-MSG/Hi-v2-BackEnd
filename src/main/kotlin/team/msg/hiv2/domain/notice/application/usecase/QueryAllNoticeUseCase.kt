@@ -12,7 +12,7 @@ class QueryAllNoticeUseCase(
     private val userService: UserService
 ) {
     fun execute(): List<NoticeResponse> {
-        val notices = noticeService.queryAllNotice()
+        val notices = noticeService.queryAllNoticeByOrderByCreatedAtDesc()
 
         return notices.mapIndexed { index, notice ->
             val user = userService.queryUserById(notice.userId)
