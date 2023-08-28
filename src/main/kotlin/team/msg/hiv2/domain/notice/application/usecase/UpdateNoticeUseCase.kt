@@ -23,6 +23,6 @@ class UpdateNoticeUseCase(
         if(role == UserRole.ROLE_TEACHER)
             userValidator.checkUserAndWriter(user.id, notice.userId)
 
-         noticeService.save(notice.copy(title = updateNoticeRequest.title, content = updateNoticeRequest.content))
+        noticeService.save(notice.copy(title = updateNoticeRequest.title, content = updateNoticeRequest.content))
     }
 }
