@@ -11,8 +11,8 @@ class QueryNoticeServiceImpl(
     private val queryNoticePort: QueryNoticePort
 ) : QueryNoticeService {
 
-    override fun queryAllNotice(): List<Notice> =
-        queryNoticePort.queryAllNotice()
+    override fun queryAllNoticeByOrderByCreatedAtDesc(): List<Notice> =
+        queryNoticePort.queryAllNoticeByOrderByCreatedAtDesc()
 
     override fun queryNoticeById(id: UUID): Notice =
         queryNoticePort.queryNoticeById(id) ?: throw NoticeNotFoundException()
