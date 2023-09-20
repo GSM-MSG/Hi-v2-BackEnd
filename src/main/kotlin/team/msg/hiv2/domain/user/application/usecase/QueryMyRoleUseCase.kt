@@ -8,7 +8,7 @@ import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
 import team.msg.hiv2.global.security.spi.SecurityPort
 
 @ReadOnlyUseCase
-class QueryMyRole(
+class QueryMyRoleUseCase(
     private val queryUserPort: QueryUserPort,
     private val securityPort: SecurityPort
 ) {
