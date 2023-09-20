@@ -40,7 +40,7 @@ class UserWebAdapter(
 
     @GetMapping("/my-role")
     fun queryMyRole(): ResponseEntity<UserRoleResponse> =
-        userFacade.queryMyRoleUseCase()
+        userFacade.queryMyRole()
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("/{id}")

@@ -12,7 +12,7 @@ import java.util.*
 interface UserFacade {
     fun queryAllStudents(): AllStudentsResponse
     fun queryUserInfo(): UserInfoResponse
-    fun queryMyRoleUseCase(): UserRoleResponse
+    fun queryMyRole(): UserRoleResponse
     fun searchUserByNameKeyword(request: SearchUserKeywordRequest): List<UserResponse>
     fun updateUserUseStatus(userId: UUID, request: UpdateUserUseStatusRequest)
     fun updateUserRole(userId: UUID, request: UpdateUserRoleWebRequest)
