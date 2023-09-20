@@ -13,10 +13,8 @@ class QueryMyRoleUseCase(
     private val securityPort: SecurityPort,
 ) {
     fun execute(): UserRoleResponse {
-        val user = securityPort.queryCurrentUserId().let {
-            queryUserPort.queryUserById(it) ?: throw UserNotFoundException()
-        }
-
+        val userId = securityPort.queryCurrentUserId()
+        val user = queryUserPort.queryUserById(userId) ?: throw UserNotFoundException()
         val role = user.roles.firstOrNull() ?: throw UserRoleNotFoundException()
 
         return UserRoleResponse.of(user.id, role)
