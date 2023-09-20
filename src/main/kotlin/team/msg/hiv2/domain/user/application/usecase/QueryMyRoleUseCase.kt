@@ -1,20 +1,16 @@
 package team.msg.hiv2.domain.user.application.usecase
 
-import team.msg.hiv2.domain.user.application.spi.QueryUserPort
-import team.msg.hiv2.domain.user.exception.UserNotFoundException
+import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.exception.UserRoleNotFoundException
 import team.msg.hiv2.domain.user.presentation.data.response.UserRoleResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
-import team.msg.hiv2.global.security.spi.SecurityPort
 
 @ReadOnlyUseCase
 class QueryMyRoleUseCase(
-    private val queryUserPort: QueryUserPort,
-    private val securityPort: SecurityPort,
+    private val userService: UserService
 ) {
     fun execute(): UserRoleResponse {
-        val userId = securityPort.queryCurrentUserId()
-        val user = queryUserPort.queryUserById(userId) ?: throw UserNotFoundException()
+        val user = userService.queryCurrentUser()
         val role = user.roles.firstOrNull() ?: throw UserRoleNotFoundException()
 
         return UserRoleResponse.of(user.id, role)
