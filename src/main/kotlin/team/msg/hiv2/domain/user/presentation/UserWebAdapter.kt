@@ -9,6 +9,7 @@ import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRe
 import team.msg.hiv2.domain.user.presentation.data.response.AllStudentsResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
+import team.msg.hiv2.domain.user.presentation.data.response.UserRoleResponse
 import team.msg.hiv2.domain.user.presentation.data.web.UpdateUserUseStatusWebRequest
 import java.util.UUID
 
@@ -35,6 +36,11 @@ class UserWebAdapter(
     @GetMapping("/students")
     fun queryAllStudents(): ResponseEntity<AllStudentsResponse> =
         userFacade.queryAllStudents()
+            .let { ResponseEntity.ok(it) }
+
+    @GetMapping("/my-role")
+    fun queryMyRole(): ResponseEntity<UserRoleResponse> =
+        userFacade.queryMyRole()
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("/{id}")
