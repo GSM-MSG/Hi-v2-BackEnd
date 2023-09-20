@@ -33,7 +33,7 @@ class UserFacadeImpl(
     override fun queryUserInfo(): UserInfoResponse =
         queryUserInfoUseCase.execute()
 
-    override fun queryMyRoleUseCase(): UserRoleResponse=
+    override fun queryMyRoleUseCase(): UserRoleResponse =
         queryMyRoleUseCase.execute()
 
     override fun searchUserByNameKeyword(request: SearchUserKeywordRequest): List<UserResponse> =
