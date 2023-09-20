@@ -15,6 +15,7 @@ enum class ErrorCode(
 
     // user
     USER_NOT_FOUND("유저를 찾을 수 없습니다.", 404),
+    USER_ROLE_NOT_FOUND("유저 역할을 찾을 수 없습니다.", 404),
     REFRESH_TOKEN_NOT_FOUND("존재하지 않는 리프레시 토큰", 404),
 
     // reservation
