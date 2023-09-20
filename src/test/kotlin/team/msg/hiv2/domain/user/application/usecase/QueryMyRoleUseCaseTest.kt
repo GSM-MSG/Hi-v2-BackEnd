@@ -1,6 +1,6 @@
 package team.msg.hiv2.domain.user.application.usecase
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mock
@@ -64,6 +64,6 @@ internal class QueryMyRoleUseCaseTest {
         val response = queryMyRoleUseCase.execute()
 
         // then
-        Assertions.assertThat(response).isEqualTo(responseStub)
+        assertThat(response).isEqualTo(responseStub)
     }
 }
