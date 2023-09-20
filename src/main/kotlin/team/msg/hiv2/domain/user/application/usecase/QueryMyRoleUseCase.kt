@@ -10,7 +10,7 @@ import team.msg.hiv2.global.security.spi.SecurityPort
 @ReadOnlyUseCase
 class QueryMyRoleUseCase(
     private val queryUserPort: QueryUserPort,
-    private val securityPort: SecurityPort
+    private val securityPort: SecurityPort,
 ) {
     fun execute(): UserRoleResponse {
         val user = securityPort.queryCurrentUserId().let {
@@ -19,6 +19,6 @@ class QueryMyRoleUseCase(
 
         val role = user.roles.firstOrNull() ?: throw UserRoleNotFoundException()
 
-        return UserRoleResponse.of(role)
+        return UserRoleResponse.of(user.id, role)
     }
 }
