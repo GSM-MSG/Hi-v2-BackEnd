@@ -42,7 +42,7 @@ internal class QueryMyRoleUseCaseTest {
     private val responseStub by lazy {
         UserRoleResponse(
             userId = userId,
-            role = userRole
+            role = userStub.roles
         )
     }
 

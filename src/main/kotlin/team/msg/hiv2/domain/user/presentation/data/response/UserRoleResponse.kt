@@ -5,10 +5,10 @@ import java.util.UUID
 
 data class UserRoleResponse(
     val userId: UUID,
-    val role: UserRole
+    val role: MutableList<UserRole>
 ) {
     companion object {
-        fun of(userId: UUID, role: UserRole) = UserRoleResponse(
+        fun of(userId: UUID, role: MutableList<UserRole>) = UserRoleResponse(
             userId = userId,
             role = role
         )
