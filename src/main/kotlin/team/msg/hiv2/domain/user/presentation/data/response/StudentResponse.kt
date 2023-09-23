@@ -5,7 +5,6 @@ import team.msg.hiv2.domain.user.domain.constant.UseStatus
 
 data class StudentResponse(
     val user: UserResponse,
-    val profileImageUrl: String,
     val useStatus: UseStatus
 ) {
     companion object {
@@ -15,9 +14,9 @@ data class StudentResponse(
                 name = user.name,
                 grade = user.grade,
                 classNum = user.classNum,
-                number = user.number
+                number = user.number,
+                profileImageUrl = user.profileImageUrl
             ),
-            profileImageUrl = user.profileImageUrl,
             useStatus = user.useStatus
         )
     }

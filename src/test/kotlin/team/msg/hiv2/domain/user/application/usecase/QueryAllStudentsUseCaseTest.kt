@@ -66,9 +66,9 @@ internal class QueryAllStudentsUseCaseTest {
                         name = userStub1.name,
                         grade = userStub1.grade,
                         classNum = userStub1.classNum,
-                        number = userStub1.number
+                        number = userStub1.number,
+                        profileImageUrl = userStub1.profileImageUrl
                     ),
-                    profileImageUrl = userStub1.profileImageUrl,
                     useStatus = userStub1.useStatus
                 ),
                 StudentResponse(
@@ -78,8 +78,8 @@ internal class QueryAllStudentsUseCaseTest {
                         grade = userStub2.grade,
                         classNum = userStub2.classNum,
                         number = userStub2.number,
+                        profileImageUrl = userStub2.profileImageUrl
                     ),
-                    profileImageUrl = userStub2.profileImageUrl,
                     useStatus = userStub2.useStatus
                 )
             )

@@ -8,7 +8,8 @@ data class UserResponse(
     val name: String,
     val grade: Int?,
     val classNum: Int?,
-    val number: Int?
+    val number: Int?,
+    val profileImageUrl: String
 ) {
     companion object {
         fun of(user: User) = UserResponse(
@@ -16,7 +17,8 @@ data class UserResponse(
             name = user.name,
             grade = user.grade,
             classNum = user.classNum,
-            number = user.number
+            number = user.number,
+            profileImageUrl = user.profileImageUrl
         )
     }
 }

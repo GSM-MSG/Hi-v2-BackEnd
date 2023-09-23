@@ -91,7 +91,8 @@ class QueryReservationDetailUseCaseTest {
             name = userStub1.name,
             grade = userStub1.grade,
             classNum = userStub1.classNum,
-            number = userStub1.number
+            number = userStub1.number,
+            profileImageUrl = "profileImageUrl"
         )
 
     }
@@ -102,7 +103,8 @@ class QueryReservationDetailUseCaseTest {
             name = userStub2.name,
             grade = userStub2.grade,
             classNum = userStub2.classNum,
-            number = userStub2.number
+            number = userStub2.number,
+            profileImageUrl = "profileImageUrl"
         )
     }
 

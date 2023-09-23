@@ -100,6 +100,7 @@ class QueryReservationByHomeBaseUseCaseTest {
             grade = userStub1.grade,
             classNum = userStub1.classNum,
             number = userStub1.number,
+            profileImageUrl = userStub1.profileImageUrl
         )
     }
 
@@ -110,6 +111,7 @@ class QueryReservationByHomeBaseUseCaseTest {
             grade = userStub2.grade,
             classNum = userStub2.classNum,
             number = userStub2.number,
+            profileImageUrl = userStub2.profileImageUrl
         )
     }
 

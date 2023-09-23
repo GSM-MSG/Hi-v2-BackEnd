@@ -67,7 +67,8 @@ class QueryAllNoticeUseCaseTest {
                 name = "test",
                 grade = 2,
                 classNum = 3,
-                number = 6
+                number = 6,
+                profileImageUrl = "profileImageUrl"
             ),
             index = 1,
             createdAt = LocalDateTime.MAX

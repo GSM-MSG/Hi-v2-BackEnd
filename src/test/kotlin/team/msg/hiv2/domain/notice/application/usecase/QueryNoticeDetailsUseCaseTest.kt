@@ -69,7 +69,8 @@ class QueryNoticeDetailsUseCaseTest {
                 name = "test",
                 grade = 2,
                 classNum = 3,
-                number = 6
+                number = 6,
+                profileImageUrl = "profileImageUrl"
             ),
             createdAt = LocalDateTime.MAX
         )
