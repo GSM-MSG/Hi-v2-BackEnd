@@ -7,7 +7,6 @@ import team.msg.hiv2.domain.user.domain.constant.UseStatus
 class UserInfoResponse(
     val user: UserResponse,
     val useStatus: UseStatus,
-    val profileImageUrl: String,
     val reservation: ReservationResponse?
 ) {
     companion object {
@@ -17,10 +16,10 @@ class UserInfoResponse(
                 name = user.name,
                 grade = user.grade,
                 classNum = user.classNum,
-                number = user.number
+                number = user.number,
+                profileImageUrl = user.profileImageUrl
             ),
             useStatus = user.useStatus,
-            profileImageUrl = user.profileImageUrl,
             reservation = reservation
         )
     }
