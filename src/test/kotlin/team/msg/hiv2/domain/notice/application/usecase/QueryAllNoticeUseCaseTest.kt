@@ -70,20 +70,7 @@ class QueryAllNoticeUseCaseTest {
     }
 
     private val responseStub = listOf(
-        NoticeResponse(
-            noticeId = noticeId,
-            title = title,
-            user = UserResponse(
-                userId = userId,
-                name = "test",
-                grade = 2,
-                classNum = 3,
-                number = 6,
-                profileImageUrl =  profileImageUrl
-            ),
-            index = 1,
-            createdAt = LocalDateTime.MAX
-        )
+        NoticeResponse.of(noticeStub, userResponseStub, index)
     )
 
     @BeforeEach
