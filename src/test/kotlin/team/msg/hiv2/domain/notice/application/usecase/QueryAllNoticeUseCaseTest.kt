@@ -66,18 +66,24 @@ class QueryAllNoticeUseCaseTest {
     }
 
     private val userResponseStub: UserResponse by lazy {
-        UserResponse(
-            userId = userId,
-            name = name,
-            grade = grade,
-            classNum = classNum,
-            number = number,
-            profileImageUrl = profileImageUrl
-        )
+        UserResponse.of(userStub)
     }
 
     private val responseStub = listOf(
-        NoticeResponse.of(noticeStub, userResponseStub, index)
+        NoticeResponse(
+            noticeId = noticeId,
+            title = title,
+            user = UserResponse(
+                userId = userId,
+                name = "test",
+                grade = 2,
+                classNum = 3,
+                number = 6,
+                profileImageUrl =  profileImageUrl
+            ),
+            index = 1,
+            createdAt = LocalDateTime.MAX
+        )
     )
 
     @BeforeEach

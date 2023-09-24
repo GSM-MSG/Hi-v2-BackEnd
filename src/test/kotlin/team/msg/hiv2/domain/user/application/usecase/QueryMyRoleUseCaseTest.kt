@@ -40,7 +40,10 @@ internal class QueryMyRoleUseCaseTest {
     }
 
     private val responseStub by lazy {
-        UserRoleResponse.of(userId, userStub.roles)
+        UserRoleResponse(
+            userId = userId,
+            role = userStub.roles
+        )
     }
 
     @BeforeEach

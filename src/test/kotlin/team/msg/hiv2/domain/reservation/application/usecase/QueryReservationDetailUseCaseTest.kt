@@ -86,30 +86,22 @@ class QueryReservationDetailUseCaseTest {
     }
 
     private val userResponseStub1 by lazy {
-        UserResponse(
-            userId = representativeId,
-            name = userStub1.name,
-            grade = userStub1.grade,
-            classNum = userStub1.classNum,
-            number = userStub1.number,
-            profileImageUrl = "profileImageUrl"
-        )
+        UserResponse.of(userStub1)
 
     }
 
     private val userResponseStub2 by lazy {
-        UserResponse(
-            userId = userId,
-            name = userStub2.name,
-            grade = userStub2.grade,
-            classNum = userStub2.classNum,
-            number = userStub2.number,
-            profileImageUrl = "profileImageUrl"
-        )
+        UserResponse.of(userStub2)
     }
 
     private val responseStub by lazy {
-        ReservationDetailResponse.of(reservationStub, listOf(userResponseStub1, userResponseStub2))
+        ReservationDetailResponse(
+            reservationId = reservationStub.id,
+            reason = reason,
+            checkStatus = false,
+            users = listOf(userResponseStub1, userResponseStub2),
+            reservationNumber = reservationNumber
+        )
     }
 
     private val requestId = reservationStub.id
