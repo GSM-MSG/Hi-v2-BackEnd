@@ -29,9 +29,16 @@ class QueryAllNoticeUseCaseTest {
     private lateinit var queryAllNoticeUseCase: QueryAllNoticeUseCase
 
     private val noticeId = UUID.randomUUID()
-    private val userId = UUID.randomUUID()
     private val title = "title_test"
     private val content = "content_test"
+    private val index = 1L
+
+    private val userId = UUID.randomUUID()
+    private val name = "test"
+    private val grade = 2
+    private val classNum = 3
+    private val number = 6
+    private val profileImageUrl = "profileImageUrl"
 
     private val noticeStub: Notice by lazy {
         Notice(
@@ -47,32 +54,30 @@ class QueryAllNoticeUseCaseTest {
         User(
             id = userId,
             email = "test@email",
-            name = "test",
-            grade = 2,
-            classNum = 3,
-            number = 6,
-            profileImageUrl = "profileImageUrl",
+            name = name,
+            grade = grade,
+            classNum = classNum,
+            number = number,
+            profileImageUrl = profileImageUrl,
             roles = mutableListOf(UserRole.ROLE_ADMIN),
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }
 
-    private val responseStub = listOf(
-        NoticeResponse(
-            noticeId = noticeId,
-            title = title,
-            user = UserResponse(
-                userId = userId,
-                name = "test",
-                grade = 2,
-                classNum = 3,
-                number = 6,
-                profileImageUrl = "profileImageUrl"
-            ),
-            index = 1,
-            createdAt = LocalDateTime.MAX
+    private val userResponseStub: UserResponse by lazy {
+        UserResponse(
+            userId = userId,
+            name = name,
+            grade = grade,
+            classNum = classNum,
+            number = number,
+            profileImageUrl = profileImageUrl
         )
+    }
+
+    private val responseStub = listOf(
+        NoticeResponse.of(noticeStub, userResponseStub, index)
     )
 
     @BeforeEach

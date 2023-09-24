@@ -29,9 +29,15 @@ class QueryNoticeDetailsUseCaseTest {
     private lateinit var queryNoticeDetailsUseCase: QueryNoticeDetailsUseCase
 
     private val noticeId = UUID.randomUUID()
-    private val userId = UUID.randomUUID()
     private val title = "title_test"
     private val content = "content_test"
+
+    private val userId = UUID.randomUUID()
+    private val name = "test"
+    private val grade = 2
+    private val classNum = 3
+    private val number = 6
+    private val profileImageUrl = "profileImageUrl"
 
     private val noticeStub: Notice by lazy {
         Notice(
@@ -47,33 +53,30 @@ class QueryNoticeDetailsUseCaseTest {
         User(
             id = userId,
             email = "test@email",
-            name = "test",
-            grade = 2,
-            classNum = 3,
-            number = 6,
-            profileImageUrl = "profileImageUrl",
+            name = name,
+            grade = grade,
+            classNum = classNum,
+            number = number,
+            profileImageUrl = profileImageUrl,
             roles = mutableListOf(UserRole.ROLE_ADMIN),
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }
 
+    private val userResponseStub: UserResponse by lazy {
+        UserResponse(
+            userId = userId,
+            name = name,
+            grade = grade,
+            classNum = classNum,
+            number = number,
+            profileImageUrl = profileImageUrl
+        )
+    }
 
     private val responseStub: NoticeDetailsResponse by lazy {
-        NoticeDetailsResponse(
-            noticeId = noticeId,
-            title = title,
-            content = content,
-            user = UserResponse(
-                userId = userId,
-                name = "test",
-                grade = 2,
-                classNum = 3,
-                number = 6,
-                profileImageUrl = "profileImageUrl"
-            ),
-            createdAt = LocalDateTime.MAX
-        )
+        NoticeDetailsResponse.of(noticeStub, userResponseStub)
     }
 
     @BeforeEach

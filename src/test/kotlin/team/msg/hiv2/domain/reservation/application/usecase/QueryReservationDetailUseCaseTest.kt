@@ -109,13 +109,7 @@ class QueryReservationDetailUseCaseTest {
     }
 
     private val responseStub by lazy {
-        ReservationDetailResponse(
-            reservationId = reservationStub.id,
-            reason = reason,
-            checkStatus = false,
-            users = listOf(userResponseStub1, userResponseStub2),
-            reservationNumber = reservationNumber
-        )
+        ReservationDetailResponse.of(reservationStub, listOf(userResponseStub1, userResponseStub2))
     }
 
     private val requestId = reservationStub.id

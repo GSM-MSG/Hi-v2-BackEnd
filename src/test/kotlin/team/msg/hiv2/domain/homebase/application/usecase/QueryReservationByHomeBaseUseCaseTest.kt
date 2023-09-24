@@ -117,14 +117,7 @@ class QueryReservationByHomeBaseUseCaseTest {
 
 
     private val responseStub by lazy {
-        ReservationResponse(
-            reservationId = reservationId1,
-            users = listOf(
-                userResponseStub1,
-                userResponseStub2
-            ),
-            reservationNumber = reservationNumber
-        )
+        ReservationResponse.of(reservationStub, listOf(userResponseStub1, userResponseStub2))
     }
 
     @BeforeEach
