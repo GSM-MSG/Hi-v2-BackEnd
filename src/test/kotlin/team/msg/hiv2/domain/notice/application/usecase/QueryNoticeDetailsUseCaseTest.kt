@@ -58,21 +58,12 @@ class QueryNoticeDetailsUseCaseTest {
         )
     }
 
+    private val userResponseStub: UserResponse by lazy {
+        UserResponse.of(userStub)
+    }
 
     private val responseStub: NoticeDetailsResponse by lazy {
-        NoticeDetailsResponse(
-            noticeId = noticeId,
-            title = title,
-            content = content,
-            user = UserResponse(
-                userId = userId,
-                name = "test",
-                grade = 2,
-                classNum = 3,
-                number = 6
-            ),
-            createdAt = LocalDateTime.MAX
-        )
+        NoticeDetailsResponse.of(noticeStub, userResponseStub)
     }
 
     @BeforeEach

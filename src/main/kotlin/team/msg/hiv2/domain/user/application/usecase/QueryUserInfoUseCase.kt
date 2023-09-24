@@ -6,7 +6,6 @@ import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
-import java.util.*
 
 @ReadOnlyUseCase
 class QueryUserInfoUseCase(
