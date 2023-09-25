@@ -12,6 +12,7 @@ import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserRoleResponse
 import team.msg.hiv2.domain.user.presentation.data.web.UpdateUserUseStatusWebRequest
 import java.util.UUID
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/user")
@@ -44,7 +45,7 @@ class UserWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("/{id}")
-    fun updateUserUseStatus(@PathVariable id: UUID, request: UpdateUserUseStatusWebRequest): ResponseEntity<Void> =
+    fun updateUserUseStatus(@PathVariable id: UUID, @RequestBody @Valid request: UpdateUserUseStatusWebRequest): ResponseEntity<Void> =
         userFacade.updateUserUseStatus(id,
             UpdateUserUseStatusRequest(
                 status = request.status
@@ -53,7 +54,7 @@ class UserWebAdapter(
             .let { ResponseEntity.noContent().build() }
 
     @PatchMapping("/{id}/role")
-    fun updateUserRole(@PathVariable id: UUID, request: UpdateUserRoleWebRequest): ResponseEntity<Void> =
+    fun updateUserRole(@PathVariable id: UUID, @RequestBody @Valid request: UpdateUserRoleWebRequest): ResponseEntity<Void> =
         userFacade.updateUserRole(id,
             UpdateUserRoleWebRequest(
                 role = request.role
