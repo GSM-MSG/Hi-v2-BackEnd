@@ -13,6 +13,7 @@ class UserInfoResponse(
         fun of(user: User, reservation: ReservationResponse?) = UserInfoResponse(
             user = UserResponse(
                 userId = user.id,
+                email = user.email,
                 name = user.name,
                 grade = user.grade,
                 classNum = user.classNum,
