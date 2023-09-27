@@ -1,8 +1,6 @@
 package team.msg.hiv2.domain.user.application.usecase
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.*
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mock
@@ -42,6 +40,7 @@ class SearchUserByNameKeywordUseCaseTest {
     private val responseStub by lazy {
         UserResponse(
             userId = userStub.id,
+            email = userStub.email,
             name = userStub.name,
             grade = userStub.grade,
             classNum = userStub.classNum,
