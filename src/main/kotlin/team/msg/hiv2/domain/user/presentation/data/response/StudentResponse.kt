@@ -5,20 +5,19 @@ import team.msg.hiv2.domain.user.domain.constant.UseStatus
 
 data class StudentResponse(
     val user: UserResponse,
-    val email: String,
     val useStatus: UseStatus
 ) {
     companion object {
         fun of(user: User) = StudentResponse(
             user = UserResponse(
                 userId = user.id,
+                email = user.email,
                 name = user.name,
                 grade = user.grade,
                 classNum = user.classNum,
                 number = user.number,
                 profileImageUrl = user.profileImageUrl
             ),
-            email = user.email,
             useStatus = user.useStatus
         )
     }
