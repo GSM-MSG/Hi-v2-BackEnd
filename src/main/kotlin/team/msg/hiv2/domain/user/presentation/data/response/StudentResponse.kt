@@ -18,7 +18,6 @@ data class StudentResponse(
                 number = user.number,
                 profileImageUrl = user.profileImageUrl,
                 roles = user.roles
-
             ),
             useStatus = user.useStatus
         )
