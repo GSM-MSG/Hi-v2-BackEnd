@@ -1,6 +1,7 @@
 package team.msg.hiv2.domain.user.presentation.data.response
 
 import team.msg.hiv2.domain.user.domain.User
+import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import java.util.UUID
 
@@ -12,7 +13,8 @@ data class UserResponse(
     val classNum: Int?,
     val number: Int?,
     val profileImageUrl: String,
-    val roles: MutableList<UserRole>
+    val roles: MutableList<UserRole>,
+    val useStatus: UseStatus
 ) {
     companion object {
         fun of(user: User) = UserResponse(
@@ -23,7 +25,8 @@ data class UserResponse(
             classNum = user.classNum,
             number = user.number,
             profileImageUrl = user.profileImageUrl,
-            roles = user.roles
+            roles = user.roles,
+            useStatus = user.useStatus
         )
     }
 }
