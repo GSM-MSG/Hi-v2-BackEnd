@@ -16,7 +16,8 @@ data class StudentResponse(
                 grade = user.grade,
                 classNum = user.classNum,
                 number = user.number,
-                profileImageUrl = user.profileImageUrl
+                profileImageUrl = user.profileImageUrl,
+                roles = user.roles
             ),
             useStatus = user.useStatus
         )
