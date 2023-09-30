@@ -38,8 +38,8 @@ class HttpLoggingAspect {
         val contentType = request.contentType
         val userAgent = request.getHeader("User-Agent")
         val signature: MethodSignature = proceedingJoinPoint.signature as MethodSignature
-        val className: String = signature.declaringType.simpleName
-        val methodName: String = signature.name
+        val className = signature.declaringType.simpleName
+        val methodName = signature.name
         val headerNames = request.headerNames
         val headerSet: MutableSet<String> = HashSet()
 
