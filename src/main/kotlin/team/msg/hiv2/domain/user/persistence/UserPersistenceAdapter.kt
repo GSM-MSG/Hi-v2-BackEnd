@@ -63,14 +63,17 @@ class UserPersistenceAdapter(
         userMapper.toDomain(userRepository.findByIdOrNull(securityPort.queryCurrentUserId()))
             .let { it ?: throw UserNotFoundException() }
 
-    override fun queryUserByNameContaining(keyword: String): List<User> =
-        userRepository.findAllByNameContaining(keyword).map { userMapper.toDomain(it)!! }
+    override fun queryUserByNameContainingOrderByEmail(keyword: String): List<User> =
+        userRepository.findAllByNameContainingOrderByEmail(keyword).map { userMapper.toDomain(it)!! }
 
     override fun queryAllUserByReservationIsNotNull(): List<User> =
         userRepository.findAllByReservationIsNotNull().map { userMapper.toDomain(it)!! }
 
     override fun queryAllUserByRolesContaining(role: UserRole): List<User> =
         userRepository.findAllByRolesContaining(role).map { userMapper.toDomain(it)!! }
+
+    override fun queryAllUserByNameContainingAndRolesContainingOrderByEmail(keyword: String,role: UserRole): List<User>  =
+        userRepository.findAllByNameContainingAndRolesContainingOrderByEmail(keyword, role).map { userMapper.toDomain(it)!! }
 
     override fun queryAllUserByReservationIn(reservations: List<Reservation>): List<User> =
         userRepository.findAllByReservationIn(reservations.map { reservationMapper.toEntity(it) })
