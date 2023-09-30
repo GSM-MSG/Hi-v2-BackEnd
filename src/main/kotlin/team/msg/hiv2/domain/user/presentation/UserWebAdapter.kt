@@ -13,6 +13,7 @@ import team.msg.hiv2.domain.user.presentation.data.response.UserRoleResponse
 import team.msg.hiv2.domain.user.presentation.data.web.UpdateUserUseStatusWebRequest
 import java.util.UUID
 import javax.validation.Valid
+import team.msg.hiv2.domain.user.presentation.data.response.StudentResponse
 
 @RestController
 @RequestMapping("/user")
@@ -61,4 +62,11 @@ class UserWebAdapter(
             )
         )
             .let { ResponseEntity.noContent().build() }
+
+    @GetMapping("/search-student")
+    fun searchStudent(@RequestParam keyword: String): ResponseEntity<List<StudentResponse>> =
+        userFacade.searchStudentByNameKeyword(
+            SearchUserKeywordRequest(keyword)
+        )
+            .let { ResponseEntity.ok(it) }
 }

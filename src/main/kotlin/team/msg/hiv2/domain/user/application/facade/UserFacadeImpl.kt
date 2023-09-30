@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.user.application.usecase.QueryAllStudentsUseCase
 import team.msg.hiv2.domain.user.application.usecase.QueryMyRoleUseCase
 import team.msg.hiv2.domain.user.application.usecase.QueryUserInfoUseCase
+import team.msg.hiv2.domain.user.application.usecase.SearchStudentByNameKeywordUseCase
 import team.msg.hiv2.domain.user.application.usecase.SearchUserByNameKeywordUseCase
 import team.msg.hiv2.domain.user.application.usecase.UpdateUserRoleUseCase
 import team.msg.hiv2.domain.user.application.usecase.UpdateUserUseStatusUseCase
@@ -11,6 +12,7 @@ import team.msg.hiv2.domain.user.presentation.data.request.SearchUserKeywordRequ
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserRoleWebRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRequest
 import team.msg.hiv2.domain.user.presentation.data.response.AllStudentsResponse
+import team.msg.hiv2.domain.user.presentation.data.response.StudentResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserRoleResponse
@@ -23,7 +25,8 @@ class UserFacadeImpl(
     private val queryMyRoleUseCase: QueryMyRoleUseCase,
     private val searchUserByNameKeywordUseCase: SearchUserByNameKeywordUseCase,
     private val updateUserUseStatusUseCase: UpdateUserUseStatusUseCase,
-    private val updateUserRoleUseCase: UpdateUserRoleUseCase
+    private val updateUserRoleUseCase: UpdateUserRoleUseCase,
+    private val searchStudentByNameKeywordUseCase: SearchStudentByNameKeywordUseCase
 ) : UserFacade {
 
     override fun queryAllStudents(): AllStudentsResponse =
@@ -43,5 +46,8 @@ class UserFacadeImpl(
 
     override fun updateUserRole(userId: UUID, request: UpdateUserRoleWebRequest) =
         updateUserRoleUseCase.execute(userId, request)
+
+    override fun searchStudentByNameKeyword(request: SearchUserKeywordRequest): List<StudentResponse> =
+        searchStudentByNameKeywordUseCase.execute(request)
 
 }
