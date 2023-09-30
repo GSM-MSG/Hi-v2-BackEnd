@@ -57,14 +57,14 @@ class HttpLoggingAspect {
             is ResponseEntity<*> -> {
                 log.info(
                     "At {}#{} [Response:{}] IP: {}, Session-ID: {}, Headers: {}, Response: {}, Status-Code: {}, Code: {}",
-                    className,methodName,method,ip,sessionId,result.headers,result.body,result.statusCode,code
+                    className, methodName, method, ip,sessionId, result.headers, result.body, result.statusCode, code
                 )
             }
 
             null -> {
                 log.info(
                     "At {}#{} [Response: null] IP: {}, Session-ID: {}, Code: {}",
-                    className,methodName,ip,sessionId,code
+                    className, methodName, ip, sessionId, code
                 )
             }
 
