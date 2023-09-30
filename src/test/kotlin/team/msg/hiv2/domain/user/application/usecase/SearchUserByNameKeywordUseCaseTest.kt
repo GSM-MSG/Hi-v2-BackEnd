@@ -38,16 +38,7 @@ class SearchUserByNameKeywordUseCaseTest {
     }
 
     private val responseStub by lazy {
-        UserResponse(
-            userId = userStub.id,
-            email = userStub.email,
-            name = userStub.name,
-            grade = userStub.grade,
-            classNum = userStub.classNum,
-            number = userStub.number,
-            profileImageUrl = userStub.profileImageUrl,
-            roles = userStub.roles
-        )
+        UserResponse.of(userStub)
     }
 
     private val requestStub by lazy {
