@@ -45,7 +45,8 @@ class SearchUserByNameKeywordUseCaseTest {
             grade = userStub.grade,
             classNum = userStub.classNum,
             number = userStub.number,
-            profileImageUrl = userStub.profileImageUrl
+            profileImageUrl = userStub.profileImageUrl,
+            roles = userStub.roles
         )
     }
 
