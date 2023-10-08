@@ -1,5 +1,6 @@
 package team.msg.hiv2.domain.homebase.persistence
 
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.homebase.application.spi.HomeBasePort
 import team.msg.hiv2.domain.homebase.domain.HomeBase
@@ -17,5 +18,8 @@ class HomeBasePersistenceAdapter(
 
     override fun queryAllHomeBaseByPeriod(period: Int): List<HomeBase> =
         homeBaseRepository.findAllByPeriod(period).map { homeBaseMapper.toDomain(it)!! }
+
+    override fun queryHomeBaseById(id: Long): HomeBase? =
+        homeBaseMapper.toDomain(homeBaseRepository.findByIdOrNull(id))
 
 }

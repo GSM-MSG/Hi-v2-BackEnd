@@ -1,5 +1,6 @@
 package team.msg.hiv2.domain.user.presentation.data.response
 
+import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
@@ -16,10 +17,11 @@ class UserInfoResponse(
     val profileImageUrl: String,
     val roles: MutableList<UserRole>,
     val useStatus: UseStatus,
-    val reservation: ReservationResponse?
+    val reservation: ReservationResponse?,
+    val homeBase: HomeBaseResponse?
 ) {
     companion object {
-        fun of(user: User, reservation: ReservationResponse?) = UserInfoResponse(
+        fun of(user: User, reservation: ReservationResponse?, homeBase: HomeBaseResponse?) = UserInfoResponse(
             userId = user.id,
             email = user.email,
             name = user.name,
@@ -29,7 +31,8 @@ class UserInfoResponse(
             profileImageUrl = user.profileImageUrl,
             roles = user.roles,
             useStatus = user.useStatus,
-            reservation = reservation
+            reservation = reservation,
+            homeBase = homeBase
         )
     }
 }
