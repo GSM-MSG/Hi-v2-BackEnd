@@ -6,4 +6,5 @@ interface QueryHomeBasePort {
 
     fun queryHomeBaseByFloorAndPeriod(floor: Int, period: Int): HomeBase?
     fun queryAllHomeBaseByPeriod(period: Int): List<HomeBase>
+    fun queryHomeBaseById(id: Long): HomeBase?
 }

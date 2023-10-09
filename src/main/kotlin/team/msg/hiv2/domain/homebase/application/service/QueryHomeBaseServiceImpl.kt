@@ -14,4 +14,7 @@ class QueryHomeBaseServiceImpl(
 
     override fun queryAllHomeBaseByPeriod(period: Int): List<HomeBase> =
         queryHomeBasePort.queryAllHomeBaseByPeriod(period)
+
+    override fun queryHomeBaseById(id: Long): HomeBase =
+        queryHomeBasePort.queryHomeBaseById(id) ?: throw HomeBaseNotFoundException()
 }

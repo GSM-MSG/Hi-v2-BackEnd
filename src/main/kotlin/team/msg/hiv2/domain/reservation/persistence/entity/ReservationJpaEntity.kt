@@ -3,7 +3,6 @@ package team.msg.hiv2.domain.reservation.persistence.entity
 import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
 import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 import team.msg.hiv2.global.entity.BaseUuidEntity
-import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 

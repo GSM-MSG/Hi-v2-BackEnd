@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.mockito.Mock
 import org.mockito.kotlin.given
+import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
+import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.user.application.service.UserService
@@ -22,6 +24,9 @@ internal class QueryUserInfoUseCaseTest {
 
     @Mock
     private lateinit var reservationService: ReservationService
+
+    @Mock
+    private lateinit var homeBaseService: HomeBaseService
 
     private lateinit var queryUserInfoUseCase: QueryUserInfoUseCase
 
@@ -56,10 +61,18 @@ internal class QueryUserInfoUseCaseTest {
         )
     }
 
+    private val homeBaseStub: HomeBase by lazy {
+        HomeBase(
+            id = 1,
+            floor = 3,
+            period = 8
+        )
+    }
+
     @BeforeEach
     fun setUp() {
         queryUserInfoUseCase = QueryUserInfoUseCase(
-            userService, reservationService
+            userService, reservationService, homeBaseService
         )
     }
 
@@ -75,6 +88,9 @@ internal class QueryUserInfoUseCaseTest {
 
         given(userService.queryAllUserByReservation(reservationStub))
             .willReturn(listOf(userStub))
+
+        given(homeBaseService.queryHomeBaseById(reservationStub.homeBaseId))
+            .willReturn(homeBaseStub)
 
         // when & then
         assertDoesNotThrow {
