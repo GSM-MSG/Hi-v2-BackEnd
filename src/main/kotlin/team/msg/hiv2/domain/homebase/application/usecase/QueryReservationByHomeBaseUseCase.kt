@@ -22,7 +22,7 @@ class QueryReservationByHomeBaseUseCase(
         return reservations.map {
             val users = userService.queryAllUserByReservation(it)
             ReservationResponse.of(it, users.map { user
-                -> UserResponse.of(user) })
+                -> UserResponse.of(user) }, homeBase)
         }
     }
 }

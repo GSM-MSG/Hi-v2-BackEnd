@@ -103,7 +103,7 @@ class QueryReservationByHomeBaseUseCaseTest {
 
 
     private val responseStub by lazy {
-        ReservationResponse.of(reservationStub, listOf(userResponseStub1, userResponseStub2))
+        ReservationResponse.of(reservationStub, listOf(userResponseStub1, userResponseStub2), homeBaseStub)
     }
 
     @BeforeEach

@@ -1,7 +1,6 @@
 package team.msg.hiv2.domain.user.application.usecase
 
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
-import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 import team.msg.hiv2.domain.user.application.service.UserService
@@ -27,10 +26,7 @@ class QueryUserInfoUseCase(
             user,
             reservation?.let {
                 val users = userService.queryAllUserByReservation(it)
-                ReservationResponse.of(it, users.map { user -> UserResponse.of(user) }) },
-            homeBase?.let {
-                HomeBaseResponse.of(homeBase)
-            }
+                ReservationResponse.of(it, users.map { user -> UserResponse.of(user) }, homeBase!!) }
         )
     }
 }
