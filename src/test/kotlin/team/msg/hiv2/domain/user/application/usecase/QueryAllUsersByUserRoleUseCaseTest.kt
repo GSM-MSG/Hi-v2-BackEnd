@@ -9,22 +9,22 @@ import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
-import team.msg.hiv2.domain.user.presentation.data.response.AllStudentsResponse
-import team.msg.hiv2.domain.user.presentation.data.response.StudentResponse
+import team.msg.hiv2.domain.user.presentation.data.response.AllUsersResponse
+import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.HiTest
 import java.util.UUID
 
 @HiTest
-internal class QueryAllStudentsUseCaseTest {
+internal class QueryAllUsersByUserRoleUseCaseTest {
 
     @Mock
     private lateinit var userService: UserService
 
-    private lateinit var queryAllStudentsUseCase: QueryAllStudentsUseCase
+    private lateinit var queryAllUsersByUserRoleUseCase: QueryAllUsersByUserRoleUseCase
 
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
-    private val studentRole = UserRole.ROLE_STUDENT
+    private val userRole = UserRole.ROLE_STUDENT
 
     private val userStub1: User by lazy {
         User(
@@ -35,7 +35,7 @@ internal class QueryAllStudentsUseCaseTest {
             classNum = 3,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(studentRole),
+            roles = mutableListOf(userRole),
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
@@ -50,23 +50,23 @@ internal class QueryAllStudentsUseCaseTest {
             classNum = 3,
             number = 7,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(studentRole),
+            roles = mutableListOf(userRole),
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }
 
     private val responseStub by lazy {
-        AllStudentsResponse(
+        AllUsersResponse(
             listOf(userStub1, userStub2).map {
-                StudentResponse.of(it)
+                UserResponse.of(it)
             }
         )
     }
 
     @BeforeEach
     fun setUp() {
-        queryAllStudentsUseCase = QueryAllStudentsUseCase(
+        queryAllUsersByUserRoleUseCase = QueryAllUsersByUserRoleUseCase(
             userService
         )
     }
@@ -75,11 +75,11 @@ internal class QueryAllStudentsUseCaseTest {
     fun `전체 학생 조회 성공`() {
 
         // given
-        given(userService.queryAllUserByRolesContaining(studentRole))
+        given(userService.queryAllUserByRolesContainingOrderByEmail(userRole))
             .willReturn(listOf(userStub1, userStub2))
 
         // when
-        val response = queryAllStudentsUseCase.execute()
+        val response = queryAllUsersByUserRoleUseCase.execute(userRole)
 
         // then
         assertThat(response).isEqualTo(responseStub)

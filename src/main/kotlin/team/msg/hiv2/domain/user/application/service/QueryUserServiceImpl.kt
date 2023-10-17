@@ -46,6 +46,9 @@ class QueryUserServiceImpl(
     override fun queryAllUserByRolesContaining(role: UserRole): List<User> =
         queryUserPort.queryAllUserByRolesContaining(role)
 
+    override fun queryAllUserByRolesContainingOrderByEmail(role: UserRole): List<User> =
+        queryUserPort.queryAllUserByRolesContainingOrderByEmail(role)
+
     override fun queryAllUserByNameContainingAndRolesContainingOrderByEmail(keyword: String,role: UserRole) =
         queryUserPort.queryAllUserByNameContainingAndRolesContainingOrderByEmail(keyword, role)
 

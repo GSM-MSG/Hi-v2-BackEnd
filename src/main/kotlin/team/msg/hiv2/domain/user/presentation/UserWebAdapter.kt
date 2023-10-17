@@ -3,10 +3,11 @@ package team.msg.hiv2.domain.user.presentation
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import team.msg.hiv2.domain.user.application.facade.UserFacade
+import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.presentation.data.request.SearchUserKeywordRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserRoleWebRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRequest
-import team.msg.hiv2.domain.user.presentation.data.response.AllStudentsResponse
+import team.msg.hiv2.domain.user.presentation.data.response.AllUsersResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserRoleResponse
@@ -35,9 +36,9 @@ class UserWebAdapter(
         userFacade.queryUserInfo()
             .let { ResponseEntity.ok(it) }
 
-    @GetMapping("/students")
-    fun queryAllStudents(): ResponseEntity<AllStudentsResponse> =
-        userFacade.queryAllStudents()
+    @GetMapping
+    fun queryAllUsersByUserRole(@RequestParam userRole: UserRole): ResponseEntity<AllUsersResponse> =
+        userFacade.queryAllUsersByUserRole(userRole)
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/my-role")
