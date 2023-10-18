@@ -43,6 +43,9 @@ class QueryUserServiceImpl(
     override fun queryAllUserByReservationIsNotNull(): List<User> =
         queryUserPort.queryAllUserByReservationIsNotNull()
 
+    override fun queryAllUsersOrderByEmail(): List<User> =
+        queryUserPort.queryAllUsersOrderByEmail()
+
     override fun queryAllUserByRolesContaining(role: UserRole): List<User> =
         queryUserPort.queryAllUserByRolesContaining(role)
 
