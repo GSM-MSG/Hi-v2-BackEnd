@@ -1,7 +1,6 @@
 package team.msg.hiv2.global.security
 
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -78,7 +77,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/user/students").authenticated()
             .antMatchers(HttpMethod.GET, "/user/my-role").authenticated()
             .antMatchers(HttpMethod.GET, "/user/search").hasAnyRole(ADMIN, TEACHER)
-            .antMatchers(HttpMethod.GET, "/user/search-student").hasRole(ADMIN, STUDENT)
+            .antMatchers(HttpMethod.GET, "/user/search-student").hasAnyRole(ADMIN, STUDENT)
             .antMatchers(HttpMethod.PATCH, "/user/{id}").hasAnyRole(ADMIN, TEACHER)
             .antMatchers(HttpMethod.PATCH, "/user/{id}/role").hasRole(ADMIN)
 
