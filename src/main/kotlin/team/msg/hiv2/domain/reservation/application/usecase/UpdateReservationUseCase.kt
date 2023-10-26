@@ -20,7 +20,7 @@ class UpdateReservationUseCase(
 
         userService.saveAll(prevUsers.map { it.copy(reservationId = null , useStatus = UseStatus.AVAILABLE) })
 
-        val users = userService.queryAllUserById(request.users)
+        val users = request.users.map { userService.queryUserById(it) }
 
         reservationService.save(reservation.copy(reason = request.reason))
         userService.saveAll(users.map { it.copy(reservationId = reservationId) })
