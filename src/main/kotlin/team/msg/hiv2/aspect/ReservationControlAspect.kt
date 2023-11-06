@@ -56,7 +56,6 @@ class ReservationControlAspect(
         val reservation = reservationService.queryReservationById(reservationId)
 
         userValidator.checkRepresentative(currentUser, reservation)
-        userValidator.checkUsersUseStatus(userService.queryAllUserById(request.users))
     }
 
     @Before("delegateRepresentativeUseCasePointcut(reservationId, userId)")
