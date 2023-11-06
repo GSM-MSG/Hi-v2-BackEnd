@@ -26,6 +26,9 @@ class UpdateReservationUseCaseTest {
     @Mock
     private lateinit var reservationService: ReservationService
 
+    @Mock
+    private lateinit var userValidator: UserValidator
+
     private lateinit var updateReservationUseCase: UpdateReservationUseCase
 
     private val floor = 3
@@ -97,7 +100,7 @@ class UpdateReservationUseCaseTest {
     @BeforeEach
     fun setUp(){
         updateReservationUseCase = UpdateReservationUseCase(
-            reservationService, userService
+            reservationService, userService, userValidator
         )
     }
 
