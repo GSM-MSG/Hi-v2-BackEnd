@@ -12,7 +12,8 @@ class WebMvcConfig : WebMvcConfigurer {
             .allowedMethods("GET", "POST", "PUT", "PATCH", "HEAD", "DELETE", "OPTIONS")
             .allowedOrigins(
                 "http://localhost:3000",
-                "https://dev-hi.msg-team.com"
+                "https://dev-hi.msg-team.com",
+                "https://msg-hi.vercel.app/"
             )
             .allowCredentials(true)
     }
