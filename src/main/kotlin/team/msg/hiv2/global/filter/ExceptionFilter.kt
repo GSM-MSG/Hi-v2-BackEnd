@@ -10,8 +10,11 @@ import team.msg.hiv2.global.error.exception.HiException
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import org.slf4j.LoggerFactory
 
 class ExceptionFilter: OncePerRequestFilter() {
+
+    private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
 
     override fun doFilterInternal(
         request: HttpServletRequest,
@@ -25,6 +28,10 @@ class ExceptionFilter: OncePerRequestFilter() {
                 is ExpiredJwtException -> exceptionToResponse(ErrorCode.EXPIRED_ACCESS_TOKEN, response)
                 is JwtException -> exceptionToResponse(ErrorCode.INVALID_TOKEN, response)
                 is HiException -> exceptionToResponse(e.errorCode, response)
+                else -> {
+                    log.error(e.message)
+                    exceptionToResponse(ErrorCode.INTERVAL_SERVER_ERROR,response)
+                }
             }
         }
     }
