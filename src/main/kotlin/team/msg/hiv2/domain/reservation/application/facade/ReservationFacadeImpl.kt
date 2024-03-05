@@ -10,7 +10,6 @@ import java.util.*
 @Component
 class ReservationFacadeImpl(
     private val checkAndRestrictReservationUserUseCase: CheckAndRestrictReservationUserUseCase,
-    private val delegateRepresentativeUseCase: DelegateRepresentativeUseCase,
     private val deleteAllReservationUseCase: DeleteAllReservationUseCase,
     private val deleteReservationUseCase: DeleteReservationUseCase,
     private val exitReservationUseCase: ExitReservationUseCase,
@@ -21,9 +20,6 @@ class ReservationFacadeImpl(
 
     override fun checkAndRestrictReservation(id: UUID) =
         checkAndRestrictReservationUserUseCase.execute(id)
-
-    override fun delegateRepresentative(reservationId: UUID, userId: UUID) =
-        delegateRepresentativeUseCase.execute(reservationId, userId)
 
     override fun deleteAllReservation() =
         deleteAllReservationUseCase.execute()

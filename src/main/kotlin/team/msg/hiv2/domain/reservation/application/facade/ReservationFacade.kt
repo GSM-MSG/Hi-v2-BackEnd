@@ -7,7 +7,6 @@ import java.util.UUID
 
 interface ReservationFacade {
     fun checkAndRestrictReservation(id: UUID)
-    fun delegateRepresentative(reservationId: UUID, userId: UUID)
     fun deleteAllReservation()
     fun deleteReservation(id: UUID)
     fun exitReservation(id: UUID)

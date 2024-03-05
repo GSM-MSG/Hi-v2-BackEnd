@@ -27,10 +27,6 @@ class ReservationControlAspect(
             " && args(reservationId, request) && within(team.msg.hiv2.domain.reservation.application.usecase.UpdateReservationUseCase)")
     private fun updateReservationUseCasePointcut(reservationId: UUID, request: UpdateReservationRequest) {}
 
-    @Pointcut("execution(* team.msg.hiv2.domain.reservation.application.usecase.DelegateRepresentativeUseCase.execute(..)) " +
-            "&& args(reservationId, userId) && within(team.msg.hiv2.domain.reservation.application.usecase.DelegateRepresentativeUseCase)")
-    private fun delegateRepresentativeUseCasePointcut(reservationId: UUID, userId: UUID){}
-
     @Pointcut("execution(* team.msg.hiv2.domain.reservation.application.usecase.DeleteReservationUseCase.execute(..))" +
             " && args(reservationId) && within(team.msg.hiv2.domain.reservation.application.usecase.DeleteReservationUseCase)")
     private fun deleteReservationUseCasePointcut(reservationId: UUID){}
@@ -49,14 +45,6 @@ class ReservationControlAspect(
 
     @Before("updateReservationUseCasePointcut(reservationId, request)")
     private fun checkAuthorizationUpdateReservation(reservationId: UUID, request: UpdateReservationRequest) {
-        val currentUser = userService.queryCurrentUser()
-        val reservation = reservationService.queryReservationById(reservationId)
-
-        userValidator.checkRepresentative(currentUser, reservation)
-    }
-
-    @Before("delegateRepresentativeUseCasePointcut(reservationId, userId)")
-    private fun checkAuthorizationDelegateRepresentative(reservationId: UUID, userId: UUID) {
         val currentUser = userService.queryCurrentUser()
         val reservation = reservationService.queryReservationById(reservationId)
 
