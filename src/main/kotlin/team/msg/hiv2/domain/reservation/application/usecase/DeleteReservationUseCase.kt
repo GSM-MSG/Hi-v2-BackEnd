@@ -17,7 +17,15 @@ class DeleteReservationUseCase(
 
         val users = userService.queryAllUserByReservation(reservation)
 
-        userService.saveAll(users.map { it.copy(useStatus = UseStatus.AVAILABLE, reservationId = null) })
+        val updatedUsers = users.map {
+            if (it.id == reservation.representativeId) {
+                it.copy(useStatus = UseStatus.UNAVAILABLE, reservationId = null)
+            } else {
+                it.copy(useStatus = UseStatus.AVAILABLE, reservationId = null)
+            }
+        }
+
+        userService.saveAll(updatedUsers)
         reservationService.delete(reservation)
     }
 }
