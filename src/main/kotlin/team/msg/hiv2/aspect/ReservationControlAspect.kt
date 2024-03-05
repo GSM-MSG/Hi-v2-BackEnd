@@ -3,12 +3,11 @@ package team.msg.hiv2.aspect
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.annotation.Pointcut
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
+import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import java.util.*
 
@@ -19,8 +18,6 @@ class ReservationControlAspect(
     private val reservationService: ReservationService,
     private val userValidator: UserValidator
 ) {
-
-    private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
 
     @Pointcut("execution(* team.msg.hiv2.domain.homebase.application.usecase.ReserveHomeBaseUseCase.execute(..)) " +
             "&& args(floor, period, request) && within(team.msg.hiv2.domain.homebase.application.usecase.ReserveHomeBaseUseCase)")
