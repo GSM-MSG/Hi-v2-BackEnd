@@ -52,7 +52,7 @@ class QueryNoticeDetailsUseCaseTest {
             classNum = 3,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(UserRole.ROLE_ADMIN),
+            role = mutableListOf(UserRole.ROLE_ADMIN),
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )

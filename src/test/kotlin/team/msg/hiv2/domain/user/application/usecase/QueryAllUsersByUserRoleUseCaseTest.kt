@@ -35,7 +35,7 @@ internal class QueryAllUsersByUserRoleUseCaseTest {
             classNum = 3,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(userRole),
+            role = mutableListOf(userRole),
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
@@ -50,7 +50,7 @@ internal class QueryAllUsersByUserRoleUseCaseTest {
             classNum = 3,
             number = 7,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(userRole),
+            role = mutableListOf(userRole),
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
@@ -75,7 +75,7 @@ internal class QueryAllUsersByUserRoleUseCaseTest {
     fun `전체 학생 조회 성공`() {
 
         // given
-        given(userService.queryAllUserByRolesContainingOrderByEmail(userRole))
+        given(userService.queryAllUserByRoleContainingOrderByEmail(userRole))
             .willReturn(listOf(userStub1, userStub2))
 
         // when

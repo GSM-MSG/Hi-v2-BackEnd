@@ -18,31 +18,31 @@ class GenerateJwtAdapter(
     private val commandRefreshTokenPort: CommandRefreshTokenPort
 ) : GenerateJwtPort{
 
-    override fun generate(userId: UUID, roles: MutableList<UserRole>): TokenResponse {
-        val accessToken = generateAccessToken(userId, jwtProperties.accessSecret, roles)
-        val refreshToken = generateRefreshToken(userId, jwtProperties.refreshSecret, roles)
+    override fun generate(userId: UUID, role: UserRole): TokenResponse {
+        val accessToken = generateAccessToken(userId, jwtProperties.accessSecret, role)
+        val refreshToken = generateRefreshToken(userId, jwtProperties.refreshSecret, role)
         val accessExpiredAt = getAccessTokenExpiredAt()
         val refreshExpiredAt = getRefreshTokenExpiredAt()
         commandRefreshTokenPort.save(RefreshToken(refreshToken, userId, jwtProperties.refreshExp))
         return TokenResponse(accessToken, refreshToken, accessExpiredAt, refreshExpiredAt)
     }
 
-    private fun generateAccessToken(userId: UUID, secret: Key, roles: MutableList<UserRole>): String =
+    private fun generateAccessToken(userId: UUID,secret: Key, role: UserRole): String =
         Jwts.builder()
             .signWith(secret, SignatureAlgorithm.HS256)
             .setSubject(userId.toString())
             .claim("type", JwtProperties.accessType)
-            .claim(JwtProperties.roleType, roles)
+            .claim(JwtProperties.roleType, role)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtProperties.accessExp * 1000))
             .compact()
 
-    private fun generateRefreshToken(userId: UUID, secret: Key, roles: MutableList<UserRole>): String =
+    private fun generateRefreshToken(userId: UUID,secret: Key, role: UserRole): String =
         Jwts.builder()
             .signWith(secret, SignatureAlgorithm.HS256)
             .setSubject(userId.toString())
             .claim("type", JwtProperties.refreshType)
-            .claim(JwtProperties.roleType, roles)
+            .claim(JwtProperties.roleType, role)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtProperties.refreshExp * 1000))
             .compact()

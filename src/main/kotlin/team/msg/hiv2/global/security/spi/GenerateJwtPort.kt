@@ -6,5 +6,5 @@ import java.util.UUID
 
 interface GenerateJwtPort {
 
-    fun generate(userId: UUID, roles: MutableList<UserRole>): TokenResponse
+    fun generate(userId: UUID, role: UserRole): TokenResponse
 }

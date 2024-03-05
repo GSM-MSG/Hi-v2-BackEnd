@@ -1,7 +1,5 @@
 package team.msg.hiv2.domain.user.application.service
 
-import team.msg.hiv2.domain.user.application.spi.CommandUserPort
-import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.application.spi.UserPort
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.exception.UserNotFoundException

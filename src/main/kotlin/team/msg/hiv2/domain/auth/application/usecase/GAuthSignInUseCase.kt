@@ -33,14 +33,14 @@ class GAuthSignInUseCase(
                 classNum = gAuthUserInfo.classNum,
                 number = gAuthUserInfo.num,
                 profileImageUrl = gAuthUserInfo.profileUrl ?: "",
-                roles = mutableListOf(role),
+                role = role,
                 reservationId = null,
                 useStatus = UseStatus.AVAILABLE
             ),
             userService.existsUserByEmail(gAuthUserInfo.email),
         )
 
-        return generateJwtPort.generate(user.id, user.roles)
+        return generateJwtPort.generate(user.id, user.role)
     }
 
 }

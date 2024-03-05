@@ -18,8 +18,8 @@ interface QueryUserService {
     fun queryUserByNameContainingOrderByEmail(keyword: String): List<User>
     fun queryAllUserByReservationIsNotNull(): List<User>
     fun queryAllUsersOrderByEmail(): List<User>
-    fun queryAllUserByRolesContaining(role: UserRole): List<User>
-    fun queryAllUserByRolesContainingOrderByEmail(role: UserRole): List<User>
-    fun queryAllUserByNameContainingAndRolesContainingOrderByEmail(keyword: String, role: UserRole): List<User>
+    fun queryAllUserByRoleContaining(role: UserRole): List<User>
+    fun queryAllUserByRoleContainingOrderByEmail(role: UserRole): List<User>
+    fun queryAllUserByNameContainingAndRoleContainingOrderByEmail(keyword: String, role: UserRole): List<User>
     fun queryAllUserByReservationIn(reservations: List<Reservation>): List<User>
 }

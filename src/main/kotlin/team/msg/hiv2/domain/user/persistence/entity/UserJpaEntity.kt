@@ -36,9 +36,8 @@ class UserJpaEntity(
     val reservation: ReservationJpaEntity? = null,
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "roles", joinColumns = [JoinColumn(name = "user_id")])
-    var roles: MutableList<UserRole> = mutableListOf(),
+    @Column(nullable = false)
+    var role: UserRole,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "use_status")

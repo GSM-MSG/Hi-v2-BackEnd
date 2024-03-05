@@ -11,6 +11,6 @@ class QueryMyRoleUseCase(
     fun execute(): UserRoleResponse {
         val user = userService.queryCurrentUser()
 
-        return UserRoleResponse.of(user.id, user.roles)
+        return UserRoleResponse.of(user.id, user.role)
     }
 }

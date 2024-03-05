@@ -64,7 +64,7 @@ class QueryReservationDetailUseCaseTest {
             classNum = 4,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(UserRole.ROLE_STUDENT),
+            role = mutableListOf(UserRole.ROLE_STUDENT),
             reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )
@@ -79,7 +79,7 @@ class QueryReservationDetailUseCaseTest {
             classNum = 4,
             number = 7,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(UserRole.ROLE_STUDENT),
+            role = mutableListOf(UserRole.ROLE_STUDENT),
             reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )

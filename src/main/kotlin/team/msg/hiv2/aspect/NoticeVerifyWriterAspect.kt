@@ -27,7 +27,7 @@ class NoticeVerifyWriterAspect(
         val user = userService.queryCurrentUser()
         val notice = noticeService.queryNoticeById(id)
 
-        if (user.roles.firstOrNull() == UserRole.ROLE_TEACHER)
+        if (user.role == UserRole.ROLE_TEACHER)
             userValidator.checkUserAndWriter(user.id, notice.userId)
     }
 }

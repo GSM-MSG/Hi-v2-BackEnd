@@ -1,6 +1,5 @@
 package team.msg.hiv2.domain.user.presentation.data.response
 
-import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
@@ -15,7 +14,7 @@ class UserInfoResponse(
     val classNum: Int?,
     val number: Int?,
     val profileImageUrl: String,
-    val roles: MutableList<UserRole>,
+    val role: UserRole,
     val useStatus: UseStatus,
     val reservation: ReservationResponse?
 ) {
@@ -28,7 +27,7 @@ class UserInfoResponse(
             classNum = user.classNum,
             number = user.number,
             profileImageUrl = user.profileImageUrl,
-            roles = user.roles,
+            role = user.role,
             useStatus = user.useStatus,
             reservation = reservation
         )

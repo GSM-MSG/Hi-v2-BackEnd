@@ -55,7 +55,7 @@ class GAuthSignInUseCaseTest{
             classNum = classNum,
             number = number,
             profileImageUrl = profileImageUrl,
-            roles = mutableListOf(role),
+            role = mutableListOf(role),
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
@@ -126,7 +126,7 @@ class GAuthSignInUseCaseTest{
         given(userService.createUser(any(), any()))
             .willReturn(saveUserStub)
 
-        given(generateJwtPort.generate(saveUserStub.id, saveUserStub.roles))
+        given(generateJwtPort.generate(saveUserStub.id, saveUserStub.role))
             .willReturn(responseStub)
 
         // when

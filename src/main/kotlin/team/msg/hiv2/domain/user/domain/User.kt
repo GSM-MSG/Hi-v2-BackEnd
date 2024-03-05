@@ -12,7 +12,7 @@ data class User(
     val classNum: Int?,
     val number: Int?,
     val profileImageUrl: String,
-    val roles: MutableList<UserRole>,
+    val role: UserRole,
     val reservationId: UUID?,
     val useStatus: UseStatus
 )

@@ -9,7 +9,6 @@ import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.user.application.service.UserService
-import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
@@ -60,7 +59,7 @@ class DelegateRepresentativeUseCaseTest {
             classNum = 4,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(UserRole.ROLE_STUDENT),
+            role = mutableListOf(UserRole.ROLE_STUDENT),
             reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )
@@ -75,7 +74,7 @@ class DelegateRepresentativeUseCaseTest {
             classNum = 4,
             number = 7,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(UserRole.ROLE_STUDENT),
+            role = mutableListOf(UserRole.ROLE_STUDENT),
             reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )
