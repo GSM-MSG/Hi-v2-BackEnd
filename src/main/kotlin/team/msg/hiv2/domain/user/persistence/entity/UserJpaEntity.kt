@@ -36,11 +36,11 @@ class UserJpaEntity(
     val reservation: ReservationJpaEntity? = null,
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false)
     var role: UserRole,
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "use_status")
+    @Column(name = "use_status", nullable = false)
     val useStatus: UseStatus
 
 ) : BaseUuidEntity(id)
