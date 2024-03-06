@@ -32,7 +32,7 @@ internal class UpdateUserUseStatusUseCaseTest {
             classNum = 3,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            role = mutableListOf(UserRole.ROLE_STUDENT),
+            role = UserRole.ROLE_STUDENT,
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )

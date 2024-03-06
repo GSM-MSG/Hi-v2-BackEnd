@@ -62,7 +62,7 @@ class DeleteReservationUseCaseTest {
             classNum = 4,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            role = mutableListOf(UserRole.ROLE_STUDENT),
+            role = UserRole.ROLE_STUDENT,
             reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )
@@ -77,7 +77,7 @@ class DeleteReservationUseCaseTest {
             classNum = 4,
             number = 7,
             profileImageUrl = "profileImageUrl",
-            role = mutableListOf(UserRole.ROLE_STUDENT),
+            role = UserRole.ROLE_STUDENT,
             reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )

@@ -86,7 +86,7 @@ internal class ReserveHomeBaseUseCaseTest {
             classNum = 4,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            role = mutableListOf(UserRole.ROLE_STUDENT),
+            role = UserRole.ROLE_STUDENT,
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
@@ -99,7 +99,7 @@ internal class ReserveHomeBaseUseCaseTest {
             classNum = 4,
             number = 7,
             profileImageUrl = "profileImageUrl2",
-            role = mutableListOf(UserRole.ROLE_STUDENT),
+            role = UserRole.ROLE_STUDENT,
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )

@@ -35,7 +35,7 @@ internal class QueryAllUsersByUserRoleUseCaseTest {
             classNum = 3,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            role = mutableListOf(userRole),
+            role = userRole,
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
@@ -50,7 +50,7 @@ internal class QueryAllUsersByUserRoleUseCaseTest {
             classNum = 3,
             number = 7,
             profileImageUrl = "profileImageUrl",
-            role = mutableListOf(userRole),
+            role = userRole,
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )

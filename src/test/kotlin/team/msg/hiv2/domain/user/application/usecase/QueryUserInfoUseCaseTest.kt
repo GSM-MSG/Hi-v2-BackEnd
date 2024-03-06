@@ -44,7 +44,7 @@ internal class QueryUserInfoUseCaseTest {
             classNum = 3,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            role = mutableListOf(UserRole.ROLE_ADMIN),
+            role = UserRole.ROLE_ADMIN,
             reservationId = reservationId,
             useStatus = UseStatus.AVAILABLE
         )

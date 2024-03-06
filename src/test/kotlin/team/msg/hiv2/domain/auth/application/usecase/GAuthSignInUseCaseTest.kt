@@ -55,7 +55,7 @@ class GAuthSignInUseCaseTest{
             classNum = classNum,
             number = number,
             profileImageUrl = profileImageUrl,
-            role = mutableListOf(role),
+            role = role,
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
