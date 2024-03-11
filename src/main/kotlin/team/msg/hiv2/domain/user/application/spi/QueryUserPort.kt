@@ -20,6 +20,6 @@ interface QueryUserPort {
     fun queryAllUsersOrderByEmail(): List<User>
     fun queryAllUserByRoleContaining(role: UserRole): List<User>
     fun queryAllUserByRoleOrderByEmail(role: UserRole): List<User>
-    fun queryAllUserByNameContainingAndRoleContainingOrderByEmail(keyword: String,role: UserRole): List<User>
+    fun queryAllUserByNameContainingAndRoleOrderByEmail(keyword: String,role: UserRole): List<User>
     fun queryAllUserByReservationIn(reservations: List<Reservation>): List<User>
 }
