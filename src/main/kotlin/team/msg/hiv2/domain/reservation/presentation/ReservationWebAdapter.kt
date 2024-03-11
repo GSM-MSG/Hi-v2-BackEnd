@@ -37,11 +37,6 @@ class ReservationWebAdapter(
         )
             .let { ResponseEntity.noContent().build() }
 
-    @PatchMapping("/{id}/{user_id}")
-    fun delegateRepresentative(@PathVariable id: UUID, @PathVariable("user_id") userId: UUID): ResponseEntity<Void> =
-        reservationFacade.delegateRepresentative(id, userId)
-            .let { ResponseEntity.noContent().build() }
-
     @DeleteMapping("/{id}/exit")
     fun exitReservation(@PathVariable id: UUID): ResponseEntity<Void> =
         reservationFacade.exitReservation(id)

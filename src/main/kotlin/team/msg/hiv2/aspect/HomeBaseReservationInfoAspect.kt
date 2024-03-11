@@ -1,8 +1,7 @@
 package team.msg.hiv2.aspect
 
-import org.aspectj.lang.JoinPoint
-import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
+import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.annotation.Pointcut
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
@@ -17,11 +16,11 @@ class HomeBaseReservationInfoAspect(
 
     private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
 
-    @Pointcut("execution(* team.msg.hiv2.domain.reservation.application.usecase.UpdateReservationUseCase.execute(..)) " +
+    @Pointcut("execution(* team.msg.hiv2.domain.homebase.application.usecase.ReserveHomeBaseUseCase.execute(..)) " +
             "&& args(floor, period, request) && within(team.msg.hiv2.domain.homebase.application.usecase.ReserveHomeBaseUseCase)")
-    fun reserveHomeBaseUseCasePointcut(floor: Int, period: Int, request: ReservationHomeBaseRequest) {}
+    private fun reserveHomeBaseUseCasePointcut(floor: Int, period: Int, request: ReservationHomeBaseRequest) {}
 
-    @Around(
+    @Before(
         "reserveHomeBaseUseCasePointcut(floor, period, request)"
     )
     private fun loggingReservationInfo(floor: Int, period: Int, request: ReservationHomeBaseRequest) {

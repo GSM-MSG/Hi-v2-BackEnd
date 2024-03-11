@@ -43,11 +43,13 @@ class ReservationPersistenceAdapter(
         reservationRepository.findAllByHomeBaseIn(homeBases.map { homeBaseMapper.toEntity(it) })
             .map { reservationMapper.toDomain(it)!! }
 
+    override fun queryAllReservations(): List<Reservation> =
+        reservationRepository.findAll().map { reservationMapper.toDomain(it)!! }
+
     override fun countReservationByHomeBase(homeBase: HomeBase): Int =
         reservationRepository.countByHomeBase(homeBaseMapper.toEntity(homeBase))
 
     override fun existsByHomeBaseAndReservationNumber(homeBase: HomeBase,reservationNumber: Int): Boolean =
         reservationRepository.existsByHomeBaseAndReservationNumber(homeBaseMapper.toEntity(homeBase), reservationNumber)
-
 
 }

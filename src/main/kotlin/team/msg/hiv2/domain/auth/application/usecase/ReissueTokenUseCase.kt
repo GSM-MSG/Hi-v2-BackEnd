@@ -24,6 +24,6 @@ class ReissueTokenUseCase(
 
         val user = userService.queryUserById(token.userId)
 
-        return generateJwtPort.generate(user.id, user.roles)
+        return generateJwtPort.generate(user.id, user.role)
     }
 }

@@ -12,7 +12,8 @@ data class ReservationResponse(
     val reservationNumber: Int,
     val homeBaseId: Long,
     val floor: Int,
-    val period: Int
+    val period: Int,
+    val checkStatus: Boolean
 ) {
     companion object {
         fun of(reservation: Reservation, users: List<UserResponse>, homeBase: HomeBase) = ReservationResponse(
@@ -22,7 +23,8 @@ data class ReservationResponse(
             reservationNumber = reservation.reservationNumber,
             homeBaseId = homeBase.id,
             floor = homeBase.floor,
-            period = homeBase.period
+            period = homeBase.period,
+            checkStatus = reservation.checkStatus
         )
     }
 }

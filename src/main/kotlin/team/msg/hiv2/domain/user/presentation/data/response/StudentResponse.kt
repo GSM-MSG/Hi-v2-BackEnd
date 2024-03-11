@@ -13,7 +13,7 @@ data class StudentResponse(
     val classNum: Int?,
     val number: Int?,
     val profileImageUrl: String,
-    val roles: MutableList<UserRole>,
+    val role: UserRole,
     val useStatus: UseStatus
 ) {
     companion object {
@@ -25,7 +25,7 @@ data class StudentResponse(
             classNum = user.classNum,
             number = user.number,
             profileImageUrl = user.profileImageUrl,
-            roles = user.roles,
+            role = user.role,
             useStatus = user.useStatus
         )
     }

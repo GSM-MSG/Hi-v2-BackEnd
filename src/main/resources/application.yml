@@ -12,6 +12,7 @@ spring:
     properties:
       hibernate:
         default_batch_fetch_size: 1000
+        format_sql: true
 
   datasource:
     url: jdbc:mysql://${DB_URL:localhost:3306}/${DB_NAME:hiv2}?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true

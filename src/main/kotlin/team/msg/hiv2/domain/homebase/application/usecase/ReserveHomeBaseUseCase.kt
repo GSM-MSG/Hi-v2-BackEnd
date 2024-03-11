@@ -7,7 +7,6 @@ import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBa
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.user.application.service.UserService
-import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.global.annotation.usecase.UseCase
 import java.util.*
@@ -19,7 +18,7 @@ class ReserveHomeBaseUseCase(
     private val homeBaseService: HomeBaseService
 ) {
 
-    fun execute(floor: Int, period: Int, request: ReservationHomeBaseRequest){
+    fun execute(floor: Int, period: Int, request: ReservationHomeBaseRequest) {
 
         val currentUser = userService.queryCurrentUser()
 
@@ -27,8 +26,12 @@ class ReserveHomeBaseUseCase(
 
         val users = userService.queryAllUserById(request.users)
 
-        if(reservationService.countReservationByHomeBase(homeBase) >= 5)
-            throw ForbiddenReserveException()
+        val reservationCount = reservationService.countReservationByHomeBase(homeBase)
+        when(floor) {
+            2 -> if(reservationCount > 3) throw ForbiddenReserveException()
+            3 -> if(reservationCount > 5) throw ForbiddenReserveException()
+            4 -> if(reservationCount > 5) throw ForbiddenReserveException()
+        }
 
         if(reservationService.existsByHomeBaseAndReservationNumber(homeBase, request.reservationNumber))
             throw AlreadyExistReservationException()
@@ -45,8 +48,7 @@ class ReserveHomeBaseUseCase(
         ).id
 
         userService.saveAll(users.map {
-                it.copy(reservationId = reservationId, useStatus = UseStatus.UNAVAILABLE)
-            }
-        )
+            it.copy(reservationId = reservationId, useStatus = UseStatus.UNAVAILABLE)
+        })
     }
 }

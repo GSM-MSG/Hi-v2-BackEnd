@@ -46,7 +46,7 @@ class UserPersistenceAdapter(
             "ROLE_TEACHER" -> UserRole.ROLE_TEACHER
             else -> throw InvalidRoleException()
         }
-        return user.roles.firstOrNull() ?: throw UserNotFoundException()
+        return user.role
     }
 
     override fun queryAllUserByReservation(reservation: Reservation): List<User> =
@@ -72,14 +72,14 @@ class UserPersistenceAdapter(
     override fun queryAllUsersOrderByEmail(): List<User> =
         userRepository.findAllByOrderByEmail().map { userMapper.toDomain(it)!! }
 
-    override fun queryAllUserByRolesContaining(role: UserRole): List<User> =
-        userRepository.findAllByRolesContaining(role).map { userMapper.toDomain(it)!! }
+    override fun queryAllUserByRoleContaining(role: UserRole): List<User> =
+        userRepository.findAllByRoleContaining(role).map { userMapper.toDomain(it)!! }
 
-    override fun queryAllUserByRolesContainingOrderByEmail(role: UserRole): List<User> =
-        userRepository.findAllByRolesContainingOrderByEmail(role).map { userMapper.toDomain(it)!! }
+    override fun queryAllUserByRoleContainingOrderByEmail(role: UserRole): List<User> =
+        userRepository.findAllByRoleContainingOrderByEmail(role).map { userMapper.toDomain(it)!! }
 
-    override fun queryAllUserByNameContainingAndRolesContainingOrderByEmail(keyword: String,role: UserRole): List<User>  =
-        userRepository.findAllByNameContainingAndRolesContainingOrderByEmail(keyword, role).map { userMapper.toDomain(it)!! }
+    override fun queryAllUserByNameContainingAndRoleContainingOrderByEmail(keyword: String,role: UserRole): List<User>  =
+        userRepository.findAllByNameContainingAndRoleContainingOrderByEmail(keyword, role).map { userMapper.toDomain(it)!! }
 
     override fun queryAllUserByReservationIn(reservations: List<Reservation>): List<User> =
         userRepository.findAllByReservationIn(reservations.map { reservationMapper.toEntity(it) })

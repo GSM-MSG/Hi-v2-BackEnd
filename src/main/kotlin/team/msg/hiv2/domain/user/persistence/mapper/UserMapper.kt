@@ -22,7 +22,7 @@ class UserMapper(
                 classNum = it.classNum,
                 number = it.number,
                 profileImageUrl = it.profileImageUrl,
-                roles = it.roles,
+                role = it.role,
                 reservationId = it.reservation?.id,
                 useStatus = it.useStatus
             )
@@ -40,7 +40,7 @@ class UserMapper(
                 classNum = it.classNum,
                 number = it.number,
                 profileImageUrl = it.profileImageUrl,
-                roles = it.roles,
+                role = it.role,
                 reservation = reservation,
                 useStatus = it.useStatus
             )

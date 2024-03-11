@@ -44,7 +44,7 @@ class ReissueTokenUseCaseTest {
             classNum = 4,
             number = 6,
             profileImageUrl = "profile_image_url",
-            roles = mutableListOf(UserRole.ROLE_STUDENT),
+            role = UserRole.ROLE_STUDENT,
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
@@ -88,7 +88,7 @@ class ReissueTokenUseCaseTest {
         given(userService.queryUserById(refreshTokenStub.userId))
             .willReturn(userStub)
 
-        given(generateJwtPort.generate(userStub.id, userStub.roles))
+        given(generateJwtPort.generate(userStub.id, userStub.role))
             .willReturn(responseStub)
 
         // when

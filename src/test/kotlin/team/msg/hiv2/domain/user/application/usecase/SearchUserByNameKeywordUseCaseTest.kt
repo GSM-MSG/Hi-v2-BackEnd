@@ -31,7 +31,7 @@ class SearchUserByNameKeywordUseCaseTest {
             classNum = 4,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(UserRole.ROLE_STUDENT),
+            role = UserRole.ROLE_STUDENT,
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )

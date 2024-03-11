@@ -9,8 +9,6 @@ import org.mockito.kotlin.given
 import team.msg.hiv2.domain.notice.application.service.NoticeService
 import team.msg.hiv2.domain.notice.domain.Notice
 import team.msg.hiv2.domain.notice.presentation.data.request.UpdateNoticeRequest
-import team.msg.hiv2.domain.user.application.service.UserService
-import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
@@ -50,7 +48,7 @@ class UpdateNoticeUseCaseTest {
             classNum = 3,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(UserRole.ROLE_ADMIN),
+            role = UserRole.ROLE_ADMIN,
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )

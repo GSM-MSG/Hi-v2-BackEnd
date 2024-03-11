@@ -33,14 +33,14 @@ internal class QueryMyRoleUseCaseTest {
             classNum = 3,
             number = 6,
             profileImageUrl = "profileImageUrl",
-            roles = mutableListOf(userRole),
+            role = userRole,
             reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }
 
     private val responseStub by lazy {
-        UserRoleResponse.of(userId, userStub.roles)
+        UserRoleResponse.of(userId, userStub.role)
     }
 
     @BeforeEach
