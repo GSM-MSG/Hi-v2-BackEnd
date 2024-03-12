@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: msg.local.db
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: "hiv2"
+    ports:
+      - "3306:3306"
+    command:
+      - "mysqld"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+    env_file:
+      - .env
+
+  redis:
+    image: redis:latest
+    container_name: msg.local.redis
+    command: /bin/sh -c "redis-server --requirepass msg"
+    ports:
+      - "6379:6379"
+
+
