@@ -10,7 +10,7 @@ import java.util.UUID
 @UseCase
 class ExitReservationUseCase(
     private val userService: UserService,
-    private val reservationService: ReservationService,
+    private val reservationService: ReservationService
 ) {
 
     fun execute(reservationId: UUID){
@@ -18,7 +18,10 @@ class ExitReservationUseCase(
 
         val currentUser = userService.queryCurrentUser()
 
-        if(reservation.representativeId == currentUser.id)
+        // count 로 바꾸기
+        val users = userService.queryAllUserByReservation(reservation)
+
+        if(users.size < 3)
             throw ForbiddenExitReservationException()
 
         userService.save(currentUser.copy(reservationId = null, useStatus = UseStatus.AVAILABLE))

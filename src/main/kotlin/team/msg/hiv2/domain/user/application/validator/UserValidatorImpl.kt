@@ -26,13 +26,6 @@ class UserValidatorImpl : UserValidator {
         users.forEach { checkUserUseStatus(it) }
     }
 
-    override fun checkRepresentative(user: User, reservation: Reservation) {
-        if(user.id != reservation.representativeId) {
-            log.warn("User {} is not authorized to update Reservation {}", user.id, reservation.id)
-            throw ForbiddenCommandReservationException()
-        }
-    }
-
     override fun checkUserAndReservation(user: User, reservation: Reservation) {
         if(user.reservationId != reservation.id) {
             log.warn("User {} is not contained in a reservation {}", user.id, reservation.id)

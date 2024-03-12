@@ -1,7 +1,6 @@
 package team.msg.hiv2.domain.reservation.persistence.entity
 
 import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
-import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 import team.msg.hiv2.global.entity.BaseUuidEntity
 import java.util.*
 import javax.persistence.*
@@ -15,10 +14,6 @@ class ReservationJpaEntity(
     @ManyToOne
     @JoinColumn(name = "home_base_id")
     val homeBase: HomeBaseJpaEntity,
-
-    @OneToOne
-    @JoinColumn(name = "representative_id")
-    val user: UserJpaEntity,
 
     @Column(nullable = false)
     val reason: String,

@@ -20,8 +20,6 @@ class ReserveHomeBaseUseCase(
 
     fun execute(floor: Int, period: Int, request: ReservationHomeBaseRequest) {
 
-        val currentUser = userService.queryCurrentUser()
-
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
 
         val users = userService.queryAllUserById(request.users)
@@ -40,7 +38,6 @@ class ReserveHomeBaseUseCase(
             Reservation(
                 id = UUID.randomUUID(),
                 reason = request.reason,
-                representativeId = currentUser.id,
                 homeBaseId = homeBase.id,
                 checkStatus = false,
                 reservationNumber = request.reservationNumber
