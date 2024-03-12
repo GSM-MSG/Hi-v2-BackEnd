@@ -43,22 +43,6 @@ class ReservationControlAspect(
         userValidator.checkUsersUseStatus(userService.queryAllUserById(request.users))
     }
 
-//    @Before("updateReservationUseCasePointcut(reservationId, request)")
-//    private fun checkAuthorizationUpdateReservation(reservationId: UUID, request: UpdateReservationRequest) {
-//        val currentUser = userService.queryCurrentUser()
-//        val reservation = reservationService.queryReservationById(reservationId)
-//
-//        userValidator.checkRepresentative(currentUser, reservation)
-//    }
-//
-//    @Before("deleteReservationUseCasePointcut(reservationId)")
-//    private fun checkAuthorizationDeleteReservation(reservationId: UUID) {
-//        val currentUser = userService.queryCurrentUser()
-//        val reservation = reservationService.queryReservationById(reservationId)
-//
-//        userValidator.checkRepresentative(currentUser, reservation)
-//    }
-
     @Before("exitReservationUseCasePointcut(reservationId)")
     private fun checkAuthorizationExitReservation(reservationId: UUID) {
         val currentUser = userService.queryCurrentUser()

@@ -60,7 +60,6 @@ internal class ReserveHomeBaseUseCaseTest {
         Reservation(
             id = UUID.randomUUID(),
             homeBaseId = homeBaseStub.id,
-            representativeId = userId,
             reason = reason,
             checkStatus = false,
             reservationNumber = reservationNumber
