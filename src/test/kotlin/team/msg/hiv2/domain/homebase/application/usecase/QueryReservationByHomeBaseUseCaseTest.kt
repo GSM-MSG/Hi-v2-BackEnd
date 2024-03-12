@@ -55,7 +55,6 @@ class QueryReservationByHomeBaseUseCaseTest {
     private val reservationStub by lazy {
         Reservation(
             id = reservationId1,
-            representativeId = representativeId1,
             homeBaseId = homeBaseId,
             reason = reason,
             checkStatus = false,

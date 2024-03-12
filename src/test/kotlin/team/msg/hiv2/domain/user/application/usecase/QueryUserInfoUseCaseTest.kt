@@ -53,7 +53,6 @@ internal class QueryUserInfoUseCaseTest {
     private val reservationStub: Reservation by lazy {
         Reservation(
             id = reservationId,
-            representativeId = userId,
             homeBaseId = 1,
             reason = "test",
             checkStatus = false,

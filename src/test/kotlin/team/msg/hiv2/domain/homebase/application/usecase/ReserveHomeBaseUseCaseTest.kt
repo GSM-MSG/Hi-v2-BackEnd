@@ -39,6 +39,7 @@ internal class ReserveHomeBaseUseCaseTest {
 
     private val userId = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
+    private val reservationCount = 3
 
     private val requestStub by lazy {
         ReservationHomeBaseRequest(
@@ -60,7 +61,6 @@ internal class ReserveHomeBaseUseCaseTest {
         Reservation(
             id = UUID.randomUUID(),
             homeBaseId = homeBaseStub.id,
-            representativeId = userId,
             reason = reason,
             checkStatus = false,
             reservationNumber = reservationNumber
@@ -104,11 +104,11 @@ internal class ReserveHomeBaseUseCaseTest {
             useStatus = UseStatus.AVAILABLE
         )
 
-        given(userService.queryCurrentUser()).willReturn(userStub)
-
         given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)).willReturn(homeBaseStub)
 
         given(userService.queryAllUserById(requestStub.users)).willReturn(listOf(userStub, userStub2))
+
+        given(reservationService.countReservationByHomeBase(homeBaseStub)).willReturn(reservationCount)
 
         given(reservationService.save(any())).willReturn(reservationStub)
 

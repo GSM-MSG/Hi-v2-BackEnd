@@ -75,11 +75,11 @@ class UserPersistenceAdapter(
     override fun queryAllUserByRoleContaining(role: UserRole): List<User> =
         userRepository.findAllByRoleContaining(role).map { userMapper.toDomain(it)!! }
 
-    override fun queryAllUserByRoleContainingOrderByEmail(role: UserRole): List<User> =
-        userRepository.findAllByRoleContainingOrderByEmail(role).map { userMapper.toDomain(it)!! }
+    override fun queryAllUserByRoleOrderByEmail(role: UserRole): List<User> =
+        userRepository.findAllByRoleOrderByEmail(role).map { userMapper.toDomain(it)!! }
 
-    override fun queryAllUserByNameContainingAndRoleContainingOrderByEmail(keyword: String,role: UserRole): List<User>  =
-        userRepository.findAllByNameContainingAndRoleContainingOrderByEmail(keyword, role).map { userMapper.toDomain(it)!! }
+    override fun queryAllUserByNameContainingAndRoleOrderByEmail(keyword: String, role: UserRole): List<User>  =
+        userRepository.findAllByNameContainingAndRoleOrderByEmail(keyword, role).map { userMapper.toDomain(it)!! }
 
     override fun queryAllUserByReservationIn(reservations: List<Reservation>): List<User> =
         userRepository.findAllByReservationIn(reservations.map { reservationMapper.toEntity(it) })

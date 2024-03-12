@@ -45,7 +45,6 @@ class DeleteReservationUseCaseTest {
     private val reservationStub by lazy {
         Reservation(
             id = UUID.randomUUID(),
-            representativeId = representativeId,
             reason = reason,
             homeBaseId = homeBaseStub.id,
             checkStatus = false,

@@ -18,8 +18,8 @@ interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun findAllByReservationIsNotNull(): List<UserJpaEntity>
     fun findAllByRoleContaining(role: UserRole): List<UserJpaEntity>
     fun findAllByOrderByEmail(): List<UserJpaEntity>
-    fun findAllByRoleContainingOrderByEmail(role: UserRole): List<UserJpaEntity>
-    fun findAllByNameContainingAndRoleContainingOrderByEmail(keyword: String,role: UserRole): List<UserJpaEntity>
+    fun findAllByRoleOrderByEmail(role: UserRole): List<UserJpaEntity>
+    fun findAllByNameContainingAndRoleOrderByEmail(keyword: String, role: UserRole): List<UserJpaEntity>
     @EntityGraph(attributePaths = ["reservation"])
     fun findAllByReservationIn(reservations: List<ReservationJpaEntity>): List<UserJpaEntity>
 }
