@@ -21,7 +21,7 @@ enum class ErrorCode(
     // reservation
     RESERVATION_NOT_FOUND("예약을 찾을 수 없습니다.", 404),
     FORBIDDEN_COMMAND_RESERVATION("예약 테이블을 제어할 권한이 없습니다.", 403),
-    FORBIDDEN_EXIT_RESERVATION("대표자는 예약을 나갈 수 없습니다.", 403),
+    FORBIDDEN_EXIT_RESERVATION("사용자 수가 2명 이하일 경우 나갈 수 없습니다.", 403),
     ALREADY_EXIST_RESERVATION("이미 예약 되어진 자리입니다.", 403),
 
     // homeBase

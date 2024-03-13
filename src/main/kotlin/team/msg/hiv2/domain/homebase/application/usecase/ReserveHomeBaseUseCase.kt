@@ -44,7 +44,7 @@ class ReserveHomeBaseUseCase(
             )
         )
 
-        val reservationId = reservationService.save(
+        reservationService.save(
             Reservation(
                 id = UUID.randomUUID(),
                 reason = request.reason,
@@ -53,10 +53,10 @@ class ReserveHomeBaseUseCase(
                 checkStatus = false,
                 reservationNumber = request.reservationNumber
             )
-        ).id
+        )
 
         userService.saveAll(users.map {
-            it.copy(reservationId = reservationId, useStatus = UseStatus.UNAVAILABLE)
+            it.copy(useStatus = UseStatus.UNAVAILABLE)
         })
     }
 }

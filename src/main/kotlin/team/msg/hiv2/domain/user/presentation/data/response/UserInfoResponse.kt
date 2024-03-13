@@ -16,10 +16,10 @@ class UserInfoResponse(
     val profileImageUrl: String,
     val role: UserRole,
     val useStatus: UseStatus,
-    val reservation: ReservationResponse?
+    val reservations: List<ReservationResponse>
 ) {
     companion object {
-        fun of(user: User, reservation: ReservationResponse?) = UserInfoResponse(
+        fun of(user: User, reservations: List<ReservationResponse>) = UserInfoResponse(
             userId = user.id,
             email = user.email,
             name = user.name,
@@ -29,7 +29,7 @@ class UserInfoResponse(
             profileImageUrl = user.profileImageUrl,
             role = user.role,
             useStatus = user.useStatus,
-            reservation = reservation
+            reservations = reservations
         )
     }
 }

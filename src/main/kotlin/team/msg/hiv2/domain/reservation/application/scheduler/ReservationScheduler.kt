@@ -27,8 +27,8 @@ class ReservationScheduler(
         val updatedUsers = users.map {
             val reservation = reservationService.queryReservationById(it.reservationId!!)
             when(reservation.checkStatus) {
-                true -> it.copy(useStatus = UseStatus.AVAILABLE, reservationId = null)
-                false -> it.copy(useStatus = UseStatus.UNAVAILABLE, reservationId = null)
+                true -> it.copy(useStatus = UseStatus.AVAILABLE)
+                false -> it.copy(useStatus = UseStatus.UNAVAILABLE )
             }
         }
 

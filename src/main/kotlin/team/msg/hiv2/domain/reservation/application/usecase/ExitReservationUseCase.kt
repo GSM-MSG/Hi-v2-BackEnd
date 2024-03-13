@@ -14,6 +14,7 @@ class ExitReservationUseCase(
 ) {
 
     fun execute(reservationId: UUID){
+
         val reservation = reservationService.queryReservationById(reservationId)
 
         val currentUser = userService.queryCurrentUser()

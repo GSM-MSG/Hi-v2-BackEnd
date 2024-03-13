@@ -23,14 +23,14 @@ class UserMapper(
                 number = it.number,
                 profileImageUrl = it.profileImageUrl,
                 role = it.role,
-                reservationId = it.reservation?.id,
+//                reservationId = it.reservation?.id,
                 useStatus = it.useStatus
             )
         }
 
     override fun toEntity(domain: User): UserJpaEntity {
-        val reservationId = domain.reservationId
-        val reservation = reservationId?.let { reservationRepository.findByIdOrNull(it) }
+//        val reservationId = domain.reservationId
+//        val reservation = reservationId?.let { reservationRepository.findByIdOrNull(it) }
         return domain.let {
             UserJpaEntity(
                 id = it.id,
@@ -41,7 +41,7 @@ class UserMapper(
                 number = it.number,
                 profileImageUrl = it.profileImageUrl,
                 role = it.role,
-                reservation = reservation,
+//                reservation = reservation,
                 useStatus = it.useStatus
             )
         }

@@ -1,6 +1,5 @@
 package team.msg.hiv2.domain.user.persistence.entity
 
-import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.global.entity.BaseUuidEntity
@@ -31,10 +30,6 @@ class UserJpaEntity(
 
     @Column(columnDefinition = "TEXT", nullable = false)
     var profileImageUrl: String = "",
-
-    @ManyToOne
-    @JoinColumn(name = "reservation_id")
-    val reservation: ReservationJpaEntity? = null,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)

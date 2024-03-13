@@ -35,7 +35,7 @@ class GAuthSignInUseCase(
                 number = gAuthUserInfo.num,
                 profileImageUrl = gAuthUserInfo.profileUrl ?: "",
                 role = role,
-                reservationId = null,
+//                reservationId = null,
                 useStatus = UseStatus.AVAILABLE
             ),
             userService.existsUserByEmail(gAuthUserInfo.email),

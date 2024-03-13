@@ -22,4 +22,5 @@ interface QueryUserService {
     fun queryAllUserByRoleOrderByEmail(role: UserRole): List<User>
     fun queryAllUserByNameContainingAndRoleOrderByEmail(keyword: String, role: UserRole): List<User>
     fun queryAllUserByReservationIn(reservations: List<Reservation>): List<User>
+    fun queryAllUsersByUserIds(userIds: List<UUID>): List<User>
 }

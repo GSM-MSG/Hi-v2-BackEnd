@@ -2,6 +2,7 @@ package team.msg.hiv2.domain.reservation.application.spi
 
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.domain.Reservation
+import team.msg.hiv2.domain.team.domain.Team
 import java.util.UUID
 
 interface QueryReservationPort {
@@ -11,4 +12,5 @@ interface QueryReservationPort {
     fun queryAllReservations(): List<Reservation>
     fun countReservationByHomeBase(homeBase: HomeBase): Int
     fun existsByHomeBaseAndReservationNumber(homeBase: HomeBase, reservationNumber: Int): Boolean
+    fun queryAllReservationByTeam(team: Team): List<Reservation>
 }

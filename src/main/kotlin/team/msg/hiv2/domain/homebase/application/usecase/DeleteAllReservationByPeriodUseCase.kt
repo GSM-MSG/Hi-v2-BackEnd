@@ -20,7 +20,7 @@ class DeleteAllReservationByPeriodUseCase(
 
         val users = userService.queryAllUserByReservationIn(reservations)
 
-        userService.saveAll(users.map { it.copy(useStatus = UseStatus.AVAILABLE, reservationId = null) })
+        userService.saveAll(users.map { it.copy(useStatus = UseStatus.AVAILABLE) })
         reservationService.deleteAllReservationInBatch(reservations)
     }
 }

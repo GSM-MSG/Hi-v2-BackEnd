@@ -4,5 +4,7 @@ import team.msg.hiv2.global.annotation.service.DomainService
 
 @DomainService
 class TeamService(
-    commandTeamService: CommandTeamService
-) : CommandTeamService by commandTeamService
+    commandTeamService: CommandTeamService,
+    queryTeamService: QueryTeamService
+) : CommandTeamService by commandTeamService,
+    QueryTeamService by queryTeamService

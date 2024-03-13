@@ -22,4 +22,5 @@ interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun findAllByNameContainingAndRoleOrderByEmail(keyword: String, role: UserRole): List<UserJpaEntity>
     @EntityGraph(attributePaths = ["reservation"])
     fun findAllByReservationIn(reservations: List<ReservationJpaEntity>): List<UserJpaEntity>
+    fun findAllByUserIds(userIds: List<UUID>): List<UserJpaEntity>
 }
