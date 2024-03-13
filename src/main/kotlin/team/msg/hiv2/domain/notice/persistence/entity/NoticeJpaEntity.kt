@@ -1,14 +1,13 @@
 package team.msg.hiv2.domain.notice.persistence.entity
 
-import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
-import team.msg.hiv2.global.entity.BaseUuidEntity
-import java.time.LocalDateTime
-import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.Table
+import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
+import team.msg.hiv2.global.entity.BaseUuidEntity
+import java.util.*
 
 @Entity
 @Table(name = "notice")

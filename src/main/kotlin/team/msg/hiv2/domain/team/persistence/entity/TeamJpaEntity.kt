@@ -20,5 +20,4 @@ class TeamJpaEntity(
     @CollectionTable(name = "users", joinColumns = [JoinColumn(name = "team_id")])
     val userIds: MutableList<UUID>
 
-
 ) : BaseUuidEntity(id)

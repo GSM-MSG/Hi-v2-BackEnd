@@ -32,6 +32,8 @@ enum class ErrorCode(
     NOTICE_NOT_FOUND("공지사항을 찾을 수 없습니다.", 404),
     FORBIDDEN_COMMAND_NOTICE("공지사항을 제어할 권한이 없습니다.", 403),
 
+    // team
+    TEAM_NOT_FOUND("팀을 찾을 수 없습니다.", 404),
 
     // internal
     FORBIDDEN("FORBIDDEN", 403),

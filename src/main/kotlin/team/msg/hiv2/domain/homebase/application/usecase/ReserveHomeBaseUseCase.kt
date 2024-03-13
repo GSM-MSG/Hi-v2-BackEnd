@@ -6,6 +6,8 @@ import team.msg.hiv2.domain.homebase.exception.ForbiddenReserveException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
+import team.msg.hiv2.domain.team.application.service.TeamService
+import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.global.annotation.usecase.UseCase
@@ -15,7 +17,8 @@ import java.util.*
 class ReserveHomeBaseUseCase(
     private val userService: UserService,
     private val reservationService: ReservationService,
-    private val homeBaseService: HomeBaseService
+    private val homeBaseService: HomeBaseService,
+    private val teamService: TeamService
 ) {
 
     fun execute(floor: Int, period: Int, request: ReservationHomeBaseRequest) {
@@ -34,11 +37,19 @@ class ReserveHomeBaseUseCase(
         if(reservationService.existsByHomeBaseAndReservationNumber(homeBase, request.reservationNumber))
             throw AlreadyExistReservationException()
 
+        val team = teamService.save(
+            Team(
+                id = UUID.randomUUID(),
+                userIds = users.map { it.id }.toMutableList()
+            )
+        )
+
         val reservationId = reservationService.save(
             Reservation(
                 id = UUID.randomUUID(),
                 reason = request.reason,
                 homeBaseId = homeBase.id,
+                teamId = team.id,
                 checkStatus = false,
                 reservationNumber = request.reservationNumber
             )
