@@ -6,4 +6,5 @@ import java.util.*
 
 interface TeamRepository : CrudRepository<TeamJpaEntity, UUID> {
     fun findByUserIdsIn(userId: MutableList<UUID>): TeamJpaEntity?
+    fun deleteAllInBatch(teams: List<TeamJpaEntity>)
 }

@@ -10,4 +10,7 @@ class CommandTeamServiceImpl(
 ) : CommandTeamService {
     override fun save(team: Team) =
         commandTeamPort.save(team)
+
+    override fun deleteAllTeamInBatch(teams: List<Team>) =
+        commandTeamPort.deleteAllTeamInBatch(teams)
 }

@@ -6,4 +6,5 @@ import java.util.UUID
 interface QueryTeamPort {
     fun queryTeamByUserId(userId: UUID): Team?
     fun queryTeamById(id: UUID): Team?
+    fun queryAllTeam(): List<Team>
 }

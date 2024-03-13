@@ -3,13 +3,15 @@ package team.msg.hiv2.domain.reservation.application.scheduler
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
+import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 
 @Component
 class ReservationScheduler(
     private val reservationService: ReservationService,
-    private val userService: UserService
+    private val userService: UserService,
+    private val teamService: TeamService
 ) {
 
     /**
@@ -22,15 +24,22 @@ class ReservationScheduler(
 
         val reservations = reservationService.queryAllReservation()
 
-        val users = userService.queryAllUserByReservationIn(reservations)
+        val teams = teamService.queryAllTeam()
 
-        val updatedUsers = users.map {
-            val reservation = reservationService.queryReservationById(it.reservationId!!)
-            when(reservation.checkStatus) {
-                true -> it.copy(useStatus = UseStatus.AVAILABLE)
-                false -> it.copy(useStatus = UseStatus.UNAVAILABLE )
+        val userIds = teams.flatMap { it.userIds }
+
+        val users = userService.queryAllUsersByUserIds(userIds)
+
+        val updatedUsers = users.flatMap {
+            reservations.map { reservation ->
+                when (reservation.checkStatus) {
+                    true -> it.copy(useStatus = UseStatus.AVAILABLE)
+                    false -> it.copy(useStatus = UseStatus.UNAVAILABLE)
+                }
             }
         }
+
+        teamService.deleteAllTeamInBatch(teams)
 
         userService.saveAll(updatedUsers)
 

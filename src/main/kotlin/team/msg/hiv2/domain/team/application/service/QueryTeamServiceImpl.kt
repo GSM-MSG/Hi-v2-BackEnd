@@ -15,4 +15,7 @@ class QueryTeamServiceImpl(
     override fun queryTeamById(id: UUID): Team =
         queryTeamPort.queryTeamById(id)
             ?: throw TeamNotFoundException()
+
+    override fun queryAllTeam(): List<Team> =
+        queryTeamPort.queryAllTeam()
 }
