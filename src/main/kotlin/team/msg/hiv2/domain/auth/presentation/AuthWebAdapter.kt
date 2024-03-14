@@ -1,17 +1,13 @@
 package team.msg.hiv2.domain.auth.presentation
 
+import javax.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import team.msg.hiv2.domain.auth.application.facade.AuthFacade
-import team.msg.hiv2.domain.auth.application.usecase.GAuthSignInUseCase
-import team.msg.hiv2.domain.auth.application.usecase.LogoutUseCase
-import team.msg.hiv2.domain.auth.application.usecase.QueryGAuthLoginLinkUseCase
-import team.msg.hiv2.domain.auth.application.usecase.ReissueTokenUseCase
 import team.msg.hiv2.domain.auth.presentation.data.request.GAuthSignInRequest
 import team.msg.hiv2.domain.auth.presentation.data.response.GAuthLinkResponse
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
 import team.msg.hiv2.domain.auth.presentation.data.web.GAuthSignInWebRequest
-import javax.validation.Valid
 
 @RestController
 @RequestMapping("/auth")

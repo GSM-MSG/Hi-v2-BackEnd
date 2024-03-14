@@ -19,5 +19,6 @@ interface ReservationRepository : CrudRepository<ReservationJpaEntity, UUID> {
     fun deleteAllInBatch(reservations: List<ReservationJpaEntity>)
     fun countByHomeBase(homeBase: HomeBaseJpaEntity): Int
     fun existsByHomeBaseAndReservationNumber(homeBase: HomeBaseJpaEntity, reservationNumber: Int): Boolean
+    @EntityGraph(attributePaths = ["homeBase"])
     fun findAllByTeamIn(teams: List<TeamJpaEntity>): List<ReservationJpaEntity>
 }

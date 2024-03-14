@@ -29,10 +29,8 @@ class ReservationMapper(
         }
 
     override fun toEntity(domain: Reservation): ReservationJpaEntity {
-        val homeBase = homeBaseRepository.findByIdOrNull(domain.homeBaseId)
-            ?: throw HomeBaseNotFoundException()
-        val team = teamRepository.findByIdOrNull(domain.teamId)
-            ?: throw TeamNotFoundException()
+        val homeBase = homeBaseRepository.findByIdOrNull(domain.homeBaseId) ?: throw HomeBaseNotFoundException()
+        val team = teamRepository.findByIdOrNull(domain.teamId) ?: throw TeamNotFoundException()
 
         return domain.let {
             ReservationJpaEntity(

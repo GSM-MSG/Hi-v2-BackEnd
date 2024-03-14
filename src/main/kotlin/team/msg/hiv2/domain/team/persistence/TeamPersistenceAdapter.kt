@@ -18,7 +18,7 @@ class TeamPersistenceAdapter(
         teamMapper.toDomain(teamRepository.save(teamMapper.toEntity(team)))!!
 
     override fun deleteAll(teams: List<Team>) {
-        teamRepository.deleteAll(teams.map { teamMapper.toEntity(it) })
+        teamRepository.deleteAllInBatch(teams.map { teamMapper.toEntity(it) })
     }
 
     override fun deleteTeamById(id: UUID) {
@@ -29,8 +29,8 @@ class TeamPersistenceAdapter(
         teamRepository.deleteAll()
     }
 
-    override fun queryTeamByUserId(userId: UUID): List<Team> =
-        teamRepository.findAllByUserIdsIn(mutableListOf(userId)).map { teamMapper.toDomain(it)!! }
+    override fun queryTeamByUserIdsIn(userIds: List<UUID>): List<Team> =
+        teamRepository.findAllByUserIdsIn(userIds).map { teamMapper.toDomain(it)!! }
 
     override fun queryTeamById(id: UUID): Team? =
         teamMapper.toDomain(teamRepository.findByIdOrNull(id))

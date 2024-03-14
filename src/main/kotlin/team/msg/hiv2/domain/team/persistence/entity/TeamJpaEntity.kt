@@ -15,7 +15,7 @@ class TeamJpaEntity(
 
     override val id: UUID,
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", columnDefinition = "BINARY(16)")
     @ElementCollection
     @CollectionTable(name = "users", joinColumns = [JoinColumn(name = "team_id")])
     val userIds: MutableList<UUID>
