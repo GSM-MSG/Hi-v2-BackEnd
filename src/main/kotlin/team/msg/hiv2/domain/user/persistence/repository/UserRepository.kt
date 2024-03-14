@@ -12,15 +12,15 @@ interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun findByEmail(email: String): UserJpaEntity?
     fun existsByEmail(email: String): Boolean
     @EntityGraph(attributePaths = ["reservation"])
-    fun findAllByReservation(reservation: ReservationJpaEntity): List<UserJpaEntity>
-    fun findByIdAndReservation(id: UUID, reservation: ReservationJpaEntity): UserJpaEntity
+//    fun findAllByReservation(reservation: ReservationJpaEntity): List<UserJpaEntity>
+//    fun findByIdAndReservation(id: UUID, reservation: ReservationJpaEntity): UserJpaEntity
     fun findAllByNameContainingOrderByEmail(keyword: String): List<UserJpaEntity>
-    fun findAllByReservationIsNotNull(): List<UserJpaEntity>
+//    fun findAllByReservationIsNotNull(): List<UserJpaEntity>
     fun findAllByRoleContaining(role: UserRole): List<UserJpaEntity>
     fun findAllByOrderByEmail(): List<UserJpaEntity>
     fun findAllByRoleOrderByEmail(role: UserRole): List<UserJpaEntity>
     fun findAllByNameContainingAndRoleOrderByEmail(keyword: String, role: UserRole): List<UserJpaEntity>
-    @EntityGraph(attributePaths = ["reservation"])
-    fun findAllByReservationIn(reservations: List<ReservationJpaEntity>): List<UserJpaEntity>
-    fun findAllByUserIds(userIds: List<UUID>): List<UserJpaEntity>
+//    @EntityGraph(attributePaths = ["reservation"])
+//    fun findAllByReservationIn(reservations: List<ReservationJpaEntity>): List<UserJpaEntity>
+//    fun findAllByUserIds(userIds: List<UUID>): List<UserJpaEntity>
 }

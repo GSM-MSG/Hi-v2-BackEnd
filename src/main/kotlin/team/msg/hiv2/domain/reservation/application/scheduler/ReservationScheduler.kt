@@ -39,7 +39,7 @@ class ReservationScheduler(
             }
         }
 
-        teamService.deleteAllTeamInBatch(teams)
+        teamService.deleteAll(teams)
 
         userService.saveAll(updatedUsers)
 

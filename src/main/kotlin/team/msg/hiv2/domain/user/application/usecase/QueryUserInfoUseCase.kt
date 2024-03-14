@@ -25,17 +25,16 @@ class QueryUserInfoUseCase(
 
         val reservations = reservationService.queryAllReservationByTeam(team)
 
-        val homeBases = reservations.map { homeBaseService.queryHomeBaseById(it.homeBaseId) }
-
         return UserInfoResponse.of(
             user,
             reservations.map { reservation ->
                 val users = userService.queryAllUsersByUserIds(team.userIds)
+                val homeBase = homeBaseService.queryHomeBaseById(reservation.homeBaseId)
 
                 ReservationResponse.of(
                     reservation,
                     users.map { UserResponse.of(it) },
-                    homeBases.map { HomeBaseResponse(it.id, it.floor, it.period) }
+                    HomeBaseResponse(homeBase.id, homeBase.floor, homeBase.period)
                 )
             }
         )

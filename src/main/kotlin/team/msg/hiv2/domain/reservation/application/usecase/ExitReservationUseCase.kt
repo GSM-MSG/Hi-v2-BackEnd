@@ -2,6 +2,7 @@ package team.msg.hiv2.domain.reservation.application.usecase
 
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.exception.ForbiddenExitReservationException
+import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.global.annotation.usecase.UseCase
@@ -10,7 +11,8 @@ import java.util.UUID
 @UseCase
 class ExitReservationUseCase(
     private val userService: UserService,
-    private val reservationService: ReservationService
+    private val reservationService: ReservationService,
+    private val teamService: TeamService
 ) {
 
     fun execute(reservationId: UUID){
@@ -20,11 +22,13 @@ class ExitReservationUseCase(
         val currentUser = userService.queryCurrentUser()
 
         // count 로 바꾸기
-        val users = userService.queryAllUserByReservation(reservation)
+        val team = teamService.queryTeamById(reservation.teamId)
 
-        if(users.size < 3)
+        if(team.userIds.size < 3)
             throw ForbiddenExitReservationException()
 
-        userService.save(currentUser.copy(reservationId = null, useStatus = UseStatus.AVAILABLE))
+        reservationService.delete(reservation)
+        teamService.deleteTeamById(reservation.teamId)
+        userService.save(currentUser.copy(useStatus = UseStatus.AVAILABLE))
     }
 }

@@ -17,8 +17,16 @@ class TeamPersistenceAdapter(
     override fun save(team: Team): Team =
         teamMapper.toDomain(teamRepository.save(teamMapper.toEntity(team)))!!
 
-    override fun deleteAllTeamInBatch(teams: List<Team>) {
-        teamRepository.deleteAllInBatch(teams.map { teamMapper.toEntity(it) })
+    override fun deleteAll(teams: List<Team>) {
+        teamRepository.deleteAll(teams.map { teamMapper.toEntity(it) })
+    }
+
+    override fun deleteTeamById(id: UUID) {
+        teamRepository.deleteById(id)
+    }
+
+    override fun deleteAll() {
+        teamRepository.deleteAll()
     }
 
     override fun queryTeamByUserId(userId: UUID): Team? =
