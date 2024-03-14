@@ -1,6 +1,5 @@
 package team.msg.hiv2.domain.user.application.service
 
-import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.user.application.spi.QueryUserPort
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UserRole
@@ -38,7 +37,7 @@ class QueryUserServiceImpl(
         queryUserPort.queryCurrentUser()
 
     override fun queryUserByNameContainingOrderByEmail(keyword: String): List<User> =
-        queryUserPort.queryUserByNameContainingOrderByEmail(keyword)
+        queryUserPort.queryAllUserByNameContainingOrderByEmail(keyword)
 
 //    override fun queryAllUserByReservationIsNotNull(): List<User> =
 //        queryUserPort.queryAllUserByReservationIsNotNull()

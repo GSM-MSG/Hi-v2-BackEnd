@@ -62,7 +62,7 @@ class UserPersistenceAdapter(
         userMapper.toDomain(userRepository.findByIdOrNull(securityPort.queryCurrentUserId()))
             .let { it ?: throw UserNotFoundException() }
 
-    override fun queryUserByNameContainingOrderByEmail(keyword: String): List<User> =
+    override fun queryAllUserByNameContainingOrderByEmail(keyword: String): List<User> =
         userRepository.findAllByNameContainingOrderByEmail(keyword).map { userMapper.toDomain(it)!! }
 
 //    override fun queryAllUserByReservationIsNotNull(): List<User> =

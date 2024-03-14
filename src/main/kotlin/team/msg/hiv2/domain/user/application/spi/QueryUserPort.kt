@@ -15,7 +15,7 @@ interface QueryUserPort {
 //    fun queryUserByIdAndReservation(id: UUID, reservation: Reservation): User?
     fun existsUserByEmail(email: String): Boolean
     fun queryCurrentUser(): User
-    fun queryUserByNameContainingOrderByEmail(keyword: String): List<User>
+    fun queryAllUserByNameContainingOrderByEmail(keyword: String): List<User>
 //    fun queryAllUserByReservationIsNotNull(): List<User>
     fun queryAllUsersOrderByEmail(): List<User>
     fun queryAllUserByRoleContaining(role: UserRole): List<User>
