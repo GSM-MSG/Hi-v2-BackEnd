@@ -27,8 +27,7 @@ class ReserveHomeBaseUseCase(
 
         val users = userService.queryAllUserById(request.users)
 
-        val userIds = users.map { it.id }
-        if (!userService.existsUsersByIds(userIds))
+        if (request.users.size != users.size)
             throw UserNotFoundException()
 
         val reservationCount = reservationService.countReservationByHomeBase(homeBase)
