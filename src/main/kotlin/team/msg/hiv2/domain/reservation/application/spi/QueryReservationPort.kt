@@ -12,5 +12,5 @@ interface QueryReservationPort {
     fun queryAllReservations(): List<Reservation>
     fun countReservationByHomeBase(homeBase: HomeBase): Int
     fun existsByHomeBaseAndReservationNumber(homeBase: HomeBase, reservationNumber: Int): Boolean
-    fun queryAllReservationByTeam(team: Team): List<Reservation>
+    fun queryAllReservationByTeams(teams: List<Team>): List<Reservation>
 }

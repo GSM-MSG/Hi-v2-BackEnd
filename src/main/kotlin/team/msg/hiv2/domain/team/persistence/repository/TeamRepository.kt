@@ -5,6 +5,6 @@ import team.msg.hiv2.domain.team.persistence.entity.TeamJpaEntity
 import java.util.*
 
 interface TeamRepository : CrudRepository<TeamJpaEntity, UUID> {
-    fun findByUserIdsIn(userId: MutableList<UUID>): TeamJpaEntity?
+    fun findAllByUserIdsIn(userId: MutableList<UUID>): List<TeamJpaEntity>
 //    fun deleteAllIn(teams: List<TeamJpaEntity>)
 }

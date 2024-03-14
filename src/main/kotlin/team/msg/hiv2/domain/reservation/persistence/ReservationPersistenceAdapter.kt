@@ -55,7 +55,7 @@ class ReservationPersistenceAdapter(
     override fun existsByHomeBaseAndReservationNumber(homeBase: HomeBase,reservationNumber: Int): Boolean =
         reservationRepository.existsByHomeBaseAndReservationNumber(homeBaseMapper.toEntity(homeBase), reservationNumber)
 
-    override fun queryAllReservationByTeam(team: Team): List<Reservation> =
-        reservationRepository.findAllByTeam(teamMapper.toEntity(team)).map { reservationMapper.toDomain(it)!! }
+    override fun queryAllReservationByTeams(teams: List<Team>): List<Reservation> =
+        reservationRepository.findAllByTeamIn(teams.map { teamMapper.toEntity(it) }).map { reservationMapper.toDomain(it)!! }
 
 }
