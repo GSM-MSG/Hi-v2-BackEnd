@@ -24,12 +24,6 @@ class QueryUserServiceImpl(
     override fun queryUserRoleByEmail(email: String, role: String): UserRole =
         queryUserPort.queryUserRoleByEmail(email, role)
 
-//    override fun queryAllUserByReservation(reservation: Reservation): List<User> =
-//        queryUserPort.queryAllUserByReservation(reservation)
-
-//    override fun queryUserByIdAndReservation(id: UUID, reservation: Reservation): User =
-//        queryUserPort.queryUserByIdAndReservation(id, reservation) ?: throw UserNotFoundException()
-
     override fun existsUserByEmail(email: String): Boolean =
         queryUserPort.existsUserByEmail(email)
 
@@ -38,9 +32,6 @@ class QueryUserServiceImpl(
 
     override fun queryUserByNameContainingOrderByEmail(keyword: String): List<User> =
         queryUserPort.queryAllUserByNameContainingOrderByEmail(keyword)
-
-//    override fun queryAllUserByReservationIsNotNull(): List<User> =
-//        queryUserPort.queryAllUserByReservationIsNotNull()
 
     override fun queryAllUsersOrderByEmail(): List<User> =
         queryUserPort.queryAllUsersOrderByEmail()
@@ -53,9 +44,6 @@ class QueryUserServiceImpl(
 
     override fun queryAllUserByNameContainingAndRoleOrderByEmail(keyword: String, role: UserRole) =
         queryUserPort.queryAllUserByNameContainingAndRoleOrderByEmail(keyword, role)
-
-//    override fun queryAllUserByReservationIn(reservations: List<Reservation>): List<User> =
-//        queryUserPort.queryAllUserByReservationIn(reservations)
 
     override fun queryAllUsersByUserIds(userIds: List<UUID>): List<User> =
         queryUserPort.queryAllUserByUserIds(userIds)

@@ -2,7 +2,6 @@ package team.msg.hiv2.domain.user.persistence
 
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
-import team.msg.hiv2.domain.reservation.persistence.mapper.ReservationMapper
 import team.msg.hiv2.domain.user.application.spi.UserPort
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UserRole
@@ -17,8 +16,7 @@ import java.util.*
 class UserPersistenceAdapter(
     private val userRepository: UserRepository,
     private val userMapper: UserMapper,
-    private val securityPort: SecurityPort,
-    private val reservationMapper: ReservationMapper,
+    private val securityPort: SecurityPort
 ) : UserPort {
 
     override fun save(user: User): User =
@@ -48,13 +46,6 @@ class UserPersistenceAdapter(
         return user.role
     }
 
-//    override fun queryAllUserByReservation(reservation: Reservation): List<User> =
-//        userRepository.findAllByReservation(reservationMapper.toEntity(reservation))
-//            .map { userMapper.toDomain(it)!! }
-
-//    override fun queryUserByIdAndReservation(id: UUID, reservation: Reservation): User? =
-//        userMapper.toDomain(userRepository.findByIdAndReservation(id, reservationMapper.toEntity(reservation)))
-
     override fun existsUserByEmail(email: String): Boolean =
         userRepository.existsByEmail(email)
 
@@ -64,9 +55,6 @@ class UserPersistenceAdapter(
 
     override fun queryAllUserByNameContainingOrderByEmail(keyword: String): List<User> =
         userRepository.findAllByNameContainingOrderByEmail(keyword).map { userMapper.toDomain(it)!! }
-
-//    override fun queryAllUserByReservationIsNotNull(): List<User> =
-//        userRepository.findAllByReservationIsNotNull().map { userMapper.toDomain(it)!! }
 
     override fun queryAllUsersOrderByEmail(): List<User> =
         userRepository.findAllByOrderByEmail().map { userMapper.toDomain(it)!! }
@@ -79,10 +67,6 @@ class UserPersistenceAdapter(
 
     override fun queryAllUserByNameContainingAndRoleOrderByEmail(keyword: String, role: UserRole): List<User>  =
         userRepository.findAllByNameContainingAndRoleOrderByEmail(keyword, role).map { userMapper.toDomain(it)!! }
-
-//    override fun queryAllUserByReservationIn(reservations: List<Reservation>): List<User> =
-//        userRepository.findAllByReservationIn(reservations.map { reservationMapper.toEntity(it) })
-//            .map { userMapper.toDomain(it)!! }
 
     override fun queryAllUserByUserIds(userIds: List<UUID>): List<User> =
         userRepository.findAllById(userIds).map { userMapper.toDomain(it)!! }

@@ -13,6 +13,5 @@ data class User(
     val number: Int?,
     val profileImageUrl: String,
     val role: UserRole,
-//    val reservationId: UUID?,
     val useStatus: UseStatus
 )
