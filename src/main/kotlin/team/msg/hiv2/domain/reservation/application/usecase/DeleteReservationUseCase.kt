@@ -20,7 +20,7 @@ class DeleteReservationUseCase(
 
         val team = teamService.queryTeamById(reservation.teamId)
 
-        val users = userService.queryAllUsersByUserIds(team.userIds)
+        val users = userService.queryAllUserById(team.userIds)
 
         val updatedUsers = users.map { it.copy(useStatus = UseStatus.UNAVAILABLE) }
 

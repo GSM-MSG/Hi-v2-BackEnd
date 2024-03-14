@@ -19,7 +19,7 @@ class CheckAndRestrictReservationUserUseCase(
 
         val team = teamService.queryTeamById(reservation.teamId)
 
-        val users = userService.queryAllUsersByUserIds(team.userIds)
+        val users = userService.queryAllUserById(team.userIds)
 
         if(!reservation.checkStatus) {
             userService.saveAll(users.map { it.copy(useStatus = UseStatus.UNAVAILABLE) })

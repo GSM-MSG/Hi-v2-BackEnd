@@ -25,7 +25,7 @@ class QueryReservationByHomeBaseUseCase(
         val team = teamService.queryTeamById(reservations[0].teamId)
 
         return reservations.map {
-            val users = userService.queryAllUsersByUserIds(team.userIds)
+            val users = userService.queryAllUserById(team.userIds)
             ReservationResponse.of(
                 it,
                 users.map { user -> UserResponse.of(user) },

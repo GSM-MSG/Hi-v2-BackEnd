@@ -21,7 +21,7 @@ class QueryReservationDetailUseCase(
 
         val team = teamService.queryTeamById(reservation.teamId)
 
-        val users = userService.queryAllUsersByUserIds(team.userIds)
+        val users = userService.queryAllUserById(team.userIds)
 
         return ReservationDetailResponse.of(reservation, users.map { UserResponse.of(it) })
     }

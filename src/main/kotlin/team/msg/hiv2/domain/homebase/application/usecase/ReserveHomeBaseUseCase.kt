@@ -9,7 +9,7 @@ import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
-import team.msg.hiv2.domain.user.domain.constant.UseStatus
+import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.global.annotation.usecase.UseCase
 import java.util.*
 
@@ -26,6 +26,10 @@ class ReserveHomeBaseUseCase(
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
 
         val users = userService.queryAllUserById(request.users)
+
+        val userIds = users.map { it.id }
+        if (!userService.existsUsersByIds(userIds))
+            throw UserNotFoundException()
 
         val reservationCount = reservationService.countReservationByHomeBase(homeBase)
         when(floor) {
@@ -54,9 +58,5 @@ class ReserveHomeBaseUseCase(
                 reservationNumber = request.reservationNumber
             )
         )
-
-        userService.saveAll(users.map {
-            it.copy(useStatus = UseStatus.UNAVAILABLE)
-        })
     }
 }

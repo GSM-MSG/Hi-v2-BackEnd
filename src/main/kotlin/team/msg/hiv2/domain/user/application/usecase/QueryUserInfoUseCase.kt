@@ -29,7 +29,7 @@ class QueryUserInfoUseCase(
             user,
             reservations.map { reservation ->
                 val userIds = teams.flatMap { it.userIds }
-                val users = userService.queryAllUsersByUserIds(userIds)
+                val users = userService.queryAllUserById(userIds)
                 val homeBase = homeBaseService.queryHomeBaseById(reservation.homeBaseId)
 
                 ReservationResponse.of(

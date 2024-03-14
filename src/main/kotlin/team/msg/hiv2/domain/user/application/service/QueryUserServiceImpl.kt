@@ -27,6 +27,9 @@ class QueryUserServiceImpl(
     override fun existsUserByEmail(email: String): Boolean =
         queryUserPort.existsUserByEmail(email)
 
+    override fun existsUsersByIds(ids: List<UUID>): Boolean =
+        queryUserPort.existsUserByIds(ids)
+
     override fun queryCurrentUser(): User =
         queryUserPort.queryCurrentUser()
 
@@ -44,8 +47,5 @@ class QueryUserServiceImpl(
 
     override fun queryAllUserByNameContainingAndRoleOrderByEmail(keyword: String, role: UserRole) =
         queryUserPort.queryAllUserByNameContainingAndRoleOrderByEmail(keyword, role)
-
-    override fun queryAllUsersByUserIds(userIds: List<UUID>): List<User> =
-        queryUserPort.queryAllUserByUserIds(userIds)
 
 }

@@ -28,7 +28,7 @@ class ReservationScheduler(
 
         val userIds = teams.flatMap { it.userIds }
 
-        val users = userService.queryAllUsersByUserIds(userIds)
+        val users = userService.queryAllUserById(userIds)
 
         val updatedUsers = users.flatMap {
             reservations.map { reservation ->
