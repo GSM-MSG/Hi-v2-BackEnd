@@ -25,11 +25,14 @@ class TeamPersistenceAdapter(
         teamRepository.deleteById(id)
     }
 
+    override fun queryAllTeamByIdIn(id: List<UUID>): List<Team> =
+        teamRepository.findAllByIdIn(id).map { teamMapper.toDomain(it)!! }
+
     override fun deleteAll() {
         teamRepository.deleteAll()
     }
 
-    override fun queryTeamByUserIdsIn(userIds: List<UUID>): List<Team> =
+    override fun queryAllTeamByUserIdsIn(userIds: List<UUID>): List<Team> =
         teamRepository.findAllByUserIdsIn(userIds).map { teamMapper.toDomain(it)!! }
 
     override fun queryTeamById(id: UUID): Team? =
