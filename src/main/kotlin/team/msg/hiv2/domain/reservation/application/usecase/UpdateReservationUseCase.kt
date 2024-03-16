@@ -25,8 +25,6 @@ class UpdateReservationUseCase(
 
         val users = request.users.map { userService.queryUserById(it) }
 
-        userValidator.checkUsersUseStatus(users)
-
         teamService.save(team.copy(userIds = users.map { it.id }.toMutableList()))
         reservationService.save(reservation.copy(reason = request.reason))
         userService.saveAll(users.map { it.copy(useStatus = UseStatus.UNAVAILABLE) })
