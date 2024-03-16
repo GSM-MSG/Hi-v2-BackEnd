@@ -7,14 +7,10 @@ import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.presentation.data.request.SearchUserKeywordRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserRoleWebRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRequest
-import team.msg.hiv2.domain.user.presentation.data.response.AllUsersResponse
-import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
-import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
-import team.msg.hiv2.domain.user.presentation.data.response.UserRoleResponse
+import team.msg.hiv2.domain.user.presentation.data.response.*
 import team.msg.hiv2.domain.user.presentation.data.web.UpdateUserUseStatusWebRequest
-import java.util.UUID
+import java.util.*
 import javax.validation.Valid
-import team.msg.hiv2.domain.user.presentation.data.response.StudentResponse
 
 @RestController
 @RequestMapping("/user")
