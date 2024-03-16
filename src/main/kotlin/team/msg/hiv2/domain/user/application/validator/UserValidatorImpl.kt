@@ -32,7 +32,7 @@ class UserValidatorImpl(
     override fun checkUserAndReservation(user: User, reservation: Reservation) {
         val team = teamService.queryTeamById(reservation.teamId)
 
-        if(team.userIds.contains(user.id)) {
+        if(!team.userIds.contains(user.id)) {
             log.warn("User {} is not contained in a reservation {}", user.id, reservation.id)
             throw ForbiddenCommandReservationException()
         }
