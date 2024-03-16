@@ -60,7 +60,6 @@ class QueryAllNoticeUseCaseTest {
             number = number,
             profileImageUrl = profileImageUrl,
             role = UserRole.ROLE_ADMIN,
-            reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }

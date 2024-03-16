@@ -9,6 +9,8 @@ import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
+import team.msg.hiv2.domain.team.application.service.TeamService
+import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
@@ -28,6 +30,9 @@ internal class QueryUserInfoUseCaseTest {
     @Mock
     private lateinit var homeBaseService: HomeBaseService
 
+    @Mock
+    private lateinit var teamService: TeamService
+
     private lateinit var queryUserInfoUseCase: QueryUserInfoUseCase
 
     private val userId = UUID.randomUUID()
@@ -45,8 +50,14 @@ internal class QueryUserInfoUseCaseTest {
             number = 6,
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_ADMIN,
-            reservationId = reservationId,
             useStatus = UseStatus.AVAILABLE
+        )
+    }
+
+    private val teamStub by lazy {
+        Team(
+            id = UUID.randomUUID(),
+            userIds = mutableListOf(userId)
         )
     }
 
@@ -56,7 +67,8 @@ internal class QueryUserInfoUseCaseTest {
             homeBaseId = 1,
             reason = "test",
             checkStatus = false,
-            reservationNumber = reservationNumber
+            reservationNumber = reservationNumber,
+            teamId = teamStub.id
         )
     }
 
@@ -71,7 +83,7 @@ internal class QueryUserInfoUseCaseTest {
     @BeforeEach
     fun setUp() {
         queryUserInfoUseCase = QueryUserInfoUseCase(
-            userService, reservationService, homeBaseService
+            userService, reservationService, homeBaseService, teamService
         )
     }
 
@@ -82,11 +94,11 @@ internal class QueryUserInfoUseCaseTest {
         given(userService.queryCurrentUser())
             .willReturn(userStub)
 
-        given(reservationService.queryReservationById(reservationId))
-            .willReturn(reservationStub)
+        given(teamService.queryAllTeamByUserIdsIn(listOf(userId)))
+            .willReturn(listOf(teamStub))
 
-        given(userService.queryAllUserByReservation(reservationStub))
-            .willReturn(listOf(userStub))
+        given(reservationService.queryAllReservationByTeams(listOf(teamStub)))
+            .willReturn(listOf(reservationStub))
 
         given(homeBaseService.queryHomeBaseById(reservationStub.homeBaseId))
             .willReturn(homeBaseStub)

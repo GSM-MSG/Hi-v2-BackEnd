@@ -11,6 +11,8 @@ import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
+import team.msg.hiv2.domain.team.application.service.TeamService
+import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
@@ -29,6 +31,9 @@ internal class ReserveHomeBaseUseCaseTest {
 
     @Mock
     private lateinit var homeBaseService: HomeBaseService
+
+    @Mock
+    private lateinit var teamService: TeamService
 
     private lateinit  var reserveHomeBaseUseCase: ReserveHomeBaseUseCase
 
@@ -57,13 +62,21 @@ internal class ReserveHomeBaseUseCaseTest {
         )
     }
 
+    private val teamStub by lazy {
+        Team(
+            id = UUID.randomUUID(),
+            userIds = mutableListOf(userId, userId2)
+        )
+    }
+
     private val reservationStub by lazy {
         Reservation(
             id = UUID.randomUUID(),
             homeBaseId = homeBaseStub.id,
             reason = reason,
             checkStatus = false,
-            reservationNumber = reservationNumber
+            reservationNumber = reservationNumber,
+            teamId = teamStub.id
         )
     }
 
@@ -72,7 +85,8 @@ internal class ReserveHomeBaseUseCaseTest {
         reserveHomeBaseUseCase = ReserveHomeBaseUseCase(
             userService,
             reservationService,
-            homeBaseService
+            homeBaseService,
+            teamService
         )
     }
 
@@ -87,7 +101,6 @@ internal class ReserveHomeBaseUseCaseTest {
             number = 6,
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
-            reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
 
@@ -100,7 +113,6 @@ internal class ReserveHomeBaseUseCaseTest {
             number = 7,
             profileImageUrl = "profileImageUrl2",
             role = UserRole.ROLE_STUDENT,
-            reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
 
@@ -110,12 +122,13 @@ internal class ReserveHomeBaseUseCaseTest {
 
         given(reservationService.countReservationByHomeBase(homeBaseStub)).willReturn(reservationCount)
 
+        given(teamService.save(any())).willReturn(teamStub)
+
         given(reservationService.save(any())).willReturn(reservationStub)
 
         assertDoesNotThrow {
             reserveHomeBaseUseCase.execute(floor, period, requestStub)
         }
-
     }
 
 }

@@ -1,16 +1,18 @@
 package team.msg.hiv2.domain.reservation.application.usecase
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mock
+import org.mockito.kotlin.any
 import org.mockito.kotlin.given
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
+import team.msg.hiv2.domain.team.application.service.TeamService
+import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
-import team.msg.hiv2.domain.user.application.validator.UserValidator
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
@@ -27,7 +29,7 @@ class UpdateReservationUseCaseTest {
     private lateinit var reservationService: ReservationService
 
     @Mock
-    private lateinit var userValidator: UserValidator
+    private lateinit var teamService: TeamService
 
     private lateinit var updateReservationUseCase: UpdateReservationUseCase
 
@@ -35,8 +37,8 @@ class UpdateReservationUseCaseTest {
     private val period = 10
     private val reservationNumber = 1
 
-    private val representativeId = UUID.randomUUID()
-    private val userId = UUID.randomUUID()
+    private val userId1 = UUID.randomUUID()
+    private val teamId = UUID.randomUUID()
 
     private val reason = "회의"
     private val homeBaseStub by lazy {
@@ -47,19 +49,27 @@ class UpdateReservationUseCaseTest {
         )
     }
 
+    private val teamStub by lazy {
+        Team(
+            id = teamId,
+            userIds = mutableListOf(userId1)
+        )
+    }
+
     private val reservationStub by lazy {
         Reservation(
             id = UUID.randomUUID(),
             reason = reason,
             homeBaseId = homeBaseStub.id,
             checkStatus = false,
-            reservationNumber = reservationNumber
+            reservationNumber = reservationNumber,
+            teamId = teamStub.id
         )
     }
 
     private val userStub1 by lazy {
         User(
-            id = representativeId,
+            id = userId1,
             email = "test@email",
             name = "hope",
             grade = 2,
@@ -67,22 +77,6 @@ class UpdateReservationUseCaseTest {
             number = 6,
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
-            reservationId = reservationStub.id,
-            useStatus = UseStatus.AVAILABLE
-        )
-    }
-
-    private val userStub2 by lazy {
-        User(
-            id = userId,
-            email = "test@email",
-            name = "esperer",
-            grade = 2,
-            classNum = 4,
-            number = 7,
-            profileImageUrl = "profileImageUrl",
-            role = UserRole.ROLE_STUDENT,
-            reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )
     }
@@ -91,7 +85,7 @@ class UpdateReservationUseCaseTest {
 
     private val requestStub by lazy{
         UpdateReservationRequest(
-            users = listOf(representativeId, userId),
+            users = listOf(userId1),
             reason = "수정됨"
         )
     }
@@ -99,7 +93,7 @@ class UpdateReservationUseCaseTest {
     @BeforeEach
     fun setUp(){
         updateReservationUseCase = UpdateReservationUseCase(
-            reservationService, userService, userValidator
+            reservationService, userService, teamService
         )
     }
 
@@ -107,18 +101,24 @@ class UpdateReservationUseCaseTest {
     fun `수정 성공`() {
 
         // given
-        given(reservationService.queryReservationById(requestReservationId))
+        given(reservationService.queryReservationById(userId1))
             .willReturn(reservationStub)
 
-        given(userService.queryUserById(representativeId))
+        given(teamService.queryTeamById(teamId))
+            .willReturn(teamStub)
+
+        given(userService.queryUserById(userId1))
             .willReturn(userStub1)
 
-        given(userService.queryUserById(userId))
-            .willReturn(userStub2)
+        given(teamService.save(any()))
+            .willReturn(teamStub)
+
+        given(reservationService.save(any()))
+            .willReturn(reservationStub)
 
         // when & then
         assertDoesNotThrow {
-            updateReservationUseCase.execute(requestReservationId, requestStub)
+            updateReservationUseCase.execute(userId1, requestStub)
         }
     }
 
