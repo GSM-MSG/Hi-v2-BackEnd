@@ -1,13 +1,8 @@
 package team.msg.hiv2.domain.team.persistence.entity
 
-import javax.persistence.CollectionTable
-import javax.persistence.Column
-import javax.persistence.ElementCollection
-import javax.persistence.Entity
-import javax.persistence.JoinColumn
-import javax.persistence.Table
 import team.msg.hiv2.global.entity.BaseUuidEntity
 import java.util.*
+import javax.persistence.*
 
 @Entity
 @Table(name = "team")
