@@ -13,6 +13,7 @@ class SearchStudentByNameKeywordUseCase(
 
     fun execute(request: SearchUserKeywordRequest): List<StudentResponse> {
         val users = userService.queryAllUserByNameContainingAndRoleOrderByEmail(request.keyword, UserRole.ROLE_STUDENT)
+
         return users.map { StudentResponse.of(it) }
     }
 }

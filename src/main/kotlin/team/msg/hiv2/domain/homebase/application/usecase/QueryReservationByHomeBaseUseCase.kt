@@ -17,7 +17,8 @@ class QueryReservationByHomeBaseUseCase(
     private val teamService: TeamService
 ) {
 
-    fun execute(floor: Int, period: Int): List<ReservationResponse>{
+    fun execute(floor: Int, period: Int): List<ReservationResponse> {
+
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
 
         val reservations = reservationService.queryAllReservationByHomeBase(homeBase)

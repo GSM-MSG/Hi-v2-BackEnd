@@ -16,7 +16,8 @@ class DeleteAllReservationByPeriodUseCase(
     private val teamMapper: TeamMapper
 ) {
 
-    fun execute(period: Int){
+    fun execute(period: Int) {
+
         val homeBases = homeBaseService.queryAllHomeBaseByPeriod(period)
 
         val reservations = reservationService.queryAllReservationByHomeBaseIn(homeBases)

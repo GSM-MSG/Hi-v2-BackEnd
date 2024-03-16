@@ -12,7 +12,7 @@ class HomeBaseFacadeImpl(
     private val deleteAllReservationByPeriodUseCase: DeleteAllReservationByPeriodUseCase,
     private val queryReservationByHomeBaseUseCase: QueryReservationByHomeBaseUseCase,
     private val reserveHomeBaseUseCase: ReserveHomeBaseUseCase
-) : HomeBaseFacade{
+) : HomeBaseFacade {
 
     override fun deleteAllReservationByPeriod(period: Int) =
         deleteAllReservationByPeriodUseCase.execute(period)

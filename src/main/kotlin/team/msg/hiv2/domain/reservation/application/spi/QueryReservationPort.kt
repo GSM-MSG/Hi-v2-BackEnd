@@ -6,6 +6,7 @@ import team.msg.hiv2.domain.team.domain.Team
 import java.util.UUID
 
 interface QueryReservationPort {
+
     fun queryReservationById(id: UUID): Reservation?
     fun queryAllReservationByHomeBase(homeBase: HomeBase): List<Reservation>
     fun queryAllReservationByHomeBaseIn(homeBases: List<HomeBase>): List<Reservation>

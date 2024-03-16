@@ -6,7 +6,7 @@ import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.global.annotation.usecase.UseCase
-import java.util.UUID
+import java.util.*
 
 @UseCase
 class ExitReservationUseCase(
@@ -16,7 +16,6 @@ class ExitReservationUseCase(
 ) {
 
     fun execute(reservationId: UUID){
-
         val reservation = reservationService.queryReservationById(reservationId)
 
         val currentUser = userService.queryCurrentUser()
@@ -29,6 +28,5 @@ class ExitReservationUseCase(
 
         reservationService.delete(reservation)
         teamService.deleteTeamById(reservation.teamId)
-        userService.save(currentUser.copy(useStatus = UseStatus.AVAILABLE))
     }
 }

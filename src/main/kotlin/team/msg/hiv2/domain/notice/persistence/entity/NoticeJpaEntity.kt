@@ -22,5 +22,6 @@ class NoticeJpaEntity(
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    val user: UserJpaEntity,
+    val user: UserJpaEntity
+
 ) : BaseUuidEntity(id)

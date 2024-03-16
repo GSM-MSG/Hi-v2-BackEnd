@@ -23,7 +23,7 @@ class ReservationPersistenceAdapter(
     override fun save(reservation: Reservation): Reservation =
         reservationMapper.toDomain(reservationRepository.save(reservationMapper.toEntity(reservation)))!!
 
-    override fun delete(reservation: Reservation){
+    override fun delete(reservation: Reservation) {
         reservationRepository.deleteById(reservation.id)
     }
 

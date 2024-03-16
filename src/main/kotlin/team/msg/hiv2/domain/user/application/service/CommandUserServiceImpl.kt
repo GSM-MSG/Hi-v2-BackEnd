@@ -16,11 +16,10 @@ class CommandUserServiceImpl(
     override fun saveAll(users: List<User>) =
         userPort.saveAll(users)
 
-    override fun createUser(user: User, isExist: Boolean): User {
-        return if(isExist){
+    override fun createUser(user: User, isExist: Boolean): User =
+        if(isExist){
             userPort.queryUserByEmail(user.email) ?: throw UserNotFoundException()
         } else {
             userPort.save(user)
         }
-    }
 }

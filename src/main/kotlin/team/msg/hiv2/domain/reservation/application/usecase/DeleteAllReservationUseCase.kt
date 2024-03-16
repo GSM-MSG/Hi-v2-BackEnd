@@ -10,7 +10,7 @@ class DeleteAllReservationUseCase(
     private val teamService: TeamService
 ) {
 
-    fun execute(){
+    fun execute() {
         teamService.deleteAll()
         reservationService.deleteAll()
     }

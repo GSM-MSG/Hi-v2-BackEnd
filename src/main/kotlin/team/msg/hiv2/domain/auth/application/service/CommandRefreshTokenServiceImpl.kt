@@ -7,7 +7,8 @@ import team.msg.hiv2.global.annotation.service.DomainService
 @DomainService
 class CommandRefreshTokenServiceImpl(
     private val commandRefreshTokenPort: CommandRefreshTokenPort
-) : CommandRefreshTokenService{
+) : CommandRefreshTokenService {
+
     override fun save(refreshToken: RefreshToken): String =
         commandRefreshTokenPort.save(refreshToken)
 

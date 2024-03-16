@@ -3,14 +3,14 @@ package team.msg.hiv2.global.filter
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.JwtException
-import org.springframework.web.filter.OncePerRequestFilter
-import team.msg.hiv2.global.error.ErrorCode
-import team.msg.hiv2.global.error.ErrorResponse
-import team.msg.hiv2.global.error.exception.HiException
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
+import org.springframework.web.filter.OncePerRequestFilter
+import team.msg.hiv2.global.error.ErrorCode
+import team.msg.hiv2.global.error.ErrorResponse
+import team.msg.hiv2.global.error.exception.HiException
 
 class ExceptionFilter: OncePerRequestFilter() {
 
@@ -30,7 +30,7 @@ class ExceptionFilter: OncePerRequestFilter() {
                 is HiException -> exceptionToResponse(e.errorCode, response)
                 else -> {
                     log.error(e.message)
-                    exceptionToResponse(ErrorCode.INTERVAL_SERVER_ERROR,response)
+                    exceptionToResponse(ErrorCode.INTERVAL_SERVER_ERROR, response)
                 }
             }
         }

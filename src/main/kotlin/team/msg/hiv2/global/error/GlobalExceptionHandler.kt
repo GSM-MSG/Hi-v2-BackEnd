@@ -16,7 +16,7 @@ class GlobalExceptionHandler {
     fun handleHiException(e: HiException): ResponseEntity<ErrorResponse> {
         log.warn("Exception message = ${e.message}")
         return ResponseEntity(
-            ErrorResponse(e.errorCode.message,e.errorCode.status),
+            ErrorResponse(e.errorCode.message, e.errorCode.status),
             HttpStatus.valueOf(e.errorCode.status)
         )
     }

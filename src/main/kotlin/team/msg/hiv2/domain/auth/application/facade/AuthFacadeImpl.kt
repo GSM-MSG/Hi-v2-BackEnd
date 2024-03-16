@@ -15,7 +15,7 @@ class AuthFacadeImpl(
     private val logoutUseCase: LogoutUseCase,
     private val queryGAuthLoginLinkUseCase: QueryGAuthLoginLinkUseCase,
     private val reissueTokenUseCase: ReissueTokenUseCase
-) : AuthFacade{
+) : AuthFacade {
 
     override fun gAuthSignIn(request: GAuthSignInRequest): TokenResponse =
         gAuthSignInUseCase.execute(request)

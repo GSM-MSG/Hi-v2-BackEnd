@@ -6,7 +6,7 @@ import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
-import java.util.UUID
+import java.util.*
 
 @ReadOnlyUseCase
 class QueryReservationDetailUseCase(
@@ -16,7 +16,6 @@ class QueryReservationDetailUseCase(
 ) {
 
     fun execute(id: UUID): ReservationDetailResponse {
-
         val reservation = reservationService.queryReservationById(id)
 
         val team = teamService.queryTeamById(reservation.teamId)

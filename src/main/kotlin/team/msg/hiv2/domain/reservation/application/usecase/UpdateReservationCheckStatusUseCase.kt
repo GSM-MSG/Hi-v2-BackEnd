@@ -10,7 +10,7 @@ class UpdateReservationCheckStatusUseCase(
     private val reservationService: ReservationService
 ) {
 
-    fun execute(reservationId: UUID, request: UpdateReservationCheckStatusRequest){
+    fun execute(reservationId: UUID, request: UpdateReservationCheckStatusRequest) {
         val reservation = reservationService.queryReservationById(reservationId)
 
         reservationService.save(reservation.copy(checkStatus = request.checkStatus))

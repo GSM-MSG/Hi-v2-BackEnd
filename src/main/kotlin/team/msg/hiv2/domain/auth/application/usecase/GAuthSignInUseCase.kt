@@ -17,7 +17,7 @@ class GAuthSignInUseCase(
     private val generateJwtPort: GenerateJwtPort
 ) {
 
-    fun execute(request: GAuthSignInRequest): TokenResponse{
+    fun execute(request: GAuthSignInRequest): TokenResponse {
 
         val gAuthToken = gAuthPort.queryGAuthToken(request.code)
 

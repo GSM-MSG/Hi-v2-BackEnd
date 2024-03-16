@@ -6,6 +6,7 @@ import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationDe
 import java.util.UUID
 
 interface ReservationFacade {
+
     fun checkAndRestrictReservation(id: UUID)
     fun deleteAllReservation()
     fun deleteReservation(id: UUID)

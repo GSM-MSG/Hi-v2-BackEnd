@@ -20,7 +20,7 @@ class ReservationScheduler(
     @Scheduled(cron = "0 30 8 ? * MON-FRI", zone = "Asia/Seoul")
     fun resetAllReservation() = checkAndDelete()
 
-    private fun checkAndDelete(){
+    private fun checkAndDelete() {
 
         val reservations = reservationService.queryAllReservation()
 
@@ -40,9 +40,7 @@ class ReservationScheduler(
         }
 
         teamService.deleteAll(teams)
-
         userService.saveAll(updatedUsers)
-
         reservationService.deleteAllReservationInBatch(reservations)
     }
 }

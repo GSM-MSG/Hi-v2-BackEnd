@@ -3,7 +3,6 @@ package team.msg.hiv2.global.security.principle
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 
 class AuthDetails(

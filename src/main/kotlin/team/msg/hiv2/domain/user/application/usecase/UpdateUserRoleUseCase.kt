@@ -9,6 +9,7 @@ import java.util.UUID
 class UpdateUserRoleUseCase(
     private val userService: UserService
 ) {
+
     fun execute(userId: UUID, request: UpdateUserRoleWebRequest) {
         val user = userService.queryUserById(userId)
 

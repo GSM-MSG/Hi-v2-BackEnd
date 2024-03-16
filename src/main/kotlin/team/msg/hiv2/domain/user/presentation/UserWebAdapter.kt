@@ -1,5 +1,6 @@
 package team.msg.hiv2.domain.user.presentation
 
+import javax.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import team.msg.hiv2.domain.user.application.facade.UserFacade
@@ -10,7 +11,6 @@ import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRe
 import team.msg.hiv2.domain.user.presentation.data.response.*
 import team.msg.hiv2.domain.user.presentation.data.web.UpdateUserUseStatusWebRequest
 import java.util.*
-import javax.validation.Valid
 
 @RestController
 @RequestMapping("/user")
@@ -71,4 +71,5 @@ class UserWebAdapter(
             SearchUserKeywordRequest(keyword)
         )
             .let { ResponseEntity.ok(it) }
+
 }

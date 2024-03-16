@@ -9,11 +9,13 @@ import java.util.*
 class CommandTeamServiceImpl(
     private val commandTeamPort: CommandTeamPort
 ) : CommandTeamService {
+
     override fun save(team: Team) =
         commandTeamPort.save(team)
 
-    override fun deleteAll(teams: List<Team>) =
+    override fun deleteAll(teams: List<Team>) {
         commandTeamPort.deleteAll(teams)
+    }
 
     override fun deleteTeamById(id: UUID) {
         commandTeamPort.deleteTeamById(id)

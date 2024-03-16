@@ -10,6 +10,7 @@ import java.util.*
 class QueryTeamServiceImpl(
     private val queryTeamPort: QueryTeamPort
 ) : QueryTeamService {
+
     override fun queryAllTeamByIdIn(id: List<UUID>): List<Team> =
         queryTeamPort.queryAllTeamByIdIn(id)
 

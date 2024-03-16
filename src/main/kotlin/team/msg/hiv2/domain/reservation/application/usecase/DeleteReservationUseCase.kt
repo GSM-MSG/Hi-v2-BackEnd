@@ -14,8 +14,7 @@ class DeleteReservationUseCase(
     private val teamService: TeamService
 ) {
 
-    fun execute(reservationId: UUID){
-
+    fun execute(reservationId: UUID) {
         val reservation = reservationService.queryReservationById(reservationId)
 
         val team = teamService.queryTeamById(reservation.teamId)
