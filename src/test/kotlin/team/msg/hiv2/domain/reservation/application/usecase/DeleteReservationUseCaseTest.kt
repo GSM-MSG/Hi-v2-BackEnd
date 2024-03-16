@@ -34,8 +34,8 @@ class DeleteReservationUseCaseTest {
     private val floor = 3
     private val period = 10
 
-    private val representativeId = UUID.randomUUID()
-    private val userId = UUID.randomUUID()
+    private val userId1 = UUID.randomUUID()
+    private val userId2 = UUID.randomUUID()
     private val teamId = UUID.randomUUID()
     private val reservationNumber = 1
 
@@ -52,7 +52,7 @@ class DeleteReservationUseCaseTest {
     private val teamStub by lazy {
         Team(
             id = teamId,
-            userIds = mutableListOf(userId)
+            userIds = mutableListOf(userId2)
         )
     }
 
@@ -69,7 +69,7 @@ class DeleteReservationUseCaseTest {
 
     private val userStub1 by lazy {
         User(
-            id = representativeId,
+            id = userId1,
             email = "test@email",
             name = "hope",
             grade = 2,
@@ -83,7 +83,7 @@ class DeleteReservationUseCaseTest {
 
     private val userStub2 by lazy {
         User(
-            id = userId,
+            id = userId2,
             email = "test@email",
             name = "esperer",
             grade = 2,
