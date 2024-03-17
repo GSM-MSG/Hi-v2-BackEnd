@@ -15,6 +15,12 @@ class HomeBaseJpaEntity(
     val floor: Int,
 
     @Column(name = "period", nullable = false)
-    val period: Int
+    val period: Int,
+
+    @Column(name = "number", nullable = false)
+    val number: Int,
+
+    @Column(name = "max_capacity", nullable = false)
+    val maxCapacity: Int
 
 ) : BaseIdEntity(id)
