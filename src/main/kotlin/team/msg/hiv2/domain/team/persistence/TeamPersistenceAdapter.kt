@@ -40,4 +40,5 @@ class TeamPersistenceAdapter(
 
     override fun queryAllTeam(): List<Team> =
         teamRepository.findAll().map { teamMapper.toDomain(it)!! }
+
 }

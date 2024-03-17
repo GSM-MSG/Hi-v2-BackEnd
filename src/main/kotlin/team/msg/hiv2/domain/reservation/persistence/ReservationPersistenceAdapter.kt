@@ -27,8 +27,8 @@ class ReservationPersistenceAdapter(
         reservationRepository.deleteById(reservation.id)
     }
 
-    override fun deleteAll() {
-        reservationRepository.deleteAll()
+    override fun deleteAllInBatch() {
+        reservationRepository.deleteAllInBatch()
     }
 
     override fun deleteAllReservationInBatch(reservations: List<Reservation>) {
