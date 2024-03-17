@@ -4,7 +4,6 @@ import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
 import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.user.application.service.UserService
-import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.global.annotation.usecase.UseCase
 import java.util.*
 
@@ -25,6 +24,5 @@ class UpdateReservationUseCase(
 
         teamService.save(team.copy(userIds = users.map { it.id }.toMutableList()))
         reservationService.save(reservation.copy(reason = request.reason))
-        userService.saveAll(users.map { it.copy(useStatus = UseStatus.UNAVAILABLE) })
     }
 }
