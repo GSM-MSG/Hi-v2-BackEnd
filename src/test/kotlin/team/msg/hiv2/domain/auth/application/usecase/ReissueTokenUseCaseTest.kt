@@ -45,7 +45,6 @@ class ReissueTokenUseCaseTest {
             number = 6,
             profileImageUrl = "profile_image_url",
             role = UserRole.ROLE_STUDENT,
-            reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }

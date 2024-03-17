@@ -13,7 +13,7 @@ import java.util.*
 @Transactional(readOnly = true, rollbackFor = [Exception::class])
 class AuthDetailsService(
     private val userRepository: UserRepository
-) : UserDetailsService{
+) : UserDetailsService {
 
     override fun loadUserByUsername(username: String): UserDetails =
         AuthDetails(

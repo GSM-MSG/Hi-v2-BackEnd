@@ -12,4 +12,5 @@ class QueryRefreshTokenServiceImpl(
 
     override fun queryByRefreshToken(refreshToken: String): RefreshToken =
         queryRefreshTokenPort.queryByRefreshToken(refreshToken) ?: throw RefreshTokenNotFoundException()
+
 }

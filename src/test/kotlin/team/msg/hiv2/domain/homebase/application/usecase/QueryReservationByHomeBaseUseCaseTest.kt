@@ -9,7 +9,10 @@ import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
+import team.msg.hiv2.domain.reservation.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
+import team.msg.hiv2.domain.team.application.service.TeamService
+import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
@@ -30,6 +33,9 @@ class QueryReservationByHomeBaseUseCaseTest {
     @Mock
     private lateinit var userService: UserService
 
+    @Mock
+    private lateinit var teamService: TeamService
+
     private lateinit var queryReservationByHomeBaseUseCase: QueryReservationByHomeBaseUseCase
 
     private val floor = 3
@@ -37,10 +43,10 @@ class QueryReservationByHomeBaseUseCaseTest {
     private val homeBaseId: Long = 1
     private val reservationNumber = 1
 
-    private val representativeId1 = UUID.randomUUID()
     private val userId1 = UUID.randomUUID()
-
+    private val userId2 = UUID.randomUUID()
     private val reservationId1 = UUID.randomUUID()
+    private val teamId = UUID.randomUUID()
 
     private val reason = "회의"
 
@@ -52,19 +58,27 @@ class QueryReservationByHomeBaseUseCaseTest {
         )
     }
 
+    private val teamStub by lazy {
+        Team(
+            id = teamId,
+            userIds = mutableListOf(userId1, userId2)
+        )
+    }
+
     private val reservationStub by lazy {
         Reservation(
             id = reservationId1,
             homeBaseId = homeBaseId,
             reason = reason,
             checkStatus = false,
-            reservationNumber = reservationNumber
+            reservationNumber = reservationNumber,
+            teamId = teamStub.id
         )
     }
 
     private val userStub1 by lazy {
         User(
-            id = representativeId1,
+            id = userId1,
             email = "test@email",
             name = "hope",
             grade = 2,
@@ -72,14 +86,13 @@ class QueryReservationByHomeBaseUseCaseTest {
             number = 6,
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
-            reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )
     }
 
     private val userStub2 by lazy {
         User(
-            id = userId1,
+            id = userId2,
             email = "test@email",
             name = "esperer",
             grade = 2,
@@ -87,7 +100,6 @@ class QueryReservationByHomeBaseUseCaseTest {
             number = 7,
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
-            reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )
     }
@@ -100,15 +112,19 @@ class QueryReservationByHomeBaseUseCaseTest {
         UserResponse.of(userStub2)
     }
 
+    private val homeBaseResponseStub by lazy {
+        HomeBaseResponse(homeBaseId, floor, period)
+    }
+
 
     private val responseStub by lazy {
-        ReservationResponse.of(reservationStub, listOf(userResponseStub1, userResponseStub2), homeBaseStub)
+        ReservationResponse.of(reservationStub, listOf(userResponseStub1, userResponseStub2), homeBaseResponseStub)
     }
 
     @BeforeEach
     fun setUp(){
         queryReservationByHomeBaseUseCase = QueryReservationByHomeBaseUseCase(
-            reservationService, homeBaseService, userService
+            reservationService, homeBaseService, userService, teamService
         )
     }
 
@@ -122,7 +138,10 @@ class QueryReservationByHomeBaseUseCaseTest {
         given(reservationService.queryAllReservationByHomeBase(homeBaseStub))
             .willReturn(listOf(reservationStub))
 
-        given(userService.queryAllUserByReservation(reservationStub))
+        given(teamService.queryTeamById(teamId))
+            .willReturn(teamStub)
+
+        given(userService.queryAllUserById(listOf(userId1, userId2)))
             .willReturn(listOf(userStub1, userStub2))
 
         // when

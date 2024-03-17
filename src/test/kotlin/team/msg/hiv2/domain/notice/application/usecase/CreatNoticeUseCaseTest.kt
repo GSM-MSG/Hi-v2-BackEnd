@@ -43,7 +43,6 @@ internal class CreatNoticeUseCaseTest {
             number = 6,
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_ADMIN,
-            reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }

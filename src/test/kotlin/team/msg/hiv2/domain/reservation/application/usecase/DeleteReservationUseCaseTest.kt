@@ -8,6 +8,8 @@ import org.mockito.kotlin.given
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
+import team.msg.hiv2.domain.team.application.service.TeamService
+import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
@@ -24,21 +26,33 @@ class DeleteReservationUseCaseTest {
     @Mock
     private lateinit var userService: UserService
 
+    @Mock
+    private lateinit var teamService: TeamService
+
     private lateinit var deleteReservationUseCase: DeleteReservationUseCase
 
     private val floor = 3
     private val period = 10
 
-    private val representativeId = UUID.randomUUID()
-    private val userId = UUID.randomUUID()
+    private val userId1 = UUID.randomUUID()
+    private val userId2 = UUID.randomUUID()
+    private val teamId = UUID.randomUUID()
     private val reservationNumber = 1
 
     private val reason = "회의"
+
     private val homeBaseStub by lazy {
         HomeBase(
             id = 1,
             floor = floor,
             period = period
+        )
+    }
+
+    private val teamStub by lazy {
+        Team(
+            id = teamId,
+            userIds = mutableListOf(userId2)
         )
     }
 
@@ -48,13 +62,14 @@ class DeleteReservationUseCaseTest {
             reason = reason,
             homeBaseId = homeBaseStub.id,
             checkStatus = false,
-            reservationNumber = reservationNumber
+            reservationNumber = reservationNumber,
+            teamId = teamId
         )
     }
 
     private val userStub1 by lazy {
         User(
-            id = representativeId,
+            id = userId1,
             email = "test@email",
             name = "hope",
             grade = 2,
@@ -62,14 +77,13 @@ class DeleteReservationUseCaseTest {
             number = 6,
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
-            reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )
     }
 
     private val userStub2 by lazy {
         User(
-            id = userId,
+            id = userId2,
             email = "test@email",
             name = "esperer",
             grade = 2,
@@ -77,7 +91,6 @@ class DeleteReservationUseCaseTest {
             number = 7,
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
-            reservationId = reservationStub.id,
             useStatus = UseStatus.AVAILABLE
         )
     }
@@ -87,7 +100,7 @@ class DeleteReservationUseCaseTest {
     @BeforeEach
     fun setUp() {
         deleteReservationUseCase = DeleteReservationUseCase(
-            reservationService, userService
+            reservationService, userService, teamService
         )
     }
 
@@ -98,8 +111,8 @@ class DeleteReservationUseCaseTest {
         given(reservationService.queryReservationById(requestReservationId))
             .willReturn(reservationStub)
 
-        given(userService.queryAllUserByReservation(reservationStub))
-            .willReturn(listOf(userStub1, userStub2))
+        given(teamService.queryTeamById(teamId))
+            .willReturn(teamStub)
 
         // when & then
         assertDoesNotThrow {

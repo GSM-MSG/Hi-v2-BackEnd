@@ -2,7 +2,6 @@ package team.msg.hiv2.domain.user.presentation.data.response
 
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
-import team.msg.hiv2.domain.user.domain.constant.UserRole
 import java.util.*
 
 data class StudentResponse(
@@ -13,7 +12,6 @@ data class StudentResponse(
     val classNum: Int?,
     val number: Int?,
     val profileImageUrl: String,
-    val role: UserRole,
     val useStatus: UseStatus
 ) {
     companion object {
@@ -25,7 +23,6 @@ data class StudentResponse(
             classNum = user.classNum,
             number = user.number,
             profileImageUrl = user.profileImageUrl,
-            role = user.role,
             useStatus = user.useStatus
         )
     }

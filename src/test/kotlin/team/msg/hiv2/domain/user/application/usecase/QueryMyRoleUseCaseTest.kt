@@ -34,7 +34,6 @@ internal class QueryMyRoleUseCaseTest {
             number = 6,
             profileImageUrl = "profileImageUrl",
             role = userRole,
-            reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }

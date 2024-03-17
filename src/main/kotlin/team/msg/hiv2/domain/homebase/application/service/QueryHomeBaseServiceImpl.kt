@@ -9,6 +9,7 @@ import team.msg.hiv2.global.annotation.service.DomainService
 class QueryHomeBaseServiceImpl(
     private val queryHomeBasePort: QueryHomeBasePort
 ) : QueryHomeBaseService {
+
     override fun queryHomeBaseByFloorAndPeriod(floor: Int, period: Int): HomeBase =
         queryHomeBasePort.queryHomeBaseByFloorAndPeriod(floor, period) ?: throw HomeBaseNotFoundException()
 

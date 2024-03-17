@@ -17,7 +17,7 @@ class GAuthSignInUseCase(
     private val generateJwtPort: GenerateJwtPort
 ) {
 
-    fun execute(request: GAuthSignInRequest): TokenResponse{
+    fun execute(request: GAuthSignInRequest): TokenResponse {
 
         val gAuthToken = gAuthPort.queryGAuthToken(request.code)
 
@@ -35,7 +35,6 @@ class GAuthSignInUseCase(
                 number = gAuthUserInfo.num,
                 profileImageUrl = gAuthUserInfo.profileUrl ?: "",
                 role = role,
-                reservationId = null,
                 useStatus = UseStatus.AVAILABLE
             ),
             userService.existsUserByEmail(gAuthUserInfo.email),

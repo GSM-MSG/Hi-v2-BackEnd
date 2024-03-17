@@ -7,6 +7,7 @@ import team.msg.hiv2.domain.notice.presentation.data.response.NoticeResponse
 import java.util.*
 
 interface NoticeFacade {
+
     fun createNotice(request: CreateNoticeRequest)
     fun deleteNotice(id: UUID)
     fun queryAllNotice(): List<NoticeResponse>

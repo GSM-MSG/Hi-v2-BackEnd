@@ -33,7 +33,6 @@ internal class UpdateUserUseStatusUseCaseTest {
             number = 6,
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
-            reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }

@@ -6,4 +6,5 @@ import team.msg.hiv2.global.annotation.service.DomainService
 class NoticeService(
     queryNoticeService: QueryNoticeService,
     commandNoticeService: CommandNoticeService
-) : QueryNoticeService by queryNoticeService, CommandNoticeService by commandNoticeService
+) : QueryNoticeService by queryNoticeService,
+    CommandNoticeService by commandNoticeService

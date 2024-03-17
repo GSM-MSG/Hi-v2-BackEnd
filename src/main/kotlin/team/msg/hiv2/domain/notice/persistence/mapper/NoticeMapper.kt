@@ -23,7 +23,7 @@ class NoticeMapper(
             )
         }
 
-    override fun toEntity(domain: Notice): NoticeJpaEntity{
+    override fun toEntity(domain: Notice): NoticeJpaEntity {
         val user = userRepository.findByIdOrNull(domain.userId) ?: throw UserNotFoundException()
 
         return domain.let{

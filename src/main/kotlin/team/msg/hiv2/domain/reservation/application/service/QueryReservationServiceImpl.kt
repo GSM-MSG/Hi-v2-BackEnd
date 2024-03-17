@@ -4,6 +4,7 @@ import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.spi.QueryReservationPort
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.exception.ReservationNotFoundException
+import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.global.annotation.service.DomainService
 import java.util.*
 
@@ -29,5 +30,8 @@ class QueryReservationServiceImpl(
 
     override fun existsByHomeBaseAndReservationNumber(homeBase: HomeBase,reservationNumber: Int): Boolean =
         queryReservationPort.existsByHomeBaseAndReservationNumber(homeBase, reservationNumber)
+
+    override fun queryAllReservationByTeams(teams: List<Team>): List<Reservation> =
+        queryReservationPort.queryAllReservationByTeams(teams)
 
 }

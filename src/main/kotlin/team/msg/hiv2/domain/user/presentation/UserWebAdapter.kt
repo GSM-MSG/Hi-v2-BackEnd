@@ -1,5 +1,6 @@
 package team.msg.hiv2.domain.user.presentation
 
+import javax.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import team.msg.hiv2.domain.user.application.facade.UserFacade
@@ -7,14 +8,9 @@ import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.presentation.data.request.SearchUserKeywordRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserRoleWebRequest
 import team.msg.hiv2.domain.user.presentation.data.request.UpdateUserUseStatusRequest
-import team.msg.hiv2.domain.user.presentation.data.response.AllUsersResponse
-import team.msg.hiv2.domain.user.presentation.data.response.UserInfoResponse
-import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
-import team.msg.hiv2.domain.user.presentation.data.response.UserRoleResponse
+import team.msg.hiv2.domain.user.presentation.data.response.*
 import team.msg.hiv2.domain.user.presentation.data.web.UpdateUserUseStatusWebRequest
-import java.util.UUID
-import javax.validation.Valid
-import team.msg.hiv2.domain.user.presentation.data.response.StudentResponse
+import java.util.*
 
 @RestController
 @RequestMapping("/user")
@@ -75,4 +71,5 @@ class UserWebAdapter(
             SearchUserKeywordRequest(keyword)
         )
             .let { ResponseEntity.ok(it) }
+
 }

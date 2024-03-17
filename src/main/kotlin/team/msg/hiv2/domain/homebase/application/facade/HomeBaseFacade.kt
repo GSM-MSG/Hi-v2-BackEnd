@@ -4,6 +4,7 @@ import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBa
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 
 interface HomeBaseFacade {
+
     fun deleteAllReservationByPeriod(period: Int)
     fun queryReservationByHomeBase(floor: Int, period: Int): List<ReservationResponse>
     fun reserveHomeBase(floor: Int, period: Int, request: ReservationHomeBaseRequest)

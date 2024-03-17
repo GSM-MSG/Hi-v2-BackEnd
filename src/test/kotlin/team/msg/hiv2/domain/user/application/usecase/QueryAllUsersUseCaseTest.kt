@@ -36,7 +36,6 @@ internal class QueryAllUsersUseCaseTest {
             number = 6,
             profileImageUrl = "profileImageUrl",
             role = userRole,
-            reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }
@@ -51,7 +50,6 @@ internal class QueryAllUsersUseCaseTest {
             number = 7,
             profileImageUrl = "profileImageUrl",
             role = userRole,
-            reservationId = null,
             useStatus = UseStatus.AVAILABLE
         )
     }

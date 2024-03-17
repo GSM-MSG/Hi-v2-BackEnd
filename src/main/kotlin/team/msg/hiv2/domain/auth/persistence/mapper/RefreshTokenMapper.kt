@@ -6,7 +6,7 @@ import team.msg.hiv2.domain.auth.persistence.entity.RefreshTokenEntity
 import team.msg.hiv2.global.mapper.GenericMapper
 
 @Component
-class RefreshTokenMapper() : GenericMapper<RefreshToken, RefreshTokenEntity> {
+class RefreshTokenMapper : GenericMapper<RefreshToken, RefreshTokenEntity> {
 
     override fun toDomain(entity: RefreshTokenEntity?): RefreshToken? =
         entity?.let {
