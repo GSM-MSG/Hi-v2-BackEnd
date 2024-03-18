@@ -20,7 +20,7 @@ class HomeBaseFacadeImpl(
     override fun queryReservationByHomeBase(floor: Int, period: Int): List<ReservationResponse> =
         queryReservationByHomeBaseUseCase.execute(floor, period)
 
-    override fun reserveHomeBase(floor: Int, period: Int, request: ReservationHomeBaseRequest) =
-        reserveHomeBaseUseCase.execute(floor, period, request)
+    override fun reserveHomeBase(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest) =
+        reserveHomeBaseUseCase.execute(floor, period, homeBaseNumber, request)
 
 }

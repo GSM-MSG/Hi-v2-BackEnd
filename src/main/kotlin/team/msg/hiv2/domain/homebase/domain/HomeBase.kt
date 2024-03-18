@@ -7,6 +7,6 @@ data class HomeBase(
     val id: Long,
     val floor: Int,
     val period: Int,
-    val number: Int,
+    val homeBaseNumber: Int,
     val maxCapacity: Int
 )

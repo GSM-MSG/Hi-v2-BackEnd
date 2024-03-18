@@ -132,7 +132,7 @@ class QueryReservationByHomeBaseUseCaseTest {
     fun `예약 현황 조회 성공`(){
 
         // given
-        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period))
+        given(homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period))
             .willReturn(homeBaseStub)
 
         given(reservationService.queryAllReservationByHomeBase(homeBaseStub))

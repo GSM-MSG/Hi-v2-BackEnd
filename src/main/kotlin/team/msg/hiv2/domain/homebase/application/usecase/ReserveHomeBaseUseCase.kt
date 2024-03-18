@@ -21,9 +21,9 @@ class ReserveHomeBaseUseCase(
     private val teamService: TeamService
 ) {
 
-    fun execute(floor: Int, period: Int, request: ReservationHomeBaseRequest) {
+    fun execute(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest) {
 
-        val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
+        val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)
 
         val users = userService.queryAllUserById(request.users)
 

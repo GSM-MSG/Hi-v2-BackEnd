@@ -116,7 +116,7 @@ internal class ReserveHomeBaseUseCaseTest {
             useStatus = UseStatus.AVAILABLE
         )
 
-        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)).willReturn(homeBaseStub)
+        given(homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period)).willReturn(homeBaseStub)
 
         given(userService.queryAllUserById(requestStub.users)).willReturn(listOf(userStub, userStub2))
 

@@ -7,5 +7,5 @@ interface HomeBaseFacade {
 
     fun deleteAllReservationByPeriod(period: Int)
     fun queryReservationByHomeBase(floor: Int, period: Int): List<ReservationResponse>
-    fun reserveHomeBase(floor: Int, period: Int, request: ReservationHomeBaseRequest)
+    fun reserveHomeBase(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest)
 }
