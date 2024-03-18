@@ -19,7 +19,7 @@ import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.HiTest
-import java.util.UUID
+import java.util.*
 
 @HiTest
 class QueryReservationByHomeBaseUseCaseTest {

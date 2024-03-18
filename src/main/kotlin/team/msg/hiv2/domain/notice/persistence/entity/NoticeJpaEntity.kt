@@ -2,6 +2,7 @@ package team.msg.hiv2.domain.notice.persistence.entity
 
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.Table
@@ -20,7 +21,7 @@ class NoticeJpaEntity(
     @Column(nullable = false)
     val content: String,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     val user: UserJpaEntity
 
