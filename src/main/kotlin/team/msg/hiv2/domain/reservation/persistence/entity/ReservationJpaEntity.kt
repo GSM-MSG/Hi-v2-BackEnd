@@ -1,13 +1,19 @@
 package team.msg.hiv2.domain.reservation.persistence.entity
 
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToOne
+import javax.persistence.Table
+import javax.persistence.UniqueConstraint
 import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
 import team.msg.hiv2.domain.team.persistence.entity.TeamJpaEntity
 import team.msg.hiv2.global.entity.BaseUuidEntity
 import java.util.*
-import javax.persistence.*
 
 @Entity
-@Table(name = "reservation", uniqueConstraints = [UniqueConstraint(columnNames = ["home_base_id", "reservation_number"])])
+@Table(name = "reservation")
 class ReservationJpaEntity(
 
     override val id: UUID,
@@ -16,7 +22,7 @@ class ReservationJpaEntity(
     @JoinColumn(name = "home_base_id")
     val homeBase: HomeBaseJpaEntity,
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "team_id")
     val team: TeamJpaEntity,
 
@@ -24,9 +30,6 @@ class ReservationJpaEntity(
     val reason: String,
 
     @Column(name = "check_status", nullable = false)
-    var checkStatus: Boolean = false,
-
-    @Column(name = "reservation_number", nullable = false)
-    val reservationNumber: Int
+    var checkStatus: Boolean = false
 
 ) : BaseUuidEntity(id)

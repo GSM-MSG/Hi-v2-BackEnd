@@ -1,8 +1,8 @@
 package team.msg.hiv2.domain.user.application.usecase
 
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
+import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
-import team.msg.hiv2.domain.reservation.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.user.application.service.UserService
@@ -35,7 +35,7 @@ class QueryUserInfoUseCase(
                 ReservationResponse.of(
                     reservation,
                     users.map { UserResponse.of(it) },
-                    HomeBaseResponse(homeBase.id, homeBase.floor, homeBase.period)
+                    HomeBaseResponse.of(homeBase)
                 )
             }
         )

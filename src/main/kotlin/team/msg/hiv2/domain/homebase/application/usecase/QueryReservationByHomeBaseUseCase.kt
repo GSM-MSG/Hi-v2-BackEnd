@@ -1,8 +1,8 @@
 package team.msg.hiv2.domain.homebase.application.usecase
 
 import team.msg.hiv2.domain.homebase.application.service.QueryHomeBaseService
+import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
-import team.msg.hiv2.domain.reservation.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.user.application.service.UserService
@@ -19,7 +19,7 @@ class QueryReservationByHomeBaseUseCase(
 
     fun execute(floor: Int, period: Int): List<ReservationResponse> {
 
-        val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period)
+        val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
 
         val reservations = reservationService.queryAllReservationByHomeBase(homeBase)
 
@@ -29,7 +29,7 @@ class QueryReservationByHomeBaseUseCase(
             ReservationResponse.of(
                 it,
                 users.map { user -> UserResponse.of(user) },
-                HomeBaseResponse(homeBase.id, floor, period)
+                HomeBaseResponse.of(homeBase)
             )
         }
     }

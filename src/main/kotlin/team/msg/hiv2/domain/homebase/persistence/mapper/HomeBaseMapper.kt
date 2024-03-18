@@ -14,7 +14,7 @@ class HomeBaseMapper : GenericMapper<HomeBase, HomeBaseJpaEntity> {
                 id = it.id,
                 floor = it.floor,
                 period = it.period,
-                number = it.homeBaseNumber,
+                homeBaseNumber = it.homeBaseNumber,
                 maxCapacity = it.maxCapacity
             )
         }
@@ -25,7 +25,7 @@ class HomeBaseMapper : GenericMapper<HomeBase, HomeBaseJpaEntity> {
                 id = it.id,
                 floor = it.floor,
                 period = it.period,
-                homeBaseNumber = it.number,
+                homeBaseNumber = it.homeBaseNumber,
                 maxCapacity = it.maxCapacity
             )
         }

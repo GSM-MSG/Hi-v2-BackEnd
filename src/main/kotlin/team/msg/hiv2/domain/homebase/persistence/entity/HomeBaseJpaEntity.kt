@@ -1,27 +1,24 @@
 package team.msg.hiv2.domain.homebase.persistence.entity
 
-import team.msg.hiv2.domain.homebase.persistence.entity.id.HomeBaseId
 import javax.persistence.Column
 import team.msg.hiv2.global.entity.BaseIdEntity
 import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.IdClass
 import javax.persistence.Table
+import javax.persistence.UniqueConstraint
 
 @Entity
-@Table(name = "home_base")
-@IdClass(HomeBaseId::class)
+@Table(name = "home_base", uniqueConstraints = [UniqueConstraint(columnNames = ["floor", "period"])])
 class HomeBaseJpaEntity(
 
     override val id: Long,
 
-    @Id
+    @Column(name = "floor", nullable = false)
     val floor: Int,
 
-    @Id
+    @Column(name = "period", nullable = false)
     val period: Int,
 
-    @Id
+    @Column(name = "home_base_number", nullable = false)
     val homeBaseNumber: Int,
 
     @Column(name = "max_capacity", nullable = false)

@@ -12,6 +12,8 @@ class HomeBasePersistenceAdapter(
     private val homeBaseRepository: HomeBaseRepository,
     private val homeBaseMapper: HomeBaseMapper
 ) : HomeBasePort {
+    override fun queryHomeBaseByFloorAndPeriod(floor: Int, period: Int): HomeBase? =
+        homeBaseMapper.toDomain(homeBaseRepository.findByFloorAndPeriod(floor, period))
 
     override fun queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor: Int, period: Int, homeBaseNumber: Int): HomeBase? =
         homeBaseMapper.toDomain(homeBaseRepository.findByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber))

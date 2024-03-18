@@ -23,8 +23,7 @@ class ReservationMapper(
                 homeBaseId = it.homeBase.id,
                 teamId = it.team.id,
                 reason = it.reason,
-                checkStatus = it.checkStatus,
-                reservationNumber = it.reservationNumber
+                checkStatus = it.checkStatus
             )
         }
 
@@ -38,8 +37,7 @@ class ReservationMapper(
                 homeBase = homeBase,
                 team = team,
                 reason = it.reason,
-                checkStatus = it.checkStatus,
-                reservationNumber = it.reservationNumber
+                checkStatus = it.checkStatus
             )
         }
     }
