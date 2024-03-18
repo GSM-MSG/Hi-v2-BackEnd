@@ -11,7 +11,7 @@ class DeleteAllReservationUseCase(
 ) {
 
     fun execute() {
-        teamService.deleteAllInBatch()
-        reservationService.deleteAll()
+        teamService.deleteAll()
+        reservationService.deleteAllInBatch()
     }
 }

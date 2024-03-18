@@ -5,7 +5,6 @@ import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.global.annotation.usecase.UseCase
-import java.util.*
 
 @UseCase
 class CheckAndRestrictReservationUserUseCase(
@@ -14,15 +13,20 @@ class CheckAndRestrictReservationUserUseCase(
     private val teamService: TeamService
 ) {
 
-    fun execute(id: UUID) {
-        val reservation = reservationService.queryReservationById(id)
+    fun execute() {
 
-        val team = teamService.queryTeamById(reservation.teamId)
+        val reservations = reservationService.queryAllReservation()
 
-        val users = userService.queryAllUserById(team.userIds)
+        reservations.map { reservation ->
+            if (!reservation.checkStatus) {
+                val team = teamService.queryTeamById(reservation.teamId)
+                val users = userService.queryAllUserById(team.userIds)
 
-        if(!reservation.checkStatus) {
-            userService.saveAll(users.map { it.copy(useStatus = UseStatus.UNAVAILABLE) })
+                userService.saveAll(users.map { it.copy(useStatus = UseStatus.UNAVAILABLE) })
+            }
         }
+
+        teamService.deleteAll()
+        reservationService.deleteAllInBatch()
     }
 }

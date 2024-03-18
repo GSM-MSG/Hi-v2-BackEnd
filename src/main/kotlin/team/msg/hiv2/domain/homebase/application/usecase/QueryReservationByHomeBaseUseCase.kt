@@ -19,13 +19,14 @@ class QueryReservationByHomeBaseUseCase(
 
     fun execute(floor: Int, period: Int): List<ReservationResponse> {
 
-        val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
+        val homeBases = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
 
-        val reservations = reservationService.queryAllReservationByHomeBase(homeBase)
+        val reservations = reservationService.queryAllReservationByHomeBaseIn(homeBases)
 
         return reservations.map {
             val team = teamService.queryTeamById(it.teamId)
             val users = userService.queryAllUserById(team.userIds)
+            val homeBase = homeBaseService.queryHomeBaseById(it.homeBaseId)
             ReservationResponse.of(
                 it,
                 users.map { user -> UserResponse.of(user) },

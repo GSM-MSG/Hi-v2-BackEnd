@@ -1,13 +1,12 @@
 package team.msg.hiv2.domain.homebase.persistence.entity
 
-import javax.persistence.Column
 import team.msg.hiv2.global.entity.BaseIdEntity
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Table
-import javax.persistence.UniqueConstraint
 
 @Entity
-@Table(name = "home_base", uniqueConstraints = [UniqueConstraint(columnNames = ["floor", "period"])])
+@Table(name = "home_base")
 class HomeBaseJpaEntity(
 
     override val id: Long,

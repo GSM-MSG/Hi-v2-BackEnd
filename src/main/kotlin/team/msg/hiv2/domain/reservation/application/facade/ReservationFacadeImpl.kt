@@ -18,8 +18,8 @@ class ReservationFacadeImpl(
     private val updateReservationUseCase: UpdateReservationUseCase
 ) : ReservationFacade {
 
-    override fun checkAndRestrictReservation(id: UUID) =
-        checkAndRestrictReservationUserUseCase.execute(id)
+    override fun checkAndRestrictReservation() =
+        checkAndRestrictReservationUserUseCase.execute()
 
     override fun deleteAllReservation() =
         deleteAllReservationUseCase.execute()
