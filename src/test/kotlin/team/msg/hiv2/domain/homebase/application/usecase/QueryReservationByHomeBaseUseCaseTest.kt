@@ -7,9 +7,9 @@ import org.mockito.Mock
 import org.mockito.kotlin.given
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
+import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.reservation.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.team.domain.Team
@@ -41,7 +41,8 @@ class QueryReservationByHomeBaseUseCaseTest {
     private val floor = 3
     private val period = 10
     private val homeBaseId: Long = 1
-    private val reservationNumber = 1
+    private val homeBaseNumber = 1
+    private val maxCapacity = 4
 
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
@@ -54,7 +55,9 @@ class QueryReservationByHomeBaseUseCaseTest {
         HomeBase(
             id = 1,
             floor = floor,
-            period = period
+            period = period,
+            homeBaseNumber = 1,
+            maxCapacity = 4
         )
     }
 
@@ -71,7 +74,6 @@ class QueryReservationByHomeBaseUseCaseTest {
             homeBaseId = homeBaseId,
             reason = reason,
             checkStatus = false,
-            reservationNumber = reservationNumber,
             teamId = teamStub.id
         )
     }
@@ -113,7 +115,7 @@ class QueryReservationByHomeBaseUseCaseTest {
     }
 
     private val homeBaseResponseStub by lazy {
-        HomeBaseResponse(homeBaseId, floor, period)
+        HomeBaseResponse(homeBaseId, floor, period, homeBaseNumber, maxCapacity)
     }
 
 
@@ -132,7 +134,7 @@ class QueryReservationByHomeBaseUseCaseTest {
     fun `예약 현황 조회 성공`(){
 
         // given
-        given(homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period))
+        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period))
             .willReturn(homeBaseStub)
 
         given(reservationService.queryAllReservationByHomeBase(homeBaseStub))

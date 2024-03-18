@@ -35,7 +35,8 @@ class UpdateReservationUseCaseTest {
 
     private val floor = 3
     private val period = 10
-    private val reservationNumber = 1
+    private val homeBaseNumber = 1
+    private val maxCapacity = 4
 
     private val userId1 = UUID.randomUUID()
     private val teamId = UUID.randomUUID()
@@ -45,7 +46,9 @@ class UpdateReservationUseCaseTest {
         HomeBase(
             id = 1,
             floor = floor,
-            period = period
+            period = period,
+            homeBaseNumber = homeBaseNumber,
+            maxCapacity = maxCapacity
         )
     }
 
@@ -62,7 +65,6 @@ class UpdateReservationUseCaseTest {
             reason = reason,
             homeBaseId = homeBaseStub.id,
             checkStatus = false,
-            reservationNumber = reservationNumber,
             teamId = teamStub.id
         )
     }

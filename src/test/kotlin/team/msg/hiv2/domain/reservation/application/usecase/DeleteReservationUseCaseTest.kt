@@ -33,11 +33,12 @@ class DeleteReservationUseCaseTest {
 
     private val floor = 3
     private val period = 10
+    private val homeBaseNumber = 1
+    private val maxCapacity = 4
 
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
     private val teamId = UUID.randomUUID()
-    private val reservationNumber = 1
 
     private val reason = "회의"
 
@@ -45,7 +46,9 @@ class DeleteReservationUseCaseTest {
         HomeBase(
             id = 1,
             floor = floor,
-            period = period
+            period = period,
+            homeBaseNumber =  homeBaseNumber,
+            maxCapacity = maxCapacity
         )
     }
 
@@ -62,7 +65,6 @@ class DeleteReservationUseCaseTest {
             reason = reason,
             homeBaseId = homeBaseStub.id,
             checkStatus = false,
-            reservationNumber = reservationNumber,
             teamId = teamId
         )
     }
