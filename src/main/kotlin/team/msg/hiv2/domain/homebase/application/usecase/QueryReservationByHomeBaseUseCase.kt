@@ -2,35 +2,40 @@ package team.msg.hiv2.domain.homebase.application.usecase
 
 import team.msg.hiv2.domain.homebase.application.service.QueryHomeBaseService
 import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
-import team.msg.hiv2.domain.reservation.application.service.ReservationService
+import team.msg.hiv2.domain.reservation.application.spi.QueryReservationPort
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
-import team.msg.hiv2.domain.team.application.service.TeamService
+import team.msg.hiv2.domain.team.application.spi.TeamPort
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
 
 @ReadOnlyUseCase
 class QueryReservationByHomeBaseUseCase(
-    private val reservationService: ReservationService,
     private val homeBaseService: QueryHomeBaseService,
     private val userService: UserService,
-    private val teamService: TeamService
+    private val reservationPort: QueryReservationPort,
+    private val teamPort: TeamPort
 ) {
 
-    fun execute(floor: Int, period: Int): List<ReservationResponse> {
+    fun execute(floor: Int, period: Int): List<ReservationResponse?> {
 
         val homeBases = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
 
-        val reservations = reservationService.queryAllReservationByHomeBaseIn(homeBases)
+        return homeBases.map {
+            reservationPort.queryReservationByHomeBase(it)?.let { reservation ->
+                teamPort.queryTeamById(reservation.teamId)?.let { team ->
+                    val users = userService.queryAllUserById(team.userIds)
 
-        return reservations.map {
-            val team = teamService.queryTeamById(it.teamId)
-            val users = userService.queryAllUserById(team.userIds)
-            val homeBase = homeBaseService.queryHomeBaseById(it.homeBaseId)
-            ReservationResponse.of(
-                it,
-                users.map { user -> UserResponse.of(user) },
-                HomeBaseResponse.of(homeBase)
+                    ReservationResponse.of(
+                        reservation,
+                        users.map(UserResponse::of),
+                        HomeBaseResponse.of(it)
+                    )
+                }
+            } ?: ReservationResponse.of(
+                null,
+                null,
+                HomeBaseResponse.of(it)
             )
         }
     }
