@@ -18,7 +18,5 @@ data class ReservationResponse(
             checkStatus = reservation?.checkStatus,
             homeBase = homeBase
         )
-
-        fun nullOf() = ReservationResponse
     }
 }
