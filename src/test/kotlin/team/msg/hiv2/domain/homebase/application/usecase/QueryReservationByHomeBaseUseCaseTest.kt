@@ -5,13 +5,13 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mock
 import org.mockito.kotlin.given
-import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
+import team.msg.hiv2.domain.homebase.application.service.QueryHomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
-import team.msg.hiv2.domain.reservation.application.service.ReservationService
+import team.msg.hiv2.domain.reservation.application.spi.QueryReservationPort
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
-import team.msg.hiv2.domain.team.application.service.TeamService
+import team.msg.hiv2.domain.team.application.spi.TeamPort
 import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
@@ -25,16 +25,16 @@ import java.util.*
 class QueryReservationByHomeBaseUseCaseTest {
 
     @Mock
-    private lateinit var reservationService: ReservationService
+    private lateinit var queryReservationPort: QueryReservationPort
 
     @Mock
-    private lateinit var homeBaseService: HomeBaseService
+    private lateinit var queryHomeBaseService: QueryHomeBaseService
 
     @Mock
     private lateinit var userService: UserService
 
     @Mock
-    private lateinit var teamService: TeamService
+    private lateinit var teamPort: TeamPort
 
     private lateinit var queryReservationByHomeBaseUseCase: QueryReservationByHomeBaseUseCase
 
@@ -126,7 +126,7 @@ class QueryReservationByHomeBaseUseCaseTest {
     @BeforeEach
     fun setUp(){
         queryReservationByHomeBaseUseCase = QueryReservationByHomeBaseUseCase(
-            reservationService, homeBaseService, userService, teamService
+            queryHomeBaseService, userService, queryReservationPort, teamPort
         )
     }
 
@@ -134,20 +134,17 @@ class QueryReservationByHomeBaseUseCaseTest {
     fun `예약 현황 조회 성공`(){
 
         // given
-        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period))
+        given(queryHomeBaseService.queryHomeBaseByFloorAndPeriod(floor, period))
             .willReturn(listOf(homeBaseStub))
 
-        given(reservationService.queryAllReservationByHomeBaseIn(listOf(homeBaseStub)))
-            .willReturn(listOf(reservationStub))
+        given(queryReservationPort.queryReservationByHomeBase(homeBaseStub))
+            .willReturn(reservationStub)
 
-        given(teamService.queryTeamById(teamId))
+        given(teamPort.queryTeamById(teamId))
             .willReturn(teamStub)
 
         given(userService.queryAllUserById(listOf(userId1, userId2)))
             .willReturn(listOf(userStub1, userStub2))
-
-        given(homeBaseService.queryHomeBaseById(reservationStub.homeBaseId))
-            .willReturn(homeBaseStub)
 
         // when
         val response = queryReservationByHomeBaseUseCase.execute(floor, period)
