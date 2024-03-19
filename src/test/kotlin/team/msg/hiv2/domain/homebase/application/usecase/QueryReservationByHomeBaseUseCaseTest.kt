@@ -135,9 +135,9 @@ class QueryReservationByHomeBaseUseCaseTest {
 
         // given
         given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period))
-            .willReturn(homeBaseStub)
+            .willReturn(listOf(homeBaseStub))
 
-        given(reservationService.queryAllReservationByHomeBase(homeBaseStub))
+        given(reservationService.queryAllReservationByHomeBaseIn(listOf(homeBaseStub)))
             .willReturn(listOf(reservationStub))
 
         given(teamService.queryTeamById(teamId))
@@ -145,6 +145,9 @@ class QueryReservationByHomeBaseUseCaseTest {
 
         given(userService.queryAllUserById(listOf(userId1, userId2)))
             .willReturn(listOf(userStub1, userStub2))
+
+        given(homeBaseService.queryHomeBaseById(reservationStub.homeBaseId))
+            .willReturn(homeBaseStub)
 
         // when
         val response = queryReservationByHomeBaseUseCase.execute(floor, period)
