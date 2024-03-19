@@ -1,5 +1,7 @@
 package team.msg.hiv2.domain.reservation.application.usecase
 
+import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
+import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationDetailResponse
 import team.msg.hiv2.domain.team.application.service.TeamService
@@ -12,16 +14,23 @@ import java.util.*
 class QueryReservationDetailUseCase(
     private val reservationService: ReservationService,
     private val userService: UserService,
-    private val teamService: TeamService
+    private val teamService: TeamService,
+    private val homeBaseService: HomeBaseService
 ) {
 
     fun execute(id: UUID): ReservationDetailResponse {
         val reservation = reservationService.queryReservationById(id)
 
+        val homeBase = homeBaseService.queryHomeBaseById(reservation.homeBaseId)
+
         val team = teamService.queryTeamById(reservation.teamId)
 
         val users = userService.queryAllUserById(team.userIds)
 
-        return ReservationDetailResponse.of(reservation, users.map { UserResponse.of(it) })
+        return ReservationDetailResponse.of(
+            reservation,
+            users.map { UserResponse.of(it) },
+            homeBase
+        )
     }
 }

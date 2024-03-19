@@ -4,6 +4,5 @@ import java.util.UUID
 
 data class ReservationHomeBaseRequest(
     val users: MutableList<UUID>,
-    val reason: String,
-    val reservationNumber: Int
+    val reason: String
 )

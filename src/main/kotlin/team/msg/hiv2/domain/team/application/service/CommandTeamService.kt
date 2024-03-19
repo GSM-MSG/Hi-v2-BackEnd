@@ -6,6 +6,7 @@ import java.util.UUID
 interface CommandTeamService {
 
     fun save(team: Team): Team
+    fun deleteAll()
     fun deleteAllInBatch(teams: List<Team>)
     fun deleteTeamById(id: UUID)
     fun deleteAllInBatch()

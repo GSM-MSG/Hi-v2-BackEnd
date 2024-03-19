@@ -9,6 +9,5 @@ data class Reservation(
     val homeBaseId: Long,
     val teamId: UUID,
     val reason: String,
-    val checkStatus: Boolean,
-    val reservationNumber: Int
+    val checkStatus: Boolean
 )

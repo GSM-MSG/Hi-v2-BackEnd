@@ -17,6 +17,7 @@ import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.global.annotation.HiTest
 import java.util.*
+import kotlin.math.max
 
 @HiTest
 internal class QueryUserInfoUseCaseTest {
@@ -37,7 +38,6 @@ internal class QueryUserInfoUseCaseTest {
 
     private val userId = UUID.randomUUID()
     private val reservationId = UUID.randomUUID()
-    private val reservationNumber = 1
 
 
     private val userStub: User by lazy {
@@ -67,7 +67,6 @@ internal class QueryUserInfoUseCaseTest {
             homeBaseId = 1,
             reason = "test",
             checkStatus = false,
-            reservationNumber = reservationNumber,
             teamId = teamStub.id
         )
     }
@@ -76,7 +75,9 @@ internal class QueryUserInfoUseCaseTest {
         HomeBase(
             id = 1,
             floor = 3,
-            period = 8
+            period = 8,
+            homeBaseNumber = 1,
+            maxCapacity = 4
         )
     }
 

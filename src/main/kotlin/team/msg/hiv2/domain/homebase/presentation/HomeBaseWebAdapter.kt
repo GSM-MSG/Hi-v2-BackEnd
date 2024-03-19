@@ -24,8 +24,9 @@ class HomeBaseWebAdapter(
     @PostMapping
     fun reserveHomeBase(@RequestParam floor: Int,
                         @RequestParam period: Int,
+                        @RequestParam homeBaseNumber: Int,
                         @Valid @RequestBody request: ReservationHomeBaseWebRequest): ResponseEntity<Void> =
-        homeBaseFacade.reserveHomeBase(floor, period, ReservationHomeBaseRequest(request.users, request.reason, request.reservationNumber))
+        homeBaseFacade.reserveHomeBase(floor, period, homeBaseNumber, ReservationHomeBaseRequest(request.users, request.reason))
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @GetMapping

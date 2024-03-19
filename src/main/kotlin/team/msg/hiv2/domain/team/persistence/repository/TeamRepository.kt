@@ -1,6 +1,8 @@
 package team.msg.hiv2.domain.team.persistence.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
+import org.springframework.data.jpa.repository.Query
 import team.msg.hiv2.domain.team.persistence.entity.TeamJpaEntity
 import java.util.*
 

@@ -7,9 +7,9 @@ import org.mockito.Mock
 import org.mockito.kotlin.given
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
+import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.reservation.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationResponse
 import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.team.domain.Team
@@ -19,7 +19,7 @@ import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.HiTest
-import java.util.UUID
+import java.util.*
 
 @HiTest
 class QueryReservationByHomeBaseUseCaseTest {
@@ -41,7 +41,8 @@ class QueryReservationByHomeBaseUseCaseTest {
     private val floor = 3
     private val period = 10
     private val homeBaseId: Long = 1
-    private val reservationNumber = 1
+    private val homeBaseNumber = 1
+    private val maxCapacity = 4
 
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
@@ -54,7 +55,9 @@ class QueryReservationByHomeBaseUseCaseTest {
         HomeBase(
             id = 1,
             floor = floor,
-            period = period
+            period = period,
+            homeBaseNumber = 1,
+            maxCapacity = 4
         )
     }
 
@@ -71,7 +74,6 @@ class QueryReservationByHomeBaseUseCaseTest {
             homeBaseId = homeBaseId,
             reason = reason,
             checkStatus = false,
-            reservationNumber = reservationNumber,
             teamId = teamStub.id
         )
     }
@@ -113,7 +115,7 @@ class QueryReservationByHomeBaseUseCaseTest {
     }
 
     private val homeBaseResponseStub by lazy {
-        HomeBaseResponse(homeBaseId, floor, period)
+        HomeBaseResponse(homeBaseId, floor, period, homeBaseNumber, maxCapacity)
     }
 
 
@@ -133,9 +135,9 @@ class QueryReservationByHomeBaseUseCaseTest {
 
         // given
         given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period))
-            .willReturn(homeBaseStub)
+            .willReturn(listOf(homeBaseStub))
 
-        given(reservationService.queryAllReservationByHomeBase(homeBaseStub))
+        given(reservationService.queryAllReservationByHomeBaseIn(listOf(homeBaseStub)))
             .willReturn(listOf(reservationStub))
 
         given(teamService.queryTeamById(teamId))
@@ -143,6 +145,9 @@ class QueryReservationByHomeBaseUseCaseTest {
 
         given(userService.queryAllUserById(listOf(userId1, userId2)))
             .willReturn(listOf(userStub1, userStub2))
+
+        given(homeBaseService.queryHomeBaseById(reservationStub.homeBaseId))
+            .willReturn(homeBaseStub)
 
         // when
         val response = queryReservationByHomeBaseUseCase.execute(floor, period)

@@ -21,9 +21,9 @@ class ReserveHomeBaseUseCase(
     private val teamService: TeamService
 ) {
 
-    fun execute(floor: Int, period: Int, request: ReservationHomeBaseRequest) {
+    fun execute(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest) {
 
-        val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
+        val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)
 
         val users = userService.queryAllUserById(request.users)
 
@@ -37,7 +37,7 @@ class ReserveHomeBaseUseCase(
             4 -> if(reservationCount > 5) throw ForbiddenReserveException()
         }
 
-        if(reservationService.existsByHomeBaseAndReservationNumber(homeBase, request.reservationNumber))
+        if(reservationService.existsByHomeBase(homeBase))
             throw AlreadyExistReservationException()
 
         val team = teamService.save(
@@ -53,8 +53,7 @@ class ReserveHomeBaseUseCase(
                 reason = request.reason,
                 homeBaseId = homeBase.id,
                 teamId = team.id,
-                checkStatus = false,
-                reservationNumber = request.reservationNumber
+                checkStatus = false
             )
         )
     }

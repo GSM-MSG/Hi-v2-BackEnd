@@ -17,6 +17,10 @@ class TeamPersistenceAdapter(
     override fun save(team: Team): Team =
         teamMapper.toDomain(teamRepository.save(teamMapper.toEntity(team)))!!
 
+    override fun deleteAll() {
+        teamRepository.deleteAll()
+    }
+
     override fun deleteAllInBatch(teams: List<Team>) {
         teamRepository.deleteAllInBatch(teams.map { teamMapper.toEntity(it) })
     }

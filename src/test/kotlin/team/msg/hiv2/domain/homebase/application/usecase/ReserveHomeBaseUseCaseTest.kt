@@ -40,7 +40,8 @@ internal class ReserveHomeBaseUseCaseTest {
     private val floor = 3
     private val period = 10
     private val reason = "회의"
-    private val reservationNumber = 1
+    private val homeBaseNumber = 1
+    private val maxCapacity = 4
 
     private val userId = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
@@ -49,8 +50,7 @@ internal class ReserveHomeBaseUseCaseTest {
     private val requestStub by lazy {
         ReservationHomeBaseRequest(
             mutableListOf(userId, userId2),
-            reason,
-            reservationNumber
+            reason
         )
     }
 
@@ -58,7 +58,9 @@ internal class ReserveHomeBaseUseCaseTest {
         HomeBase(
             id = 1,
             period = period,
-            floor = floor
+            floor = floor,
+            homeBaseNumber = homeBaseNumber,
+            maxCapacity = maxCapacity
         )
     }
 
@@ -75,7 +77,6 @@ internal class ReserveHomeBaseUseCaseTest {
             homeBaseId = homeBaseStub.id,
             reason = reason,
             checkStatus = false,
-            reservationNumber = reservationNumber,
             teamId = teamStub.id
         )
     }
@@ -116,7 +117,7 @@ internal class ReserveHomeBaseUseCaseTest {
             useStatus = UseStatus.AVAILABLE
         )
 
-        given(homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)).willReturn(homeBaseStub)
+        given(homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)).willReturn(homeBaseStub)
 
         given(userService.queryAllUserById(requestStub.users)).willReturn(listOf(userStub, userStub2))
 
@@ -127,7 +128,7 @@ internal class ReserveHomeBaseUseCaseTest {
         given(reservationService.save(any())).willReturn(reservationStub)
 
         assertDoesNotThrow {
-            reserveHomeBaseUseCase.execute(floor, period, requestStub)
+            reserveHomeBaseUseCase.execute(floor, period, homeBaseNumber, requestStub)
         }
     }
 

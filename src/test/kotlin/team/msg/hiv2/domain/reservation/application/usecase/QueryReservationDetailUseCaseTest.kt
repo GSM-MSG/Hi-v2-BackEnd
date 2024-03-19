@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mock
 import org.mockito.kotlin.given
+import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
+import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationDetailResponse
@@ -31,11 +33,16 @@ class QueryReservationDetailUseCaseTest {
     @Mock
     private lateinit var teamService: TeamService
 
+    @Mock
+    private lateinit var homeBaseService: HomeBaseService
+
     private lateinit var queryReservationDetailUseCase: QueryReservationDetailUseCase
 
+    private val homeBaseId = 21L
     private val floor = 3
     private val period = 10
-    private val reservationNumber = 1
+    private val homeBaseNumber = 1
+    private val maxCapacity = 4
 
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
@@ -46,9 +53,11 @@ class QueryReservationDetailUseCaseTest {
 
     private val homeBaseStub by lazy {
         HomeBase(
-            id = 1,
+            id = homeBaseId,
             floor = floor,
-            period = period
+            period = period,
+            homeBaseNumber = homeBaseNumber,
+            maxCapacity = maxCapacity
         )
     }
 
@@ -65,7 +74,6 @@ class QueryReservationDetailUseCaseTest {
             reason = reason,
             homeBaseId = homeBaseStub.id,
             checkStatus = false,
-            reservationNumber = reservationNumber,
             teamId = teamStub.id
         )
     }
@@ -107,8 +115,12 @@ class QueryReservationDetailUseCaseTest {
         UserResponse.of(userStub2)
     }
 
+    private val homeBaseResponseStub by lazy {
+        HomeBaseResponse.of(homeBaseStub)
+    }
+
     private val responseStub by lazy {
-        ReservationDetailResponse.of(reservationStub, listOf(userResponseStub1, userResponseStub2))
+        ReservationDetailResponse.of(reservationStub, listOf(userResponseStub1, userResponseStub2), homeBaseStub)
     }
 
     private val requestId = reservationStub.id
@@ -116,7 +128,7 @@ class QueryReservationDetailUseCaseTest {
     @BeforeEach
     fun setUp() {
         queryReservationDetailUseCase =
-            QueryReservationDetailUseCase(reservationService, userService, teamService)
+            QueryReservationDetailUseCase(reservationService, userService, teamService, homeBaseService)
     }
 
     @Test
@@ -125,6 +137,9 @@ class QueryReservationDetailUseCaseTest {
         // given
         given(reservationService.queryReservationById(requestId))
             .willReturn(reservationStub)
+
+        given(homeBaseService.queryHomeBaseById(homeBaseId))
+            .willReturn(homeBaseStub)
 
         given(teamService.queryTeamById(teamId))
             .willReturn(teamStub)
