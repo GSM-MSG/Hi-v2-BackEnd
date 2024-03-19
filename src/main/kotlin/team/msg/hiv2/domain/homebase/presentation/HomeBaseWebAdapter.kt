@@ -30,7 +30,7 @@ class HomeBaseWebAdapter(
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @GetMapping
-    fun queryHomeBaseReservation(@RequestParam floor: Int, @RequestParam period: Int): ResponseEntity<List<ReservationResponse>> =
+    fun queryHomeBaseReservation(@RequestParam floor: Int, @RequestParam period: Int): ResponseEntity<List<ReservationResponse?>> =
         homeBaseFacade.queryReservationByHomeBase(floor, period)
             .let { ResponseEntity.ok(it) }
 

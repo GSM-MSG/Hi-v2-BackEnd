@@ -12,7 +12,7 @@ import java.util.*
 interface ReservationRepository : JpaRepository<ReservationJpaEntity, UUID> {
 
     @EntityGraph(attributePaths = ["homeBase"])
-    fun findAllByHomeBase(homeBase: HomeBaseJpaEntity): List<ReservationJpaEntity>
+    fun findByHomeBase(homeBase: HomeBaseJpaEntity): ReservationJpaEntity?
     @EntityGraph(attributePaths = ["homeBase"])
     fun findAllByHomeBaseIn(homeBases: List<HomeBaseJpaEntity>): List<ReservationJpaEntity>
     @Modifying
