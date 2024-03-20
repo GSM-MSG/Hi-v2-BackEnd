@@ -59,9 +59,9 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/reservation/{id}").authenticated()
             .antMatchers(HttpMethod.DELETE, "/reservation/{id}").hasAnyRole(STUDENT, ADMIN)
             .antMatchers(HttpMethod.PATCH, "/reservation/{id}").hasAnyRole(STUDENT, ADMIN)
+            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/check-status").hasAnyRole(TEACHER, ADMIN)
             .antMatchers(HttpMethod.PATCH, "/reservation/{id}/{user_id}").hasAnyRole(STUDENT, ADMIN)
             .antMatchers(HttpMethod.DELETE, "/reservation/{id}/exit").hasAnyRole(STUDENT, ADMIN)
-            .antMatchers(HttpMethod.PATCH, "/reservation/{id}/check-status").hasAnyRole(TEACHER, ADMIN)
             .antMatchers(HttpMethod.DELETE, "/reservation/kill-all").hasRole(ADMIN)
 
             // notice
