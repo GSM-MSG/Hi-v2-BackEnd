@@ -19,6 +19,7 @@ object Dependencies {
 
     // mockito
     const val MOCKITO = "org.mockito.kotlin:mockito-kotlin:${DependencyVersions.MOCKITO_VERSION}"
+
     // jackson
     const val JACKSON_MODULE_KOTLIN = "com.fasterxml.jackson.module:jackson-module-kotlin"
 
@@ -41,6 +42,10 @@ object Dependencies {
     const val COMMONS_IO = "commons-io:commons-io:${DependencyVersions.COMMONS_IO_VERSION}"
     const val APACHE_TIKA = "org.apache.tika:tika-core:${DependencyVersions.APACHE_TIKA_VERSION}"
 
-    //gauth
+    // gauth
     const val GAUTH = "com.github.GSM-MSG:GAuth-SDK-Java:${DependencyVersions.GAUTH_VERSION}"
+
+    // redisson
+    const val REDISSON = "org.redisson:redisson-spring-boot-starter:${DependencyVersions.REDISSON}"
+
 }

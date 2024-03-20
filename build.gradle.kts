@@ -51,6 +51,9 @@ dependencies {
 	// mockito
 	testImplementation(Dependencies.MOCKITO)
 
+    // redisson
+    implementation(Dependencies.REDISSON)
+
 }
 
 tasks.withType<KotlinCompile> {

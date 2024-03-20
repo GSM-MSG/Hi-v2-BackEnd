@@ -25,6 +25,9 @@ class ReserveHomeBaseUseCase(
 
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)
 
+        if(reservationService.existsByHomeBase(homeBase))
+            throw AlreadyExistReservationException()
+
         val users = userService.queryAllUserById(request.users)
 
         if (request.users.size != users.size)
@@ -37,8 +40,6 @@ class ReserveHomeBaseUseCase(
             4 -> if(reservationCount > 5) throw ForbiddenReserveException()
         }
 
-        if(reservationService.existsByHomeBase(homeBase))
-            throw AlreadyExistReservationException()
 
         val team = teamService.save(
             Team(

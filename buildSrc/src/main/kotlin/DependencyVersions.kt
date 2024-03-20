@@ -20,6 +20,9 @@ object DependencyVersions {
     // gauth
     const val GAUTH_VERSION = "v2.0.0"
 
+    // redisson
+    const val REDISSON = "3.17.0"
+
     // test
     const val MOCKITO_VERSION = "4.0.0"
 }
