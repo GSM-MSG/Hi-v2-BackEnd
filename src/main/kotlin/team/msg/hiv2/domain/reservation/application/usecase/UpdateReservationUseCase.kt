@@ -28,20 +28,19 @@ class UpdateReservationUseCase(
         if (request.users.size > homeBase.maxCapacity)
             throw TooManyUsersException()
 
-        val homeBases = homeBaseService.queryHomeBaseById(reservation.homeBaseId).let { homeBaseService.queryHomeBaseByPeriod(it.period) }
+        val homeBases = homeBaseService.queryHomeBaseByPeriod(homeBase.period)
         val teamIds = reservationService.queryAllReservationByHomeBaseIn(homeBases).map { reservation -> reservation.teamId }
         val userIds = teamService.queryAllTeamByIdIn(teamIds).flatMap { team -> team.userIds }
 
-        if (userIds.containsAll(request.users))
-            throw AlreadyExistReservationException()
-
         val team = teamService.queryTeamById(reservation.teamId)
+
+        if ((userIds.subtract(team.userIds.toSet()).containsAll(request.users)))
+            throw AlreadyExistReservationException()
 
         val users = userService.queryAllUserById(request.users)
 
         if (request.users.size != users.size)
             throw UserNotFoundException()
-
 
         teamService.save(team.copy(userIds = users.map { it.id }.toMutableList()))
         reservationService.save(reservation.copy(reason = request.reason))

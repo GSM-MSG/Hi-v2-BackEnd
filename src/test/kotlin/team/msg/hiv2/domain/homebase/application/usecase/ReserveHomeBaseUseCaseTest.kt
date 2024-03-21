@@ -1,6 +1,6 @@
 package team.msg.hiv2.domain.homebase.application.usecase
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mock
@@ -35,7 +35,7 @@ internal class ReserveHomeBaseUseCaseTest {
     @Mock
     private lateinit var teamService: TeamService
 
-    private lateinit  var reserveHomeBaseUseCase: ReserveHomeBaseUseCase
+    private lateinit var reserveHomeBaseUseCase: ReserveHomeBaseUseCase
 
     private val floor = 3
     private val period = 10
@@ -43,13 +43,14 @@ internal class ReserveHomeBaseUseCaseTest {
     private val homeBaseNumber = 1
     private val maxCapacity = 4
 
-    private val userId = UUID.randomUUID()
+    private val teamId1 = UUID.randomUUID()
+    private val teamId2 = UUID.randomUUID()
+    private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
-    private val reservationCount = 3
 
     private val requestStub by lazy {
         ReservationHomeBaseRequest(
-            mutableListOf(userId, userId2),
+            mutableListOf(userId1, userId2),
             reason
         )
     }
@@ -64,10 +65,17 @@ internal class ReserveHomeBaseUseCaseTest {
         )
     }
 
-    private val teamStub by lazy {
+    private val teamStub1 by lazy {
         Team(
-            id = UUID.randomUUID(),
-            userIds = mutableListOf(userId, userId2)
+            id = teamId1,
+            userIds = mutableListOf(userId1, userId2)
+        )
+    }
+
+    private val teamStub2 by lazy {
+        Team(
+            id = teamId2,
+            userIds = mutableListOf(userId1, userId2)
         )
     }
 
@@ -77,24 +85,13 @@ internal class ReserveHomeBaseUseCaseTest {
             homeBaseId = homeBaseStub.id,
             reason = reason,
             checkStatus = false,
-            teamId = teamStub.id
+            teamId = teamStub1.id
         )
     }
 
-    @BeforeEach
-    fun setUp(){
-        reserveHomeBaseUseCase = ReserveHomeBaseUseCase(
-            userService,
-            reservationService,
-            homeBaseService,
-            teamService
-        )
-    }
-
-    @Test
-    fun `예약 성공`(){
-        val userStub = User(
-            id = userId,
+    private val userStub1 by lazy {
+        User(
+            id = userId1,
             email = "test@email",
             name = "hope",
             grade = 2,
@@ -104,8 +101,10 @@ internal class ReserveHomeBaseUseCaseTest {
             role = UserRole.ROLE_STUDENT,
             useStatus = UseStatus.AVAILABLE
         )
+    }
 
-        val userStub2 = User(
+    private val userStub2 by lazy {
+        User(
             id = userId2,
             email = "test2@email",
             name = "hope2",
@@ -116,16 +115,39 @@ internal class ReserveHomeBaseUseCaseTest {
             role = UserRole.ROLE_STUDENT,
             useStatus = UseStatus.AVAILABLE
         )
+    }
+
+    @BeforeEach
+    fun setUp(){
+        reserveHomeBaseUseCase = ReserveHomeBaseUseCase(
+            userService, reservationService, homeBaseService, teamService
+        )
+    }
+
+    @Test
+    fun `예약 성공`(){
 
         given(homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)).willReturn(homeBaseStub)
 
-        given(userService.queryAllUserById(requestStub.users)).willReturn(listOf(userStub, userStub2))
+        given(reservationService.existsByHomeBase(homeBaseStub))
 
-        given(reservationService.countReservationByHomeBase(homeBaseStub)).willReturn(reservationCount)
+        given(userService.queryAllUserById(listOf(userId1, userId2)))
+            .willReturn(listOf(userStub1, userStub2))
 
-        given(teamService.save(any())).willReturn(teamStub)
+        given(homeBaseService.queryHomeBaseByPeriod(period))
+            .willReturn(listOf(homeBaseStub))
 
-        given(reservationService.save(any())).willReturn(reservationStub)
+        given(reservationService.queryAllReservationByHomeBaseIn(listOf(homeBaseStub)))
+            .willReturn(listOf(reservationStub))
+
+        given(teamService.queryAllTeamByIdIn(listOf(teamId2)))
+            .willReturn(listOf(teamStub2))
+
+        given(teamService.save(any()))
+            .willReturn(teamStub1)
+
+        given(reservationService.save(any()))
+            .willReturn(reservationStub)
 
         assertDoesNotThrow {
             reserveHomeBaseUseCase.execute(floor, period, homeBaseNumber, requestStub)
