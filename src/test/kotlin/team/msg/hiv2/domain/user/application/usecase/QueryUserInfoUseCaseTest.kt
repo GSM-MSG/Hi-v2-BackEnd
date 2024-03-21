@@ -17,7 +17,6 @@ import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.global.annotation.HiTest
 import java.util.*
-import kotlin.math.max
 
 @HiTest
 internal class QueryUserInfoUseCaseTest {
@@ -98,7 +97,7 @@ internal class QueryUserInfoUseCaseTest {
         given(teamService.queryAllTeamByUserIdsIn(listOf(userId)))
             .willReturn(listOf(teamStub))
 
-        given(reservationService.queryAllReservationByTeams(listOf(teamStub)))
+        given(reservationService.queryAllReservationByTeamsOrderByTeam(listOf(teamStub)))
             .willReturn(listOf(reservationStub))
 
         given(homeBaseService.queryHomeBaseById(reservationStub.homeBaseId))

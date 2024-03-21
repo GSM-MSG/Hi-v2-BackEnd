@@ -2,7 +2,8 @@ package team.msg.hiv2.domain.homebase.application.usecase
 
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.exception.AlreadyExistReservationException
-import team.msg.hiv2.domain.homebase.exception.ForbiddenReserveException
+import team.msg.hiv2.domain.homebase.exception.AlreadyReservedAtSamePeriodException
+import team.msg.hiv2.domain.homebase.exception.TooManyUsersException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
@@ -25,25 +26,28 @@ class ReserveHomeBaseUseCase(
 
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)
 
+        if(reservationService.existsByHomeBase(homeBase))
+            throw AlreadyExistReservationException()
+
+        if (request.users.size > homeBase.maxCapacity)
+            throw TooManyUsersException()
+
         val users = userService.queryAllUserById(request.users)
 
         if (request.users.size != users.size)
             throw UserNotFoundException()
 
-        val reservationCount = reservationService.countReservationByHomeBase(homeBase)
-        when(floor) {
-            2 -> if(reservationCount > 3) throw ForbiddenReserveException()
-            3 -> if(reservationCount > 5) throw ForbiddenReserveException()
-            4 -> if(reservationCount > 5) throw ForbiddenReserveException()
-        }
+        val homeBases = homeBaseService.queryHomeBaseByPeriod(period)
+        val teamIds = reservationService.queryAllReservationByHomeBaseIn(homeBases).map { reservation -> reservation.teamId }
+        val userIds = teamService.queryAllTeamByIdIn(teamIds).flatMap { team -> team.userIds }
 
-        if(reservationService.existsByHomeBase(homeBase))
-            throw AlreadyExistReservationException()
+        if (userIds.any { it in request.users })
+            throw AlreadyReservedAtSamePeriodException()
 
         val team = teamService.save(
             Team(
                 id = UUID.randomUUID(),
-                userIds = users.map { it.id }.toMutableList()
+                userIds = request.users
             )
         )
 
