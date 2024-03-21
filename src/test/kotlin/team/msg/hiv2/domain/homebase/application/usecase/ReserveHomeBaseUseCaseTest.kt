@@ -47,13 +47,7 @@ internal class ReserveHomeBaseUseCaseTest {
     private val teamId2 = UUID.randomUUID()
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
-
-    private val requestStub by lazy {
-        ReservationHomeBaseRequest(
-            mutableListOf(userId1, userId2),
-            reason
-        )
-    }
+    private val userId3 = UUID.randomUUID()
 
     private val homeBaseStub by lazy {
         HomeBase(
@@ -92,8 +86,8 @@ internal class ReserveHomeBaseUseCaseTest {
     private val userStub1 by lazy {
         User(
             id = userId1,
-            email = "test@email",
-            name = "hope",
+            email = "test1@email",
+            name = "hope1",
             grade = 2,
             classNum = 4,
             number = 6,
@@ -117,6 +111,13 @@ internal class ReserveHomeBaseUseCaseTest {
         )
     }
 
+    private val requestStub by lazy {
+        ReservationHomeBaseRequest(
+            mutableListOf(userId1, userId2),
+            reason
+        )
+    }
+
     @BeforeEach
     fun setUp(){
         reserveHomeBaseUseCase = ReserveHomeBaseUseCase(
@@ -127,11 +128,13 @@ internal class ReserveHomeBaseUseCaseTest {
     @Test
     fun `예약 성공`(){
 
-        given(homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)).willReturn(homeBaseStub)
+        given(homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber))
+            .willReturn(homeBaseStub)
 
         given(reservationService.existsByHomeBase(homeBaseStub))
+            .willReturn(false)
 
-        given(userService.queryAllUserById(listOf(userId1, userId2)))
+        given(userService.queryAllUserById(requestStub.users))
             .willReturn(listOf(userStub1, userStub2))
 
         given(homeBaseService.queryHomeBaseByPeriod(period))
@@ -139,9 +142,6 @@ internal class ReserveHomeBaseUseCaseTest {
 
         given(reservationService.queryAllReservationByHomeBaseIn(listOf(homeBaseStub)))
             .willReturn(listOf(reservationStub))
-
-        given(teamService.queryAllTeamByIdIn(listOf(teamId2)))
-            .willReturn(listOf(teamStub2))
 
         given(teamService.save(any()))
             .willReturn(teamStub1)
