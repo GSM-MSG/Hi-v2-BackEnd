@@ -4,12 +4,9 @@ import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.annotation.Pointcut
 import org.springframework.stereotype.Component
-import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
-import team.msg.hiv2.domain.homebase.exception.AlreadyReservedAtSamePeriodException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
-import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.application.validator.UserValidator
 import java.util.*
@@ -19,9 +16,7 @@ import java.util.*
 class ReservationControlAspect(
     private val userService: UserService,
     private val reservationService: ReservationService,
-    private val userValidator: UserValidator,
-    private val homeBaseService: HomeBaseService,
-    private val teamService: TeamService
+    private val userValidator: UserValidator
 ) {
 
     @Pointcut("execution(* team.msg.hiv2.domain.homebase.application.usecase.ReserveHomeBaseUseCase.execute(..)) " +
@@ -42,13 +37,6 @@ class ReservationControlAspect(
 
         userValidator.checkUserUseStatus(currentUser)
         userValidator.checkUsersUseStatus(userService.queryAllUserById(request.users))
-
-        val homeBases = homeBaseService.queryHomeBaseByPeriod(period)
-        val teamIds = reservationService.queryAllReservationByHomeBaseIn(homeBases).map { reservation -> reservation.teamId }
-        val userIds = teamService.queryAllTeamByIdIn(teamIds).flatMap { team -> team.userIds }
-
-        if (userIds.any { it in request.users })
-            throw AlreadyReservedAtSamePeriodException()
     }
 
     @Before("updateReservationUseCasePointcut(reservationId, request)")

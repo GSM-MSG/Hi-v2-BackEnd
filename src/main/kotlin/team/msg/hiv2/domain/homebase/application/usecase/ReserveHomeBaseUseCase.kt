@@ -2,6 +2,7 @@ package team.msg.hiv2.domain.homebase.application.usecase
 
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.exception.AlreadyExistReservationException
+import team.msg.hiv2.domain.homebase.exception.AlreadyReservedAtSamePeriodException
 import team.msg.hiv2.domain.homebase.exception.TooManyUsersException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
@@ -23,13 +24,9 @@ class ReserveHomeBaseUseCase(
 
     fun execute(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest) {
 
-        val homeBases = homeBaseService.queryHomeBaseByPeriod(floor)
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)
 
-        val teamIds = reservationService.queryAllReservationByHomeBaseIn(homeBases).map { reservation -> reservation.teamId }
-        val userIds = teamService.queryAllTeamByIdIn(teamIds).flatMap { team -> team.userIds }
-
-        if (userIds.containsAll(request.users))
+        if(reservationService.existsByHomeBase(homeBase))
             throw AlreadyExistReservationException()
 
         if (request.users.size > homeBase.maxCapacity)
@@ -40,8 +37,12 @@ class ReserveHomeBaseUseCase(
         if (request.users.size != users.size)
             throw UserNotFoundException()
 
-        if(reservationService.existsByHomeBase(homeBase))
-            throw AlreadyExistReservationException()
+        val homeBases = homeBaseService.queryHomeBaseByPeriod(period)
+        val teamIds = reservationService.queryAllReservationByHomeBaseIn(homeBases).map { reservation -> reservation.teamId }
+        val userIds = teamService.queryAllTeamByIdIn(teamIds).flatMap { team -> team.userIds }
+
+        if (userIds.any { it in request.users })
+            throw AlreadyReservedAtSamePeriodException()
 
         val team = teamService.save(
             Team(
