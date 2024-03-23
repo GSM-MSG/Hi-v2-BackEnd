@@ -97,7 +97,7 @@ internal class QueryUserInfoUseCaseTest {
         given(teamService.queryAllTeamByUserIdsIn(listOf(userId)))
             .willReturn(listOf(teamStub))
 
-        given(reservationService.queryAllReservationByTeamsOrderByTeam(listOf(teamStub)))
+        given(reservationService.queryAllReservationByTeamsOrderByReservationId(listOf(teamStub)))
             .willReturn(listOf(reservationStub))
 
         given(homeBaseService.queryHomeBaseById(reservationStub.homeBaseId))

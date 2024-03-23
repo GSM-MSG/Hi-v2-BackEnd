@@ -31,7 +31,7 @@ class QueryReservationServiceImpl(
     override fun existsByHomeBase(homeBase: HomeBase): Boolean =
         queryReservationPort.existsByHomeBase(homeBase)
 
-    override fun queryAllReservationByTeamsOrderByTeam(teams: List<Team>): List<Reservation> =
-        queryReservationPort.queryAllReservationByTeamsOrderByTeam(teams)
+    override fun queryAllReservationByTeamsOrderByReservationId(teams: List<Team>): List<Reservation> =
+        queryReservationPort.queryAllReservationByTeamsOrderByReservationId(teams)
 
 }

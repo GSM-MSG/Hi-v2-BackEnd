@@ -21,9 +21,9 @@ class QueryUserInfoUseCase(
     fun execute(): UserInfoResponse {
         val user = userService.queryCurrentUser()
 
-        val teams = teamService.queryAllTeamByUserIdsIn(listOf(user.id))
+        val teams = teamService.queryAllTeamByUserId(user.id)
 
-        val reservations = reservationService.queryAllReservationByTeamsOrderByTeam(teams)
+        val reservations = reservationService.queryAllReservationByTeamsOrderByReservationId(teams)
 
         return UserInfoResponse.of(
             user,
