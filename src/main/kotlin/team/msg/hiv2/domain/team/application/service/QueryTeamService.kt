@@ -7,6 +7,7 @@ interface QueryTeamService {
 
     fun queryAllTeamByIdIn(id: List<UUID>): List<Team>
     fun queryAllTeamByUserIdsIn(userIds: List<UUID>): List<Team>
+    fun queryAllTeamByUserId(userId: UUID): List<Team>
     fun queryTeamById(id: UUID): Team
     fun queryAllTeam(): List<Team>
 }
