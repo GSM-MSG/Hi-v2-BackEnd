@@ -6,15 +6,12 @@ import team.msg.hiv2.domain.homebase.exception.ForbiddenReserveException
 import team.msg.hiv2.domain.notice.exception.ForbiddenCommandNoticeException
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.exception.ForbiddenCommandReservationException
-import team.msg.hiv2.domain.team.application.service.TeamService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import java.util.*
 
 @Component
-class UserValidatorImpl(
-    private val teamService: TeamService
-) : UserValidator {
+class UserValidatorImpl : UserValidator {
 
     private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
 
@@ -30,9 +27,7 @@ class UserValidatorImpl(
     }
 
     override fun checkUserAndReservation(user: User, reservation: Reservation) {
-        val team = teamService.queryTeamById(reservation.teamId)
-
-        if(!team.userIds.contains(user.id)) {
+        if(!reservation.userIds.contains(user.id)) {
             log.warn("User {} is not contained in a reservation {}", user.id, reservation.id)
             throw ForbiddenCommandReservationException()
         }

@@ -7,7 +7,7 @@ import java.util.*
 data class Reservation(
     val id: UUID,
     val homeBaseId: Long,
-    val teamId: UUID,
     val reason: String,
-    val checkStatus: Boolean
+    val checkStatus: Boolean,
+    val userIds: MutableList<UUID>
 )

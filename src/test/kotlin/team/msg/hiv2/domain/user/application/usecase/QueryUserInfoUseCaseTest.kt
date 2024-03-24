@@ -9,8 +9,6 @@ import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.team.application.service.TeamService
-import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
@@ -29,9 +27,6 @@ internal class QueryUserInfoUseCaseTest {
 
     @Mock
     private lateinit var homeBaseService: HomeBaseService
-
-    @Mock
-    private lateinit var teamService: TeamService
 
     private lateinit var queryUserInfoUseCase: QueryUserInfoUseCase
 
@@ -53,20 +48,13 @@ internal class QueryUserInfoUseCaseTest {
         )
     }
 
-    private val teamStub by lazy {
-        Team(
-            id = UUID.randomUUID(),
-            userIds = mutableListOf(userId)
-        )
-    }
-
     private val reservationStub: Reservation by lazy {
         Reservation(
             id = reservationId,
             homeBaseId = 1,
             reason = "test",
             checkStatus = false,
-            teamId = teamStub.id
+            userIds = listOf(userId).toMutableList()
         )
     }
 
@@ -83,7 +71,7 @@ internal class QueryUserInfoUseCaseTest {
     @BeforeEach
     fun setUp() {
         queryUserInfoUseCase = QueryUserInfoUseCase(
-            userService, reservationService, homeBaseService, teamService
+            userService, reservationService, homeBaseService
         )
     }
 
@@ -94,11 +82,11 @@ internal class QueryUserInfoUseCaseTest {
         given(userService.queryCurrentUser())
             .willReturn(userStub)
 
-        given(teamService.queryAllTeamByUserId(userId))
-            .willReturn(listOf(teamStub))
-
-        given(reservationService.queryAllReservationByTeamsOrderByReservationId(listOf(teamStub)))
+        given(reservationService.queryAllReservationByUserIdInOrderByReservationId(userId))
             .willReturn(listOf(reservationStub))
+
+        given(userService.queryAllUserById(reservationStub.userIds))
+            .willReturn(listOf(userStub))
 
         given(homeBaseService.queryHomeBaseById(reservationStub.homeBaseId))
             .willReturn(homeBaseStub)
