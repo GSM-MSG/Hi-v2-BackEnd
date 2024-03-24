@@ -6,9 +6,7 @@ import team.msg.hiv2.domain.homebase.exception.AlreadyReservedAtSamePeriodExcept
 import team.msg.hiv2.domain.homebase.exception.TooManyUsersException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
-import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.team.application.service.TeamService
-import team.msg.hiv2.domain.team.domain.Team
+import team.msg.hiv2.domain.reservation.domain.Reservationz
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.global.annotation.usecase.UseCase
