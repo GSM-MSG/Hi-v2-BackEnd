@@ -12,7 +12,7 @@ class SearchReservationUsersByNameKeywordUseCase(
 ) {
 
     fun execute(request: SearchUserKeywordRequest): List<StudentResponse> {
-        val users = userService.queryAllUserByNameContainingAndRoleInOrderByEmail(request.keyword, listOf(UserRole.ROLE_TEACHER, UserRole.ROLE_ADMIN))
+        val users = userService.queryAllUserByNameContainingAndRoleInOrderByEmail(request.keyword, listOf(UserRole.ROLE_STUDENT, UserRole.ROLE_ADMIN))
 
         return users.map { StudentResponse.of(it) }
     }
