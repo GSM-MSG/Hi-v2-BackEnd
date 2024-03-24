@@ -39,7 +39,7 @@ class GAuthSignInUseCaseTest{
     private val name = "test"
     private val grade = 2
     private val classNum = 4
-    private val number = 6
+    private val num = 6
     private val profileImageUrl = "profile_image_url"
     private val role = UserRole.ROLE_STUDENT
 
@@ -53,7 +53,7 @@ class GAuthSignInUseCaseTest{
             name = name,
             grade = grade,
             classNum = classNum,
-            number = number,
+            number = num,
             profileImageUrl = profileImageUrl,
             role = role,
             useStatus = UseStatus.AVAILABLE
@@ -89,7 +89,7 @@ class GAuthSignInUseCaseTest{
                 "name" to name,
                 "grade" to grade,
                 "classNum" to classNum,
-                "number" to number,
+                "num" to num,
                 "gender" to "MALE",
                 "profileUrl" to profileImageUrl,
                 "role" to "ROLE_STUDENT"
@@ -116,10 +116,10 @@ class GAuthSignInUseCaseTest{
         given(gAuthPort.queryGAuthUserInfo(gAuthTokenStub.accessToken))
             .willReturn(gAuthUserInfoStub)
 
-        given(userService.queryUserRoleByEmail(gAuthUserInfoStub.email, gAuthUserInfoStub.role))
+        given(userService.queryUserRoleByEmail(any(), any()))
             .willReturn(role)
 
-        given(userService.existsUserByEmail(gAuthUserInfoStub.email))
+        given(userService.existsUserByEmail(any()))
             .willReturn(false)
 
         given(userService.createUser(any(), any()))

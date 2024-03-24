@@ -8,7 +8,6 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "user")
-@Embeddable
 class UserJpaEntity(
 
     override val id: UUID,
@@ -19,14 +18,14 @@ class UserJpaEntity(
     @Column(columnDefinition = "VARCHAR(10)", nullable = false)
     val name: String,
 
-    @Column(nullable = true)
-    val grade: Int?,
+    @Column(nullable = false)
+    val grade: Int,
 
-    @Column(nullable = true)
-    val classNum: Int?,
+    @Column(nullable = false)
+    val classNum: Int,
 
-    @Column(nullable = true)
-    val number: Int?,
+    @Column(nullable = false)
+    val number: Int,
 
     @Column(columnDefinition = "TEXT", nullable = false)
     var profileImageUrl: String = "",
