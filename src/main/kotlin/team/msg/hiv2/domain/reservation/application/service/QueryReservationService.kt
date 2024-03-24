@@ -2,7 +2,6 @@ package team.msg.hiv2.domain.reservation.application.service
 
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.team.domain.Team
 import java.util.*
 
 interface QueryReservationService {
@@ -13,5 +12,5 @@ interface QueryReservationService {
     fun queryAllReservation(): List<Reservation>
     fun countReservationByHomeBase(homeBase: HomeBase): Int
     fun existsByHomeBase(homeBase: HomeBase): Boolean
-    fun queryAllReservationByTeamsOrderByReservationId(teams: List<Team>): List<Reservation>
+    fun queryAllReservationByUserIdInOrderByReservationId(userId: UUID): List<Reservation>
 }

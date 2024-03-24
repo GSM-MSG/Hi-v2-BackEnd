@@ -6,7 +6,7 @@ import team.msg.hiv2.domain.homebase.exception.AlreadyReservedAtSamePeriodExcept
 import team.msg.hiv2.domain.homebase.exception.TooManyUsersException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
-import team.msg.hiv2.domain.reservation.domain.Reservationz
+import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.global.annotation.usecase.UseCase
@@ -16,8 +16,7 @@ import java.util.*
 class ReserveHomeBaseUseCase(
     private val userService: UserService,
     private val reservationService: ReservationService,
-    private val homeBaseService: HomeBaseService,
-    private val teamService: TeamService
+    private val homeBaseService: HomeBaseService
 ) {
 
     fun execute(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest) {
@@ -36,26 +35,18 @@ class ReserveHomeBaseUseCase(
             throw UserNotFoundException()
 
         val homeBases = homeBaseService.queryHomeBaseByPeriod(period)
-        val teamIds = reservationService.queryAllReservationByHomeBaseIn(homeBases).map { reservation -> reservation.teamId }
-        val userIds = teamService.queryAllTeamByIdIn(teamIds).flatMap { team -> team.userIds }
+        val userIds = reservationService.queryAllReservationByHomeBaseIn(homeBases).flatMap { reservation -> reservation.userIds }
 
         if (userIds.any { it in request.users })
             throw AlreadyReservedAtSamePeriodException()
-
-        val team = teamService.save(
-            Team(
-                id = UUID.randomUUID(),
-                userIds = request.users
-            )
-        )
 
         reservationService.save(
             Reservation(
                 id = UUID.randomUUID(),
                 reason = request.reason,
                 homeBaseId = homeBase.id,
-                teamId = team.id,
-                checkStatus = false
+                checkStatus = false,
+                userIds = request.users
             )
         )
     }

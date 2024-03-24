@@ -20,5 +20,5 @@ interface ReservationRepository : JpaRepository<ReservationJpaEntity, UUID> {
     fun countByHomeBase(homeBase: HomeBaseJpaEntity): Int
     fun existsByHomeBase(homeBase: HomeBaseJpaEntity): Boolean
     @EntityGraph(attributePaths = ["homeBase"])
-    fun findAllByTeamInOrderByHomeBaseId(teams: List<TeamJpaEntity>): List<ReservationJpaEntity>
+    fun findAllByUserIdsInOrderByHomeBaseId(userIds: List<UUID>): List<ReservationJpaEntity>
 }
