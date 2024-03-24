@@ -11,8 +11,6 @@ import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
-import team.msg.hiv2.domain.team.application.service.TeamService
-import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
@@ -32,9 +30,6 @@ internal class ReserveHomeBaseUseCaseTest {
     @Mock
     private lateinit var homeBaseService: HomeBaseService
 
-    @Mock
-    private lateinit var teamService: TeamService
-
     private lateinit var reserveHomeBaseUseCase: ReserveHomeBaseUseCase
 
     private val floor = 3
@@ -43,11 +38,8 @@ internal class ReserveHomeBaseUseCaseTest {
     private val homeBaseNumber = 1
     private val maxCapacity = 4
 
-    private val teamId1 = UUID.randomUUID()
-    private val teamId2 = UUID.randomUUID()
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
-    private val userId3 = UUID.randomUUID()
 
     private val homeBaseStub by lazy {
         HomeBase(
@@ -59,27 +51,13 @@ internal class ReserveHomeBaseUseCaseTest {
         )
     }
 
-    private val teamStub1 by lazy {
-        Team(
-            id = teamId1,
-            userIds = mutableListOf(userId1, userId2)
-        )
-    }
-
-    private val teamStub2 by lazy {
-        Team(
-            id = teamId2,
-            userIds = mutableListOf(userId1, userId2)
-        )
-    }
-
     private val reservationStub by lazy {
         Reservation(
             id = UUID.randomUUID(),
             homeBaseId = homeBaseStub.id,
             reason = reason,
             checkStatus = false,
-            teamId = teamStub1.id
+            userIds = mutableListOf(userId1)
         )
     }
 
@@ -113,7 +91,7 @@ internal class ReserveHomeBaseUseCaseTest {
 
     private val requestStub by lazy {
         ReservationHomeBaseRequest(
-            mutableListOf(userId1, userId2),
+            mutableListOf(userId2),
             reason
         )
     }
@@ -121,7 +99,7 @@ internal class ReserveHomeBaseUseCaseTest {
     @BeforeEach
     fun setUp(){
         reserveHomeBaseUseCase = ReserveHomeBaseUseCase(
-            userService, reservationService, homeBaseService, teamService
+            userService, reservationService, homeBaseService
         )
     }
 
@@ -135,16 +113,13 @@ internal class ReserveHomeBaseUseCaseTest {
             .willReturn(false)
 
         given(userService.queryAllUserById(requestStub.users))
-            .willReturn(listOf(userStub1, userStub2))
+            .willReturn(listOf(userStub2))
 
         given(homeBaseService.queryHomeBaseByPeriod(period))
             .willReturn(listOf(homeBaseStub))
 
         given(reservationService.queryAllReservationByHomeBaseIn(listOf(homeBaseStub)))
             .willReturn(listOf(reservationStub))
-
-        given(teamService.save(any()))
-            .willReturn(teamStub1)
 
         given(reservationService.save(any()))
             .willReturn(reservationStub)

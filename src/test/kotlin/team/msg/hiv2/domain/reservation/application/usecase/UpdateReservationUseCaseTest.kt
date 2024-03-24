@@ -11,8 +11,6 @@ import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
-import team.msg.hiv2.domain.team.application.service.TeamService
-import team.msg.hiv2.domain.team.domain.Team
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
@@ -28,9 +26,6 @@ class UpdateReservationUseCaseTest {
 
     @Mock
     private lateinit var reservationService: ReservationService
-
-    @Mock
-    private lateinit var teamService: TeamService
 
     @Mock
     private lateinit var homeBaseService: HomeBaseService
@@ -58,20 +53,13 @@ class UpdateReservationUseCaseTest {
         )
     }
 
-    private val teamStub1 by lazy {
-        Team(
-            id = teamId1,
-            userIds = mutableListOf(userId)
-        )
-    }
-
     private val reservationStub by lazy {
         Reservation(
             id = UUID.randomUUID(),
             reason = reason,
             homeBaseId = homeBaseStub.id,
             checkStatus = false,
-            teamId = teamStub1.id
+            userIds = listOf(userId).toMutableList()
         )
     }
 
@@ -99,7 +87,7 @@ class UpdateReservationUseCaseTest {
     @BeforeEach
     fun setUp(){
         updateReservationUseCase = UpdateReservationUseCase(
-            reservationService, userService, teamService, homeBaseService
+            reservationService, userService, homeBaseService
         )
     }
 
@@ -119,17 +107,8 @@ class UpdateReservationUseCaseTest {
         given(reservationService.queryAllReservationByHomeBaseIn(listOf(homeBaseStub)))
             .willReturn(listOf(reservationStub))
 
-        given(teamService.queryAllTeamByIdIn(listOf(teamId1)))
-            .willReturn(listOf(teamStub1))
-
-        given(teamService.queryTeamById(teamId1))
-            .willReturn(teamStub1)
-
         given(userService.queryAllUserById(listOf(userId)))
             .willReturn(listOf(userStub))
-
-        given(teamService.save(any()))
-            .willReturn(teamStub1)
 
         given(reservationService.save(any()))
             .willReturn(reservationStub)
