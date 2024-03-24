@@ -8,16 +8,13 @@ import team.msg.hiv2.domain.reservation.application.spi.ReservationPort
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.persistence.mapper.ReservationMapper
 import team.msg.hiv2.domain.reservation.persistence.repository.ReservationRepository
-import team.msg.hiv2.domain.team.domain.Team
-import team.msg.hiv2.domain.team.persistence.mapper.TeamMapper
 import java.util.*
 
 @Component
 class ReservationPersistenceAdapter(
     private val reservationRepository: ReservationRepository,
     private val reservationMapper: ReservationMapper,
-    private val homeBaseMapper: HomeBaseMapper,
-    private val teamMapper: TeamMapper
+    private val homeBaseMapper: HomeBaseMapper
 ) : ReservationPort {
 
     override fun save(reservation: Reservation): Reservation =
