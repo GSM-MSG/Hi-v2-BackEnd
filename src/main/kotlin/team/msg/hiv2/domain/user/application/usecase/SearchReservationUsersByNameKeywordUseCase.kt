@@ -7,12 +7,12 @@ import team.msg.hiv2.domain.user.presentation.data.response.StudentResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
 
 @ReadOnlyUseCase
-class SearchStudentByNameKeywordUseCase(
+class SearchReservationUsersByNameKeywordUseCase(
     private val userService: UserService
 ) {
 
     fun execute(request: SearchUserKeywordRequest): List<StudentResponse> {
-        val users = userService.queryAllUserByNameContainingAndRoleOrderByEmail(request.keyword, UserRole.ROLE_STUDENT)
+        val users = userService.queryAllUserByNameContainingAndRoleInOrderByEmail(request.keyword, listOf(UserRole.ROLE_STUDENT, UserRole.ROLE_ADMIN))
 
         return users.map { StudentResponse.of(it) }
     }

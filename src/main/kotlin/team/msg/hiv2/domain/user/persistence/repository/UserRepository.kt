@@ -14,5 +14,5 @@ interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun findAllByRoleContaining(role: UserRole): List<UserJpaEntity>
     fun findAllByOrderByEmail(): List<UserJpaEntity>
     fun findAllByRoleOrderByEmail(role: UserRole): List<UserJpaEntity>
-    fun findAllByNameContainingAndRoleOrderByEmail(keyword: String, role: UserRole): List<UserJpaEntity>
+    fun findAllByNameContainingAndRoleInOrderByEmail(keyword: String, role: List<UserRole>): List<UserJpaEntity>
 }

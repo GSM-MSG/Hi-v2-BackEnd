@@ -5,7 +5,7 @@ import team.msg.hiv2.domain.user.application.usecase.QueryAllUsersByUserRoleUseC
 import team.msg.hiv2.domain.user.application.usecase.QueryAllUsersUseCase
 import team.msg.hiv2.domain.user.application.usecase.QueryMyRoleUseCase
 import team.msg.hiv2.domain.user.application.usecase.QueryUserInfoUseCase
-import team.msg.hiv2.domain.user.application.usecase.SearchStudentByNameKeywordUseCase
+import team.msg.hiv2.domain.user.application.usecase.SearchReservationUsersByNameKeywordUseCase
 import team.msg.hiv2.domain.user.application.usecase.SearchUserByNameKeywordUseCase
 import team.msg.hiv2.domain.user.application.usecase.UpdateUserRoleUseCase
 import team.msg.hiv2.domain.user.application.usecase.UpdateUserUseStatusUseCase
@@ -29,7 +29,7 @@ class UserFacadeImpl(
     private val searchUserByNameKeywordUseCase: SearchUserByNameKeywordUseCase,
     private val updateUserUseStatusUseCase: UpdateUserUseStatusUseCase,
     private val updateUserRoleUseCase: UpdateUserRoleUseCase,
-    private val searchStudentByNameKeywordUseCase: SearchStudentByNameKeywordUseCase
+    private val searchReservationUsersByNameKeywordUseCase: SearchReservationUsersByNameKeywordUseCase
 ) : UserFacade {
 
     override fun queryAllUsers(): AllUsersResponse =
@@ -54,6 +54,6 @@ class UserFacadeImpl(
         updateUserRoleUseCase.execute(userId, request)
 
     override fun searchStudentByNameKeyword(request: SearchUserKeywordRequest): List<StudentResponse> =
-        searchStudentByNameKeywordUseCase.execute(request)
+        searchReservationUsersByNameKeywordUseCase.execute(request)
 
 }
