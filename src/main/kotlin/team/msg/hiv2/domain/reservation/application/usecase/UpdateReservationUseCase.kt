@@ -27,9 +27,9 @@ class UpdateReservationUseCase(
             throw TooManyUsersException()
 
         val homeBases = homeBaseService.queryHomeBaseByPeriod(homeBase.period)
-        val userIds = reservationService.queryAllReservationByHomeBaseIn(homeBases).map { reservation -> reservation.userIds }
+        val userIds = reservationService.queryAllReservationByHomeBaseIn(homeBases).flatMap { reservation -> reservation.userIds }
 
-        if ((userIds.subtract(reservation.userIds.toSet()).containsAll(request.users)))
+        if ((userIds.subtract(reservation.userIds.toSet()).any { it in request.users }))
             throw AlreadyExistReservationException()
 
         val users = userService.queryAllUserById(request.users)
