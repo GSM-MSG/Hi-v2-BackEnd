@@ -73,7 +73,7 @@ internal class QueryAllUsersUseCaseTest {
     fun `전체 학생 조회 성공`() {
 
         // given
-        given(userService.queryAllUsersOrderByEmail())
+        given(userService.queryAllUsersOrderBySchoolNumber())
             .willReturn(listOf(userStub1, userStub2))
 
         // when

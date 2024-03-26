@@ -12,7 +12,7 @@ class QueryAllUsersByUserRoleUseCase(
 ) {
 
     fun execute(userRole: UserRole): AllUsersResponse {
-        val users = userService.queryAllUserByRoleOrderByEmail(userRole)
+        val users = userService.queryAllUserByRoleOrderBySchoolNumber(userRole)
 
         return AllUsersResponse(
             users.map {

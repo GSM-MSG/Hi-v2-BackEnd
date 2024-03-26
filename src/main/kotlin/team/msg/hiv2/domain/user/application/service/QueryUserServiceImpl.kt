@@ -33,19 +33,19 @@ class QueryUserServiceImpl(
     override fun queryCurrentUser(): User =
         queryUserPort.queryCurrentUser()
 
-    override fun queryUserByNameContainingOrderByEmail(keyword: String): List<User> =
-        queryUserPort.queryAllUserByNameContainingOrderByEmail(keyword)
+    override fun queryUserByNameContainingOrderBySchoolNumber(keyword: String): List<User> =
+        queryUserPort.queryAllUserByNameContainingOrderBySchoolNumber(keyword)
 
-    override fun queryAllUsersOrderByEmail(): List<User> =
-        queryUserPort.queryAllUsersOrderByEmail()
+    override fun queryAllUsersOrderBySchoolNumber(): List<User> =
+        queryUserPort.queryAllUsersOrderBySchoolNumber()
 
     override fun queryAllUserByRoleContaining(role: UserRole): List<User> =
         queryUserPort.queryAllUserByRoleContaining(role)
 
-    override fun queryAllUserByRoleOrderByEmail(role: UserRole): List<User> =
-        queryUserPort.queryAllUserByRoleOrderByEmail(role)
+    override fun queryAllUserByRoleOrderBySchoolNumber(role: UserRole): List<User> =
+        queryUserPort.queryAllUserByRoleOrderBySchoolNumber(role)
 
-    override fun queryAllUserByNameContainingAndRoleInOrderByEmail(keyword: String, role: List<UserRole>) =
-        queryUserPort.queryAllUserByNameContainingAndRoleInOrderByEmail(keyword, role)
+    override fun queryAllUserByNameContainingAndRoleInOrderBySchoolNumber(keyword: String, role: List<UserRole>) =
+        queryUserPort.queryAllUserByNameContainingAndRoleInOrderBySchoolNumber(keyword, role)
 
 }

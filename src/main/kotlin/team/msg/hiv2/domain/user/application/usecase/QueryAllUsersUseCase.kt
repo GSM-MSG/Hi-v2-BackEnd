@@ -11,7 +11,7 @@ class QueryAllUsersUseCase(
 ) {
 
     fun execute(): AllUsersResponse {
-        val users = userService.queryAllUsersOrderByEmail()
+        val users = userService.queryAllUsersOrderBySchoolNumber()
 
         return AllUsersResponse(
             users.map {

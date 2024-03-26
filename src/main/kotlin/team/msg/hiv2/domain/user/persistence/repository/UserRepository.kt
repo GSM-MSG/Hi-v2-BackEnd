@@ -10,9 +10,9 @@ interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun findByEmail(email: String): UserJpaEntity?
     fun existsByEmail(email: String): Boolean
     fun existsAllByIdIn(ids: List<UUID>): Boolean
-    fun findAllByNameContainingOrderByEmail(keyword: String): List<UserJpaEntity>
+    fun findAllByNameContainingOrderByGradeAscClassNumAscNumberAsc(keyword: String): List<UserJpaEntity>
     fun findAllByRoleContaining(role: UserRole): List<UserJpaEntity>
-    fun findAllByOrderByEmail(): List<UserJpaEntity>
-    fun findAllByRoleOrderByEmail(role: UserRole): List<UserJpaEntity>
-    fun findAllByNameContainingAndRoleInOrderByEmail(keyword: String, role: List<UserRole>): List<UserJpaEntity>
+    fun findAllByOrderByGradeAscClassNumAscNumberAsc(): List<UserJpaEntity>
+    fun findAllByRoleOrderByGradeAscClassNumAscNumberAsc(role: UserRole): List<UserJpaEntity>
+    fun findAllByNameContainingAndRoleInOrderByGradeAscClassNumAscNumberAsc(keyword: String, role: List<UserRole>): List<UserJpaEntity>
 }

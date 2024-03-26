@@ -56,19 +56,19 @@ class UserPersistenceAdapter(
         userMapper.toDomain(userRepository.findByIdOrNull(securityPort.queryCurrentUserId()))
             .let { it ?: throw UserNotFoundException() }
 
-    override fun queryAllUserByNameContainingOrderByEmail(keyword: String): List<User> =
-        userRepository.findAllByNameContainingOrderByEmail(keyword).map { userMapper.toDomain(it)!! }
+    override fun queryAllUserByNameContainingOrderBySchoolNumber(keyword: String): List<User> =
+        userRepository.findAllByNameContainingOrderByGradeAscClassNumAscNumberAsc(keyword).map { userMapper.toDomain(it)!! }
 
-    override fun queryAllUsersOrderByEmail(): List<User> =
-        userRepository.findAllByOrderByEmail().map { userMapper.toDomain(it)!! }
+    override fun queryAllUsersOrderBySchoolNumber(): List<User> =
+        userRepository.findAllByOrderByGradeAscClassNumAscNumberAsc().map { userMapper.toDomain(it)!! }
 
     override fun queryAllUserByRoleContaining(role: UserRole): List<User> =
         userRepository.findAllByRoleContaining(role).map { userMapper.toDomain(it)!! }
 
-    override fun queryAllUserByRoleOrderByEmail(role: UserRole): List<User> =
-        userRepository.findAllByRoleOrderByEmail(role).map { userMapper.toDomain(it)!! }
+    override fun queryAllUserByRoleOrderBySchoolNumber(role: UserRole): List<User> =
+        userRepository.findAllByRoleOrderByGradeAscClassNumAscNumberAsc(role).map { userMapper.toDomain(it)!! }
 
-    override fun queryAllUserByNameContainingAndRoleInOrderByEmail(keyword: String, role: List<UserRole>): List<User>  =
-        userRepository.findAllByNameContainingAndRoleInOrderByEmail(keyword, role).map { userMapper.toDomain(it)!! }
+    override fun queryAllUserByNameContainingAndRoleInOrderBySchoolNumber(keyword: String, role: List<UserRole>): List<User>  =
+        userRepository.findAllByNameContainingAndRoleInOrderByGradeAscClassNumAscNumberAsc(keyword, role).map { userMapper.toDomain(it)!! }
 
 }
