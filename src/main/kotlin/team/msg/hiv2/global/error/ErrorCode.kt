@@ -19,7 +19,7 @@ enum class ErrorCode(
     FORBIDDEN_COMMAND_RESERVATION("예약 테이블을 제어할 권한이 없습니다.", 403),
     FORBIDDEN_EXIT_RESERVATION("사용자 수가 2명 이하일 경우 나갈 수 없습니다.", 403),
     ALREADY_EXIST_RESERVATION("이미 예약 되어진 자리입니다.", 403),
-    ALREADY_RESERVED_AT_SAME_PERIOD("이미 같은 교시에 예약된 홈베이스가 존재합니다.", 403),
+    ALREADY_RESERVED_AT_SAME_PERIOD("이미 같은 교시에 예약된 홈베이스가 존재합니다.", 409),
     TOO_MANY_USERS_EXCEPTION("인원 수가 홈베이스 최대 인원보다 많습니다.", 403),
     NOT_RESERVE_HOME_BASE_EXCEPTION("홈베이스 예약 가능한 시간이 아닙니다.", 403),
 

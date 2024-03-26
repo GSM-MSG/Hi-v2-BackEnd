@@ -3,7 +3,6 @@ package team.msg.hiv2.domain.homebase.application.usecase
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.exception.AlreadyExistReservationException
 import team.msg.hiv2.domain.homebase.exception.AlreadyReservedAtSamePeriodException
-import team.msg.hiv2.domain.homebase.exception.NotReserveHomeBaseHourException
 import team.msg.hiv2.domain.homebase.exception.TooManyUsersException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
@@ -11,8 +10,6 @@ import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.global.annotation.usecase.UseCase
-import java.time.DayOfWeek
-import java.time.LocalDateTime
 import java.util.*
 
 @UseCase
