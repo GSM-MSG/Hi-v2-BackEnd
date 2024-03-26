@@ -8,9 +8,9 @@ data class User(
     val id: UUID,
     val email: String,
     val name: String,
-    val grade: Int,
-    val classNum: Int,
-    val number: Int,
+    val grade: Int?,
+    val classNum: Int?,
+    val number: Int?,
     val profileImageUrl: String,
     val role: UserRole,
     val useStatus: UseStatus
