@@ -30,27 +30,13 @@ data class UserResponse(
         )
 
         fun of(user: User, isWriter: Boolean) = NoticeUserResponse(
-            email = user.email,
             name = user.name,
-            grade = user.grade,
-            classNum = user.classNum,
-            number = user.number,
-            profileImageUrl = user.profileImageUrl,
-            role = user.role,
-            useStatus = user.useStatus,
             isWriter = isWriter
         )
     }
 }
 
 data class NoticeUserResponse(
-    val email: String,
     val name: String,
-    val grade: Int?,
-    val classNum: Int?,
-    val number: Int?,
-    val profileImageUrl: String,
-    val role: UserRole,
-    val useStatus: UseStatus,
     val isWriter: Boolean
 )
