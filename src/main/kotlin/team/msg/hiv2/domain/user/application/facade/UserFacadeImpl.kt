@@ -2,7 +2,6 @@ package team.msg.hiv2.domain.user.application.facade
 
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.user.application.usecase.QueryAllUsersByUserRoleUseCase
-import team.msg.hiv2.domain.user.application.usecase.QueryAllUsersUseCase
 import team.msg.hiv2.domain.user.application.usecase.QueryMyRoleUseCase
 import team.msg.hiv2.domain.user.application.usecase.QueryUserInfoUseCase
 import team.msg.hiv2.domain.user.application.usecase.SearchReservationUsersByNameKeywordUseCase
@@ -22,7 +21,6 @@ import java.util.*
 
 @Component
 class UserFacadeImpl(
-    private val queryAllUsersUseCase: QueryAllUsersUseCase,
     private val queryAllUsersByUserRoleUseCase: QueryAllUsersByUserRoleUseCase,
     private val queryUserInfoUseCase: QueryUserInfoUseCase,
     private val queryMyRoleUseCase: QueryMyRoleUseCase,
@@ -31,9 +29,6 @@ class UserFacadeImpl(
     private val updateUserRoleUseCase: UpdateUserRoleUseCase,
     private val searchReservationUsersByNameKeywordUseCase: SearchReservationUsersByNameKeywordUseCase
 ) : UserFacade {
-
-    override fun queryAllUsers(): AllUsersResponse =
-        queryAllUsersUseCase.execute()
 
     override fun queryAllUsersByUserRole(userRole: UserRole): AllUsersResponse =
         queryAllUsersByUserRoleUseCase.execute(userRole)

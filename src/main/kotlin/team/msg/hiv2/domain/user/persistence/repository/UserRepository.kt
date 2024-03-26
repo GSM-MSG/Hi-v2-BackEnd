@@ -12,7 +12,6 @@ interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun existsAllByIdIn(ids: List<UUID>): Boolean
     fun findAllByNameContainingOrderByGradeAscClassNumAscNumberAsc(keyword: String): List<UserJpaEntity>
     fun findAllByRoleContaining(role: UserRole): List<UserJpaEntity>
-    fun findAllByOrderByGradeAscClassNumAscNumberAsc(): List<UserJpaEntity>
     fun findAllByRoleOrderByGradeAscClassNumAscNumberAsc(role: UserRole): List<UserJpaEntity>
     fun findAllByNameContainingAndRoleInOrderByGradeAscClassNumAscNumberAsc(keyword: String, role: List<UserRole>): List<UserJpaEntity>
 }

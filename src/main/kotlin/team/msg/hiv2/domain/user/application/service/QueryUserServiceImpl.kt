@@ -36,9 +36,6 @@ class QueryUserServiceImpl(
     override fun queryUserByNameContainingOrderBySchoolNumber(keyword: String): List<User> =
         queryUserPort.queryAllUserByNameContainingOrderBySchoolNumber(keyword)
 
-    override fun queryAllUsersOrderBySchoolNumber(): List<User> =
-        queryUserPort.queryAllUsersOrderBySchoolNumber()
-
     override fun queryAllUserByRoleContaining(role: UserRole): List<User> =
         queryUserPort.queryAllUserByRoleContaining(role)
 

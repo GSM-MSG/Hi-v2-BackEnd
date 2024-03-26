@@ -59,9 +59,6 @@ class UserPersistenceAdapter(
     override fun queryAllUserByNameContainingOrderBySchoolNumber(keyword: String): List<User> =
         userRepository.findAllByNameContainingOrderByGradeAscClassNumAscNumberAsc(keyword).map { userMapper.toDomain(it)!! }
 
-    override fun queryAllUsersOrderBySchoolNumber(): List<User> =
-        userRepository.findAllByOrderByGradeAscClassNumAscNumberAsc().map { userMapper.toDomain(it)!! }
-
     override fun queryAllUserByRoleContaining(role: UserRole): List<User> =
         userRepository.findAllByRoleContaining(role).map { userMapper.toDomain(it)!! }
 
