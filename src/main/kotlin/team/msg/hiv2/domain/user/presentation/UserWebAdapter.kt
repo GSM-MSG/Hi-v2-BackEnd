@@ -32,11 +32,6 @@ class UserWebAdapter(
         userFacade.queryUserInfo()
             .let { ResponseEntity.ok(it) }
 
-    @GetMapping("/all")
-    fun queryAllUsers(): ResponseEntity<AllUsersResponse> =
-        userFacade.queryAllUsers()
-            .let { ResponseEntity.ok(it) }
-
     @GetMapping
     fun queryAllUsersByUserRole(@RequestParam userRole: UserRole): ResponseEntity<AllUsersResponse> =
         userFacade.queryAllUsersByUserRole(userRole)

@@ -13,7 +13,6 @@ import java.util.*
 
 interface UserFacade {
 
-    fun queryAllUsers(): AllUsersResponse
     fun queryAllUsersByUserRole(userRole: UserRole): AllUsersResponse
     fun queryUserInfo(): UserInfoResponse
     fun queryMyRole(): UserRoleResponse
