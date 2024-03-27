@@ -22,4 +22,7 @@ object DependencyVersions {
 
     // test
     const val MOCKITO_VERSION = "4.0.0"
+
+    // redisson
+    const val REDISSON_VERSION = "3.18.0"
 }
