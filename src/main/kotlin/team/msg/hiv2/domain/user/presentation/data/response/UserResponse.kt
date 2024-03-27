@@ -28,5 +28,15 @@ data class UserResponse(
             role = user.role,
             useStatus = user.useStatus
         )
+
+        fun of(user: User, isWriter: Boolean) = NoticeUserResponse(
+            name = user.name,
+            isWriter = isWriter
+        )
     }
 }
+
+data class NoticeUserResponse(
+    val name: String,
+    val isWriter: Boolean
+)

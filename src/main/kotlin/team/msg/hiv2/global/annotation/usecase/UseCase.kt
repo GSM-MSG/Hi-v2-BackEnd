@@ -6,5 +6,5 @@ import kotlin.annotation.AnnotationTarget.*
 
 @Retention(RUNTIME)
 @Target(CLASS)
-@Transactional
+@Transactional(rollbackFor = [Exception::class])
 annotation class UseCase

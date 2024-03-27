@@ -73,7 +73,7 @@ internal class QueryAllUsersByUserRoleUseCaseTest {
     fun `전체 학생 조회 성공`() {
 
         // given
-        given(userService.queryAllUserByRoleOrderByEmail(userRole))
+        given(userService.queryAllUserByRoleOrderBySchoolNumber(userRole))
             .willReturn(listOf(userStub1, userStub2))
 
         // when

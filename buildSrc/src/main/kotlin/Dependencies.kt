@@ -45,7 +45,4 @@ object Dependencies {
     // gauth
     const val GAUTH = "com.github.GSM-MSG:GAuth-SDK-Java:${DependencyVersions.GAUTH_VERSION}"
 
-    // redisson
-    const val REDISSON = "org.redisson:redisson-spring-boot-starter:${DependencyVersions.REDISSON}"
-
 }

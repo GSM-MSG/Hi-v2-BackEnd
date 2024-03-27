@@ -8,7 +8,6 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "user")
-@Embeddable
 class UserJpaEntity(
 
     override val id: UUID,

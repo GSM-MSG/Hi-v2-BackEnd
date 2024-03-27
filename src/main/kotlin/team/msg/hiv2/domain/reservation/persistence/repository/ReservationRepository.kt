@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
 import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
-import team.msg.hiv2.domain.team.persistence.entity.TeamJpaEntity
 import java.util.*
+import javax.persistence.LockModeType.*
 
 interface ReservationRepository : JpaRepository<ReservationJpaEntity, UUID> {
 
@@ -21,5 +21,5 @@ interface ReservationRepository : JpaRepository<ReservationJpaEntity, UUID> {
     fun countByHomeBase(homeBase: HomeBaseJpaEntity): Int
     fun existsByHomeBase(homeBase: HomeBaseJpaEntity): Boolean
     @EntityGraph(attributePaths = ["homeBase"])
-    fun findAllByTeamIn(teams: List<TeamJpaEntity>): List<ReservationJpaEntity>
+    fun findAllByUserIdsInOrderByHomeBaseId(userIds: List<UUID>): List<ReservationJpaEntity>
 }

@@ -9,6 +9,7 @@ data class ReservationResponse(
     val reservationId: UUID?,
     val users: List<UserResponse>?,
     val checkStatus: Boolean?,
+    val reason: String?,
     val homeBase: HomeBaseResponse?
 ) {
     companion object {
@@ -16,6 +17,7 @@ data class ReservationResponse(
             reservationId = reservation?.id,
             users = users,
             checkStatus = reservation?.checkStatus,
+            reason = reservation?.reason,
             homeBase = homeBase
         )
     }

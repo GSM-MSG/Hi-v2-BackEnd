@@ -12,8 +12,10 @@ import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
 import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
+import team.msg.hiv2.domain.user.presentation.data.response.NoticeUserResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.HiTest
+import team.msg.hiv2.global.security.spi.SecurityPort
 import java.time.LocalDateTime
 import java.util.*
 
@@ -25,6 +27,9 @@ class QueryAllNoticeUseCaseTest {
 
     @Mock
     private lateinit var userService: UserService
+
+    @Mock
+    private lateinit var securityPort: SecurityPort
 
     private lateinit var queryAllNoticeUseCase: QueryAllNoticeUseCase
 
@@ -64,8 +69,8 @@ class QueryAllNoticeUseCaseTest {
         )
     }
 
-    private val userResponseStub: UserResponse by lazy {
-        UserResponse.of(userStub)
+    private val userResponseStub: NoticeUserResponse by lazy {
+        UserResponse.of(userStub, false)
     }
 
     private val responseStub = listOf(
@@ -75,7 +80,7 @@ class QueryAllNoticeUseCaseTest {
     @BeforeEach
     fun setUp() {
         queryAllNoticeUseCase = QueryAllNoticeUseCase(
-            noticeService, userService
+            noticeService, userService, securityPort
         )
     }
 
