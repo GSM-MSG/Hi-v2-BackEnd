@@ -20,9 +20,7 @@ class HomeBaseReservationInfoAspect(
             "&& args(floor, period, request) && within(team.msg.hiv2.domain.homebase.application.usecase.ReserveHomeBaseUseCase)")
     private fun reserveHomeBaseUseCasePointcut(floor: Int, period: Int, request: ReservationHomeBaseRequest) {}
 
-    @Before(
-        "reserveHomeBaseUseCasePointcut(floor, period, request)"
-    )
+    @Before("reserveHomeBaseUseCasePointcut(floor, period, request)")
     private fun loggingReservationInfo(floor: Int, period: Int, request: ReservationHomeBaseRequest) {
         val currentUser = userService.queryCurrentUser()
         log.info("reserve homebase by = {}, floor = {}, period = {}, users = {}",
