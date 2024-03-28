@@ -9,6 +9,7 @@ import org.mockito.kotlin.given
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
+import team.msg.hiv2.domain.reservation.application.validator.ReservationValidator
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
 import team.msg.hiv2.domain.user.application.service.UserService
@@ -29,6 +30,9 @@ class UpdateReservationUseCaseTest {
 
     @Mock
     private lateinit var homeBaseService: HomeBaseService
+
+    @Mock
+    private lateinit var reservationValidator: ReservationValidator
 
     private lateinit var updateReservationUseCase: UpdateReservationUseCase
 
@@ -87,7 +91,7 @@ class UpdateReservationUseCaseTest {
     @BeforeEach
     fun setUp(){
         updateReservationUseCase = UpdateReservationUseCase(
-            reservationService, userService, homeBaseService
+            reservationService, userService, homeBaseService, reservationValidator
         )
     }
 
