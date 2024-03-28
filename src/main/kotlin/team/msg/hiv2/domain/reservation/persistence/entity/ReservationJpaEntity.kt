@@ -17,7 +17,7 @@ class ReservationJpaEntity(
     @JoinColumn(name = "home_base_id")
     val homeBase: HomeBaseJpaEntity,
 
-    @Column(columnDefinition = "VARCHAR(501)", nullable = false)
+    @Column(columnDefinition = "VARCHAR(600)", nullable = false)
     val reason: String,
 
     @Column(name = "check_status", nullable = false)
@@ -25,7 +25,7 @@ class ReservationJpaEntity(
 
     @JoinColumn(name = "reservation_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @Column(name = "user_id", columnDefinition = "BINARY(16)")
+    @Column(columnDefinition = "BINARY(16)", name = "user_id")
     @ElementCollection
     @CollectionTable(name = "users", joinColumns = [JoinColumn(name = "reservation_id")])
     val userIds: MutableList<UUID>
