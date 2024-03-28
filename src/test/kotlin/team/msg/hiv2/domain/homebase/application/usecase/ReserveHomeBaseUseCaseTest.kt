@@ -109,7 +109,7 @@ internal class ReserveHomeBaseUseCaseTest {
         given(homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber))
             .willReturn(homeBaseStub)
 
-        given(reservationService.existsByHomeBase(homeBaseStub))
+        given(reservationService.existsByHomeBaseId(homeBaseStub))
             .willReturn(false)
 
         given(userService.queryAllUserById(requestStub.users))

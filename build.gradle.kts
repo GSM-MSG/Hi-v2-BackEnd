@@ -52,7 +52,7 @@ dependencies {
 	testImplementation(Dependencies.MOCKITO)
 
     // redisson
-    implementation(Dependencies.REDISSON)
+//    implementation(Dependencies.REDISSON)
 
 }
 

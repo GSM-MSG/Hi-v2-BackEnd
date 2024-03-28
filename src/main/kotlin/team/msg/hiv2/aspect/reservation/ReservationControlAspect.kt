@@ -39,8 +39,8 @@ class ReservationControlAspect(
         val currentUser = userService.queryCurrentUser()
         val currentTime = LocalDateTime.now()
 
-        reservationValidator.validateReservationTime(currentTime)
-        reservationValidator.validateReservationDay(currentTime)
+//        reservationValidator.validateReservationTime(currentTime)
+//        reservationValidator.validateReservationDay(currentTime)
         userValidator.checkUserUseStatus(currentUser)
         userValidator.checkUsersUseStatus(userService.queryAllUserById(request.users))
     }

@@ -8,6 +8,9 @@ import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
 import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
 import java.util.*
 import javax.persistence.LockModeType.*
+import javax.persistence.QueryHint
+import org.springframework.data.jpa.repository.Lock
+import org.springframework.data.jpa.repository.QueryHints
 
 interface ReservationRepository : JpaRepository<ReservationJpaEntity, UUID> {
 
@@ -19,7 +22,8 @@ interface ReservationRepository : JpaRepository<ReservationJpaEntity, UUID> {
     @Query("DELETE FROM ReservationJpaEntity r WHERE r IN :reservations")
     fun deleteAllInBatch(reservations: List<ReservationJpaEntity>)
     fun countByHomeBase(homeBase: HomeBaseJpaEntity): Int
-    fun existsByHomeBase(homeBase: HomeBaseJpaEntity): Boolean
+    @Lock(PESSIMISTIC_WRITE)
+    fun existsByHomeBaseId(homeBaseId: Long): Boolean
     @EntityGraph(attributePaths = ["homeBase"])
     fun findAllByUserIdsInOrderByHomeBaseId(userIds: List<UUID>): List<ReservationJpaEntity>
 }

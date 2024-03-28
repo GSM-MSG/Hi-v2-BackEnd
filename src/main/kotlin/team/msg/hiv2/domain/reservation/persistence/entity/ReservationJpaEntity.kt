@@ -17,7 +17,7 @@ class ReservationJpaEntity(
     @JoinColumn(name = "home_base_id")
     val homeBase: HomeBaseJpaEntity,
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "VARCHAR(501)", nullable = false)
     val reason: String,
 
     @Column(name = "check_status", nullable = false)
