@@ -42,12 +42,13 @@ internal class ReserveHomeBaseUseCaseTest {
     private val homeBaseNumber = 1
     private val maxCapacity = 4
 
+    private val homeBaseId = 1L
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
 
     private val homeBaseStub by lazy {
         HomeBase(
-            id = 1,
+            id = homeBaseId,
             period = period,
             floor = floor,
             homeBaseNumber = homeBaseNumber,
@@ -113,7 +114,7 @@ internal class ReserveHomeBaseUseCaseTest {
         given(homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber))
             .willReturn(homeBaseStub)
 
-        given(reservationService.existsByHomeBase(homeBaseStub))
+        given(reservationService.existsByHomeBaseId(homeBaseId))
             .willReturn(false)
 
         given(userService.queryAllUserById(requestStub.users))

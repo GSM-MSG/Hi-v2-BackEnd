@@ -11,16 +11,16 @@ class HomeBaseJpaEntity(
 
     override val id: Long,
 
-    @Column(name = "floor", nullable = false)
+    @Column(columnDefinition = "TINYINT UNSIGNED", nullable = false)
     val floor: Int,
 
-    @Column(name = "period", nullable = false)
+    @Column(columnDefinition = "TINYINT UNSIGNED", nullable = false)
     val period: Int,
 
-    @Column(name = "home_base_number", nullable = false)
+    @Column(columnDefinition = "TINYINT UNSIGNED", nullable = false)
     val homeBaseNumber: Int,
 
-    @Column(name = "max_capacity", nullable = false)
+    @Column(columnDefinition = "TINYINT UNSIGNED", nullable = false)
     val maxCapacity: Int
 
 ) : BaseIdEntity(id)

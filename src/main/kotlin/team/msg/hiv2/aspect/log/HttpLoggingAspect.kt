@@ -1,4 +1,4 @@
-package team.msg.hiv2.aspect
+package team.msg.hiv2.aspect.log
 
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.ProceedingJoinPoint

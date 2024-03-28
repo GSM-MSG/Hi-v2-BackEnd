@@ -15,10 +15,10 @@ import java.util.*
 class NoticeJpaEntity(
     override val id: UUID,
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "VARCHAR(30)", nullable = false)
     val title: String,
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "VARCHAR(300)", nullable = false)
     val content: String,
 
     @ManyToOne(fetch = FetchType.LAZY)

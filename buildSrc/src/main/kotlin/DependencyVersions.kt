@@ -22,4 +22,5 @@ object DependencyVersions {
 
     // test
     const val MOCKITO_VERSION = "4.0.0"
+
 }
