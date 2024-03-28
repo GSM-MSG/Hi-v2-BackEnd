@@ -16,14 +16,14 @@ import java.util.*
 class ReserveHomeBaseUseCase(
     private val userService: UserService,
     private val reservationService: ReservationService,
-    private val homeBaseService: HomeBaseService
+    private val homeBaseService: HomeBaseService,
 ) {
 
     fun execute(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest) {
 
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)
 
-        if(reservationService.existsByHomeBase(homeBase))
+        if(reservationService.existsByHomeBaseId(homeBase.id))
             throw AlreadyExistReservationException()
 
         if (request.users.size > homeBase.maxCapacity)

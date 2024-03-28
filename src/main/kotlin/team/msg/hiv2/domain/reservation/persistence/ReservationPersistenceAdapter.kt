@@ -18,7 +18,7 @@ class ReservationPersistenceAdapter(
 ) : ReservationPort {
 
     override fun save(reservation: Reservation): Reservation =
-        reservationMapper.toDomain(reservationRepository.save(reservationMapper.toEntity(reservation)))!!
+        reservationMapper.toDomain(reservationRepository.saveAndFlush(reservationMapper.toEntity(reservation)))!!
 
     override fun delete(reservation: Reservation) {
         reservationRepository.deleteById(reservation.id)
@@ -48,8 +48,8 @@ class ReservationPersistenceAdapter(
     override fun countReservationByHomeBase(homeBase: HomeBase): Int =
         reservationRepository.countByHomeBase(homeBaseMapper.toEntity(homeBase))
 
-    override fun existsByHomeBase(homeBase: HomeBase): Boolean =
-        reservationRepository.existsByHomeBase(homeBaseMapper.toEntity(homeBase))
+    override fun existsByHomeBaseId(homeBaseId: Long): Boolean =
+        reservationRepository.existsByHomeBaseId(homeBaseId)
 
     override fun queryAllReservationByUserIdInOrderByHomeBaseId(userId: List<UUID>): List<Reservation> =
         reservationRepository.findAllByUserIdsInOrderByHomeBaseId(userId).map { reservationMapper.toDomain(it)!! }

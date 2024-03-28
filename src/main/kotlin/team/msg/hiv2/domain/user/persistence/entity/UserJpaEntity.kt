@@ -18,24 +18,24 @@ class UserJpaEntity(
     @Column(columnDefinition = "VARCHAR(10)", nullable = false)
     val name: String,
 
-    @Column(nullable = true)
+    @Column(columnDefinition = "TINYINT UNSIGNED", nullable = true)
     val grade: Int?,
 
-    @Column(nullable = true)
+    @Column(columnDefinition = "TINYINT UNSIGNED", nullable = true)
     val classNum: Int?,
 
-    @Column(nullable = true)
+    @Column(columnDefinition = "TINYINT UNSIGNED", nullable = true)
     val number: Int?,
 
     @Column(columnDefinition = "TEXT", nullable = false)
     var profileImageUrl: String = "",
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
+    @Column(columnDefinition = "VARCHAR(30)", name = "role", nullable = false)
     var role: UserRole,
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "use_status", nullable = false)
+    @Column(columnDefinition = "VARCHAR(30)", name = "use_status", nullable = false)
     val useStatus: UseStatus
 
 ) : BaseUuidEntity(id)

@@ -11,6 +11,6 @@ interface QueryReservationService {
     fun queryAllReservationByHomeBaseIn(homeBases: List<HomeBase>): List<Reservation>
     fun queryAllReservation(): List<Reservation>
     fun countReservationByHomeBase(homeBase: HomeBase): Int
-    fun existsByHomeBase(homeBase: HomeBase): Boolean
+    fun existsByHomeBaseId(homeBaseId: Long): Boolean
     fun queryAllReservationByUserIdInOrderByReservationId(userId: UUID): List<Reservation>
 }

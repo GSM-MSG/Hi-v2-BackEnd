@@ -1,4 +1,4 @@
-package team.msg.hiv2.aspect
+package team.msg.hiv2.aspect.notice
 
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
