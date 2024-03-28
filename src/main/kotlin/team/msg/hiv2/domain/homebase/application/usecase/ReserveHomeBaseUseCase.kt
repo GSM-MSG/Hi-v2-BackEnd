@@ -1,7 +1,5 @@
 package team.msg.hiv2.domain.homebase.application.usecase
 
-import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.exception.AlreadyExistReservationException
 import team.msg.hiv2.domain.homebase.exception.AlreadyReservedAtSamePeriodException
@@ -11,11 +9,10 @@ import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
+import team.msg.hiv2.global.annotation.usecase.UseCase
 import java.util.*
 
-//@UseCase
-@Service
-@Transactional(rollbackFor = [Exception::class])
+@UseCase
 class ReserveHomeBaseUseCase(
     private val userService: UserService,
     private val reservationService: ReservationService,
@@ -26,7 +23,7 @@ class ReserveHomeBaseUseCase(
 
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)
 
-        if(reservationService.existsByHomeBaseId(homeBase))
+        if(reservationService.existsByHomeBaseId(homeBase.id))
             throw AlreadyExistReservationException()
 
         if (request.users.size > homeBase.maxCapacity)
@@ -42,7 +39,6 @@ class ReserveHomeBaseUseCase(
 
         if (userIds.any { it in request.users })
             throw AlreadyReservedAtSamePeriodException()
-
 
         reservationService.save(
             Reservation(

@@ -27,8 +27,8 @@ class QueryReservationServiceImpl(
     override fun countReservationByHomeBase(homeBase: HomeBase): Int =
         queryReservationPort.countReservationByHomeBase(homeBase)
 
-    override fun existsByHomeBaseId(homeBase: HomeBase): Boolean =
-        queryReservationPort.existsByHomeBaseId(homeBase)
+    override fun existsByHomeBaseId(homeBaseId: Long): Boolean =
+        queryReservationPort.existsByHomeBaseId(homeBaseId)
 
     override fun queryAllReservationByUserIdInOrderByReservationId(userId: UUID): List<Reservation> =
         queryReservationPort.queryAllReservationByUserIdInOrderByHomeBaseId(listOf(userId))

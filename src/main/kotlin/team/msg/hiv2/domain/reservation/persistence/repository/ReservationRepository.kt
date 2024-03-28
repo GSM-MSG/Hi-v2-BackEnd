@@ -1,16 +1,10 @@
 package team.msg.hiv2.domain.reservation.persistence.repository
 
-import org.springframework.data.jpa.repository.EntityGraph
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Modifying
-import org.springframework.data.jpa.repository.Query
+import org.springframework.data.jpa.repository.*
 import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
 import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
 import java.util.*
 import javax.persistence.LockModeType.*
-import javax.persistence.QueryHint
-import org.springframework.data.jpa.repository.Lock
-import org.springframework.data.jpa.repository.QueryHints
 
 interface ReservationRepository : JpaRepository<ReservationJpaEntity, UUID> {
 
