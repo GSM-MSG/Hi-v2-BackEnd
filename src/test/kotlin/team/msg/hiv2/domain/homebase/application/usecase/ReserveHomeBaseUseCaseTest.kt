@@ -10,6 +10,7 @@ import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
+import team.msg.hiv2.domain.reservation.application.validator.ReservationValidator
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.domain.User
@@ -29,6 +30,9 @@ internal class ReserveHomeBaseUseCaseTest {
 
     @Mock
     private lateinit var homeBaseService: HomeBaseService
+
+    @Mock
+    private lateinit var reservationValidator: ReservationValidator
 
     private lateinit var reserveHomeBaseUseCase: ReserveHomeBaseUseCase
 
@@ -99,7 +103,7 @@ internal class ReserveHomeBaseUseCaseTest {
     @BeforeEach
     fun setUp(){
         reserveHomeBaseUseCase = ReserveHomeBaseUseCase(
-            userService, reservationService, homeBaseService
+            userService, reservationService, homeBaseService, reservationValidator
         )
     }
 
