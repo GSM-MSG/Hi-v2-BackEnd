@@ -4,17 +4,20 @@ import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.exception.AlreadyExistReservationException
 import team.msg.hiv2.domain.homebase.exception.TooManyUsersException
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
+import team.msg.hiv2.domain.reservation.application.validator.ReservationValidator
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.global.annotation.usecase.UseCase
+import java.time.LocalDateTime
 import java.util.*
 
 @UseCase
 class UpdateReservationUseCase(
     private val reservationService: ReservationService,
     private val userService: UserService,
-    private val homeBaseService: HomeBaseService
+    private val homeBaseService: HomeBaseService,
+    private val reservationValidator: ReservationValidator
 ) {
 
     fun execute(reservationId: UUID, request: UpdateReservationRequest) {
@@ -22,6 +25,8 @@ class UpdateReservationUseCase(
         val reservation = reservationService.queryReservationById(reservationId)
 
         val homeBase = homeBaseService.queryHomeBaseById(reservation.homeBaseId)
+
+        reservationValidator.validateReservationTime(LocalDateTime.now(), homeBase.period)
 
         if (request.users.size > homeBase.maxCapacity)
             throw TooManyUsersException()

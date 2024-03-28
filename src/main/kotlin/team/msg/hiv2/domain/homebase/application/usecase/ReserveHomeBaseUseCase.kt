@@ -6,20 +6,26 @@ import team.msg.hiv2.domain.homebase.exception.AlreadyReservedAtSamePeriodExcept
 import team.msg.hiv2.domain.homebase.exception.TooManyUsersException
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
+import team.msg.hiv2.domain.reservation.application.validator.ReservationValidator
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.exception.UserNotFoundException
 import team.msg.hiv2.global.annotation.usecase.UseCase
+import java.time.LocalDateTime
 import java.util.*
 
 @UseCase
 class ReserveHomeBaseUseCase(
     private val userService: UserService,
     private val reservationService: ReservationService,
-    private val homeBaseService: HomeBaseService
+    private val homeBaseService: HomeBaseService,
+    private val reservationValidator: ReservationValidator
 ) {
 
     fun execute(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest) {
+
+        reservationValidator.validateReservationTime(LocalDateTime.now(), period)
+        reservationValidator.validateReservationDay(LocalDateTime.now())
 
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)
 

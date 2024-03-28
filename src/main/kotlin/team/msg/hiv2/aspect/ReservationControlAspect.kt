@@ -6,11 +6,9 @@ import org.aspectj.lang.annotation.Pointcut
 import org.springframework.stereotype.Component
 import team.msg.hiv2.domain.homebase.presentation.data.request.ReservationHomeBaseRequest
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
-import team.msg.hiv2.domain.reservation.application.validator.ReservationValidator
 import team.msg.hiv2.domain.reservation.presentation.data.request.UpdateReservationRequest
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.domain.user.application.validator.UserValidator
-import java.time.LocalDateTime
 import java.util.*
 
 @Aspect
@@ -18,8 +16,7 @@ import java.util.*
 class ReservationControlAspect(
     private val userService: UserService,
     private val reservationService: ReservationService,
-    private val userValidator: UserValidator,
-    private val reservationValidator: ReservationValidator
+    private val userValidator: UserValidator
 ) {
 
     @Pointcut("execution(* team.msg.hiv2.domain.homebase.application.usecase.ReserveHomeBaseUseCase.execute(..)) " +
@@ -37,10 +34,7 @@ class ReservationControlAspect(
     @Before("reserveHomeBaseUseCasePointcut(floor, period, homeBaseNumber, request)")
     private fun checkReserveHomeBase(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest) {
         val currentUser = userService.queryCurrentUser()
-        val currentTime = LocalDateTime.now()
 
-        reservationValidator.validateReservationTime(currentTime)
-        reservationValidator.validateReservationDay(currentTime)
         userValidator.checkUserUseStatus(currentUser)
         userValidator.checkUsersUseStatus(userService.queryAllUserById(request.users))
     }
@@ -48,9 +42,7 @@ class ReservationControlAspect(
     @Before("updateReservationUseCasePointcut(reservationId, request)")
     private fun checkUpdateReservation(reservationId: UUID, request: UpdateReservationRequest) {
         val currentUser = userService.queryCurrentUser()
-        val currentTime = LocalDateTime.now()
 
-        reservationValidator.validateReservationTime(currentTime)
         userValidator.checkUserUseStatus(currentUser)
         userValidator.checkUsersUseStatus(userService.queryAllUserById(request.users))
     }
