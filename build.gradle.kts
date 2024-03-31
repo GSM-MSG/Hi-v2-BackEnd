@@ -51,6 +51,9 @@ dependencies {
 	// mockito
 	testImplementation(Dependencies.MOCKITO)
 
+    // cloudwatch appender
+    implementation(Dependencies.CLOUDWATCH_APPENDER)
+
 }
 
 tasks.withType<KotlinCompile> {

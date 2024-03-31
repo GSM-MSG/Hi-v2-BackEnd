@@ -45,4 +45,7 @@ object Dependencies {
     // gauth
     const val GAUTH = "com.github.GSM-MSG:GAuth-SDK-Java:${DependencyVersions.GAUTH_VERSION}"
 
+    // cloudwatch appender
+    const val CLOUDWATCH_APPENDER = "ca.pjer:logback-awslogs-appender:${DependencyVersions.CLOUDWATCH_APPENDER_VERSION}"
+
 }
