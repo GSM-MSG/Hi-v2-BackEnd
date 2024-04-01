@@ -19,7 +19,7 @@ import java.util.*
 @Component
 class HttpLoggingAspect {
 
-    private val log by lazy { LoggerFactory.getLogger(this.javaClass.simpleName) }
+    private val log by lazy { LoggerFactory.getLogger(this.javaClass.name) }
 
     @Pointcut("within(@org.springframework.web.bind.annotation.RestController *)")
     fun onRequest() {}
