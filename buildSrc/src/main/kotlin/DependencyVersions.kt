@@ -23,4 +23,7 @@ object DependencyVersions {
     // test
     const val MOCKITO_VERSION = "4.0.0"
 
+    // cloudwatch appender
+    const val CLOUDWATCH_APPENDER_VERSION = "1.6.0"
+
 }
