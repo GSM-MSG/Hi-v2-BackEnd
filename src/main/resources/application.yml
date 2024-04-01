@@ -1,8 +1,7 @@
 
 spring:
-  config:
-    active:
-      on-profile: ${PROFILE:local}
+  profiles:
+    active: ${PROFILE:local}
   mvc:
     throw-exception-if-no-handler-found: true
   web:
