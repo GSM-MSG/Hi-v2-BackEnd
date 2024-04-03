@@ -14,7 +14,7 @@
             </encoder>
         </appender>
 
-        <logger name="org.springframework" level="ALL">
+        <logger name="org.springframework" level="INFO">
             <appender-ref ref="CONSOLE"/>
         </logger>
         <logger name="org.hibernate.orm.jdbc.bind" level="TRACE">
@@ -31,7 +31,7 @@
                 <pattern>${CONSOLE_LOG_PATTERN}</pattern>
             </layout>
             <logGroupName>hi</logGroupName>
-            <logStreamUuidPrefix>hi-log-</logStreamUuidPrefix>
+            <logStreamUuidPrefix>hi-log</logStreamUuidPrefix>
             <logRegion>ap-northeast-2</logRegion>
             <maxBatchLogEvents>50</maxBatchLogEvents>
             <maxFlushTimeMillis>30000</maxFlushTimeMillis>
