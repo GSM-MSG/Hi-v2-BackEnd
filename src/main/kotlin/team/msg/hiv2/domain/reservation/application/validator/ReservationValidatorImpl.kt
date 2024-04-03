@@ -17,13 +17,6 @@ class ReservationValidatorImpl : ReservationValidator {
          */
         if (hour < 8 || (hour == 8 && minute < 10) || hour > 20 || (hour == 20 && minute > 30))
             throw NotReserveHomeBaseHourException()
-
-        when (period) {
-            8 -> if ((hour == 16 && minute > 40) || hour > 16) throw NotReserveHomeBaseHourException()
-            9 -> if ((hour == 17 && minute > 40) || hour > 17) throw NotReserveHomeBaseHourException()
-            10 -> if ((hour == 18 && minute > 30) || hour > 18) throw NotReserveHomeBaseHourException()
-            11 -> if ((hour == 19 && minute > 30) || hour > 19) throw NotReserveHomeBaseHourException()
-        }
     }
 
     override fun validateReservationDay(currentTime: LocalDateTime) {
