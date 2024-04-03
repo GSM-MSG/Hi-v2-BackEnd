@@ -19,12 +19,14 @@ class ReservationValidatorImpl : ReservationValidator {
             throw NotReserveHomeBaseHourException()
     }
 
-    override fun validateReservationDay(currentTime: LocalDateTime) {
+    override fun validateReservationDay(currentTime: LocalDateTime): DayOfWeek {
         val dayOfWeek = currentTime.dayOfWeek
 
         // 금요일, 토요일, 일요일은 예약 불가능
         if (dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY)
             throw NotReserveHomeBaseHourException()
+
+        return dayOfWeek
     }
 
 }
