@@ -26,7 +26,7 @@ class ReservationJpaEntity(
     @JoinColumn(name = "reservation_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Column(columnDefinition = "BINARY(16)", name = "user_id")
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "users", joinColumns = [JoinColumn(name = "reservation_id")])
     val userIds: MutableList<UUID>
 

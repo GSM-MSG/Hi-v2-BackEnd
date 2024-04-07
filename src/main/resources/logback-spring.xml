@@ -3,9 +3,6 @@
 <configuration scan="true" scanPeriod="30 seconds">
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
-    <property name="LOG_PATH" value="./logs"/>
-    <property name="LOG_NAME" value="hiv2-log"/>
-
     <springProfile name="local | prod">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
