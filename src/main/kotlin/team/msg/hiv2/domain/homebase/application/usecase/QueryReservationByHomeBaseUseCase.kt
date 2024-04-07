@@ -20,7 +20,7 @@ class QueryReservationByHomeBaseUseCase(
         val homeBases = homeBaseService.queryHomeBaseByFloorAndPeriod(floor, period)
 
         return homeBases.map {
-            reservationPort.queryReservationByHomeBase(it)?.let { reservation ->
+            reservationPort.queryReservationByHomeBaseId(it.id)?.let { reservation ->
                 val users = userService.queryAllUserById(reservation.userIds)
 
                 ReservationResponse.of(

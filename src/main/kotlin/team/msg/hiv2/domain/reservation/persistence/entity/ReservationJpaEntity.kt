@@ -1,11 +1,19 @@
 package team.msg.hiv2.domain.reservation.persistence.entity
 
+import javax.persistence.CollectionTable
+import javax.persistence.Column
+import javax.persistence.ElementCollection
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.Index
+import javax.persistence.JoinColumn
+import javax.persistence.OneToOne
+import javax.persistence.Table
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
 import team.msg.hiv2.global.entity.BaseUuidEntity
 import java.util.*
-import javax.persistence.*
-import org.hibernate.annotations.OnDelete
-import org.hibernate.annotations.OnDeleteAction
 
 @Entity
 @Table(name = "reservation")
@@ -26,8 +34,11 @@ class ReservationJpaEntity(
     @JoinColumn(name = "reservation_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Column(columnDefinition = "BINARY(16)", name = "user_id")
-    @ElementCollection
-    @CollectionTable(name = "users", joinColumns = [JoinColumn(name = "reservation_id")])
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(
+        name = "users",
+        joinColumns = [JoinColumn(name = "reservation_id")]
+    )
     val userIds: MutableList<UUID>
 
 ) : BaseUuidEntity(id)

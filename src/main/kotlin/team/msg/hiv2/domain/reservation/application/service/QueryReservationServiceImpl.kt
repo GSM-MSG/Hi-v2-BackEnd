@@ -15,8 +15,8 @@ class QueryReservationServiceImpl(
     override fun queryReservationById(id: UUID): Reservation =
         queryReservationPort.queryReservationById(id) ?: throw ReservationNotFoundException()
 
-    override fun queryReservationByHomeBase(homeBase: HomeBase): Reservation? =
-        queryReservationPort.queryReservationByHomeBase(homeBase)
+    override fun queryReservationByHomeBaseId(homeBaseId: Long): Reservation? =
+        queryReservationPort.queryReservationByHomeBaseId(homeBaseId)
 
     override fun queryAllReservationByHomeBaseIn(homeBases: List<HomeBase>): List<Reservation> =
         queryReservationPort.queryAllReservationByHomeBaseIn(homeBases)

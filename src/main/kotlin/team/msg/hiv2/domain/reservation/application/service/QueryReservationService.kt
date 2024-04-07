@@ -7,7 +7,7 @@ import java.util.*
 interface QueryReservationService {
 
     fun queryReservationById(id: UUID): Reservation
-    fun queryReservationByHomeBase(homeBase: HomeBase): Reservation?
+    fun queryReservationByHomeBaseId(homeBaseId: Long): Reservation?
     fun queryAllReservationByHomeBaseIn(homeBases: List<HomeBase>): List<Reservation>
     fun queryAllReservation(): List<Reservation>
     fun countReservationByHomeBase(homeBase: HomeBase): Int
