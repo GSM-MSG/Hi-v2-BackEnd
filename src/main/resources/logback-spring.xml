@@ -11,7 +11,7 @@
             </encoder>
         </appender>
 
-        <logger name="org.springframework" level="INFO">
+        <logger name="org.springframework" level="TRACE">
             <appender-ref ref="CONSOLE"/>
         </logger>
         <logger name="org.hibernate.orm.jdbc.bind" level="TRACE">
