@@ -9,7 +9,8 @@ import javax.persistence.LockModeType.*
 interface ReservationRepository : JpaRepository<ReservationJpaEntity, UUID> {
 
     @EntityGraph(attributePaths = ["homeBase"])
-    fun findByHomeBase(homeBase: HomeBaseJpaEntity): ReservationJpaEntity?
+    @Lock(PESSIMISTIC_WRITE)
+    fun findByHomeBaseId(homeBaseId: Long): ReservationJpaEntity?
     @EntityGraph(attributePaths = ["homeBase"])
     fun findAllByHomeBaseIn(homeBases: List<HomeBaseJpaEntity>): List<ReservationJpaEntity>
     @Modifying
