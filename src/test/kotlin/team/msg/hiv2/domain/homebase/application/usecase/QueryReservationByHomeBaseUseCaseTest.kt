@@ -125,7 +125,7 @@ class QueryReservationByHomeBaseUseCaseTest {
         given(queryHomeBaseService.queryHomeBaseByFloorAndPeriod(floor, period))
             .willReturn(listOf(homeBaseStub))
 
-        given(queryReservationPort.queryReservationByHomeBase(homeBaseStub))
+        given(queryReservationPort.queryReservationByHomeBaseId(homeBaseId))
             .willReturn(reservationStub)
 
         given(userService.queryAllUserById(listOf(userId1, userId2)))
