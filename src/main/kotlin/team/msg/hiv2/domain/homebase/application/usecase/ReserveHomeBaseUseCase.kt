@@ -1,8 +1,5 @@
 package team.msg.hiv2.domain.homebase.application.usecase
 
-import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Isolation
-import org.springframework.transaction.annotation.Transactional
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.exception.AlreadyExistReservationException
 import team.msg.hiv2.domain.homebase.exception.AlreadyReservedAtSamePeriodException
@@ -19,8 +16,7 @@ import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.util.*
 
-//@UseCase
-@Service
+@UseCase
 class ReserveHomeBaseUseCase(
     private val userService: UserService,
     private val reservationService: ReservationService,
@@ -28,7 +24,6 @@ class ReserveHomeBaseUseCase(
     private val reservationValidator: ReservationValidator
 ) {
 
-    @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = [Exception::class])
     fun execute(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest) {
 
         reservationValidator.validateReservationTime(LocalDateTime.now(), period)
