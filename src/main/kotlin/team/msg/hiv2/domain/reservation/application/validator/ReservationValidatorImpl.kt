@@ -13,11 +13,11 @@ class ReservationValidatorImpl : ReservationValidator {
         val minute = currentTime.minute
 
         when (period) {
-            7 -> if ((hour == 3 && minute > 30) || (hour == 4 && minute < 20)) throw NotReserveHomeBaseHourException()
-            8 -> if ((hour == 4 && minute > 40) || (hour == 5 && minute < 30)) throw NotReserveHomeBaseHourException()
-            9 -> if ((hour == 5 && minute > 40) || (hour == 6 && minute < 30)) throw NotReserveHomeBaseHourException()
-            10 -> if ((hour == 7 && minute > 30) || (hour == 8 && minute < 20)) throw NotReserveHomeBaseHourException()
-            11 -> if ((hour == 8 && minute > 20) || (hour == 9 && minute < 20)) throw NotReserveHomeBaseHourException()
+            7 -> if (hour > 15 || (hour == 15 && minute > 30)) throw NotReserveHomeBaseHourException()
+            8 ->  if (hour > 16 || (hour == 16 && minute > 40)) throw NotReserveHomeBaseHourException()
+            9 -> if (hour > 17 || (hour == 17 && minute > 40)) throw NotReserveHomeBaseHourException()
+            10 -> if (hour > 19 || (hour == 19 && minute > 30)) throw NotReserveHomeBaseHourException()
+            11 -> if (hour > 20 || (hour == 20 && minute > 30)) throw NotReserveHomeBaseHourException()
         }
     }
 
