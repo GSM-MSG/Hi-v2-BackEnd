@@ -8,13 +8,17 @@ import java.time.LocalDateTime
 @Component
 class ReservationValidatorImpl : ReservationValidator {
 
-    // 오전 8시 10분부터 오후 8시 30분까지만 예약 가능
     override fun validateReservationTime(currentTime: LocalDateTime, period: Int) {
         val hour = currentTime.hour
         val minute = currentTime.minute
 
-        if (hour < 8 || (hour == 8 && minute < 10) || hour > 20 || (hour == 20 && minute > 30))
-            throw NotReserveHomeBaseHourException()
+        when (period) {
+            7 -> if ((hour == 3 && minute > 30) || (hour == 4 && minute < 20)) throw NotReserveHomeBaseHourException()
+            8 -> if ((hour == 4 && minute > 40) || (hour == 5 && minute < 30)) throw NotReserveHomeBaseHourException()
+            9 -> if ((hour == 5 && minute > 40) || (hour == 6 && minute < 30)) throw NotReserveHomeBaseHourException()
+            10 -> if ((hour == 7 && minute > 30) || (hour == 8 && minute < 20)) throw NotReserveHomeBaseHourException()
+            11 -> if ((hour == 8 && minute > 20) || (hour == 9 && minute < 20)) throw NotReserveHomeBaseHourException()
+        }
     }
 
     // 금요일, 토요일, 일요일은 예약 불가능
@@ -26,5 +30,4 @@ class ReservationValidatorImpl : ReservationValidator {
 
         return dayOfWeek
     }
-
 }
