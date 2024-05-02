@@ -29,7 +29,7 @@ class ReservationJpaEntity(
     val reason: String,
 
     @Column(name = "check_status", nullable = false)
-    var checkStatus: Boolean = false,
+    var checkStatus: Boolean = true,
 
     @JoinColumn(name = "reservation_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
