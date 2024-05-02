@@ -57,7 +57,7 @@ class ReserveHomeBaseUseCase(
                 id = UUID.randomUUID(),
                 reason = request.reason,
                 homeBaseId = homeBase.id,
-                checkStatus = false,
+                checkStatus = true,
                 userIds = request.users
             )
         )
