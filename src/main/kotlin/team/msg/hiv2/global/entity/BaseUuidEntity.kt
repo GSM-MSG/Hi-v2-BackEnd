@@ -8,7 +8,7 @@ import javax.persistence.Id
 import javax.persistence.MappedSuperclass
 
 @MappedSuperclass
-abstract class BaseUuidEntity (
+abstract class BaseUuidEntity(
 
     @Id
     @GeneratedValue(generator = "uuid2")
