@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne
 import javax.persistence.Table
 import team.msg.hiv2.domain.user.persistence.entity.UserJpaEntity
 import team.msg.hiv2.global.entity.BaseUuidEntity
+import java.time.LocalDateTime
 import java.util.*
 
 @Entity

@@ -5,6 +5,7 @@ import team.msg.hiv2.domain.notice.domain.Notice
 import team.msg.hiv2.domain.notice.presentation.data.request.CreateNoticeRequest
 import team.msg.hiv2.domain.user.application.service.UserService
 import team.msg.hiv2.global.annotation.usecase.UseCase
+import java.time.LocalDateTime
 import java.util.*
 
 @UseCase
@@ -20,7 +21,8 @@ class CreateNoticeUseCase(
             id = UUID.randomUUID(),
             title = request.title,
             content = request.content,
-            userId = user.id
+            userId = user.id,
+            createdAt = LocalDateTime.now()
         )
 
         noticeService.save(notice)

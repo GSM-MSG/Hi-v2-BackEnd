@@ -19,7 +19,8 @@ class NoticeMapper(
                 id = it.id,
                 title = it.title,
                 content = it.content,
-                userId = it.user.id
+                userId = it.user.id,
+                createdAt = it.createdAt
             )
         }
 
