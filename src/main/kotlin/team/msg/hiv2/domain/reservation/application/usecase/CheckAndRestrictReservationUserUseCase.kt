@@ -12,7 +12,6 @@ class CheckAndRestrictReservationUserUseCase(
 ) {
 
     fun execute() {
-
         val reservations = reservationService.queryAllReservation()
 
         reservations.map { reservation ->

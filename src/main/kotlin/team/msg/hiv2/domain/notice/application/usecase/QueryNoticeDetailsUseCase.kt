@@ -1,14 +1,12 @@
 package team.msg.hiv2.domain.notice.application.usecase
 
-import org.apache.catalina.security.SecurityUtil
 import team.msg.hiv2.domain.notice.application.service.NoticeService
 import team.msg.hiv2.domain.notice.presentation.data.response.NoticeDetailsResponse
 import team.msg.hiv2.domain.user.application.service.UserService
-import team.msg.hiv2.domain.user.presentation.data.response.NoticeUserResponse
 import team.msg.hiv2.domain.user.presentation.data.response.UserResponse
 import team.msg.hiv2.global.annotation.usecase.ReadOnlyUseCase
 import team.msg.hiv2.global.security.spi.SecurityPort
-import java.util.UUID
+import java.util.*
 
 @ReadOnlyUseCase
 class QueryNoticeDetailsUseCase(
