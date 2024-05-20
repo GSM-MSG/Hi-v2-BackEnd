@@ -6,4 +6,5 @@ interface CommandRefreshTokenService {
 
     fun save(refreshToken: RefreshToken): String
     fun delete(refreshToken: RefreshToken)
+    fun deleteById(refreshToken: String)
 }

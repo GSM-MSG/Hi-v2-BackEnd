@@ -15,4 +15,7 @@ class CommandRefreshTokenServiceImpl(
     override fun delete(refreshToken: RefreshToken) =
         commandRefreshTokenPort.delete(refreshToken)
 
+    override fun deleteById(refreshToken: String) =
+        commandRefreshTokenPort.deleteById(refreshToken)
+
 }
