@@ -35,7 +35,7 @@ class ReserveHomeBaseUseCase(
 
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)
 
-        if(reservationService.existsByHomeBaseId(homeBase.id))
+        if (reservationService.existsByHomeBaseId(homeBase.id))
             throw AlreadyExistReservationException()
 
         if (request.users.size > homeBase.maxCapacity)

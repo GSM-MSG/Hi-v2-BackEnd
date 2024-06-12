@@ -11,7 +11,6 @@ interface QueryUserService {
     fun queryAllUserById(ids: List<UUID>): List<User>
     fun queryUserRoleByEmail(email: String, role: String): UserRole
     fun existsUserByEmail(email: String): Boolean
-    fun existsUsersByIds(ids: List<UUID>): Boolean
     fun queryCurrentUser(): User
     fun queryUserByNameContainingOrderBySchoolNumber(keyword: String): List<User>
     fun queryAllUserByRoleContaining(role: UserRole): List<User>
