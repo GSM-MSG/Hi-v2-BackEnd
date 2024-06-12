@@ -44,7 +44,6 @@ class UpdateReservationUseCaseTest {
     private val reservationId = UUID.randomUUID()
     private val homeBaseId = 1L
     private val userId = UUID.randomUUID()
-    private val teamId1 = UUID.randomUUID()
 
     private val reason = "회의"
     private val homeBaseStub by lazy {

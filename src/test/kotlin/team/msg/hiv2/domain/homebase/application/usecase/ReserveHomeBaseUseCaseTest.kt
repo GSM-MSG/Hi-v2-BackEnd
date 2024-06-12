@@ -66,20 +66,6 @@ internal class ReserveHomeBaseUseCaseTest {
         )
     }
 
-    private val userStub1 by lazy {
-        User(
-            id = userId1,
-            email = "test1@email",
-            name = "hope1",
-            grade = 2,
-            classNum = 4,
-            number = 6,
-            profileImageUrl = "profileImageUrl",
-            role = UserRole.ROLE_STUDENT,
-            useStatus = UseStatus.AVAILABLE
-        )
-    }
-
     private val userStub2 by lazy {
         User(
             id = userId2,

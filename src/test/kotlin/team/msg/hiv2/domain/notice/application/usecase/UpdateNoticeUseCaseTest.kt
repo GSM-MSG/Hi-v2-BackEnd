@@ -39,20 +39,6 @@ class UpdateNoticeUseCaseTest {
         )
     }
 
-    private val userStub: User by lazy {
-        User(
-            id = userId,
-            email = "test@email",
-            name = "test",
-            grade = 2,
-            classNum = 3,
-            number = 6,
-            profileImageUrl = "profileImageUrl",
-            role = UserRole.ROLE_ADMIN,
-            useStatus = UseStatus.AVAILABLE
-        )
-    }
-
     private val requestStub: UpdateNoticeRequest by lazy {
         UpdateNoticeRequest(
             title = title,
