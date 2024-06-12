@@ -31,7 +31,7 @@ class GenerateJwtAdapter(
         Jwts.builder()
             .signWith(secret, SignatureAlgorithm.HS256)
             .setSubject(userId.toString())
-            .claim("type", JwtProperties.accessType)
+            .claim(TYPE, JwtProperties.accessType)
             .claim(JwtProperties.roleType, role)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtProperties.accessExp * 1000))
@@ -41,7 +41,7 @@ class GenerateJwtAdapter(
         Jwts.builder()
             .signWith(secret, SignatureAlgorithm.HS256)
             .setSubject(userId.toString())
-            .claim("type", JwtProperties.refreshType)
+            .claim(TYPE, JwtProperties.refreshType)
             .claim(JwtProperties.roleType, role)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtProperties.refreshExp * 1000))
@@ -52,4 +52,8 @@ class GenerateJwtAdapter(
 
     private fun getRefreshTokenExpiredAt(): LocalDateTime =
         LocalDateTime.now().plusSeconds(jwtProperties.refreshExp.toLong())
+
+    companion object {
+        private const val TYPE = "type"
+    }
 }
