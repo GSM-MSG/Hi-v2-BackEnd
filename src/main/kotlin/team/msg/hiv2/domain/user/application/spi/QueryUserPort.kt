@@ -13,7 +13,6 @@ interface QueryUserPort {
     fun existsUserByEmail(email: String): Boolean
     fun queryCurrentUser(): User
     fun queryAllUserByNameContainingOrderBySchoolNumber(keyword: String): List<User>
-    fun queryAllUserByRoleContaining(role: UserRole): List<User>
     fun queryAllUserByRoleOrderBySchoolNumber(role: UserRole): List<User>
     fun queryAllUserByNameContainingAndRoleInOrderBySchoolNumber(keyword: String, role: List<UserRole>): List<User>
 }
