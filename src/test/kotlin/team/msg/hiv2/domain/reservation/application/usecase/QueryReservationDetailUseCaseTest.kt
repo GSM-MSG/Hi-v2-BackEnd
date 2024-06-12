@@ -7,7 +7,6 @@ import org.mockito.Mock
 import org.mockito.kotlin.given
 import team.msg.hiv2.domain.homebase.application.service.HomeBaseService
 import team.msg.hiv2.domain.homebase.domain.HomeBase
-import team.msg.hiv2.domain.homebase.presentation.data.response.HomeBaseResponse
 import team.msg.hiv2.domain.reservation.application.service.ReservationService
 import team.msg.hiv2.domain.reservation.domain.Reservation
 import team.msg.hiv2.domain.reservation.presentation.data.response.ReservationDetailResponse
@@ -41,8 +40,6 @@ class QueryReservationDetailUseCaseTest {
 
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
-
-    private val teamId = UUID.randomUUID()
 
     private val reason = "회의"
 
@@ -101,10 +98,6 @@ class QueryReservationDetailUseCaseTest {
 
     private val userResponseStub2 by lazy {
         UserResponse.of(userStub2)
-    }
-
-    private val homeBaseResponseStub by lazy {
-        HomeBaseResponse.of(homeBaseStub)
     }
 
     private val responseStub by lazy {

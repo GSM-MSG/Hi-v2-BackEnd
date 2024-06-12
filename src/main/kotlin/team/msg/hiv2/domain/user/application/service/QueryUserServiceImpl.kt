@@ -15,9 +15,6 @@ class QueryUserServiceImpl(
     override fun queryUserById(id: UUID): User =
         queryUserPort.queryUserById(id) ?: throw UserNotFoundException()
 
-    override fun queryUserByEmail(email: String): User =
-        queryUserPort.queryUserByEmail(email) ?: throw UserNotFoundException()
-
     override fun queryAllUserById(ids: List<UUID>): List<User> =
         queryUserPort.queryAllUserById(ids)
 
@@ -27,17 +24,11 @@ class QueryUserServiceImpl(
     override fun existsUserByEmail(email: String): Boolean =
         queryUserPort.existsUserByEmail(email)
 
-    override fun existsUsersByIds(ids: List<UUID>): Boolean =
-        queryUserPort.existsUserByIds(ids)
-
     override fun queryCurrentUser(): User =
         queryUserPort.queryCurrentUser()
 
-    override fun queryUserByNameContainingOrderBySchoolNumber(keyword: String): List<User> =
+    override fun queryAllUserByNameContainingOrderBySchoolNumber(keyword: String): List<User> =
         queryUserPort.queryAllUserByNameContainingOrderBySchoolNumber(keyword)
-
-    override fun queryAllUserByRoleContaining(role: UserRole): List<User> =
-        queryUserPort.queryAllUserByRoleContaining(role)
 
     override fun queryAllUserByRoleOrderBySchoolNumber(role: UserRole): List<User> =
         queryUserPort.queryAllUserByRoleOrderBySchoolNumber(role)

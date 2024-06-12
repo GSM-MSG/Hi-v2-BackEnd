@@ -42,7 +42,6 @@ class QueryReservationByHomeBaseUseCaseTest {
     private val userId1 = UUID.randomUUID()
     private val userId2 = UUID.randomUUID()
     private val reservationId1 = UUID.randomUUID()
-    private val teamId = UUID.randomUUID()
 
     private val reason = "회의"
 

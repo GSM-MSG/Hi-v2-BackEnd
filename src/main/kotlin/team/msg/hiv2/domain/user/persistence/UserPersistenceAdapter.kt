@@ -49,18 +49,12 @@ class UserPersistenceAdapter(
     override fun existsUserByEmail(email: String): Boolean =
         userRepository.existsByEmail(email)
 
-    override fun existsUserByIds(ids: List<UUID>): Boolean =
-        userRepository.existsAllByIdIn(ids)
-
     override fun queryCurrentUser(): User =
         userMapper.toDomain(userRepository.findByIdOrNull(securityPort.queryCurrentUserId()))
             .let { it ?: throw UserNotFoundException() }
 
     override fun queryAllUserByNameContainingOrderBySchoolNumber(keyword: String): List<User> =
         userRepository.findAllByNameContainingOrderByGradeAscClassNumAscNumberAsc(keyword).map { userMapper.toDomain(it)!! }
-
-    override fun queryAllUserByRoleContaining(role: UserRole): List<User> =
-        userRepository.findAllByRoleContaining(role).map { userMapper.toDomain(it)!! }
 
     override fun queryAllUserByRoleOrderBySchoolNumber(role: UserRole): List<User> =
         userRepository.findAllByRoleOrderByGradeAscClassNumAscNumberAsc(role).map { userMapper.toDomain(it)!! }

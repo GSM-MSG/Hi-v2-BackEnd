@@ -11,7 +11,7 @@ class SearchUserByNameKeywordUseCase(
 ) {
 
     fun execute(request: SearchUserKeywordRequest): List<UserResponse> =
-        userService.queryUserByNameContainingOrderBySchoolNumber(request.keyword).map {
+        userService.queryAllUserByNameContainingOrderBySchoolNumber(request.keyword).map {
             UserResponse.of(it)
         }
 }
