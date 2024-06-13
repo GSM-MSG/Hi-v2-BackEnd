@@ -25,7 +25,7 @@ class HomeBaseWebAdapter(
     fun reserveHomeBase(@RequestParam floor: Int,
                         @RequestParam period: Int,
                         @RequestParam homeBaseNumber: Int,
-                        @Valid @RequestBody request: ReservationHomeBaseWebRequest): ResponseEntity<Void> =
+                        @Valid @RequestBody request: ReservationHomeBaseWebRequest): ResponseEntity<Unit> =
         homeBaseFacade.reserveHomeBase(floor, period, homeBaseNumber, ReservationHomeBaseRequest(request.users, request.reason))
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
@@ -35,7 +35,7 @@ class HomeBaseWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping
-    fun deleteAllReservationByPeriod(@RequestParam period: Int): ResponseEntity<Void> =
+    fun deleteAllReservationByPeriod(@RequestParam period: Int): ResponseEntity<Unit> =
         homeBaseFacade.deleteAllReservationByPeriod(period)
             .let { ResponseEntity.noContent().build() }
 }

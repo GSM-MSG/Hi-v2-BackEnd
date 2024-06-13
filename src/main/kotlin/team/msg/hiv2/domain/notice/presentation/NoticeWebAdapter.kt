@@ -28,7 +28,7 @@ class NoticeWebAdapter(
 ) {
 
     @PostMapping
-    fun createNotice(@RequestBody @Valid request: CreateNoticeWebRequest): ResponseEntity<Void> =
+    fun createNotice(@RequestBody @Valid request: CreateNoticeWebRequest): ResponseEntity<Unit> =
         noticeFacade.createNotice(
             CreateNoticeRequest(
                 title = request.title,
@@ -48,12 +48,12 @@ class NoticeWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping("/{id}")
-    fun deleteNotice(@PathVariable id: UUID): ResponseEntity<Void> =
+    fun deleteNotice(@PathVariable id: UUID): ResponseEntity<Unit> =
         noticeFacade.deleteNotice(id)
             .let { ResponseEntity.noContent().build() }
 
     @PatchMapping("/{id}")
-    fun updateNotice(@PathVariable id: UUID, @RequestBody @Valid request: UpdateNoticeWebRequest): ResponseEntity<Void> =
+    fun updateNotice(@PathVariable id: UUID, @RequestBody @Valid request: UpdateNoticeWebRequest): ResponseEntity<Unit> =
         noticeFacade.updateNotice(id,
             UpdateNoticeRequest(
                 title = request.title,
