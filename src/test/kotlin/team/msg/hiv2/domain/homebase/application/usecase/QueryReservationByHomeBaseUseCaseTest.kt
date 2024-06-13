@@ -70,9 +70,7 @@ class QueryReservationByHomeBaseUseCaseTest {
             id = userId1,
             email = "test@email",
             name = "hope",
-            grade = 2,
-            classNum = 4,
-            number = 6,
+            schoolNumber = "2406",
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
             useStatus = UseStatus.AVAILABLE
@@ -84,9 +82,7 @@ class QueryReservationByHomeBaseUseCaseTest {
             id = userId2,
             email = "test@email",
             name = "esperer",
-            grade = 2,
-            classNum = 4,
-            number = 7,
+            schoolNumber = "2407",
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
             useStatus = UseStatus.AVAILABLE

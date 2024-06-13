@@ -44,7 +44,7 @@ internal class ReserveHomeBaseUseCaseTest {
 
     private val homeBaseId = 1L
     private val userId1 = UUID.randomUUID()
-    private val userId2 = UUID.randomUUID()
+    private val userId = UUID.randomUUID()
 
     private val homeBaseStub by lazy {
         HomeBase(
@@ -66,14 +66,12 @@ internal class ReserveHomeBaseUseCaseTest {
         )
     }
 
-    private val userStub2 by lazy {
+    private val userStub by lazy {
         User(
-            id = userId2,
-            email = "test2@email",
-            name = "hope2",
-            grade = 2,
-            classNum = 4,
-            number = 7,
+            id = userId,
+            email = "test@email",
+            name = "hope",
+            schoolNumber = "2406",
             profileImageUrl = "profileImageUrl2",
             role = UserRole.ROLE_STUDENT,
             useStatus = UseStatus.AVAILABLE
@@ -82,7 +80,7 @@ internal class ReserveHomeBaseUseCaseTest {
 
     private val requestStub by lazy {
         ReservationHomeBaseRequest(
-            mutableListOf(userId2),
+            mutableListOf(userId),
             reason
         )
     }
@@ -104,7 +102,7 @@ internal class ReserveHomeBaseUseCaseTest {
             .willReturn(false)
 
         given(userService.queryAllUserById(requestStub.users))
-            .willReturn(listOf(userStub2))
+            .willReturn(listOf(userStub))
 
         given(homeBaseService.queryHomeBaseByPeriod(period))
             .willReturn(listOf(homeBaseStub))

@@ -40,9 +40,6 @@ class QueryAllNoticeUseCaseTest {
 
     private val userId = UUID.randomUUID()
     private val name = "test"
-    private val grade = 2
-    private val classNum = 3
-    private val number = 6
     private val profileImageUrl = "profileImageUrl"
 
     private val noticeStub: Notice by lazy {
@@ -60,9 +57,7 @@ class QueryAllNoticeUseCaseTest {
             id = userId,
             email = "test@email",
             name = name,
-            grade = grade,
-            classNum = classNum,
-            number = number,
+            schoolNumber = "2306",
             profileImageUrl = profileImageUrl,
             role = UserRole.ROLE_ADMIN,
             useStatus = UseStatus.AVAILABLE

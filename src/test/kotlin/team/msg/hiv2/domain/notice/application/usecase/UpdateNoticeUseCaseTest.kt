@@ -9,9 +9,6 @@ import org.mockito.kotlin.given
 import team.msg.hiv2.domain.notice.application.service.NoticeService
 import team.msg.hiv2.domain.notice.domain.Notice
 import team.msg.hiv2.domain.notice.presentation.data.request.UpdateNoticeRequest
-import team.msg.hiv2.domain.user.domain.User
-import team.msg.hiv2.domain.user.domain.constant.UseStatus
-import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.global.annotation.HiTest
 import java.time.LocalDateTime
 import java.util.*

@@ -39,9 +39,7 @@ internal class QueryUserInfoUseCaseTest {
             id = userId,
             email = "test@email",
             name = "test",
-            grade = 2,
-            classNum = 3,
-            number = 6,
+            schoolNumber = "2306",
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_ADMIN,
             useStatus = UseStatus.AVAILABLE
