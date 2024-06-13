@@ -9,9 +9,7 @@ data class UserResponse(
     val userId: UUID,
     val email: String,
     val name: String,
-    val grade: Int?,
-    val classNum: Int?,
-    val number: Int?,
+    val schoolNumber: String?,
     val profileImageUrl: String,
     val role: UserRole,
     val useStatus: UseStatus
@@ -21,9 +19,7 @@ data class UserResponse(
             userId = user.id,
             email = user.email,
             name = user.name,
-            grade = user.grade,
-            classNum = user.classNum,
-            number = user.number,
+            schoolNumber = user.schoolNumber,
             profileImageUrl = user.profileImageUrl,
             role = user.role,
             useStatus = user.useStatus
