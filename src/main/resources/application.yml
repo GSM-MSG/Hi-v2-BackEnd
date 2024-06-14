@@ -8,7 +8,7 @@ spring:
     resources:
       add-mappings: false
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
     hibernate:
       ddl-auto: ${DDL_AUTO:update}
