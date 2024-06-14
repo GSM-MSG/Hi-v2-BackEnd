@@ -15,6 +15,9 @@ spring:
     properties:
       hibernate:
         default_batch_fetch_size: 1000
+        timezone:
+          default_storage:
+            NORMALIZE
 
   sql:
     init:
