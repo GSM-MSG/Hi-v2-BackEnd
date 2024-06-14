@@ -1,5 +1,8 @@
 
 spring:
+  aop:
+    proxy-target-class: true
+    expose-proxy: true
   profiles:
     active: ${PROFILE:local}
   mvc:
