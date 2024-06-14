@@ -1,7 +1,7 @@
 package team.msg.hiv2.domain.notice.presentation.data.web
 
-import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.Size
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.Size
 
 data class UpdateNoticeWebRequest(
     @field:NotEmpty

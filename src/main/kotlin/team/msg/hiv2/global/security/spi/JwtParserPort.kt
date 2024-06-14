@@ -1,7 +1,7 @@
 package team.msg.hiv2.global.security.spi
 
 import org.springframework.security.core.Authentication
-import javax.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletRequest
 
 interface JwtParserPort {
 

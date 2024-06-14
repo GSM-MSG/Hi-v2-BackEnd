@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.*
 import team.msg.hiv2.domain.homebase.persistence.entity.HomeBaseJpaEntity
 import team.msg.hiv2.domain.reservation.persistence.entity.ReservationJpaEntity
 import java.util.*
-import javax.persistence.LockModeType.*
+import jakarta.persistence.LockModeType.*
 
 interface ReservationRepository : JpaRepository<ReservationJpaEntity, UUID> {
 

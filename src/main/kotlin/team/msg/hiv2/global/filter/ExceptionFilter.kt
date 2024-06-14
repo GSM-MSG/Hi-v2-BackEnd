@@ -3,9 +3,9 @@ package team.msg.hiv2.global.filter
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.JwtException
-import javax.servlet.FilterChain
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import jakarta.servlet.FilterChain
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
 import org.springframework.web.filter.OncePerRequestFilter
 import team.msg.hiv2.global.error.ErrorCode

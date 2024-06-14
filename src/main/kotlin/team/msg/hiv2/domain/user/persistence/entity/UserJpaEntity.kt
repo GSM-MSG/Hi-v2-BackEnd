@@ -4,7 +4,7 @@ import team.msg.hiv2.domain.user.domain.constant.UseStatus
 import team.msg.hiv2.domain.user.domain.constant.UserRole
 import team.msg.hiv2.global.entity.BaseUuidEntity
 import java.util.*
-import javax.persistence.*
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "user")

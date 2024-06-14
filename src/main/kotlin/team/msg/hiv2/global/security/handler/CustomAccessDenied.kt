@@ -4,8 +4,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.web.access.AccessDeniedHandler
 import team.msg.hiv2.global.error.exception.InvalidRoleException
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 
 class CustomAccessDenied : AccessDeniedHandler {
 
