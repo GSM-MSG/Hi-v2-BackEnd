@@ -21,7 +21,7 @@ object Dependencies {
     const val JACKSON_MODULE_KOTLIN = "com.fasterxml.jackson.module:jackson-module-kotlin"
 
     // database
-    const val MYSQL_DATABASE = "mysql:mysql-connector-java"
+    const val MYSQL_DATABASE = "com.mysql:mysql-connector-j"
     const val MARIADB_DATABASE = "org.mariadb.jdbc:mariadb-java-client"
 
     // jwt
