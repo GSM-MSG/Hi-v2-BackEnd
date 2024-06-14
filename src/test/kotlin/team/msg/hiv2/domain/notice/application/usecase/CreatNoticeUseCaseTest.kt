@@ -38,9 +38,7 @@ internal class CreatNoticeUseCaseTest {
             id = userId,
             email = "test@email",
             name = "test2",
-            grade = 2,
-            classNum = 3,
-            number = 6,
+            schoolNumber = "2406",
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_ADMIN,
             useStatus = UseStatus.AVAILABLE

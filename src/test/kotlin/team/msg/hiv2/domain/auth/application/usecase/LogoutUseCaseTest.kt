@@ -32,9 +32,7 @@ class LogoutUseCaseTest {
             id = UUID.randomUUID(),
             email = "test_email",
             name = "name",
-            grade = 2,
-            classNum = 4,
-            number = 6,
+            schoolNumber = "2306",
             profileImageUrl = "profile_image_url",
             role = UserRole.ROLE_STUDENT,
             useStatus = UseStatus.AVAILABLE

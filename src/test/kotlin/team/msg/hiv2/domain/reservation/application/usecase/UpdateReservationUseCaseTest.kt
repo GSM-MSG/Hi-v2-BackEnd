@@ -71,9 +71,7 @@ class UpdateReservationUseCaseTest {
             id = userId,
             email = "test@email",
             name = "hope",
-            grade = 2,
-            classNum = 4,
-            number = 6,
+            schoolNumber = "2406",
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
             useStatus = UseStatus.AVAILABLE

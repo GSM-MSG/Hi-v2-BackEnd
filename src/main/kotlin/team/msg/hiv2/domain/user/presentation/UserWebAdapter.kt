@@ -43,7 +43,7 @@ class UserWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @PatchMapping("/{id}")
-    fun updateUserUseStatus(@PathVariable id: UUID, @RequestBody @Valid request: UpdateUserUseStatusWebRequest): ResponseEntity<Void> =
+    fun updateUserUseStatus(@PathVariable id: UUID, @RequestBody @Valid request: UpdateUserUseStatusWebRequest): ResponseEntity<Unit> =
         userFacade.updateUserUseStatus(id,
             UpdateUserUseStatusRequest(
                 status = request.status
@@ -52,7 +52,7 @@ class UserWebAdapter(
             .let { ResponseEntity.noContent().build() }
 
     @PatchMapping("/{id}/role")
-    fun updateUserRole(@PathVariable id: UUID, @RequestBody @Valid request: UpdateUserRoleWebRequest): ResponseEntity<Void> =
+    fun updateUserRole(@PathVariable id: UUID, @RequestBody @Valid request: UpdateUserRoleWebRequest): ResponseEntity<Unit> =
         userFacade.updateUserRole(id,
             UpdateUserRoleWebRequest(
                 role = request.role

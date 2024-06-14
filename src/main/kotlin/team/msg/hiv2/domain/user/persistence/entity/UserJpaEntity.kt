@@ -18,14 +18,8 @@ class UserJpaEntity(
     @Column(columnDefinition = "VARCHAR(10)", nullable = false)
     val name: String,
 
-    @Column(columnDefinition = "TINYINT UNSIGNED", nullable = true)
-    val grade: Int?,
-
-    @Column(columnDefinition = "TINYINT UNSIGNED", nullable = true)
-    val classNum: Int?,
-
-    @Column(columnDefinition = "TINYINT UNSIGNED", nullable = true)
-    val number: Int?,
+    @Column(columnDefinition = "VARCHAR(5)", nullable = true, updatable = false, unique = true)
+    val schoolNumber: String?,
 
     @Column(columnDefinition = "TEXT", nullable = false)
     var profileImageUrl: String = "",

@@ -51,9 +51,7 @@ class GAuthSignInUseCaseTest{
             id = UUID.randomUUID(),
             email = email,
             name = name,
-            grade = grade,
-            classNum = classNum,
-            number = num,
+            schoolNumber = "2306",
             profileImageUrl = profileImageUrl,
             role = role,
             useStatus = UseStatus.AVAILABLE

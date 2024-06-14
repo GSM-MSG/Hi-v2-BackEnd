@@ -27,9 +27,7 @@ class SearchUserByNameKeywordUseCaseTest {
             id = UUID.randomUUID(),
             email = "test@email",
             name = "김희망",
-            grade = 2,
-            classNum = 4,
-            number = 6,
+            schoolNumber = "2406",
             profileImageUrl = "profileImageUrl",
             role = UserRole.ROLE_STUDENT,
             useStatus = UseStatus.AVAILABLE

@@ -54,12 +54,12 @@ class UserPersistenceAdapter(
             .let { it ?: throw UserNotFoundException() }
 
     override fun queryAllUserByNameContainingOrderBySchoolNumber(keyword: String): List<User> =
-        userRepository.findAllByNameContainingOrderByGradeAscClassNumAscNumberAsc(keyword).map { userMapper.toDomain(it)!! }
+        userRepository.findAllByNameContainingOrderBySchoolNumberAsc(keyword).map { userMapper.toDomain(it)!! }
 
     override fun queryAllUserByRoleOrderBySchoolNumber(role: UserRole): List<User> =
-        userRepository.findAllByRoleOrderByGradeAscClassNumAscNumberAsc(role).map { userMapper.toDomain(it)!! }
+        userRepository.findAllByRoleOrderBySchoolNumberAsc(role).map { userMapper.toDomain(it)!! }
 
     override fun queryAllUserByNameContainingAndRoleInOrderBySchoolNumber(keyword: String, role: List<UserRole>): List<User>  =
-        userRepository.findAllByNameContainingAndRoleInOrderByGradeAscClassNumAscNumberAsc(keyword, role).map { userMapper.toDomain(it)!! }
+        userRepository.findAllByNameContainingAndRoleInOrderBySchoolNumberAsc(keyword, role).map { userMapper.toDomain(it)!! }
 
 }

@@ -33,7 +33,7 @@ class AuthWebAdapter(
             .let { ResponseEntity.ok(it) }
 
     @DeleteMapping
-    fun logout(@RequestHeader("RefreshToken") @Valid refreshToken: String): ResponseEntity<Void> =
+    fun logout(@RequestHeader("RefreshToken") @Valid refreshToken: String): ResponseEntity<Unit> =
         authFacade.logout(refreshToken)
             .let { ResponseEntity.noContent().build() }
 

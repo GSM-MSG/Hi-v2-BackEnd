@@ -30,9 +30,7 @@ class GAuthSignInUseCase(
                 id = UUID.randomUUID(),
                 email = gAuthUserInfo.email,
                 name = gAuthUserInfo.name,
-                grade = gAuthUserInfo.grade,
-                classNum = gAuthUserInfo.classNum,
-                number = gAuthUserInfo.num,
+                schoolNumber = gAuthUserInfo.grade.toString() + gAuthUserInfo.classNum.toString() + gAuthUserInfo.num.toString(),
                 profileImageUrl = gAuthUserInfo.profileUrl ?: "",
                 role = role,
                 useStatus = UseStatus.AVAILABLE

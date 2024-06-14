@@ -31,9 +31,7 @@ internal class QueryAllUsersByUserRoleUseCaseTest {
             id = userId1,
             email = "test1@email",
             name = "test1",
-            grade = 2,
-            classNum = 3,
-            number = 6,
+            schoolNumber = "2406",
             profileImageUrl = "profileImageUrl",
             role = userRole,
             useStatus = UseStatus.AVAILABLE
@@ -45,9 +43,7 @@ internal class QueryAllUsersByUserRoleUseCaseTest {
             id = userId2,
             email = "test2@email",
             name = "test2",
-            grade = 2,
-            classNum = 3,
-            number = 7,
+            schoolNumber = "2407",
             profileImageUrl = "profileImageUrl",
             role = userRole,
             useStatus = UseStatus.AVAILABLE
