@@ -1,8 +1,5 @@
 
 spring:
-  aop:
-    proxy-target-class: true
-    expose-proxy: true
   profiles:
     active: ${PROFILE:local}
   mvc:
@@ -16,7 +13,6 @@ spring:
     hibernate:
       ddl-auto: ${DDL_AUTO:update}
     properties:
-      hibernate:
         default_batch_fetch_size: 1000
         timezone:
           default_storage:
