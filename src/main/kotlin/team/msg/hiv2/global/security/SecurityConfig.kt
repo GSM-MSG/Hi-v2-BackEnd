@@ -8,9 +8,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.RequestMatcher
 import org.springframework.web.cors.CorsUtils
 import team.msg.hiv2.global.config.FilterConfig
+import team.msg.hiv2.global.filter.ExceptionFilter
+import team.msg.hiv2.global.filter.JwtRequestFilter
 import team.msg.hiv2.global.security.handler.CustomAccessDenied
 import team.msg.hiv2.global.security.handler.CustomAuthenticationEntryPoint
 import team.msg.hiv2.global.security.spi.JwtParserPort
@@ -82,7 +85,8 @@ class SecurityConfig(
                 it.authenticationEntryPoint(CustomAuthenticationEntryPoint())
                 it.accessDeniedHandler(CustomAccessDenied())
             }
-            .apply(FilterConfig(jwtParserPort))
+            .addFilterBefore(JwtRequestFilter(jwtParserPort), UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterAfter(ExceptionFilter(), JwtRequestFilter::class.java)
 
         return http.build()
     }
