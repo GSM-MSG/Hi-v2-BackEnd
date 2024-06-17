@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
 	id("org.springframework.boot") version PluginVersion.SPRING_BOOT_VERSION
 	id("io.spring.dependency-management") version PluginVersion.DEPENDENCY_MANAGER_VERSION
@@ -55,11 +57,13 @@ dependencies {
 
 }
 
-kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict")
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		freeCompilerArgs += "-Xjsr305=strict"
+		jvmTarget = "17"
 	}
 }
+
 
 tasks.withType<Test> {
 	useJUnitPlatform()
@@ -79,7 +83,7 @@ tasks.register<JacocoReport>("jacocoRootReport") {
 	}
 
 	reports {
-		xml.outputLocation.set(File("${buildDir}/reports/jacoco/test/jacocoTestReport.xml"))
+		xml.outputLocation.set(layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml"))
 		xml.required.set(true)
 		html.required.set(false)
 	}
