@@ -18,9 +18,6 @@ class DeleteReservationUseCaseTest {
     @Mock
     private lateinit var reservationService: ReservationService
 
-    @Mock
-    private lateinit var userService: UserService
-
     private lateinit var deleteReservationUseCase: DeleteReservationUseCase
 
     private val floor = 3
@@ -58,7 +55,7 @@ class DeleteReservationUseCaseTest {
     @BeforeEach
     fun setUp() {
         deleteReservationUseCase = DeleteReservationUseCase(
-            reservationService, userService
+            reservationService
         )
     }
 
