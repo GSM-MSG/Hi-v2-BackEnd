@@ -8,8 +8,9 @@ import jakarta.persistence.MappedSuperclass
 
 @MappedSuperclass
 abstract class BaseIdEntity(
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = false)
+    @Column(name = "id", nullable = false)
     open val id: Long
 ) : BaseTimeEntity()
