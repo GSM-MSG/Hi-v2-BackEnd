@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 import team.msg.hiv2.global.security.principle.AuthDetailsService
 import team.msg.hiv2.global.security.spi.JwtParserPort
 import java.security.Key
-import javax.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletRequest
 
 @Component
 class JwtParserAdapter(

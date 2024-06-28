@@ -2,19 +2,31 @@
 spring:
   profiles:
     active: ${PROFILE:local}
-  mvc:
-    throw-exception-if-no-handler-found: true
   web:
     resources:
       add-mappings: false
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
     hibernate:
       ddl-auto: ${DDL_AUTO:update}
     properties:
-      hibernate:
         default_batch_fetch_size: 1000
+        timezone:
+          default_storage:
+            NORMALIZE
+
+  datasource:
+    hikari:
+      auto-commit: false
+      connection-timeout: 2000
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqlLimit: 2048
+      useServerPrepStmts: true
+      useLocalSessionState: true
+      cacheServerConfiguration: true
+      elideSetAutoCommits: true
 
   sql:
     init:

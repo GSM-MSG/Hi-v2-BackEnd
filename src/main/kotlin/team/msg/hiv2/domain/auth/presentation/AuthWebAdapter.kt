@@ -1,6 +1,6 @@
 package team.msg.hiv2.domain.auth.presentation
 
-import javax.validation.Valid
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import team.msg.hiv2.domain.auth.application.facade.AuthFacade

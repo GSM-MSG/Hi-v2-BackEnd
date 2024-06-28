@@ -1,9 +1,9 @@
 package team.msg.hiv2.domain.homebase.persistence.entity
 
 import team.msg.hiv2.global.entity.BaseIdEntity
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Table
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
 
 @Entity
 @Table(name = "home_base")
