@@ -16,6 +16,18 @@ spring:
           default_storage:
             NORMALIZE
 
+  datasource:
+    hikari:
+      auto-commit: false
+      connection-timeout: 2000
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqlLimit: 2048
+      useServerPrepStmts: true
+      useLocalSessionState: true
+      cacheServerConfiguration: true
+      elideSetAutoCommits: true
+
   sql:
     init:
       mode: always
