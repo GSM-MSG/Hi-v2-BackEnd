@@ -11,6 +11,10 @@
             </encoder>
         </appender>
 
+        <root level="${root-level:-INFO}">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+
         <logger name="org.springframework" level="INFO">
             <appender-ref ref="CONSOLE"/>
         </logger>
