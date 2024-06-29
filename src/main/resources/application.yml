@@ -43,5 +43,9 @@ gauth:
   clientSecret: ${GAUTH_CLIENT_SECRET}
   redirectUri: ${GAUTH_REDIRECT_URI}
 
+logging:
+  config: classpath:logback-spring.xml
+
 server:
   port: ${SERVER_PORT:8080}
+
