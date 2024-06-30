@@ -39,12 +39,9 @@ jwt:
   refreshExp: ${REFRESH_EXP:7200}
 
 gauth:
-  clientId: ${GAUTH_CLIENT_ID}
-  clientSecret: ${GAUTH_CLIENT_SECRET}
-  redirectUri: ${GAUTH_REDIRECT_URI}
-
-logging:
-  config: classpath:logback-spring.xml
+  clientId: 6844b9b18f2c40fbb48666e03fbbee0e0f252e8e281d4fa89295dd953f2b1c6f
+  clientSecret: 93d55c5dc9a74cfeaebc31970619fad81369b48cba0c4d7faba40352ff1ac05b
+  redirectUri: http://localhost:8080/auth
 
 server:
   port: ${SERVER_PORT:8080}
