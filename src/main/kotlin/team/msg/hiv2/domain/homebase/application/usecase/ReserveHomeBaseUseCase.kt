@@ -26,12 +26,12 @@ class ReserveHomeBaseUseCase(
 
     fun execute(floor: Int, period: Int, homeBaseNumber: Int, request: ReservationHomeBaseRequest) {
 
-        reservationValidator.validateReservationTime(LocalDateTime.now(), period)
+//        reservationValidator.validateReservationTime(LocalDateTime.now(), period)
 
-        val dayOfWeek = reservationValidator.validateReservationDay(LocalDateTime.now())
+//        val dayOfWeek = reservationValidator.validateReservationDay(LocalDateTime.now())
 
-        if (dayOfWeek != DayOfWeek.MONDAY && period == 7)
-            throw NotReserveHomeBaseDayException()
+//        if (dayOfWeek != DayOfWeek.MONDAY && period == 7)
+//            throw NotReserveHomeBaseDayException()
 
         val homeBase = homeBaseService.queryHomeBaseByFloorAndPeriodAndHomeBaseNumber(floor, period, homeBaseNumber)
 
