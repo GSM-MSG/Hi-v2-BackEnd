@@ -55,10 +55,12 @@ dependencies {
     implementation(Dependencies.CLOUDWATCH_APPENDER)
 
     // queryDsl
-    implementation ("com.querydsl:querydsl-jpa:5.0.0:jakarta")
-    kapt ("com.querydsl:querydsl-apt:5.0.0:jakarta")
-    kapt ("jakarta.annotation:jakarta.annotation-api")
-    kapt ("jakarta.persistence:jakarta.persistence-api")
+    implementation(Dependencies.QUERY_DSL)
+    kapt(Dependencies.QUERYDSL_APT)
+
+    // jakarta
+    kapt(Dependencies.JAKARTA_ANNOTATION_API)
+    kapt(Dependencies.JAKARTA_PERSISTENCE_API)
 }
 
 tasks.withType<KotlinCompile> {

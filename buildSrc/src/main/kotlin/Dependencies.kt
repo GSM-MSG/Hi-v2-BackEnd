@@ -35,4 +35,12 @@ object Dependencies {
     // cloudwatch appender
     const val CLOUDWATCH_APPENDER = "ca.pjer:logback-awslogs-appender:${DependencyVersions.CLOUDWATCH_APPENDER_VERSION}"
 
+    // queryDSL
+    const val QUERY_DSL = "com.querydsl:querydsl-jpa:${DependencyVersions.QUERY_DSL_VERSION}:jakarta"
+    const val QUERYDSL_APT = "com.querydsl:querydsl-apt:${DependencyVersions.QUERY_DSL_APT_VERSION}:jakarta"
+
+    // jakarta
+    const val JAKARTA_ANNOTATION_API = "jakarta.annotation:jakarta.annotation-api"
+    const val JAKARTA_PERSISTENCE_API = "jakarta.persistence:jakarta.persistence-api"
+
 }
