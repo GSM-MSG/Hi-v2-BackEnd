@@ -54,6 +54,7 @@ dependencies {
     // cloudwatch appender
     implementation(Dependencies.CLOUDWATCH_APPENDER)
 
+    // queryDsl
     implementation ("com.querydsl:querydsl-jpa:5.0.0:jakarta")
     kapt ("com.querydsl:querydsl-apt:5.0.0:jakarta")
     kapt ("jakarta.annotation:jakarta.annotation-api")
@@ -66,7 +67,6 @@ tasks.withType<KotlinCompile> {
 		jvmTarget = "17"
 	}
 }
-
 
 tasks.withType<Test> {
 	useJUnitPlatform()
