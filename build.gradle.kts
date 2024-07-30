@@ -54,6 +54,13 @@ dependencies {
     // cloudwatch appender
     implementation(Dependencies.CLOUDWATCH_APPENDER)
 
+    // queryDsl
+    implementation(Dependencies.QUERY_DSL)
+    kapt(Dependencies.QUERYDSL_APT)
+
+    // jakarta
+    kapt(Dependencies.JAKARTA_ANNOTATION_API)
+    kapt(Dependencies.JAKARTA_PERSISTENCE_API)
 }
 
 tasks.withType<KotlinCompile> {
@@ -62,7 +69,6 @@ tasks.withType<KotlinCompile> {
 		jvmTarget = "17"
 	}
 }
-
 
 tasks.withType<Test> {
 	useJUnitPlatform()

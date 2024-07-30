@@ -14,5 +14,5 @@ interface QueryUserPort {
     fun queryCurrentUser(): User
     fun queryAllUserByNameContainingOrderBySchoolNumber(keyword: String): List<User>
     fun queryAllUserByRoleOrderBySchoolNumber(role: UserRole): List<User>
-    fun queryAllUserByNameContainingAndRoleInOrderBySchoolNumber(keyword: String, role: List<UserRole>): List<User>
+    fun searchStudent(keyword: String): List<User>
 }
