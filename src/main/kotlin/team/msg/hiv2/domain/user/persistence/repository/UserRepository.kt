@@ -11,5 +11,5 @@ interface UserRepository : CrudRepository<UserJpaEntity, UUID> {
     fun existsByEmail(email: String): Boolean
     fun findAllByNameContainingOrderBySchoolNumberAsc(keyword: String): List<UserJpaEntity>
     fun findAllByRoleOrderBySchoolNumberAsc(role: UserRole): List<UserJpaEntity>
-    fun findAllByNameContainingAndRoleInOrderBySchoolNumberAsc(keyword: String,role: List<UserRole>): List<UserJpaEntity>
+    fun findAllByNameContainingAndRoleInOrderBySchoolNumberAsc(keyword: String, role: List<UserRole>): List<UserJpaEntity>
 }
