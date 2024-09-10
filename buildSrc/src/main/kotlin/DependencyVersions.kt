@@ -18,4 +18,7 @@ object DependencyVersions {
     // cloudwatch appender
     const val CLOUDWATCH_APPENDER_VERSION = "1.6.0"
 
+    // sentry
+    const val SENTRY_SPRING_VERSION = "7.9.0"
+
 }

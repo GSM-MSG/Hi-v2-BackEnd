@@ -44,5 +44,6 @@ object Dependencies {
     const val JAKARTA_PERSISTENCE_API = "jakarta.persistence:jakarta.persistence-api"
 
     // sentry
-    const val SENTRY_SPRING = "io.sentry:sentry-spring-boot-starter-jakarta:7.9.0"
+    const val SENTRY_SPRING = "io.sentry:sentry-spring-boot-starter-jakarta:${DependencyVersions.SENTRY_SPRING_VERSION}"
+
 }
