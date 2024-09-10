@@ -4,6 +4,7 @@ plugins {
 	id("org.springframework.boot") version PluginVersion.SPRING_BOOT_VERSION
 	id("io.spring.dependency-management") version PluginVersion.DEPENDENCY_MANAGER_VERSION
 	id("jacoco")
+    id("io.sentry.jvm.gradle") version "4.5.1"
 	kotlin("jvm") version PluginVersion.JVM_VERSION
 	kotlin("plugin.spring") version PluginVersion.SPRING_PLUGIN_VERSION
 	kotlin("plugin.jpa") version PluginVersion.JPA_PLUGIN_VERSION
@@ -61,6 +62,9 @@ dependencies {
 	// jakarta
 	kapt(Dependencies.JAKARTA_ANNOTATION_API)
 	kapt(Dependencies.JAKARTA_PERSISTENCE_API)
+
+    // sentry
+    implementation("io.sentry:sentry-spring-boot-starter-jakarta:7.9.0")
 }
 
 tasks.withType<KotlinCompile> {
