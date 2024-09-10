@@ -5,5 +5,5 @@ object PluginVersion {
     const val SPRING_PLUGIN_VERSION = "1.9.24"
     const val JPA_PLUGIN_VERSION = "1.9.24"
     const val KAPT_VERSION = "1.9.24"
-    const val QUERY_DSL_PLUGIN_VERSION = "1.0.10"
+    const val SENTRY_JVM = "4.5.1"
 }
