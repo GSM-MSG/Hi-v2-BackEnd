@@ -1,14 +1,14 @@
 package team.msg.hiv2.domain.auth.application.usecase
 
-import gauth.GAuthToken
-import gauth.GAuthUserInfo
-import org.assertj.core.api.Assertions.*
+import gauth.response.GAuthToken
+import gauth.response.GAuthUserInfo
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.kotlin.any
 import org.mockito.BDDMockito.given
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.mockito.kotlin.any
 import team.msg.hiv2.domain.auth.presentation.data.request.GAuthSignInRequest
 import team.msg.hiv2.domain.auth.presentation.data.response.TokenResponse
 import team.msg.hiv2.domain.user.application.service.UserService

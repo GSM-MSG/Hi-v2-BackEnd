@@ -10,7 +10,7 @@ object DependencyVersions {
     const val QUERY_DSL_APT_VERSION = "5.0.0"
 
     // gauth
-    const val GAUTH_VERSION = "v3.0.0"
+    const val GAUTH_VERSION = "v3.0.1"
 
     // test
     const val MOCKITO_VERSION = "5.0.0"

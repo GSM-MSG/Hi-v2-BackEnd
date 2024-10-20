@@ -2,13 +2,13 @@ package team.msg.hiv2.global.security.token
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
 import team.msg.hiv2.global.security.principle.AuthDetailsService
 import team.msg.hiv2.global.security.spi.JwtParserPort
 import java.security.Key
-import jakarta.servlet.http.HttpServletRequest
 
 @Component
 class JwtParserAdapter(
