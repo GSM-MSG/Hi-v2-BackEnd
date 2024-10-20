@@ -1,7 +1,7 @@
 package team.msg.hiv2.thirdparty.gauth.spi
 
-import gauth.GAuthToken
-import gauth.GAuthUserInfo
+import gauth.response.GAuthToken
+import gauth.response.GAuthUserInfo
 
 interface GAuthPort {
 
