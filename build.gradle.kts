@@ -92,12 +92,8 @@ tasks.register<JacocoReport>("jacocoRootReport") {
 	}
 
 	reports {
-		xml.outputLocation.set(layout.buildDirectory.file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml"))
+		xml.outputLocation.set(layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml"))
 		xml.required.set(true)
-		html.required.set(true)
+		html.required.set(false)
 	}
-}
-
-sentry {
-    telemetry.set(false)
 }
